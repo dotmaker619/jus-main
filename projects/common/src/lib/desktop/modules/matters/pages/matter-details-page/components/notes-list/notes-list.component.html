@@ -1,0 +1,65 @@
+<div class="notes-container" *ngIf="notes$ | async as notes; else loading">
+  <table *ngIf="notes.length; else noNotes">
+    <thead>
+      <tr>
+        <th><!-- Icon column --></th>
+        <th class="main-column">Name</th>
+        <th>Uploaded By</th>
+        <th>Date Created</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let note of notes | slice: 0:rowsNumber; trackBy: trackByNoteId"
+      >
+        <!-- Note icon. -->
+        <td>
+          <div class="icon-container">
+            <img
+              src="/assets/icons/note-circle-yellow.svg"
+              aria-hidden="true"
+              alt=""
+            />
+          </div>
+        </td>
+        <!-- Note title -->
+        <td class="main-column">
+          <button class="ellipsis title" (click)="onNoteClick(note)">
+            {{ note.title }}
+          </button>
+        </td>
+        <!-- Note author -->
+        <td>
+          <a [routerLink]="['/client', note.createdBy.id]">
+            <jlc-client-info
+              [client]="note.createdBy"
+              [fullName]="true"
+            ></jlc-client-info>
+          </a>
+        </td>
+        <!-- Date of note creation -->
+        <td>
+          {{ note.created | date: "shortDate" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Button for unfolding the table. -->
+  <ng-container *ngIf="notesNumberChange | async as totalNotesNumber">
+    <button
+      class="unfold-table-button"
+      *ngIf="totalNotesNumber > rowsNumber"
+      (click)="changeRowsNumber(totalNotesNumber)"
+    >
+      Show All {{ totalNotesNumber }}
+    </button>
+  </ng-container>
+</div>
+
+<ng-template #noNotes>
+  <div class="message">No notes</div>
+</ng-template>
+
+<ng-template #loading>
+  <jlc-loading></jlc-loading>
+</ng-template>

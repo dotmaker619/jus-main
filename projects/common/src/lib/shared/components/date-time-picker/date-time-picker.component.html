@@ -1,0 +1,27 @@
+<ng-container [formGroup]="dateTimeForm">
+  <!-- Date. -->
+  <ion-datetime
+    class="datepicker"
+    formControlName="date"
+    [min]="datePickerOptions?.min"
+    [max]="datePickerOptions?.max"
+    [displayFormat]="datePickerOptions?.displayFormat"
+    [pickerOptions]="datePickerOptions?.pickerOptions"
+    [placeholder]="datePickerOptions?.placeholder"
+    (ionChange)="onDateChanged($event)"
+    (ionFocus)="onFocused()"
+  ></ion-datetime>
+  <!-- Time. -->
+  <ion-datetime
+    class="datepicker"
+    formControlName="time"
+    *ngIf="isTimeVisible"
+    [min]="timePickerOptions?.min"
+    [max]="timePickerOptions?.max"
+    [displayFormat]="timePickerOptions?.displayFormat"
+    [pickerOptions]="timePickerOptions?.pickerOptions"
+    [placeholder]="timePickerOptions?.placeholder"
+    (ionChange)="onTimeChanged($event)"
+    (ionFocus)="onFocused()"
+  ></ion-datetime>
+</ng-container>

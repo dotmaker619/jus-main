@@ -1,0 +1,14 @@
+<header>
+  <div class="heading-with-badge">
+    <h1>Notifications</h1>
+    <div class="badge">{{notifications$ | async}}</div>
+  </div>
+
+  <jlc-dropdown [customRightOffset]="0">
+    <button jlcDropdownToggle class="primary">Preferences</button>
+
+    <jlc-notifications-settings jlcDropdownContent></jlc-notifications-settings>
+  </jlc-dropdown>
+</header>
+
+<hr />

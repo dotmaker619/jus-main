@@ -1,0 +1,33 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 24px;
+}
+
+.heading-with-badge {
+  display: flex;
+  align-items: flex-end;
+}
+
+h1 {
+  font-size: 1.5rem;
+  line-height: 1.333333;
+  font-weight: normal;
+  color: var(--page-title-color);
+}
+
+.badge {
+  background: var(--header-badge-background-color);
+  color: var(--header-badge-color);
+  font-size: 0.6875rem;
+  line-height: 1.72727;
+  text-align: center;
+  margin: 0 0 0.35rem 0.55rem;
+  padding: 0.02rem 0.25rem;
+  border-radius: 3px;
+}
+
+hr {
+  margin-top: 24px;
+}

@@ -1,0 +1,58 @@
+<div class="page-container">
+  <h1>
+    My Profile
+  </h1>
+  <hr />
+  <form
+    *ngIf="form$ | async as form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form)"
+  >
+    <div class="form-content">
+      <div class="staff-info">
+        <label>
+          <span>First Name*</span>
+          <input type="text" formControlName="firstName" readonly />
+          <jlc-form-control-validation-message controlName="firstName">
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span>Last Name*</span>
+          <input type="text" formControlName="lastName" readonly />
+          <jlc-form-control-validation-message controlName="lastName">
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span>Description*</span>
+          <textarea
+            formControlName="description"
+            jlcInputStatus
+            [jlcApiValidation]="validationError$ | async"
+            rows="7"
+          ></textarea>
+          <jlc-form-control-validation-message controlName="description">
+          </jlc-form-control-validation-message>
+        </label>
+      </div>
+      <div>
+        <label>
+          Profile Image*
+          <jlc-profile-image-edit
+            [profileImage]="form.value.avatar"
+            (profileImageChange)="onProfileImageChanged(form, $event)"
+          ></jlc-profile-image-edit>
+          <jlc-form-control-validation-message
+            controlName="avatar"
+          ></jlc-form-control-validation-message>
+        </label>
+      </div>
+    </div>
+
+    <div class="button-panel">
+      <a class="secondary" type="button" routerLink="..">Cancel</a>
+      <button class="primary" type="submit">Save</button>
+    </div>
+  </form>
+</div>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

@@ -1,0 +1,18 @@
+<div class="container" *ngIf="pagination$ | async as pagination; else loading">
+  <jlc-news-list-item
+    *ngFor="let news of pagination.items; trackBy: trackNews"
+    [news]="news"
+  >
+  </jlc-news-list-item>
+  <button
+    class="primary"
+    title="Load more news"
+    *ngIf="pagination.items.length < pagination.itemsCount"
+    (click)="onMoreNewsClick()"
+  >
+    More news
+  </button>
+</div>
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

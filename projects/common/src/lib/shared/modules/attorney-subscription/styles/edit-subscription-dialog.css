@@ -1,0 +1,29 @@
+.dialog {
+  padding: 28px;
+}
+
+hr {
+  margin-bottom: 20px;
+}
+
+.content {
+  text-align: center;
+  padding: 0 20px;
+}
+
+.button-panel {
+  text-align: center;
+  margin: 30px 0 10px 0;
+}
+
+.button-panel > *:not(:last-child) {
+  margin-right: 10px;
+}
+
+.description {
+  margin-bottom: 30px;
+}
+
+.charge-info {
+  margin: 10px 0;
+}

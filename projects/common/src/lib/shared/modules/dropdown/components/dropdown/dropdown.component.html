@@ -1,0 +1,12 @@
+<div (click)="onToggle($event)">
+  <ng-content select="[jlcDropdownToggle]"></ng-content>
+</div>
+
+<div
+  class="dropdown-content"
+  *ngIf="isOpen"
+  [style.right]="rightOffset + 'px'"
+>
+  <div class="triangle-with-shadow"></div>
+  <ng-content select="[jlcDropdownContent]"></ng-content>
+</div>

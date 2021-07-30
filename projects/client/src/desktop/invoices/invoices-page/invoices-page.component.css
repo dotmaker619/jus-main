@@ -1,0 +1,81 @@
+:host {
+  --space: 40px;
+}
+
+.page-container {
+  width: auto;
+}
+
+.page-header {
+  margin: calc(var(--space) / 2) var(--space);
+}
+
+.tab-body {
+  margin: 0;
+  border: 1px solid var(--primary-border-color);
+  border-top: none;
+  padding-bottom: calc(var(--space) / 2);
+}
+
+.tab-label {
+  width: 185px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tab-label .badge {
+  background: currentColor;
+  border-radius: 11px;
+  width: 35px;
+}
+
+.tab-label .badge span {
+  color: white;
+  line-height: 22px;
+}
+
+.loading {
+  padding: var(--space) 0;
+}
+
+.tab-body > * {
+  padding-top: calc(var(--space) / 2);
+}
+
+.action-panel {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--space);
+}
+
+.action-panel form {
+  display: flex;
+  align-items: center;
+}
+
+.date-filter {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-right: calc(var(--space) / 2);
+}
+
+.date-filter mat-datepicker-toggle {
+  position: absolute;
+  right: 0;
+}
+
+.date-filter input {
+  width: 12rem;
+}
+
+.action-buttons {
+  display: flex;
+  margin: -5px;
+}
+
+.action-buttons > button {
+  margin: 5px;
+  min-width: 100px;
+}

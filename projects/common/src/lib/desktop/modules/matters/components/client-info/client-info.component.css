@@ -1,0 +1,23 @@
+.client {
+  display: flex;
+  align-items: center;
+}
+
+.client span {
+  color: var(--primary-font-color);
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+.client img {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  background: var(--light-color);
+}
+
+.nowrap {
+  white-space: inherit;
+}

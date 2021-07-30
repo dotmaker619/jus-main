@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  position: relative;
+  height: 100px;
+  width: 100px;
+}
+
+img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.upload-button {
+  --padding-top: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-bottom: 0;
+
+  position: absolute;
+  right: -30px;
+  top: -10px;
+}

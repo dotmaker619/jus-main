@@ -1,0 +1,40 @@
+<header class="header">
+  <h2 class="title">Featured Attorneys</h2>
+
+  <div class="controls" *ngIf="(attorneys$ | async)?.length > 1">
+    <button type="button" class="to-left" (click)="swipeToLeft()"></button>
+    <button type="button" class="to-right" (click)="swipeToRight()"></button>
+  </div>
+</header>
+
+<div class="attorneys">
+  <ion-slides
+    #slider
+    *ngIf="attorneys$ | async as attorneys; else loading"
+    [options]="slideOpts"
+  >
+    <ion-slide *ngFor="let attorney of attorneys; trackBy: trackById">
+      <div
+        class="attorney"
+        [style.backgroundImage]="
+          attorney.avatar && 'url(' + attorney.avatar + ')'
+        "
+      >
+        <div class="label"><span>Featured</span></div>
+        <div class="info">
+          <a [routerLink]="['/attorneys/profile', attorney.id]" class="name">{{
+            attorney.fullName
+          }}</a>
+          <div class="location">
+            {{ attorney?.firmLocationCity }},
+            {{ attorney?.firmLocationState }}
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</div>
+
+<ng-template #loading>
+  <jlc-loading class="loading"></jlc-loading>
+</ng-template>

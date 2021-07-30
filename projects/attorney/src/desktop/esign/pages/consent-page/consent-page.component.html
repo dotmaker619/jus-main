@@ -1,0 +1,30 @@
+<ng-container
+  *ngIf="esignProfile$ | async as esignProfile; else fullScreenLoading"
+>
+  <div class="page-container narrow-centered-container">
+    <div>
+      <div *ngIf="esignProfile.hasConsent; else noConsentBlock">
+        <div>
+          <p>{{ consentProvided }}</p>
+        </div>
+        <div class="button-container">
+          <a routerLink="" class="primary">Return</a>
+        </div>
+      </div>
+      <ng-template #noConsentBlock>
+        <div>
+          <p>{{ welcomeMessage }}</p>
+          <p>{{ description }}</p>
+          <p>{{ actionDescription }}</p>
+        </div>
+        <div class="button-container">
+          <a class="primary" (click)="onConsentClicked()">Provide consent</a>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #fullScreenLoading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

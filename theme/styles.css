@@ -1,0 +1,502 @@
+@import "./custom-radio-button.css";
+@import "./custom-checkbox.css";
+@import "./custom-tabs.css";
+@import "./custom-scrollbar.css";
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* You can add global styles to this file, and also import other style files */
+html {
+  font-size: var(--primary-font-size);
+  color: var(--primary-font-color);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: var(--primary-font);
+}
+
+.primary:focus,
+.secondary:focus,
+.tertiary:focus,
+input:focus,
+textarea:focus,
+select:focus,
+a:focus,
+.focusable:focus {
+  outline: none;
+  box-shadow: var(--focus-shadow);
+}
+
+body {
+  height: 100vh;
+}
+
+p,
+ul,
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: var(--h1-font-size);
+}
+
+h2 {
+  font-size: var(--h2-font-size);
+}
+
+a,
+p,
+label,
+span,
+th,
+div {
+  font-size: inherit;
+}
+
+/* ==Inputs====================================== */
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select,
+ion-datetime {
+  border: 1px solid var(--primary-border-color);
+  border-radius: 4px;
+  color: var(--primary-font-color);
+  font-size: inherit;
+  -webkit-appearance: none;
+  font-weight: normal;
+}
+
+input:not([type="checkbox"]):not([type="radio"])::placeholder {
+  color: var(--primary-placeholder-color);
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+select,
+input:not([type="checkbox"]):not([type="radio"]),
+ion-datetime {
+  --line-height-offset: 1px;
+  --bottom-padding: 11px;
+  --top-padding: 10px;
+
+  height: calc(
+    var(--primary-font-size) + var(--line-height-offset) + var(--top-padding) +
+      var(--bottom-padding)
+  );
+
+  /* No vertical padding because we've already set the height. */
+  padding: 0 19px;
+}
+
+textarea {
+  --space: 19px;
+
+  padding: calc(var(--space) / 2) var(--space);
+  background: var(--primary-background-color);
+}
+
+select:disabled,
+input:disabled {
+  background: var(--light-color);
+}
+
+select {
+  --dropdown-icon-size: 10px;
+  --icon-offset: 10px;
+
+  background: url(./icons/dropdown_icon.svg) no-repeat;
+  background-position: right var(--icon-offset) center;
+  background-size: var(--dropdown-icon-size);
+  padding-right: calc(var(--dropdown-icon-size) + var(--icon-offset));
+}
+
+/* Search input */
+
+input:not([type="checkbox"]):not([type="radio"]).search-input {
+  /* Complex selector to override selector above */
+  padding-left: calc(var(--icon-size) + var(--icon-margin) * 2);
+}
+
+.search-input {
+  --icon-size: 15px;
+  --icon-margin: 5px;
+
+  background-position: var(--icon-margin) center;
+  background-repeat: no-repeat;
+  background-image: url(/assets/icons/search_icon.svg);
+  background-color: var(--light-color);
+  background-size: var(--icon-size);
+}
+
+/* ==Label====================================== */
+
+label {
+  font-weight: bold;
+}
+
+/* For add margin between label text and an input */
+label > * + input,
+label > * + select,
+label > * + textarea,
+label > * + jlc-date-time-picker,
+label > * + ion-datetime,
+label > * + .label-margin {
+  margin-top: 9px;
+}
+
+/*
+  Display label text in input on other rows
+
+  <Label text> --line1
+  <input> --line2
+ */
+label > span {
+  display: block;
+  width: fit-content;
+}
+
+label > input,
+label > textarea,
+label > select {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: var(--secondary-color);
+  font-style: normal;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p,
+span {
+  color: var(--primary-font-color);
+}
+
+h1,
+body {
+  margin: 0;
+}
+
+/* Base styles for elements. */
+
+hr {
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  margin-bottom: 28px;
+  margin-top: 14px;
+}
+
+button.primary,
+a.primary {
+  background: var(--secondary-gradient);
+  border: none;
+  color: var(--secondary-contrast-color);
+  text-transform: uppercase;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.primary:active,
+a.primary:active {
+  background: var(--secondary-gradient-reversed);
+}
+
+button.secondary,
+a.secondary {
+  background: var(--light-gradient);
+  border: 1px solid #e9e9e8;
+  color: var(--light-contrast-color);
+  text-transform: uppercase;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+button.secondary:active,
+a.secondary:active {
+  background: var(--light-gradient-reversed);
+}
+
+button.tertiary {
+  background: none;
+  border: 1px solid var(--tertiary-color);
+  color: var(--tertiary-color);
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+button.danger {
+  background: var(--tertiary-gradient);
+  border: none;
+  color: var(--tertiary-contrast-color);
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+a.primary,
+a.secondary,
+a.tertiary,
+a.danger,
+a.tertiary,
+button.primary,
+button.secondary,
+button.tertiary,
+button.danger,
+button.tertiary {
+  height: 3rem;
+  min-width: 170px;
+}
+
+a[disabled] {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.5;
+}
+
+button.primary:disabled,
+button.primary[disabled] {
+  opacity: 0.5;
+}
+
+a.primary,
+a.secondary {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 170px;
+  padding: 0 10px;
+}
+
+/* Modifiers. */
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+/* Styles for checkbox. */
+.checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.medium-color {
+  color: var(--medium-color);
+}
+
+.italic {
+  font-style: italic;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.back-link {
+  color: var(--medium-color);
+  font-size: 12px;
+}
+
+/* Round green button. */
+.special-button {
+  height: 44px;
+  width: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: linear-gradient(
+    180deg,
+    var(--special-button-gradient-color-1) 0%,
+    var(--special-button-gradient-color-2) 100%
+  );
+  border: none;
+  outline: transparent;
+  cursor: pointer;
+  color: var(--primary-contrast-color);
+}
+
+.special-button:hover {
+  background: linear-gradient(
+    180deg,
+    var(--special-button-gradient-color-2) 100%,
+    var(--special-button-gradient-color-1) 0%
+  );
+}
+
+/* Hide arrows for number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/** Styles for displaying validation status on inputs. */
+.jlw-validation-icon-correct {
+  background: url(/assets/icons/correct-24px.svg) no-repeat;
+  background-position: right 10px center;
+
+  /* To avoid collapse the icon with text inside field. */
+  padding-right: 34px !important;
+}
+
+.jlw-validation-icon-incorrect {
+  background: url(/assets/icons/incorrect-24px.svg) no-repeat;
+  background-position: right 10px center;
+
+  /* To avoid collapse the icon with text inside field. */
+  padding-right: 34px !important;
+}
+
+textarea.jlw-validation-icon-correct,
+textarea.jlw-validation-icon-incorrect {
+  background-position: right 15px bottom 10px;
+}
+
+/** Mat-menu styles overriding. */
+.mat-menu-panel.header-menu .mat-menu-content:not(:empty) {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/** End of mat-menu styles. */
+
+/** Modifier '.hide-header' for mat-tab-group. */
+.mat-tab-group.hide-header > .mat-tab-header {
+  display: none;
+}
+
+.mat-tab-group.no-offset-before-tabs > .mat-tab-header {
+  padding-left: 0;
+}
+
+.mat-tab-group.no-offset-before-tabs > .mat-tab-header::before {
+  border-bottom: none;
+}
+
+/* Default styles for page layout. */
+.page-container {
+  width: 90%;
+  max-width: var(--max-layout-width);
+  margin: auto;
+}
+
+.page-child-container > * {
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.page-container > * {
+  margin: 1rem 0;
+  display: block;
+}
+
+/* Profile mat-tabs styles. */
+
+.profile-page .mat-tab-body-wrapper {
+  border: 1px solid var(--list-item-border-color);
+  border-top: none;
+}
+
+.profile-page .mat-tab-header {
+  padding: 0;
+}
+
+.profile-page .mat-tab-labels {
+  padding-left: 1px;
+}
+
+/* End of profile mat-tabs styles. */
+
+/** Styles for forum */
+
+.forum-page-container {
+  width: 90%;
+  max-width: var(--max-layout-width);
+  margin: auto;
+}
+
+.forum-page-child-container > * {
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.forum-page-container > * {
+  margin: 1rem 0;
+  display: block;
+}
+
+/** End of forum styles */
+
+/* To restrict default height of stripe container. */
+.__PrivateStripeElement {
+  height: 30px;
+}
+
+iframe {
+  border: 0;
+}
+
+/* Mat menu options list */
+
+ul.mat-menu-options-list {
+  list-style: none;
+}
+
+ul.mat-menu-options-list button,
+ul.mat-menu-options-list a {
+  text-align: start;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  font-size: 1rem;
+  color: var(--primary-font-color);
+  overflow: hidden;
+  white-space: nowrap;
+  margin-right: auto;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+ul.mat-menu-options-list button:focus,
+ul.mat-menu-options-list a:focus {
+  outline: none;
+  box-shadow: var(--focus-shadow);
+}
+
+ul.mat-menu-options-list li:hover {
+  background: var(--light-color);
+}
+
+ul.mat-menu-options-list img {
+  width: 20px;
+  height: 20px;
+}
+
+/* There is no way to use styles for 'quill-view' */
+.quill-hide-images img {
+  display: none !important;
+}

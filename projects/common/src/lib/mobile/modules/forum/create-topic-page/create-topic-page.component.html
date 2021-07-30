@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Topic</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    id="create-topic-page-form"
+    *ngIf="form$ | async as form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form)"
+  >
+    <label>
+      <span>Title*</span>
+      <input
+        type="text"
+        formControlName="title"
+        [jlcApiValidation]="validationError$ | async"
+      />
+
+      <jlc-form-control-validation-message controlName="title">
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Category*</span>
+      <select
+        formControlName="category"
+        [jlcApiValidation]="validationError$ | async"
+      >
+        <option [ngValue]="null">- Select category -</option>
+        <option
+          [ngValue]="category"
+          *ngFor="let category of categories$ | async"
+        >
+          {{ category.title }}
+        </option>
+      </select>
+
+      <jlc-form-control-validation-message controlName="category">
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Message*</span>
+      <textarea
+        formControlName="message"
+        rows="14"
+        [jlcApiValidation]="validationError$ | async"
+      ></textarea>
+
+      <jlc-form-control-validation-message controlName="message">
+      </jlc-form-control-validation-message>
+    </label>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="button-panel">
+      <button class="primary" type="submit" form="create-topic-page-form">
+        Create topic
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

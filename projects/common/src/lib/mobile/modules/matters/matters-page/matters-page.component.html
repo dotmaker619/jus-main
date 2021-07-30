@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Matters</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <jlc-tab-bar *ngIf="tabs$ | async as tabs">
+    <jlc-tab-button
+      *ngFor="let tab of tabs"
+      [showBadge]="true"
+      [absoluteLink]="tab.absolutePath"
+      [count]="tab.count$ | async"
+    >
+      {{ tab.title }}
+    </jlc-tab-button>
+  </jlc-tab-bar>
+
+  <form
+    *ngIf="filteringForm$ | async as form"
+    [formGroup]="form"
+    class="filtering-form"
+  >
+    <select formControlName="order">
+      <option *ngFor="let order of orderOptions" [ngValue]="order.value">
+        {{ order.label }}
+      </option>
+    </select>
+  </form>
+</ion-header>
+<ion-content>
+  <ion-router-outlet></ion-router-outlet>
+  <ng-template [ngxPermissionsOnly]="roles.Attorney">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button class="fab-button" (click)="onCreateMatterClick()">
+        <ion-icon src="/assets/icons/new_matter.svg"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ng-template>
+</ion-content>

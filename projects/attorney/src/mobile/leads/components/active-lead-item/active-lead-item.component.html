@@ -1,0 +1,35 @@
+<ion-item button detail="false">
+  <div class="content">
+    <div class="row">
+      <div class="icon">
+        <ion-icon src="/assets/icons/arrows.svg"></ion-icon>
+      </div>
+      <div class="header">
+        <div class="row space">
+          <div class="author">
+            {{ lead.lead.client.shortName }}
+          </div>
+          <div class="priority" [ngClass]="lead.lead.priority">
+            {{ lead.lead.priority | uppercase }}
+          </div>
+        </div>
+        <div class="place">
+          {{ lead.lead.client.state?.name }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="badge-container">
+        <div class="badge" [class.active]="lead.countUnreadMessages > 0"></div>
+      </div>
+      <div class="info">
+        <span class="message">
+          {{ lead.lastMessageText }}
+        </span>
+        <span class="date">
+          {{ lead.lastMessageDate | jusLawNamedOffsetFromNow }}
+        </span>
+      </div>
+    </div>
+  </div>
+</ion-item>

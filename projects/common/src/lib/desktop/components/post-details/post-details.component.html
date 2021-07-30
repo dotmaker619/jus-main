@@ -1,0 +1,15 @@
+<div class="container">
+  <header>
+    <h2 class="title">{{ post.title }}</h2>
+    <p class="italic">
+      by {{ post.author.name }} | {{ post.created | date: "mediumDate" }}
+    </p>
+    <a routerLink=".." class="back-btn">
+      &lt;&lt; Back to all posts
+    </a>
+  </header>
+  <div class="content">
+    <img [src]="post.image" alt="Post preview image" class="preview-image" />
+    <jlc-display-html [content]="post.content"></jlc-display-html>
+  </div>
+</div>

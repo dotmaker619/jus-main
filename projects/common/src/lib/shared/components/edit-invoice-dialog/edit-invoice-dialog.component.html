@@ -1,0 +1,92 @@
+<form
+  class="form"
+  *ngIf="form$ | async as form; else loading"
+  [formGroup]="form"
+  [@loadedAnimation]
+  (ngSubmit)="onSubmit(form)"
+>
+  <ng-container *ngIf="title">
+    <h2>{{ title }}</h2>
+    <hr />
+  </ng-container>
+  <div class="row">
+    <label>
+      <span>Title*</span>
+      <input formControlName="title" [jlcApiValidation]="validationError$" />
+      <jlc-form-control-validation-message
+        controlName="title"
+      ></jlc-form-control-validation-message>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <span>Matter*</span>
+      <select formControlName="matter" [jlcApiValidation]="validationError$">
+        <option [ngValue]="null"></option>
+        <option
+          *ngFor="let matter of matterOptions$ | async"
+          [ngValue]="matter.id"
+        >
+          {{ matter.title }}
+        </option>
+      </select>
+      <jlc-form-control-validation-message
+        controlName="matter"
+      ></jlc-form-control-validation-message>
+    </label>
+  </div>
+  <div class="period-picker">
+    <div class="row" formGroupName="period">
+      <label>
+        <span>Period Start Date*</span>
+        <jlc-date-time-picker
+          formControlName="start"
+          mode="date"
+          [jlcApiValidation]="validationError$"
+          [datePickerOptions]="datePickerOptions"
+        ></jlc-date-time-picker>
+        <jlc-form-control-validation-message controlName="start">
+        </jlc-form-control-validation-message>
+      </label>
+      <label>
+        <span>Period End Date*</span>
+        <jlc-date-time-picker
+          formControlName="end"
+          mode="date"
+          [jlcApiValidation]="validationError$"
+          [datePickerOptions]="datePickerOptions"
+        ></jlc-date-time-picker>
+        <jlc-form-control-validation-message controlName="end">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+    <jlc-form-control-validation-message
+      class="period-error"
+      controlName="period"
+    >
+    </jlc-form-control-validation-message>
+  </div>
+  <div class="row">
+    <label>
+      <span>Message</span>
+      <textarea
+        formControlName="note"
+        [jlcApiValidation]="validationError$"
+      ></textarea>
+      <jlc-form-control-validation-message controlName="note">
+      </jlc-form-control-validation-message>
+    </label>
+  </div>
+  <div class="button-panel" *ngIf="!(isBusy$ | async); else loading">
+    <button class="secondary" type="button" (click)="onCancelClicked()">
+      Cancel
+    </button>
+    <button class="primary">
+      Save
+    </button>
+  </div>
+</form>
+
+<ng-template #loading>
+  <jlc-loading></jlc-loading>
+</ng-template>

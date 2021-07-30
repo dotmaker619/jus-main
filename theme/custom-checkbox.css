@@ -1,0 +1,65 @@
+:root {
+  --checkbox-input-size: 26px;
+}
+
+/* Adjust size of original  */
+[type="checkbox"] {
+  border: none;
+  position: relative;
+  width: var(--checkbox-input-size);
+  height: var(--checkbox-input-size);
+  min-width: var(--checkbox-input-size);
+  min-height: var(--checkbox-input-size);
+  padding: 0;
+  margin-right: 6px;
+}
+
+/* Render custom checkbox */
+[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  width: var(--checkbox-input-size);
+  height: var(--checkbox-input-size);
+  border: 2px solid var(--checkbox-color, black);
+  background: var(--primary-contrast-color, white);
+  transition: all 0.2s ease;
+}
+
+[type="checkbox"]:checked::before {
+  background: var(--checkbox-color, black);
+}
+
+/* Render custom "checked" mark */
+[type="checkbox"]:checked::after,
+[type="checkbox"]:not(:checked)::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--primary-contrast-color, white);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  transition: all 0.2s ease;
+}
+
+/* Hide mark for unchecked */
+[type="checkbox"]:not(:checked)::after {
+  opacity: 0;
+  transform: rotate(45deg) scale(0);
+}
+
+/* Show mark for unchecked */
+[type="checkbox"]:checked::after {
+  opacity: 1;
+  transform: rotate(45deg) scale(1);
+}
+
+/* Fix appearance of custom checkbox for ios devices */
+html.plt-cordova.plt-ios [type="checkbox"] {
+  appearance: borderless-attachment;
+}

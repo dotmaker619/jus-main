@@ -1,0 +1,14 @@
+<a
+  class="attachment"
+  [href]="attachment.url"
+  [attr.download]="attachment.title"
+  jusLawDownload
+>
+  <div class="loading" *ngIf="!attachment.url"></div>
+  <div class="icon-container">
+    <img src="/assets/icons/document_icon.svg" alt="" />
+  </div>
+  <span class="title ellipsis">
+    {{ attachment.title }}
+  </span>
+</a>

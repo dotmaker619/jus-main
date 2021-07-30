@@ -1,0 +1,29 @@
+<ion-list line="full">
+  <ng-container *ngIf="consents; else skeleton">
+    <ng-container *ngIf="consents.length > 0; else noItemsMessage">
+      <ion-item
+        class="item"
+        button
+        detail="false"
+        (click)="onConsentClick(consent)"
+        *ngFor="let consent of consents; trackBy: trackConsent"
+      >
+        <jlc-consent-item [consent]="consent"></jlc-consent-item>
+      </ion-item>
+    </ng-container>
+  </ng-container>
+</ion-list>
+
+<ng-template #skeleton>
+  <ion-item class="item" *ngFor="let i of [1, 2, 3]">
+    <jlc-consent-item></jlc-consent-item>
+  </ion-item>
+</ng-template>
+
+<ng-template #noItemsMessage>
+  <ion-item class="message">
+    <ion-label>No consents yet</ion-label>
+  </ion-item>
+</ng-template>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

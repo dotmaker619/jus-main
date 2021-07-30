@@ -1,0 +1,23 @@
+<div class="card-body">
+  <div class="content">
+    <div class="count">
+      {{count}}
+    </div>
+  
+    <h2 class="title">
+      {{title}}
+    </h2>
+  </div>
+  <div class="icon" *ngIf="iconUrl">
+    <img [src]="iconUrl" alt="">
+  </div>
+</div>
+
+<div class="link-wrapper">
+  <a
+    [routerLink]="link"
+    class="link"
+  >
+    View
+  </a>
+</div>

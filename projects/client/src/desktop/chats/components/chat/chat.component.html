@@ -1,0 +1,39 @@
+<ng-container *ngIf="chat$ | async as chat">
+  <div class="contact-profile-header">
+    <div class="contact-info ellipsis">
+      <div class="contact-name">
+        <span class="ellipsis">{{ chat.recipient.fullName }}</span>
+
+        <div
+          *ngIf="chat.lead.attorney.isVerified"
+          class="approved-indicator"
+          title="Attorney is approved"
+        >
+          <!-- Success icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 513 913">
+            <path
+              d="M186.301 339.893L96 249.461l-32 30.507L186.301 402 448 140.506 416 110z"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <div class="contact-type ellipsis">
+        {{ recipientSubtitle$ | async }}
+      </div>
+    </div>
+
+    <div class="actions">
+      <a
+        [routerLink]="['/attorneys/profile', chat.recipient.id]"
+        class="view-profile"
+      >
+        View Profile
+      </a>
+    </div>
+  </div>
+
+  <div class="feed-container">
+    <jlc-chat [chat]="chat"></jlc-chat>
+  </div>
+</ng-container>

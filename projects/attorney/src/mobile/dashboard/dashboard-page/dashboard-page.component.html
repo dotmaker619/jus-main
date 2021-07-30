@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>My Dashboard</ion-title>
+  </ion-toolbar>
+  <jlc-tab-bar>
+    <jlc-tab-button absoluteLink="/dashboard/stream">
+      Stream
+    </jlc-tab-button>
+    <jlc-tab-button absoluteLink="/dashboard/statistics">
+      Statistics
+    </jlc-tab-button>
+  </jlc-tab-bar>
+</ion-header>
+<ion-content>
+  <ion-router-outlet></ion-router-outlet>
+</ion-content>

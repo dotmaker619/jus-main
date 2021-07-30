@@ -1,0 +1,13 @@
+<div class="container" [class.read]="notification.isRead">
+  <span class="badge"></span>
+
+  <!-- Notification message. -->
+  <span class="content">
+    {{ notification.content }}
+  </span>
+
+  <!-- Notification date. -->
+  <span class="date">
+    {{ notification.date | jusLawDate: "MM/dd/yy" }}
+  </span>
+</div>

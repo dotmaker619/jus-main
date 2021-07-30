@@ -1,0 +1,45 @@
+<header class="header">
+  <h2 class="title">Recent Posts</h2>
+</header>
+
+<div
+  *ngIf="recentActivity$ | async as recentActivity; else loading"
+  class="recent-activities"
+>
+  <a
+    *ngFor="let topic of recentActivity"
+    class="recent-activity focusable"
+    [routerLink]="['/forum/topic', topic.id, topic.postCount]"
+  >
+    <div class="icon-wrapper">
+      <!-- TODO: change icon -->
+      <img src="/assets/icons/category_icon.svg" alt="Chat icon" />
+    </div>
+
+    <div class="last-post">
+      <div class="post-header">
+        <b>
+          {{ topic.lastPost?.author.shortName || "Someone" }}
+        </b>
+        posted in <b>“{{ topic?.title }}”</b>
+      </div>
+
+      <div class="text">{{ topic.lastPost?.text || "—" }}</div>
+    </div>
+
+    <div class="right-columns">
+      <span class="date">
+        <span class="date-label">Posted:</span>
+        {{ topic.lastPost?.created | jusLawDate }}
+      </span>
+
+      <span class="replies">{{ topic.postCount }} Replies</span>
+    </div>
+  </a>
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    <jlc-loading></jlc-loading>
+  </div>
+</ng-template>

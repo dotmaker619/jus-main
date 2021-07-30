@@ -1,0 +1,41 @@
+:host {
+  --space: 10px;
+}
+
+ion-content {
+  --background: var(--primary-background-color);
+}
+
+ion-content,
+ion-footer ion-toolbar {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+  --padding-top: var(--space);
+  --padding-bottom: var(--space);
+}
+
+form > * {
+  display: block;
+  margin-bottom: var(--space);
+}
+
+.submit-btn {
+  width: 100%;
+}
+
+div.row {
+  display: flex;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+}
+
+.radio-label:not(:first-child) {
+  margin-left: calc(var(--space) * 2);
+}
+
+.radio-label input[type="radio"] {
+  margin: 0 var(--space) 0 0;
+}

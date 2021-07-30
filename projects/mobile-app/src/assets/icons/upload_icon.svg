@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="16px" viewBox="0 0 15 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 63.1 (101010) - https://sketch.com -->
+    <title>56097926-D716-42DF-8B79-2EB61926E05E</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <polygon id="path-1" points="5.68138776 9.85714286 4.28566531 8.50021596 6.53853061 6.30997139 -2.66453526e-15 6.30904045 -2.66453526e-15 4.40431433 6.5635102 4.40431433 4.3106449 2.21406975 5.70636735 0.857142857 10.2857143 5.38086741"></polygon>
+        <filter x="-29.2%" y="-33.3%" width="158.3%" height="166.7%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.626188859   0 0 0 0 0.626188859   0 0 0 0 0.626188859  0 0 0 0.474868881 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-3" x="0" y="10.2857143" width="10.2857143" height="1.71428571" rx="0.857142857"></rect>
+        <filter x="-29.2%" y="-175.0%" width="158.3%" height="450.0%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.626188859   0 0 0 0 0.626188859   0 0 0 0 0.626188859  0 0 0 0.474868881 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Element-Sheet" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-63.000000, -698.000000)" id="Icons/ic-upload">
+            <g transform="translate(65.000000, 700.000000)">
+                <g id="Group-2">
+                    <g id="Path" transform="translate(5.142857, 5.357143) scale(1, -1) rotate(-90.000000) translate(-5.142857, -5.357143) ">
+                        <use fill="currentColor" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="currentColor" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <g id="Rectangle">
+                        <use fill="currentColor" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                        <use fill="currentColor" fill-rule="evenodd" xlink:href="#path-3"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

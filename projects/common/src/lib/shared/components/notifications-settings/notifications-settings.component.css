@@ -1,0 +1,80 @@
+.notifications-settings {
+  position: relative;
+  padding-bottom: 8px;
+  max-width: 400px;
+
+  --title-column-padding: 0 0 0 14px;
+  --email-column-width: 82px;
+  --push-column-width: 62px;
+}
+
+.loading-placeholder {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.header,
+.group {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #4a4a4a;
+}
+
+.header {
+  display: flex;
+}
+
+.group {
+  margin-top: 22px;
+  padding: var(--title-column-padding);
+}
+
+.item {
+  display: flex;
+  margin-top: 22px;
+}
+
+.column-type {
+  flex-grow: 1;
+  padding: var(--title-column-padding);
+}
+
+.column-title {
+  min-width: 190px;
+  padding: var(--title-column-padding);
+  color: #333;
+  font-size: 14px;
+  text-transform: capitalize;
+  flex-grow: 1;
+}
+
+.item.is-in-group > .column-title {
+  padding-left: 50px;
+}
+
+.column-email,
+.column-push {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.column-email {
+  width: var(--email-column-width);
+}
+
+.column-push {
+  width: var(--push-column-width);
+}
+
+.column-email > input,
+.column-push > input {
+  margin: 0;
+}

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="onCancelClick()">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>New Message</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <header *ngIf="recipient$ | async as recipient" class="recipient">
+    <span class="to">To: </span>
+    <span>{{ recipient.fullName }}</span>
+  </header>
+
+  <form
+    *ngIf="matterTopicForm$ | async as form"
+    [formGroup]="form"
+    class="save-topic-form"
+    (ngSubmit)="onFormSubmitted(form)"
+    id="save-topic-form"
+  >
+    <label>
+      <span>Title*</span>
+      <input formControlName="title" />
+      <jlc-form-control-validation-message
+        controlName="title"
+      ></jlc-form-control-validation-message>
+    </label>
+
+    <label>
+      <span>Message*</span>
+      <textarea
+        formControlName="message"
+        rows="15"
+        placeholder="Type..."
+      ></textarea>
+      <jlc-form-control-validation-message
+        controlName="message"
+      ></jlc-form-control-validation-message>
+    </label>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button class="primary" form="save-topic-form" type="submit">
+      Save
+    </button>
+  </ion-toolbar>
+</ion-footer>

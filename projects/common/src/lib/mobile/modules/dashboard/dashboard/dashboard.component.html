@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Dashboard
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <jlc-attorney-search
+    [place]="place$ | async"
+    (search)="onAttorneySearch($event)"
+  >
+  </jlc-attorney-search>
+  <jlc-forum-categories></jlc-forum-categories>
+  <jlc-featured-attorneys [place]="place$ | async"> </jlc-featured-attorneys>
+  <jlc-sponsored-attorneys [place]="place$ | async"> </jlc-sponsored-attorneys>
+  <jlc-recent-activity></jlc-recent-activity>
+</ion-content>

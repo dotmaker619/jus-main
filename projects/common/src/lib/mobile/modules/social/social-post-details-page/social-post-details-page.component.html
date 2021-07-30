@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Post details</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="expandable-body" *ngIf="post$ | async as post; else loading">
+    <jlc-post-details [post]="mapSocialPostToPostData(post)">
+    </jlc-post-details>
+    <ion-item
+      lines="none"
+      [routerLink]="['/attorneys', 'profile', post.author]"
+    >
+      <ion-avatar slot="start">
+        <img [src]="post.authorData.avatar" />
+      </ion-avatar>
+      <ion-label>
+        <h3>{{ post.authorData.fullName }}</h3>
+        <p class="specialities">{{ post.authorData.specialitiesStr }}</p>
+      </ion-label>
+    </ion-item>
+  </div>
+</ion-content>
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

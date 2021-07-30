@@ -1,0 +1,55 @@
+.loading {
+  margin: 100px 0;
+}
+
+.page-container {
+  padding: 18px 40px;
+}
+
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  background: var(--primary-gradient);
+  border-radius: 50%;
+  margin-right: 11px;
+  flex-shrink: 0;
+}
+
+.icon-wrapper img {
+  filter: invert(1);
+  max-width: 18px;
+}
+
+.billings header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 16px 0;
+}
+
+.billings .heading {
+  flex-grow: 1;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.428;
+  color: var(--primary-font-color);
+  margin-right: 10px;
+}
+
+.client-info {
+  font-size: 1rem;
+  line-height: normal;
+  font-weight: bold;
+}
+
+.billings {
+  margin-top: 30px;
+}
+
+.payment-btn {
+  margin: 40px auto 0 auto;
+  width: 180px;
+}

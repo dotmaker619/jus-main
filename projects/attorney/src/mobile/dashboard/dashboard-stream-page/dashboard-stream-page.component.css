@@ -1,0 +1,55 @@
+:host {
+  --space: 20px;
+}
+
+.dashboard-cards-container {
+  --cards-space: calc(var(--space) / 2);
+  background-color: var(--primary-background-color);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--cards-space);
+  row-gap: var(--cards-space);
+  padding: var(--cards-space);
+}
+
+.topic-list {
+  padding: 0;
+}
+
+.topic-list,
+.dashboard-cards-container {
+  box-shadow: var(--card-shadow);
+}
+
+.dashboard-card:active {
+  --card-background: var(--primary-light-color);
+  --card-border-color: var(--primary-color);
+}
+
+.card-opportunities {
+  --icon-background: var(--tertiary-color);
+}
+
+.card-leads,
+.card-documents {
+  --icon-background: var(--primary-shade-color);
+}
+
+.card-matters {
+  --icon-background: var(--success-shade-color);
+}
+
+.divider {
+  --font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: calc(var(--space) / 4) calc(var(--space) / 2);
+  font-size: var(--font-size);
+}
+
+.subheader {
+  color: var(--primary-font-color);
+  text-transform: uppercase;
+  font-size: var(--font-size);
+}

@@ -1,0 +1,28 @@
+<div class="dialog">
+  <h3>{{ dialogTitle }}</h3>
+  <hr />
+  <form [formGroup]="formGroup">
+    <label>
+      Name*
+      <input
+        formControlName="title"
+        [jlcApiValidation]="validationError$ | async"
+      />
+      <jlc-form-control-validation-message controlName="title">
+      </jlc-form-control-validation-message>
+    </label>
+    <ng-container *ngIf="!(isLoading$ | async); else loading">
+      <div class="button-panel">
+        <button class="secondary" type="button" (click)="onCancelClick()">
+          Cancel
+        </button>
+        <button class="primary" (click)="onSaveClick()">
+          Save
+        </button>
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      <jlc-loading></jlc-loading>
+    </ng-template>
+  </form>
+</div>

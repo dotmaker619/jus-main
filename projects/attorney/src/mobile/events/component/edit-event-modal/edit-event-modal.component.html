@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" shape="round" (click)="onCancelClick()"
+        >Cancel</ion-button
+      >
+    </ion-buttons>
+    <ion-title>{{ headerTitle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    *ngIf="form$ | async as form"
+    [formGroup]="form"
+    (ngSubmit)="onFormSubmit(form)"
+    id="edit-event-modal-form"
+  >
+    <label>
+      <span class="label-text">Title*</span>
+      <input
+        type="text"
+        formControlName="title"
+        [jlcApiValidation]="validationError$"
+        placeholder="Type..."
+      />
+      <jlc-form-control-validation-message controlName="title">
+      </jlc-form-control-validation-message>
+    </label>
+    <div formGroupName="dateTimeRange">
+      <span class="label-text">Date and Time</span>
+      <div class="date-time-container">
+        <span>Start</span>
+        <jlc-date-time-picker
+          formControlName="start"
+          [mode]="dateTimePickerMode$ | async"
+          [jlcApiValidation]="validationError$"
+          [datePickerOptions]="datePickerOptions"
+          [timePickerOptions]="timePickerOptions"
+          [timezone]="form.get('locationTimezone').value"
+        >
+        </jlc-date-time-picker>
+      </div>
+      <jlc-form-control-validation-message controlName="start">
+      </jlc-form-control-validation-message>
+      <ng-container *ngIf="!(isAllDayMode$ | async)">
+        <div class="date-time-container">
+          <span>End</span>
+          <jlc-date-time-picker
+            formControlName="end"
+            [jlcApiValidation]="validationError$"
+            [datePickerOptions]="datePickerOptions"
+            [timePickerOptions]="timePickerOptions"
+            [timezone]="form.get('locationTimezone').value"
+          ></jlc-date-time-picker>
+        </div>
+        <jlc-form-control-validation-message controlName="end">
+        </jlc-form-control-validation-message>
+      </ng-container>
+    </div>
+    <jlc-form-control-validation-message
+      controlName="dateTimeRange"
+      *ngIf="form.controls.dateTimeRange.errors"
+    >
+    </jlc-form-control-validation-message>
+    <label class="all-day-check">
+      <input
+        type="checkbox"
+        formControlName="isAllDay"
+        [jlcApiValidation]="validationError$"
+      />
+      <span>All day</span>
+    </label>
+    <label>
+      <span class="label-text">Location</span>
+      <input
+        type="text"
+        formControlName="location"
+        [jlcApiValidation]="validationError$"
+        placeholder="Type..."
+      />
+      <jlc-form-control-validation-message controlName="location">
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span class="label-text">Description</span>
+      <textarea
+        formControlName="description"
+        [jlcApiValidation]="validationError$"
+        placeholder="Type..."
+        rows="7"
+      >
+      </textarea>
+      <jlc-form-control-validation-message controlName="description">
+      </jlc-form-control-validation-message>
+    </label>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button class="primary" form="edit-event-modal-form" type="submit">
+      Save
+    </button>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

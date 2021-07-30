@@ -1,0 +1,13 @@
+<jlc-card class="card">
+  <details [attr.open]="isCollapsed ? null : true">
+    <summary class="card__header">
+      <ng-content select="header"></ng-content>
+    </summary>
+    <div class="card__body">
+      <ng-content select="article"> </ng-content>
+    </div>
+    <div class="card__footer">
+      <ng-content select="footer"></ng-content>
+    </div>
+  </details>
+</jlc-card>

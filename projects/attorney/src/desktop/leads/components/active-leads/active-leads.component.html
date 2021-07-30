@@ -1,0 +1,67 @@
+<div class="tab-sub-title">
+  These are leads that you’re currently engaged with.
+</div>
+<div *ngIf="chats$ | async as chats; else loading" class="chat">
+  <ul class="contacts">
+    <li
+      *ngFor="let chat of chats; trackBy: trackByChatId"
+      class="contact"
+      [class.selected]="(selectedChat$ | async)?.id === chat.id"
+    >
+      <span
+        class="new-messages-indicator"
+        [class.no-new-messages]="chat.countUnreadMessages === 0"
+      >
+      </span>
+      <button
+        class="special-button create-matter-button"
+        type="button"
+        [routerLink]="['/matters', 'create']"
+        [queryParams]="{ client: chat.recipient.id, leadId: chat.lead.id }"
+        title="Create a matter from lead"
+      >
+        <img src="/assets/icons/conversion_icon.svg" alt="" />
+      </button>
+      <a
+        [routerLink]="[]"
+        class="contact-link"
+        [queryParams]="{ leadId: chat.lead.id }"
+      >
+        <div class="user-info">
+          <div class="name">
+            {{ chat.recipient.shortName }}
+          </div>
+
+          <div class="location">
+            {{ chat.lead.client.state?.name }}
+          </div>
+        </div>
+
+        <div class="chat-info">
+          <span
+            class="priority"
+            [class.high-priority]="chat.lead.priority === 'high'"
+            [class.medium-priority]="chat.lead.priority === 'medium'"
+          >
+            {{ chat.lead.priority }}
+          </span>
+          <span class="priority" *ngIf="chat.lastMessageText == null">
+            New!
+          </span>
+          <span>
+            {{ chat.lastMessageDate | jusLawNamedOffsetFromNow }}
+          </span>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <jlat-leads-chat
+    *ngIf="selectedChat$ | async as selectedChat"
+    [chat]="selectedChat"
+  >
+  </jlat-leads-chat>
+</div>
+
+<ng-template #loading>
+  <jlc-loading mode="fullsize"></jlc-loading>
+</ng-template>

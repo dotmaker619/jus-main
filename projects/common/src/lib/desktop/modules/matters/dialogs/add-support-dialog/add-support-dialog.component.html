@@ -1,0 +1,61 @@
+<header>
+  <h2>Add Paralegal</h2>
+</header>
+<hr />
+<form
+  *ngIf="referForm$ | async as referForm"
+  [formGroup]="referForm"
+  (ngSubmit)="onFormSubmit(referForm)"
+>
+  <label>
+    <span>Title</span>
+    <input type="text" formControlName="title" />
+    <jlc-form-control-validation-message controlName="title">
+    </jlc-form-control-validation-message>
+  </label>
+  <label>
+    <span>Message</span>
+    <textarea formControlName="message"></textarea>
+    <jlc-form-control-validation-message controlName="message">
+    </jlc-form-control-validation-message>
+  </label>
+  <div>
+    <span class="attorneys-list-label">Send to: </span>
+    <div class="select-attorneys">
+      <div>
+        <jlc-people-filter-input
+          [selected]="getSelectedUsersFromForm(referForm) | async"
+          (unselectClick)="onUnselectClick($event)"
+          (ngModelChange)="onFilterChange($event)"
+          (enterClick)="onFilterSubmit()"
+        ></jlc-people-filter-input>
+      </div>
+      <div class="attorneys-list">
+        <ng-container *ngIf="users$ | async as attorneys">
+          <jlc-user-selectlist
+            *ngIf="attorneys.items.length > 0; else noItemsMessage"
+            [options]="attorneys.items"
+            formControlName="users"
+            [canLoadMore]="attorneys.items.length < attorneys.itemsCount"
+            (loadMore)="onMoreUsersRequested()"
+          >
+          </jlc-user-selectlist>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="button-panel">
+    <button class="secondary" type="button" (click)="onCloseClick()">
+      Cancel
+    </button>
+    <button class="primary" type="submit">
+      {{ buttonTitle$ | async }}
+    </button>
+  </div>
+</form>
+<ng-template #noItemsMessage>
+  <div class="no-items-message">
+    We haven't found anyone
+  </div>
+</ng-template>
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

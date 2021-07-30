@@ -1,0 +1,19 @@
+:host {
+  --space: 10px;
+  --image-size: 64px;
+}
+
+ion-item {
+  --padding-start: 0;
+}
+
+jlc-category-list-item {
+  padding: var(--space);
+  width: 100%;
+}
+
+.item-message {
+  font-style: italic;
+  color: var(--medium-color);
+  text-align: center;
+}

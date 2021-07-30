@@ -1,0 +1,119 @@
+.search-results {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.search-results-attorneys {
+  width: 50%;
+  max-height: 500px;
+  overflow: auto;
+  position: relative;
+}
+
+.attorney-info {
+  width: 95%;
+  height: 150px;
+  border: solid 2px var(--list-item-border-color);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.attorney-info-data {
+  flex: 1;
+  padding: 40px 20px;
+  position: relative;
+}
+
+.attorney-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.attorney-avatar-container {
+  width: 25%;
+}
+.attorney-avatar {
+  background-color: var(--light-color);
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.search-results-map {
+  margin-top: 10px;
+  width: 50%;
+  min-height: 500px;
+  margin-left: 10px;
+}
+
+.attorney-list {
+  max-height: 500px;
+  overflow: auto;
+}
+
+agm-map {
+  height: 100%;
+}
+
+.selected-attorney {
+  background-color: #fff7e2;
+  border-color: #f2c502;
+}
+
+.attorney-distance {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: var(--primary-light-font-color);
+  font-style: italic;
+}
+
+.search-count {
+  font-size: 2rem;
+  margin-right: 20px;
+}
+
+.label {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  display: inline-block;
+  padding: 0px 20px 6px 15px;
+}
+
+.label > span {
+  position: relative;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--tertiary-contrast-color);
+}
+
+.label::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-width: 10px 8px;
+  border-style: solid;
+  border-color: var(--primary-highlight-color);
+  border-right-color: transparent;
+}
+
+.specialty-info {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+jlc-loading {
+  margin-top: 200px;
+}

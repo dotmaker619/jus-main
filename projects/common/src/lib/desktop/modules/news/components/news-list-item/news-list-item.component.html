@@ -1,0 +1,21 @@
+<header>
+  <h2 class="author">Jus-Law</h2>
+</header>
+<div class="content">
+  <div *ngIf="news.image" class="image-block">
+    <img [src]="news.image" alt="News preview image" />
+  </div>
+  <div class="info">
+    <p class="title">{{ news.title }}</p>
+    <p class="date italic">{{ news.created | date: "mediumDate" }}</p>
+    <div class="html-content">
+      <jlc-display-html
+        [content]="news.description"
+        [areImagesHidden]="true"
+      ></jlc-display-html>
+    </div>
+  </div>
+</div>
+<a class="more-btn" title="Open news details" [routerLink]="news.id">
+  See more
+</a>

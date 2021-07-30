@@ -1,0 +1,10 @@
+ion-item {
+  --inner-padding-top: 16px;
+  --inner-padding-bottom: 16px;
+}
+
+.item-message {
+  font-style: italic;
+  color: var(--medium-color);
+  text-align: center;
+}

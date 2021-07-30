@@ -1,0 +1,207 @@
+<ng-container *ngIf="nodeTree$ | async as nodeTree; else loading">
+  <!-- Header for the file tree. -->
+  <div class="documents-header" *ngIf="showHeader">
+    <div class="node-content">
+      <!-- Having similar but fake markup to comply to real nodes. -->
+      <div class="expand-icon-container fake"></div>
+
+      <!-- Title for a folder. -->
+      <div class="title">
+        Name
+      </div>
+
+      <!-- Owner name -->
+      <div class="owner">
+        Uploaded By
+      </div>
+
+      <!-- Date of creation. -->
+      <div class="date">
+        Date Created
+      </div>
+
+      <!-- Fake options button to preserve the same padding as inside of a tree node. -->
+      <div class="document-options-button fake"></div>
+    </div>
+  </div>
+
+  <cdk-tree
+    *ngIf="nodeTree.length > 0; else noDocumentsTemplate"
+    [dataSource]="dataSource$"
+    [treeControl]="treeControl"
+    [trackBy]="trackByFn"
+    class="documents-tree"
+  >
+    <!-- Node without children. -->
+    <cdk-nested-tree-node
+      *cdkTreeNodeDef="let node"
+      class="documents-tree-node"
+      [class.folder]="node.doc.isExpandable"
+    >
+      <div class="node-content">
+        <!-- Having similar but fake markup to comply to real nodes. -->
+        <div class="expand-button fake">
+          <div class="expand-icon-container fake">
+            <div class="expand-icon"></div>
+            <div class="icon-container">
+              <img [src]="node.doc.icon" alt="" />
+            </div>
+          </div>
+
+          <div class="info ellipsis">
+            <!-- Title for a folder. -->
+            <ng-container
+              *ngIf="node.doc.isExpandable; else fileTitleTemplateContainer"
+            >
+              <ng-container
+                *ngTemplateOutlet="titleTemplate; context: { node: node }"
+              ></ng-container>
+            </ng-container>
+            <!-- Title for a file. -->
+            <ng-template #fileTitleTemplateContainer>
+              <!-- Using fileTitleTemplateContainer to be able to pass the context. -->
+              <ng-container
+                *ngTemplateOutlet="fileTitleTemplate; context: { node: node }"
+              ></ng-container>
+            </ng-template>
+
+            <div class="additional" *ngIf="!node.doc.isExpandable">
+              <!-- Owner name -->
+              <ng-container
+                *ngTemplateOutlet="ownerNameTemplate; context: { node: node }"
+              ></ng-container>
+
+              <!-- Date of creation. -->
+              <ng-container
+                *ngTemplateOutlet="dateTemplate; context: { node: node }"
+              ></ng-container>
+            </div>
+          </div>
+        </div>
+
+        <ng-container
+          *ngTemplateOutlet="optionsButton; context: { node: node }"
+        ></ng-container>
+      </div>
+    </cdk-nested-tree-node>
+    <!-- Tree node template for expandable nodes -->
+    <cdk-nested-tree-node
+      *cdkTreeNodeDef="let node; when: hasChild"
+      class="documents-nested-tree-node"
+    >
+      <div class="node-content">
+        <!-- Expand node button. -->
+        <button
+          [attr.aria-label]="'Toggle ' + node.doc.title"
+          cdkTreeNodeToggle
+          class="expand-button"
+        >
+          <!-- Expand icon. -->
+          <div class="expand-icon-container">
+            <ng-container *ngIf="treeControl.isExpanded(node); else expandIcon">
+              <img
+                class="expand-icon rotated"
+                src="/assets/icons/triangle_icon.svg"
+                alt=""
+              />
+            </ng-container>
+            <ng-template #expandIcon>
+              <img
+                class="expand-icon"
+                src="/assets/icons/triangle_icon.svg"
+                alt=""
+              />
+            </ng-template>
+
+            <div class="icon-container">
+              <img [src]="node.doc.icon" alt="" />
+            </div>
+          </div>
+
+          <!-- Title for a folder. -->
+          <ng-container
+            *ngTemplateOutlet="titleTemplate; context: { node: node }"
+          ></ng-container>
+
+          <ng-container *ngIf="showHeader">
+            <!-- Date of creation. -->
+            <ng-container
+              *ngTemplateOutlet="dateTemplate; context: { node: node }"
+            ></ng-container>
+          </ng-container>
+        </button>
+
+        <!-- Options button. -->
+        <ng-container
+          *ngTemplateOutlet="optionsButton; context: { node: node }"
+        ></ng-container>
+      </div>
+
+      <!-- Div for recursive children rendering. -->
+      <div
+        class="documents-tree-node-children"
+        [class.documents-tree-invisible]="!treeControl.isExpanded(node)"
+      >
+        <ng-container cdkTreeNodeOutlet></ng-container>
+      </div>
+    </cdk-nested-tree-node>
+  </cdk-tree>
+</ng-container>
+
+<!-- No documents message. -->
+<ng-template #noDocumentsTemplate>
+  <div class="message">No documents.</div>
+</ng-template>
+
+<!-- Loading template -->
+<ng-template #loading>
+  <jlc-loading></jlc-loading>
+</ng-template>
+
+<!-- Folder title template. -->
+<ng-template #titleTemplate let-node="node">
+  <div class="title">{{ node.doc.title }}</div>
+</ng-template>
+
+<!-- File title template. -->
+<ng-template #fileTitleTemplate let-node="node">
+  <div class="title underlined ellipsis">{{ node.doc.title }}</div>
+</ng-template>
+
+<!-- Name template. -->
+<ng-template #ownerNameTemplate let-node="node">
+  <div class="owner ellipsis">
+    {{ node.doc.createdBy?.shortName }}
+  </div>
+</ng-template>
+
+<!-- Date of creation template. -->
+<ng-template #dateTemplate let-node="node">
+  <div class="date">
+    {{ node.doc.created | date: "shortDate" }}
+  </div>
+</ng-template>
+
+<!-- Options button template. -->
+<ng-template #optionsButton let-node="node">
+  <button
+    *ngIf="node.doc.actions.length > 0"
+    class="document-options-button focusable"
+    (click)="onNodeOptionsClick(node)"
+    [matMenuTriggerFor]="nodeMenu"
+    title="Open options"
+  >
+    <img src="/assets/icons/more_icon.svg" alt="" />
+  </button>
+</ng-template>
+
+<!-- Node options menu. -->
+<mat-menu #nodeMenu="matMenu">
+  <ul class="mat-menu-options-list" *ngIf="selectedNode$ | async as node">
+    <li *ngFor="let action of node.doc.actions">
+      <button (click)="onOptionClick(node, action)">
+        {{ toReadableAction(action) }}
+      </button>
+    </li>
+  </ul>
+</mat-menu>

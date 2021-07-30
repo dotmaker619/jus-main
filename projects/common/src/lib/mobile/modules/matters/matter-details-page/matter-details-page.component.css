@@ -1,0 +1,72 @@
+:host {
+  --space: 10px;
+  --card-border-radius: 10px;
+}
+
+.control-form select {
+  width: 100%;
+}
+
+.skeleton {
+  width: 5rem;
+}
+
+.content > * {
+  margin: var(--space);
+}
+
+.contact-button-panel {
+  margin: var(--space);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--space);
+}
+
+.contact-button-panel button {
+  background: linear-gradient(
+    180deg,
+    var(--special-button-gradient-color-1) 0%,
+    var(--special-button-gradient-color-2) 100%
+  );
+  height: 40px;
+  display: flex;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  flex: 0.5;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--special-button-text-color);
+  border: none;
+}
+
+.contact-button-panel button:active {
+  background: var(--special-button-gradient-active);
+}
+
+.contact-button-panel button:disabled {
+  opacity: 0.7;
+}
+
+.contact-button-panel button > ion-icon {
+  margin-right: var(--space);
+}
+
+.documents-tree {
+  /* Overriding component styles. */
+  --space: 10px;
+  --document-icon-size: 25px;
+  --expand-icon-container-inner-space: 17.5px;
+  --folder-background-color: none;
+  --document-background-color: none;
+  --date-text-align: end;
+}
+
+jlc-tab-button {
+  --padding: 10px;
+}
+
+ion-title span {
+  display: flex;
+  justify-content: center;
+}

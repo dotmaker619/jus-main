@@ -1,0 +1,78 @@
+:host {
+  --vertical-space: 40px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 13px var(--vertical-space);
+  margin-left: -6px;
+  margin-right: -6px;
+}
+
+.col {
+  flex: 1;
+  padding: 0 6px;
+}
+
+.col-action {
+  flex: 0 0 42px;
+  padding-left: 0;
+}
+
+.col-client {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  flex: 0 0 30%;
+  max-width: 30%;
+}
+
+.col-opportunity {
+  font-weight: bold;
+  flex: 0 0 40%;
+  max-width: 40%;
+}
+
+.topic-title {
+  color: var(--primary-font-color);
+}
+
+.chat-button {
+  background: none;
+  border: none;
+  padding: 0;
+  height: 42px;
+  width: 42px;
+}
+
+.profile-image {
+  border-radius: 12px;
+  height: 24px;
+  width: 24px;
+  margin-right: 8px;
+}
+
+.secondary-text {
+  color: var(--primary-placeholder-color);
+  font-size: 0.86rem;
+  font-style: italic;
+  font-weight: normal;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  padding: 0 6px;
+}
+
+li:not(:last-child) {
+  border-bottom: 1px solid var(--table-row-separator-color);
+}
+
+.name {
+  color: var(--primary-font-color);
+}

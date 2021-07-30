@@ -1,0 +1,112 @@
+:host {
+  --space: 10px;
+}
+
+/* Profile image */
+
+.profile-image-container {
+  height: 50%;
+  width: 100%;
+  position: relative;
+}
+
+.profile-image-container jlc-profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-image-content {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.profile-image-content jlc-verificated-attorney-badge {
+  margin: var(--space);
+}
+
+.skeleton-fill {
+  width: 100%;
+  height: 100%;
+}
+
+/* Name */
+
+.name {
+  text-align: center;
+  margin: var(--space);
+}
+
+.name span,
+.name .skeleton-text {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.name .skeleton-text {
+  height: 2rem;
+  width: 50%;
+  display: block;
+  margin: auto;
+}
+
+/* Button panel */
+
+.button-panel {
+  display: flex;
+  justify-content: space-evenly;
+  margin: var(--space);
+}
+
+.button-panel button {
+  padding: var(--space);
+  min-width: 35%;
+  border-radius: 50px;
+}
+
+/* Info */
+
+.button-panel + section {
+  margin-top: 25px;
+}
+
+section {
+  margin: var(--space) calc(var(--space) * 2);
+  padding: var(--space);
+  background-color: var(--light-color);
+  border-radius: 10px;
+  border: 1px solid var(--primary-border-color);
+  font-size: 1.2rem;
+}
+
+.info {
+  font-size: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: normal;
+}
+
+.label {
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.extra {
+  display: flex;
+  justify-content: center;
+}
+
+/* Events */
+hr {
+  margin: var(--space) calc(var(--space) * 2);
+}
+
+.event-card {
+  margin: var(--space) calc(var(--space) * 2);
+  width: auto;
+  display: block;
+}

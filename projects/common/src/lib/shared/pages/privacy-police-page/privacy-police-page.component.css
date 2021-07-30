@@ -1,0 +1,54 @@
+:host {
+  display: block;
+  height: 100%;
+  overflow: auto;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  box-shadow: 1px 0 6px var(--medium-shade-color);
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 10px;
+}
+
+.page {
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: transparent;
+  box-shadow: 0 0 6px var(--medium-shade-color);
+}
+
+h1,
+h2,
+h3 {
+  font-size: 1rem;
+}
+
+p {
+  margin: 20px 0;
+}
+
+a {
+  text-decoration: underline;
+  word-break: break-word;
+}
+
+ul {
+  margin-left: 20px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}

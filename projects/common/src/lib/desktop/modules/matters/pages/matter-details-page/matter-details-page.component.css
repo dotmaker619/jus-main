@@ -1,0 +1,289 @@
+:host {
+  --horizontal-space: 40px;
+  --vertical-space: 20px;
+
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+  height: 100%;
+}
+
+jlc-breadcrumbs {
+  margin: var(--vertical-space) var(--horizontal-space);
+}
+
+.date-filter-container {
+  margin-left: auto;
+  margin-right: var(--horizontal-space);
+}
+
+.date-filter-container form {
+  display: flex;
+  align-items: center;
+}
+
+.date-filter-container form input {
+  display: block;
+  flex-shrink: 1;
+  width: 100%;
+}
+
+section {
+  margin: var(--vertical-space) var(--horizontal-space);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  color: var(--primary-font-color);
+}
+
+section jlc-loading {
+  flex-grow: 1;
+}
+
+section .section-header h2 {
+  font-size: 1rem;
+  margin-right: auto;
+  margin-left: 10px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: -5px;
+}
+
+.section-header > * {
+  flex-shrink: 0;
+  margin: 5px;
+}
+
+.buttons-panel {
+  align-items: center;
+}
+
+.buttons-panel > *:not(:last-child) {
+  margin-right: 10px;
+}
+
+.section-header form {
+  flex-shrink: 1;
+  min-width: 10rem;
+  display: flex;
+  align-items: center;
+}
+
+.section-header form input {
+  min-width: 5rem;
+}
+
+.section-header > .medium-width-column {
+  margin: 0;
+  flex-shrink: 1;
+}
+
+.section-table {
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 1px solid var(--light-color);
+  border-radius: 3px;
+  margin: var(--vertical-space) auto;
+}
+
+.pull-right {
+  margin-left: auto;
+}
+
+.icon-container {
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background: var(--color, var(--primary-gradient));
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.icon-container img {
+  height: 50%;
+  width: 50%;
+  filter: invert(1);
+}
+
+.contact-color {
+  background: linear-gradient(180deg, #95dbd3 0%, #5cb4a7 100%);
+}
+
+.primary {
+  box-sizing: content-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100px;
+}
+
+.primary img {
+  height: 1rem;
+  width: 1rem;
+  filter: invert(1);
+  margin-right: 0.5rem;
+}
+
+.primary span {
+  color: currentColor;
+}
+
+.matter-container {
+  --matter-container-border: 1px solid var(--light-color);
+
+  border: var(--matter-container-border);
+  border-radius: 3px;
+  margin: var(--vertical-space) var(--horizontal-space);
+}
+
+.matter-container h3 {
+  font-size: 1.3rem;
+}
+
+.matter-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.matter-container > * {
+  margin: 1rem;
+}
+
+.matter-info jlc-matter-info {
+  flex-grow: 1;
+  flex-shrink: 0;
+  table-layout: auto;
+}
+
+.matter-info select {
+  min-width: 170px;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.matter-container > hr {
+  margin: 0;
+  border: var(--matter-container-border);
+}
+
+.matter-description {
+  font-style: italic;
+  color: var(--medium-color);
+  word-break: break-all;
+}
+
+.medium-width-column {
+  width: 14rem;
+}
+
+.date-width {
+  width: 8rem;
+}
+
+.tabs-container {
+  position: relative;
+  margin-bottom: calc(var(--vertical-space) * 2);
+}
+
+.tabs-buttons {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: var(--horizontal-space);
+  top: 0;
+
+  /* To overlap mat-tabs */
+  z-index: 2;
+}
+
+@media screen and (max-width: 1110px) {
+  .tabs-buttons {
+    position: initial;
+    display: flex;
+    margin: var(--vertical-space) var(--horizontal-space);
+
+    /* To overlap mat-tabs */
+    z-index: 2;
+  }
+}
+
+.tab-label {
+  width: 12rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tab-label .badge {
+  background: currentColor;
+  border-radius: 2rem;
+  width: 20%;
+}
+
+.tab-label .badge span {
+  color: white;
+}
+
+.tabs-buttons > *:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.tabs-buttons button {
+  height: 2.1rem;
+  min-width: fit-content;
+  width: 8rem;
+  padding: 0;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: content-box;
+}
+
+.tabs-buttons button img {
+  height: 1.2rem;
+  width: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.unfold-table-button {
+  margin-left: auto;
+  border: none;
+  background: none;
+  font-weight: 500;
+  color: var(--medium-color);
+}
+
+.billable-time-info {
+  width: var(--medium-column-width);
+}
+
+.billable-time-info-heading {
+  font-weight: bold;
+}
+
+.billings-header {
+  display: flex;
+  align-items: center;
+}
+
+.tab-container {
+  border: 1px solid var(--primary-border-color);
+  border-top: none;
+}
+
+.buttons-panel {
+  display: flex;
+}

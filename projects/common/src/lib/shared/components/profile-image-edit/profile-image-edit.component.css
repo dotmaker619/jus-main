@@ -1,0 +1,42 @@
+:host {
+  display: block;
+}
+
+.profile-image {
+  width: 300px;
+}
+
+.profile-image img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border: 1px solid var(--primary-border-color);
+}
+
+.image-handle-panel {
+  display: flex;
+  align-items: center;
+}
+
+.image-upload,
+.image-remove {
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0.5rem;
+  background: none;
+  font-weight: bold;
+  border: none;
+}
+
+.image-upload {
+  margin-left: auto;
+  color: var(--secondary-color);
+}
+
+.image-remove {
+  color: var(--tertiary-color);
+}
+
+.image-upload input {
+  display: none;
+}

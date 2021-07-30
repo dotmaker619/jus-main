@@ -1,0 +1,26 @@
+<ion-list>
+  <ng-container *ngIf="topics; else skeletonListTemplate">
+    <ng-container *ngIf="topics.length; else noItemsMessage">
+      <ion-item
+        *ngFor="let topic of topics; trackBy: trackById"
+        [routerLink]="['/forum', 'topic', topic.id]"
+        lines="full"
+        detail="false"
+      >
+        <jlc-topics-list-item [topic]="topic"></jlc-topics-list-item>
+      </ion-item>
+    </ng-container>
+  </ng-container>
+</ion-list>
+
+<ng-template #skeletonListTemplate>
+  <ion-item lines="full" detail="false" *ngFor="let i of [null, null, null]">
+    <jlc-topics-list-item></jlc-topics-list-item>
+  </ion-item>
+</ng-template>
+
+<ng-template #noItemsMessage>
+  <ion-item lines="full">
+    <ion-label class="item-message">No topics</ion-label>
+  </ion-item>
+</ng-template>

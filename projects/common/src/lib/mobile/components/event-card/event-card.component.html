@@ -1,0 +1,32 @@
+<header>
+  <time class="date" [dateTime]="event.start | date: 'yyyy-MM-dd'">
+    <span class="day"
+      >{{ event.start | date: "d":event.location.timezone }}
+    </span>
+    <span class="month">{{
+      event.start | date: "MMM":event.location.timezone
+    }}</span>
+  </time>
+  <ion-button
+    *ngIf="showButton"
+    fill="clear"
+    shape="round"
+    (click)="onMoreButtonClick()"
+  >
+    <ion-icon name="more" slot="icon-only"></ion-icon>
+  </ion-button>
+</header>
+<div class="main-information">
+  <h2 class="title">{{ event.title }}</h2>
+  <div class="location">
+    <span *ngIf="event.location">{{ event.location.name }} • </span>
+    <span *ngIf="!event.isAllDay; else allDay">{{
+      event.start | date: "h:mma":event.location.timezone | lowercase
+    }}</span>
+  </div>
+  <p class="description" [innerHTML]="event.description"></p>
+</div>
+
+<ng-template #allDay>
+  All Day
+</ng-template>

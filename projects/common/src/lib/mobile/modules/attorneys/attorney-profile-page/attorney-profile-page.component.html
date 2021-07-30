@@ -1,0 +1,149 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Attorney's Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="profile-image-container">
+    <jlc-profile-image
+      *ngIf="attorney$ | async as attorney; else skeletonFill"
+      [src]="attorney.avatar"
+      [alt]="attorney.fullName + ' profile image'"
+    >
+      <div class="profile-image-content">
+        <jlc-verificated-attorney-badge
+          *ngIf="(attorney$ | async)?.isVerified"
+          [showLabel]="false"
+          (click)="onVerificationBadgeClick()"
+        ></jlc-verificated-attorney-badge>
+      </div>
+    </jlc-profile-image>
+  </div>
+  <div class="name">
+    <span *ngIf="attorney$ | async as attorney; else skeletonText">
+      {{ attorney.fullName }}
+    </span>
+  </div>
+  <div class="button-panel" *ngIf="areContactButtonsVisible$ | async">
+    <ng-container *ngIf="attorney$ | async as attorney; else skeletonButtons">
+      <button
+        class="primary"
+        *ngIf="!(isFollowed$ | async)"
+        (click)="onFollowClicked()"
+      >
+        Follow
+      </button>
+      <button
+        class="tertiary"
+        *ngIf="isFollowed$ | async"
+        (click)="onFollowClicked()"
+      >
+        Unfollow
+      </button>
+      <button class="primary" (click)="onStartChatClicked(attorney)">
+        Chat
+      </button>
+    </ng-container>
+  </div>
+  <ng-container
+    *ngIf="generatedInfo$ | async as generatedInfo; else skeletonGeneratedInfo"
+  >
+    <ng-container *ngFor="let section of generatedInfo">
+      <section>
+        <h2>{{ section.title }}</h2>
+        <div class="row" *ngFor="let row of section.elements">
+          <div class="label">
+            {{ row.label }}
+          </div>
+          <div class="info">
+            {{ row.text }}
+          </div>
+        </div>
+      </section>
+    </ng-container>
+  </ng-container>
+  <section *ngIf="attorney$ | async as attorney">
+    <h2>Contact Information</h2>
+    <div class="row">
+      <div class="label">
+        Phone Number
+      </div>
+      <a [href]="'tel:' + attorney.phone" class="info">
+        {{ attorney.phone }}
+      </a>
+    </div>
+    <div class="row">
+      <div class="label">
+        Location
+      </div>
+      <div class="info">
+        {{ attorney.firmLocationData?.formatted_address }}
+      </div>
+    </div>
+    <div class="extra">
+      <ion-button fill="clear" class="map-button" (click)="onShowMapClick()">
+        <ion-icon slot="start" src="assets/icons/location_icon.svg"></ion-icon>
+        Show on Map
+      </ion-button>
+    </div>
+  </section>
+
+  <ng-container *ngIf="events$ | async as events">
+    <ng-container *ngIf="events.length > 0">
+      <h2>Upcoming events</h2>
+      <hr />
+
+      <jlc-event-card
+        class="event-card"
+        *ngFor="let event of events"
+        [event]="event"
+      ></jlc-event-card>
+    </ng-container>
+  </ng-container>
+</ion-content>
+
+<!-- Skeleton text. -->
+<ng-template #skeletonText>
+  <span class="skeleton-text">
+    <ion-skeleton-text animated></ion-skeleton-text>
+  </span>
+</ng-template>
+<!-- Skeleton container filler. -->
+<ng-template #skeletonFill>
+  <ion-skeleton-text class="skeleton-fill"></ion-skeleton-text>
+</ng-template>
+<!-- Button panel content skeleton -->
+<ng-template #skeletonButtons>
+  <button class="primary skeleton" disabled></button>
+  <button class="primary skeleton" disabled></button>
+</ng-template>
+
+<!-- Info section skeleton -->
+<ng-template #skeletonGeneratedInfo>
+  <section *ngFor="let i of [1, 2]">
+    <h2>
+      <ion-skeleton-text animated style="width: 45%;"></ion-skeleton-text>
+    </h2>
+    <div class="row">
+      <div class="label">
+        <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+      </div>
+      <div class="info">
+        <ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text>
+      </div>
+    </div>
+    <div class="row">
+      <div class="label">
+        <ion-skeleton-text animated style="width: 30%;"></ion-skeleton-text>
+      </div>
+      <div class="info">
+        <ion-skeleton-text animated style="width: 55%;"></ion-skeleton-text>
+      </div>
+    </div>
+  </section>
+</ng-template>

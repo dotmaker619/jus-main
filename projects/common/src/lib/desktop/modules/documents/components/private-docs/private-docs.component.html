@@ -1,0 +1,31 @@
+<header>
+  <!-- Add folder button. -->
+  <button class="primary" type="button" (click)="onCreateFolderClick()">
+    <span>+ Folder</span>
+    <img src="/assets/icons/folder_icon.svg" alt="" />
+  </button>
+
+  <!-- Add file button. -->
+  <button class="primary" type="button" (click)="onUploadFileClick()">
+    <span>+ File</span>
+    <img src="/assets/icons/document_icon.svg" alt="" />
+  </button>
+
+  <!-- Input for filtering files. -->
+  <form [formGroup]="filterForm">
+    <input
+      formControlName="filter"
+      type="search"
+      placeholder="Search files..."
+    />
+  </form>
+</header>
+<!-- Documents. -->
+<jlc-documents-tree
+  [documents]="privateDocuments$ | async"
+  (documentAction)="onNodeAction($event)"
+></jlc-documents-tree>
+
+<ng-container *ngIf="isLoading$ | async">
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-container>

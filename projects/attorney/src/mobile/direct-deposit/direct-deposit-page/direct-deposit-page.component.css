@@ -1,0 +1,79 @@
+:host {
+  --space: 16px;
+}
+
+ion-content {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+  --padding-top: var(--space);
+  --padding-bottom: var(--space);
+}
+
+.no-account {
+  --space: 25px;
+
+  border-radius: 2px;
+}
+
+.no-account a {
+  width: fit-content;
+  margin: 20px auto;
+}
+
+.pending-message p {
+  margin-bottom: 10px;
+}
+
+.pending-message a {
+  background-image: url("/assets/icons/edit_icon.svg");
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: 2px;
+  padding: 3px 30px 3px 0;
+}
+
+.message {
+  color: var(--primary-light-font-color);
+}
+
+.account-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: var(--space);
+  box-shadow: 0 0 2px 0 var(--medium-shade-color);
+}
+
+.payment-info {
+  flex: 1;
+}
+
+.payment-info > * {
+  display: block;
+  margin: 3px 0;
+}
+
+.payment-info .additional {
+  font-size: 0.9rem;
+}
+
+.additional .not-verified {
+  color: var(--tertiary-color);
+}
+
+.action-buttons > * {
+  display: inline-block;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  height: 18px;
+  padding: 5px;
+  width: 18px;
+  /* To set padding without increasing height and width */
+  box-sizing: content-box;
+}
+
+.btn-icon{
+  height: 100%;
+  width: 100%;
+}

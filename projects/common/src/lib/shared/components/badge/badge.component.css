@@ -1,0 +1,10 @@
+:host {
+  background-color: var(--primary-color);
+  color: var(--primary-contrast-color);
+  border-radius: 6px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+}

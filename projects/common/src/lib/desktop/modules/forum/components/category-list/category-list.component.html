@@ -1,0 +1,74 @@
+<div class="forum-page-child-container">
+  <ng-template [ngxPermissionsOnly]="roles.Client">
+    <jlc-create-topic [categoryId]="preselectedCategoryId"></jlc-create-topic>
+  </ng-template>
+  <table
+    class="category-table"
+    *ngIf="categories$ | async as categories; else loading"
+  >
+    <thead>
+      <tr>
+        <th colspan="2">Legal Category</th>
+        <th>Topics</th>
+        <th>Replies</th>
+        <th>Last Post</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td class="icon">
+          <a [routerLink]="['category', category.id]" tabindex="-1">
+            <img [src]="category.icon || iconFallbackUrl" />
+          </a>
+        </td>
+        <td>
+          <a [routerLink]="['category', category.id]" class="title">
+            {{ category.title }}
+          </a>
+          <p class="description medium-color italic">
+            {{ category.description }}
+          </p>
+        </td>
+        <td class="medium-color italic short ellipsis">
+          <span>{{ category.topicCount }}</span>
+        </td>
+        <td class="medium-color italic short ellipsis">
+          <span>{{ category.postCount }}</span>
+        </td>
+        <td class="short">
+          <div
+            *ngIf="category.lastPost; else noLastPostTemplate"
+            class="medium-color"
+          >
+            <div class="ellipsis">
+              {{ category.lastPost.modified | jusLawDate }}
+            </div>
+            <div class="ellipsis" *ngIf="category.lastPost.topicTitle">
+              <span>In: </span>
+              <a
+                [routerLink]="['/forum/topic', category.lastPost.topicId]"
+                [title]="category.lastPost.topicTitle"
+              >
+                {{ category.lastPost.topicTitle }}
+              </a>
+            </div>
+            <div class="ellipsis" *ngIf="category.lastPost.author">
+              <span>By: </span>
+              <jlc-author-link
+                [author]="category.lastPost.author"
+                [authorUserType]="category.lastPost.userType"
+              ></jlc-author-link>
+            </div>
+          </div>
+          <ng-template #noLastPostTemplate>
+            <span>—</span>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loading>
+  <jlc-loading></jlc-loading>
+</ng-template>

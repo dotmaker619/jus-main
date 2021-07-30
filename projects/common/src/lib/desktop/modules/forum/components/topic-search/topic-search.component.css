@@ -1,0 +1,39 @@
+.topic-search-container {
+  background-color: var(--light-shade-color);
+  display: flex;
+  justify-content: space-between;
+  border-radius: 3px;
+}
+
+.topic-search-container > * {
+  margin: 1rem;
+}
+
+.greeting {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.search {
+  min-width: 40%;
+  display: flex;
+  align-items: center;
+}
+
+.search input {
+  flex-grow: 1;
+  background: var(--light-color) url("/assets/icons/search_icon.svg") no-repeat 0.5rem;
+  background-size: 1.5rem;
+  padding-left: 2rem;
+  margin-left: 1rem;
+}
+
+.search input::-webkit-search-cancel-button {
+  position: relative;
+  right: 0.2rem;
+  -webkit-appearance: none;
+  height: 1.5rem;
+  width: 1.5rem;
+  background: url("/assets/icons/close_icon.svg") no-repeat;
+}

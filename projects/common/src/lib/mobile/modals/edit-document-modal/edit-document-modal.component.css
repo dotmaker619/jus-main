@@ -1,0 +1,35 @@
+:host {
+  --space: 16px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+form {
+  padding: var(--space);
+}
+
+.validation-error span {
+  color: var(--error-color);
+  height: 1rem;
+  margin: 5px 0;
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--space);
+}
+
+.action-buttons button {
+  margin: 0;
+  min-width: 0;
+}
+
+jlc-pdf-editor {
+  flex: 1;
+}

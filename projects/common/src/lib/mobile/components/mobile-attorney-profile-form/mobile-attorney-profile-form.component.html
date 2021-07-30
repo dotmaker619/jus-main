@@ -1,0 +1,340 @@
+<form *ngIf="form$ | async as form" [formGroup]="form">
+  <div class="form-section">
+    <p class="section-title">Main information</p>
+    <div class="avatar-container">
+      <jlc-editable-profile-image
+        class="avatar"
+        [profileImage]="form.value.avatar"
+        (profileImageChange)="onProfileImageChanged(form, $event)"
+      ></jlc-editable-profile-image>
+      <jlc-form-control-validation-message controlName="avatar">
+      </jlc-form-control-validation-message>
+    </div>
+    <jlc-card>
+      <div class="fields">
+        <label>
+          <span>First Name*</span>
+          <input
+            type="text"
+            formControlName="firstName"
+            [jlcApiValidation]="validationError$"
+          />
+          <jlc-form-control-validation-message controlName="firstName">
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span>Last Name*</span>
+          <input
+            type="text"
+            formControlName="lastName"
+            [jlcApiValidation]="validationError$"
+          />
+          <jlc-form-control-validation-message controlName="lastName">
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span>Phone*</span>
+          <input
+            type="text"
+            formControlName="phone"
+            prefix="+1"
+            mask="(000) 000 0000"
+            [jlcApiValidation]="validationError$"
+          />
+          <jlc-form-control-validation-message controlName="phone">
+          </jlc-form-control-validation-message>
+        </label>
+        <div class="row" formGroupName="education">
+          <label>
+            <span>Law School*</span>
+            <input
+              type="text"
+              placeholder="Type..."
+              formControlName="university"
+              [jlcApiValidation]="validationError$"
+            />
+            <jlc-form-control-validation-message controlName="university">
+            </jlc-form-control-validation-message>
+          </label>
+          <label>
+            <span>Year of Graduation*</span>
+            <input
+              type="number"
+              placeholder="YYYY"
+              formControlName="year"
+              [jlcApiValidation]="validationError$"
+            />
+            <jlc-form-control-validation-message controlName="year">
+            </jlc-form-control-validation-message>
+          </label>
+        </div>
+      </div>
+    </jlc-card>
+  </div>
+  <div class="form-section">
+    <p class="section-title">Practice</p>
+    <jlc-card>
+      <div class="fields">
+        <label>
+          <span>
+            State(s) or federal jurisdictions you are licensed or authorized to
+            practice in?*
+          </span>
+          <select
+            formControlName="practiceJurisdictions"
+            multiple
+            [jlcApiValidation]="validationError$"
+            [compareWith]="compareById"
+          >
+            <option [ngValue]="null" hidden disabled>Select</option>
+            <option *ngFor="let state of states$ | async" [ngValue]="state">
+              {{ state.name }}
+            </option>
+          </select>
+          <jlc-form-control-validation-message
+            controlName="practiceJurisdictions"
+          >
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span>
+            Please list the state, agency, date of admission and bar membership
+            number.*
+          </span>
+          <textarea
+            formControlName="licenseInfo"
+            [jlcApiValidation]="validationError$"
+            rows="7"
+          >
+          </textarea>
+          <jlc-form-control-validation-message controlName="licenseInfo">
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span>
+            Primary Practice Address - Jus-Law will use this address to match
+            you with potential clients in your proximity.*
+          </span>
+          <input
+            jlcLocationAutocomplete
+            formControlName="firmLocationData"
+            placeholder="Search for Location"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            [jlcApiValidation]="firmLocationValidationError$ | async"
+          />
+          <jlc-form-control-validation-message controlName="firmLocationData">
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span>How many years have you been practicing?*</span>
+          <input
+            formControlName="yearsOfExperience"
+            type="number"
+            [jlcApiValidation]="validationError$"
+          />
+          <jlc-form-control-validation-message controlName="yearsOfExperience">
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span>Describe your legal practice</span>
+          <input
+            type="text"
+            formControlName="practiceDescription"
+            [jlcApiValidation]="validationError$"
+          />
+          <jlc-form-control-validation-message
+            controlName="practiceDescription"
+          >
+          </jlc-form-control-validation-message>
+        </label>
+        <div class="radio-group">
+          <p>
+            Have you ever been suspended, censured, or otherwise
+            desciplined/disqualified as a member of the legal or any other
+            profession?*
+          </p>
+          <div class="radio-fields">
+            <label>
+              <input
+                type="radio"
+                name="isDisciplined"
+                [value]="false"
+                formControlName="isDisciplined"
+                [jlcApiValidation]="validationError$"
+              />
+              <span>No</span>
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="isDisciplined"
+                [value]="true"
+                formControlName="isDisciplined"
+              />
+              <span>Yes</span>
+            </label>
+          </div>
+          <jlc-form-control-validation-message controlName="isDisciplined">
+          </jlc-form-control-validation-message>
+        </div>
+      </div>
+    </jlc-card>
+  </div>
+  <div class="form-section">
+    <p class="section-title">Speciality</p>
+    <jlc-card>
+      <div class="fields">
+        <div class="radio-group">
+          <p>
+            Do you have a speciality, or do you emphaize one specific type of
+            legal matter?
+          </p>
+          <div class="radio-fields">
+            <label>
+              <input
+                type="radio"
+                name="haveSpecialty"
+                [value]="false"
+                formControlName="haveSpecialty"
+                [jlcApiValidation]="validationError$"
+              />
+              <span>No</span>
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="haveSpecialty"
+                [value]="true"
+                formControlName="haveSpecialty"
+              />
+              <span>Yes</span>
+            </label>
+          </div>
+          <jlc-form-control-validation-message controlName="haveSpecialty">
+          </jlc-form-control-validation-message>
+        </div>
+        <div class="checkbox-group">
+          <p class="title-with-note">
+            Area of Specialty<span class="note">Check all that apply</span>*
+          </p>
+          <jlc-checkbox-list-card
+            formControlName="specialties"
+            [options]="specialties$ | async"
+            descriptionPropertyName="title"
+            idPropertyName="id"
+          >
+          </jlc-checkbox-list-card>
+          <jlc-form-control-validation-message controlName="specialties">
+          </jlc-form-control-validation-message>
+        </div>
+        <label>
+          <span>Number of years practice in the specialized area</span>
+          <input
+            type="number"
+            placeholder="Type..."
+            formControlName="specialtyTime"
+            [jlcApiValidation]="validationError$"
+          />
+          <jlc-form-control-validation-message controlName="specialtyTime">
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span
+            >Approximate number of matters you, in the last 5 years, have
+            handled in the specialized area</span
+          >
+          <input
+            type="number"
+            placeholder="Type..."
+            formControlName="specialtyMattersCount"
+            [jlcApiValidation]="validationError$"
+          />
+          <jlc-form-control-validation-message
+            controlName="specialtyMattersCount"
+          >
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span class="title-with-note"
+            >Related Keyword(s)<span class="note">Comma separated</span></span
+          >
+          <input
+            type="text"
+            placeholder="eg. Defamation, Damage Recovery, etc."
+            formControlName="keywords"
+          />
+          <jlc-form-control-validation-message controlName="keywords">
+          </jlc-form-control-validation-message>
+        </label>
+      </div>
+    </jlc-card>
+  </div>
+  <div class="form-section">
+    <p class="section-title">Service fees</p>
+    <jlc-card>
+      <div class="fields">
+        <label>
+          <span>What is your hourly fee?*</span>
+          <input
+            type="text"
+            placeholder="Type..."
+            formControlName="feeRate"
+            [jlcApiValidation]="validationError$"
+          />
+          <jlc-form-control-validation-message controlName="feeRate">
+          </jlc-form-control-validation-message>
+        </label>
+        <div class="checkbox-group">
+          <p class="title-with-note">
+            Will you consider<span class="note">Check all that apply</span>*
+          </p>
+          <jlc-checkbox-list-card
+            formControlName="feeKinds"
+            [options]="feeKinds$ | async"
+            descriptionPropertyName="title"
+            idPropertyName="id"
+          >
+          </jlc-checkbox-list-card>
+        </div>
+        <jlc-form-control-validation-message controlName="feeKinds">
+        </jlc-form-control-validation-message>
+      </div>
+    </jlc-card>
+  </div>
+  <div class="form-section">
+    <p class="section-title">Additional information</p>
+    <jlc-card>
+      <div class="fields">
+        <label>
+          <span>
+            Name any volunteer or charitable organizations you work with or are
+            a member of
+          </span>
+          <input
+            type="text"
+            placeholder="Type..."
+            formControlName="charityOrganizations"
+            [jlcApiValidation]="validationError$"
+          />
+          <jlc-form-control-validation-message
+            controlName="charityOrganizations"
+          >
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span>Any other information you want the client to know</span>
+          <input
+            type="text"
+            placeholder="Type..."
+            formControlName="extraInfo"
+            [jlcApiValidation]="validationError$"
+          />
+          <jlc-form-control-validation-message controlName="extraInfo">
+          </jlc-form-control-validation-message>
+        </label>
+      </div>
+    </jlc-card>
+  </div>
+</form>

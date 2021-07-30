@@ -1,0 +1,16 @@
+<ng-container *ngIf="links; else skeleton">
+  <ul>
+    <li *ngFor="let link of links">
+      <a [routerLink]="link.link || '.'">
+        {{ link.label }}
+      </a>
+    </li>
+  </ul>
+</ng-container>
+
+<ng-template #skeleton>
+  <ul class="skeleton">
+    <li><span></span></li>
+    <li><span></span></li>
+  </ul>
+</ng-template>

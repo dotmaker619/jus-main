@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="networks"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Invite More People</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form
+    [formGroup]="form"
+    *ngIf="form$ | async as form"
+    (ngSubmit)="onSubmit(form)"
+    id="invite-to-network-form"
+  >
+    <label>
+      <span>Message</span>
+      <textarea
+        rows="10"
+        formControlName="message"
+        aria-label="Message to send with invitation"
+        placeholder="Write a message..."
+        [jlcApiValidation]="validationError$ | async"
+      ></textarea>
+      <jlc-form-control-validation-message
+        controlName="message"
+      ></jlc-form-control-validation-message>
+    </label>
+    <label class="label-w-button">
+      <span>People to Invite*</span>
+      <ion-button fill="clear" (click)="onInviteButtonClick(form)">
+        {{ (selectedAttorneys$ | async)?.length > 0 ? "Edit" : "Add" }}
+      </ion-button>
+      <jlc-form-control-validation-message
+        controlName="attorneys"
+      ></jlc-form-control-validation-message>
+    </label>
+    <ion-list lines="full">
+      <ng-container
+        *ngIf="selectedAttorneys$ | async as attorneys; else skeletonList"
+      >
+        <ion-item
+          *ngFor="let attorney of attorneys; trackBy: trackById"
+          class="attorney-item"
+          detail="false"
+        >
+          <jlc-selectable-user-item
+            [user]="attorney"
+          ></jlc-selectable-user-item>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="button-panel">
+      <button class="primary" form="invite-to-network-form">
+        Invite
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<ng-template #skeletonList>
+  <ion-item class="attorney-item" detail="false" *ngFor="let i of [1, 2, 3]">
+    <jlc-selectable-user-item></jlc-selectable-user-item>
+  </ion-item>
+</ng-template>
+
+<ng-template #noSelectedItems>
+  <span class="no-items-message">
+    Tap 'Add' to select whom to invite
+  </span>
+</ng-template>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

@@ -1,0 +1,18 @@
+<ng-container [ngSwitch]="true">
+  <!-- Text message. -->
+  <jlc-chat-text-message
+    *ngSwitchCase="isTextMessage(message)"
+    [message]="message"
+  >
+  </jlc-chat-text-message>
+  <!-- Announce message. -->
+  <jlc-chat-announce-message
+    *ngSwitchCase="isAnnounceMessage(message)"
+    [message]="message"
+  ></jlc-chat-announce-message>
+  <!-- For other types of messages, please, add it next. -->
+
+  <!--Unsupported message-->
+  <jlc-chat-unsupported-message [message]="message" *ngSwitchDefault>
+  </jlc-chat-unsupported-message>
+</ng-container>

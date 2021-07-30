@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>My Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="form$ | async as form">
+  <form [formGroup]="form">
+    <label class="form-field">
+      <span>First Name*</span>
+      <input type="text" readonly formControlName="firstName" />
+    </label>
+    <label class="form-field">
+      <span>Last Name*</span>
+      <input type="text" readonly formControlName="lastName" />
+    </label>
+    <label class="form-field">
+      <span>Email*</span>
+      <input type="email" readonly formControlName="email" />
+    </label>
+  </form>
+  <button class="secondary" type="button" (click)="onChangePasswordClicked()">
+    Change Password
+  </button>
+  <button
+    *ngIf="isConsentProvided$ | async"
+    class="secondary"
+    type="button"
+    (click)="onResetDocusign()"
+  >
+    Reset Docusign Account
+  </button>
+</ion-content>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

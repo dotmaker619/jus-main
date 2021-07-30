@@ -1,0 +1,21 @@
+<jlc-dialog-header class="header">
+  <button class="close" (click)="onCloseClick()">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z" /></svg>
+  </button>
+
+  <h2 class="title">Edit payment method</h2>
+</jlc-dialog-header>
+
+<jlc-dialog-content class="content">
+  <jlc-payment-method-form
+    [showControls]="true"
+    (ready)="onPaymentMethodFormComponentIsReady()"
+    (formSubmit)="onPaymentMethodFormSubmitted($event)"
+    [class.hidden]="isBusy$ | async"
+  ></jlc-payment-method-form>
+
+  <jlc-loading
+    class="loading"
+    *ngIf="isBusy$ | async">
+  </jlc-loading>
+</jlc-dialog-content>

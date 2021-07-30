@@ -1,0 +1,13 @@
+<div class="post">
+  <div
+    class="post-content"
+    [class.my-message]="matterPost.isMyPost"
+    [class.reply]="!matterPost.isMyPost"
+  >
+    <div class="author">{{ matterPost.author.fullName }}</div>
+    <div class="post-message">
+      {{ matterPost.text }}
+    </div>
+  </div>
+  <div class="date">{{ matterPost.created | jusLawDate }}</div>
+</div>

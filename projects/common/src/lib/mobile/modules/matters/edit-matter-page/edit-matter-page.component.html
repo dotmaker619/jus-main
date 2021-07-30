@@ -1,0 +1,198 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/matters"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ pageTitle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    *ngIf="form$ | async as form"
+    [formGroup]="form"
+    class="create-matter-form"
+    (ngSubmit)="onFormSubmitted(form)"
+    id="create-matter-form"
+  >
+    <div class="form-part">
+      <div class="form-part-content">
+        <label>
+          <span>Client*</span>
+          <select
+            formControlName="client"
+            [jlcApiValidation]="validationError$"
+            [compareWith]="compareWithIdFn"
+          >
+            <option [ngValue]="null" disabled>- Select -</option>
+            <option
+              [ngValue]="client"
+              *ngFor="let client of clients$ | async; trackBy: trackById"
+            >
+              {{ client.fullName }}
+            </option>
+          </select>
+          <jlc-form-control-validation-message controlName="client">
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span>Title*</span>
+          <input
+            placeholder="Type..."
+            type="text"
+            formControlName="title"
+            [jlcApiValidation]="validationError$"
+          />
+          <jlc-form-control-validation-message controlName="title">
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span>Code*</span>
+          <input
+            placeholder="Type..."
+            type="text"
+            formControlName="code"
+            [jlcApiValidation]="validationError$"
+          />
+          <jlc-form-control-validation-message controlName="code">
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span>Description*</span>
+          <textarea
+            placeholder="Type..."
+            formControlName="description"
+            [jlcApiValidation]="validationError$"
+          ></textarea>
+
+          <jlc-form-control-validation-message controlName="description">
+          </jlc-form-control-validation-message>
+        </label>
+        <div class="row">
+          <label>
+            <span>Rate Type*</span>
+            <select
+              formControlName="rateType"
+              [jlcApiValidation]="validationError$"
+            >
+              <option [ngValue]="null" disabled>- Select -</option>
+              <option
+                [ngValue]="rateType.value"
+                *ngFor="let rateType of rateTypes$ | async"
+              >
+                {{ rateType.label }}
+              </option>
+            </select>
+            <jlc-form-control-validation-message controlName="rateType">
+            </jlc-form-control-validation-message>
+          </label>
+          <label>
+            <span>Rate*</span>
+            <input
+              formControlName="rate"
+              min="0"
+              type="number"
+              class="dollar-input"
+            />
+            <jlc-form-control-validation-message controlName="rate">
+            </jlc-form-control-validation-message>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-part">
+      <p class="legend">Jurisdiction</p>
+      <div class="form-part-content">
+        <div class="row">
+          <label>
+            <span>State*</span>
+            <select
+              formControlName="state"
+              [jlcApiValidation]="validationError$"
+              [compareWith]="compareWithIdFn"
+            >
+              <option [ngValue]="null" disabled>- Select -</option>
+              <option
+                *ngFor="let state of states$ | async; trackBy: trackById"
+                [ngValue]="state"
+              >
+                {{ state.name }}
+              </option>
+            </select>
+            <jlc-form-control-validation-message controlName="state">
+            </jlc-form-control-validation-message>
+          </label>
+          <label>
+            <span>City*</span>
+            <input
+              placeholder="Type..."
+              formControlName="city"
+              [jlcApiValidation]="validationError$"
+              type="text"
+              [matAutocomplete]="cityAutocomplete"
+            />
+            <mat-autocomplete
+              autoActiveFirstOption
+              #cityAutocomplete="matAutocomplete"
+              [displayWith]="displayCity"
+            >
+              <mat-option
+                *ngFor="let city of cities$ | async; trackBy: trackById"
+                [value]="city"
+              >
+                {{ city.name }}
+              </mat-option>
+            </mat-autocomplete>
+            <jlc-form-control-validation-message controlName="city">
+            </jlc-form-control-validation-message>
+          </label>
+        </div>
+        <label>
+          <span>Country</span>
+          <select
+            formControlName="country"
+            [jlcApiValidation]="validationError$"
+            [compareWith]="compareWithIdFn"
+          >
+            <option [ngValue]="null" disabled>- Select -</option>
+            <option
+              [ngValue]="country"
+              *ngFor="let country of countries$ | async; trackBy: trackById"
+            >
+              {{ country.name }}
+            </option>
+          </select>
+          <jlc-form-control-validation-message controlName="country">
+          </jlc-form-control-validation-message>
+        </label>
+      </div>
+    </div>
+    <div class="form-part">
+      <p class="legend legend-with-button">
+        <span>Required document(s)*</span>
+        <ion-button fill="clear" type="button" (click)="chooseFiles()">
+          Browse
+        </ion-button>
+      </p>
+      <div class="form-part-content">
+        <jlc-mobile-file-drop
+          class="files-container"
+          [documents]="form.controls.documents.value"
+          (documentsChange)="form.controls.documents.setValue($event)"
+          [fileValidators]="fileValidators"
+          [multiple]="true"
+          (errors)="onErrorChange($event)"
+          [showButton]="false"
+        ></jlc-mobile-file-drop>
+      </div>
+    </div>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button class="primary" form="create-matter-form" type="submit">
+      Send With Docusign
+    </button>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

@@ -1,0 +1,18 @@
+<div class="page-container">
+  <h1>
+    My Profile
+  </h1>
+
+  <hr />
+
+  <jlc-attorney-profile-form
+    [attorneyData]="attorney$ | async"
+    [validationError]="validationError$ | async"
+    (formSubmit)="onFormSubmit($event)"
+    (cancel)="onCancelClicked()"
+  ></jlc-attorney-profile-form>
+
+  <ng-container *ngIf="loading$ | async">
+    <jlc-loading mode="fullscreen"></jlc-loading>
+  </ng-container>
+</div>

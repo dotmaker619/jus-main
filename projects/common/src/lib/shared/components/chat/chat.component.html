@@ -1,0 +1,64 @@
+<div class="chat-container">
+  <div
+    class="messages"
+    #messagesContainer
+    [class.visible-authors]="visibleAuthors"
+  >
+    <ng-container *ngIf="messages$ | async as messages; else errorOrLoading">
+      <ng-container
+        [ngTemplateOutlet]="paginationLoader"
+        *ngIf="lazyLoader.haveMorePrevious$ | async"
+      ></ng-container>
+      <ng-container
+        *ngFor="let message of messages; let i = index; trackBy: trackById"
+      >
+        <ng-container *ngIf="shouldDisplayDaystamp(messages, i)">
+          <time [dateTime]="message.created | date: 'shortDate'">
+            <span class="daystamp">
+              {{ message.created | date: "shortDate" }}
+            </span>
+          </time>
+        </ng-container>
+        <jlc-chat-message
+          [message]="message"
+          [class.show-sign]="!isMessageAuthorsEqual(message, messages[i + 1])"
+        >
+        </jlc-chat-message>
+      </ng-container>
+      <ng-container
+        [ngTemplateOutlet]="paginationLoader"
+        *ngIf="lazyLoader.haveMoreNext$ | async"
+      ></ng-container>
+    </ng-container>
+  </div>
+  <button
+    [hidden]="!(isScrollButtonVisible$ | async)"
+    (click)="loadLastPage()"
+    class="end-button focusable"
+    title="Scroll chat to the bottom"
+  ></button>
+</div>
+<div class="new-message-form-container">
+  <jlc-chat-message-form
+    [loading]="filesLoading$ | async"
+    (formSubmit)="onNewMessageFormSubmitted($event)"
+    (fileAttach)="onFileAttached($event)"
+  >
+  </jlc-chat-message-form>
+</div>
+
+<ng-template #errorOrLoading>
+  <ng-container *ngIf="errorLoadingChat$ | async; else loading">
+    <div class="error-message">
+      Unfortunately, the chat could not be loaded. Please, try again later.
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #paginationLoader>
+  <jlc-loading class="pagination-loader" [diameter]="30"></jlc-loading>
+</ng-template>
+
+<ng-template #loading>
+  <jlc-loading mode="fullsize"></jlc-loading>
+</ng-template>

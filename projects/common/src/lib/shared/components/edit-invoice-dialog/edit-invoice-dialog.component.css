@@ -1,0 +1,44 @@
+:host {
+  --space: 40px;
+}
+
+jlc-loading:only-child {
+  margin: 100px;
+}
+
+.form {
+  padding: var(--space);
+}
+
+.row {
+  margin-bottom: calc(var(--space) / 4);
+}
+
+.form input,
+.form select,
+.form textarea {
+  width: 400px;
+}
+
+.form textarea {
+  padding: calc(var(--space) / 4);
+  resize: vertical;
+}
+.button-panel {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.period-picker {
+  position: relative;
+}
+
+.period-picker .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.period-error {
+  position: absolute;
+  bottom: 0;
+}

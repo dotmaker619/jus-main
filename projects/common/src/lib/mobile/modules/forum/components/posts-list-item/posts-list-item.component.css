@@ -1,0 +1,83 @@
+:host {
+  --space: 10px;
+  display: block;
+  background-color: var(--primary-background-color);
+}
+
+.header {
+  display: flex;
+  position: relative;
+}
+
+jlc-profile-image {
+  --avatar-size: 50px;
+  border-radius: var(--avatar-size);
+  margin: var(--space);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  overflow: hidden;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.name {
+  color: var(--secondary-color);
+  margin-bottom: calc(var(--space) / 2);
+}
+
+.options-button {
+  position: absolute;
+  top: var(--space);
+  right: var(--space);
+  margin: 0;
+  --color: var(--medium-color);
+}
+
+.content {
+  margin: var(--space);
+}
+
+.post {
+  border: 1px solid var(--primary-border-color);
+}
+
+.footer {
+  border-top: 1px solid var(--primary-border-color);
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.divider {
+  margin: 0 calc(var(--space) / 2);
+}
+
+.verification-status {
+  display: flex;
+  align-items: center;
+}
+
+.verification-status ion-icon {
+  margin-right: calc(var(--space) / 2);
+}
+
+.message-button {
+  background: var(--secondary-tint-color);
+  display: block;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 50px;
+  padding: var(--space);
+  color: var(--secondary-color);
+  text-align: center;
+}

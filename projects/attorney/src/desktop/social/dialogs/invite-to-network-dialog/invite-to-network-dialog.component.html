@@ -1,0 +1,36 @@
+<form
+  [formGroup]="form"
+  *ngIf="form$ | async as form"
+  (ngSubmit)="onSubmit(form)"
+>
+  <header>
+    <h2>Invite More People</h2>
+  </header>
+  <hr />
+  <textarea
+    rows="10"
+    formControlName="message"
+    aria-label="Message to send with invitation"
+    placeholder="Write a message..."
+    [jlcApiValidation]="validationError$ | async"
+  ></textarea>
+  <jlc-form-control-validation-message
+    controlName="message"
+  ></jlc-form-control-validation-message>
+  <jlat-select-attorneys
+    [preselectedAttorneys]="preselectedAttorneys$ | async"
+    formControlName="attorneys"
+  ></jlat-select-attorneys>
+  <jlc-form-control-validation-message
+    controlName="attorneys"
+  ></jlc-form-control-validation-message>
+
+  <footer>
+    <button class="secondary" type="button" (click)="close()">Cancel</button>
+    <button class="primary" type="submit">
+      Invite
+    </button>
+  </footer>
+</form>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

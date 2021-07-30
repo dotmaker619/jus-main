@@ -1,0 +1,67 @@
+<ng-container
+  [ngTemplateOutlet]="(sentInvoice$ | async) ? sentTemplate : sendFormTemplate"
+  [ngTemplateOutletContext]="sentInvoice$ | async"
+></ng-container>
+
+<ng-template #sendFormTemplate>
+  <form
+    *ngIf="sendInvoiceForm$ | async as sendInvoiceForm"
+    class="dialog"
+    [formGroup]="sendInvoiceForm"
+    (ngSubmit)="onSendClick(sendInvoiceForm)"
+  >
+    <h3 class="ellipsis">Send Invoice</h3>
+    <hr />
+
+    <label>
+      <span>To*</span>
+      <jlc-email-list-input
+        class="email-input"
+        formControlName="to"
+        [jlcApiValidation]="validationError$ | async"
+      ></jlc-email-list-input>
+      <jlc-form-control-validation-message
+        controlName="to"
+      ></jlc-form-control-validation-message>
+    </label>
+
+    <label>
+      <span>Note (optional)</span>
+      <textarea
+        formControlName="note"
+        [jlcApiValidation]="validationError$ | async"
+      ></textarea>
+      <jlc-form-control-validation-message
+        controlName="note"
+      ></jlc-form-control-validation-message>
+    </label>
+
+    <div class="button-panel" *ngIf="!(isSending$ | async); else loading">
+      <button class="confirm secondary" type="button" (click)="onCloseClick()">
+        Cancel
+      </button>
+      <button class="confirm primary" type="submit">Send</button>
+    </div>
+
+    <ng-template #loading>
+      <jlc-loading> </jlc-loading>
+    </ng-template>
+  </form>
+</ng-template>
+
+<ng-template #sentTemplate let-recipientList="recipientList">
+  <div class="invoice-sent">
+    <div class="icon-wrapper">
+      <img src="/assets/icons/correct-24px.svg" alt="Correct icon" />
+    </div>
+
+    <h3>Invoice Sent</h3>
+    <p>
+      A copy of the invoice has been sent to:
+      <br />
+      {{ recipientList.join(", ") }}
+    </p>
+
+    <button class="primary" (click)="onCloseClick()">Ok</button>
+  </div>
+</ng-template>

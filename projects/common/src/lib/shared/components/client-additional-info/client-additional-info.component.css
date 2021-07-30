@@ -1,0 +1,102 @@
+:host {
+  --row-margin: 0.5rem;
+}
+
+.description {
+  margin: 3rem 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+label {
+  width: 100%;
+  min-width: 200px;
+}
+
+label.select {
+  max-width: 30%;
+}
+
+.row label.select {
+  width: 50%;
+}
+
+label input,
+label textarea,
+label select {
+  margin-top: var(--row-margin);
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  font-weight: bold;
+  margin-bottom: var(--row-margin);
+}
+
+label.checkbox {
+  font-weight: normal;
+}
+
+label.checkbox input {
+  margin: 0 8px 0 0;
+}
+
+label.select select {
+  width: 100%;
+  background-color: transparent;
+}
+
+.feedback textarea {
+  resize: vertical;
+  width: 100%;
+  height: 2rem;
+  min-height: 2rem;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.button-pane {
+  margin-top: 2rem;
+}
+
+.check-group-field {
+  width: 100%;
+}
+
+.check-group {
+  display: flex;
+  flex-wrap: wrap;
+  height: 600px;
+  width: 100%;
+}
+
+.checkbox {
+  width: 33.3%;
+  flex-shrink: 0;
+}
+
+.secondary {
+  margin-right: 1rem;
+}
+
+.help-description {
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+}
+
+.help-description textarea {
+  padding: 5px 15px;
+}

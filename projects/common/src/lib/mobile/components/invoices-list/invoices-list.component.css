@@ -1,0 +1,31 @@
+:host {
+  display: block;
+}
+
+ion-list {
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--light-shade-color);
+}
+
+ion-item {
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+}
+
+jlc-invoice-item {
+  width: 100%;
+}
+
+.message {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--medium-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}

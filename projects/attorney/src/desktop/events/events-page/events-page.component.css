@@ -1,0 +1,41 @@
+:host {
+  --space: 40px;
+}
+
+.page-container {
+  padding: var(--space);
+  width: auto;
+}
+
+.page-header {
+  border-bottom: 2px solid var(--primary-highlight-color);
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 24px;
+  align-items: center;
+}
+
+.filter {
+  margin-bottom: 11px;
+}
+
+.main {
+  padding: 16px 0;
+}
+
+h1 {
+  align-self: flex-end;
+  font-size: 1.7rem;
+}
+
+ul {
+  list-style: none;
+}
+
+li:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.primary {
+  border-radius: 10px;
+}

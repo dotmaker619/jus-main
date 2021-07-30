@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button
+        *ngIf="form$ | async as form"
+        (click)="onSaveClicked(form)"
+        fill="clear"
+      >
+        Save
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Additional Information</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    id="staff-registration-form"
+    *ngIf="form$ | async as form"
+    [formGroup]="form"
+    class="profile-form"
+  >
+    <jlc-editable-profile-image
+      class="avatar"
+      [profileImage]="form.controls.avatar.valueChanges | async"
+      (profileImageChange)="onProfileImageChanged(form, $event)"
+    ></jlc-editable-profile-image>
+    <label>
+      <span>First Name*</span>
+      <input
+        type="text"
+        formControlName="firstName"
+        autocomplete="given-name"
+        jlcInputStatus
+        [jlcApiValidation]="validationError$ | async"
+      />
+      <jlc-form-control-validation-message controlName="firstName">
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Last Name*</span>
+      <input
+        type="text"
+        formControlName="lastName"
+        autocomplete="family-name"
+        jlcInputStatus
+        [jlcApiValidation]="validationError$ | async"
+      />
+      <jlc-form-control-validation-message controlName="lastName">
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Description*</span>
+      <textarea
+        formControlName="description"
+        jlcInputStatus
+        [jlcApiValidation]="validationError$ | async"
+        rows="7"
+      ></textarea>
+      <jlc-form-control-validation-message controlName="description">
+      </jlc-form-control-validation-message>
+    </label>
+  </form>
+</ion-content>
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

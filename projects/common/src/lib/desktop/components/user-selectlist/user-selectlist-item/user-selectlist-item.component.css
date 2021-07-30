@@ -1,0 +1,71 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+
+/* List item content */
+
+.info {
+  overflow: hidden;
+  margin: 0 10px;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 1.15rem;
+}
+
+.specialization {
+  color: var(--medium-color);
+  font-style: italic;
+}
+
+/* List item toggle button */
+
+.attorney-toggle-button {
+  margin-left: auto;
+  margin-right: 10px;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  padding: 0;
+  border: none;
+  background: none;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.attorney-toggle-button:disabled {
+  box-shadow: 0 0 0 3px var(--medium-color);
+  opacity: 0.8;
+}
+
+.attorney-toggle-button img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Avatar */
+
+.avatar-container {
+  overflow: hidden;
+  border-radius: 50%;
+  flex-shrink: 0;
+  flex-grow: 0;
+  width: 48px;
+  height: 48px;
+  background: var(--light-color);
+  border: 1px solid var(--primary-border-color);
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+jlc-profile-image {
+  border-radius: 50%;
+  overflow: hidden;
+}

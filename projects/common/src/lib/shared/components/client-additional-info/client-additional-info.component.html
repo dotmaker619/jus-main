@@ -1,0 +1,102 @@
+<form
+  *ngIf="form$ | async as form; else loading"
+  [formGroup]="form"
+  (ngSubmit)="onSubmitted(form)"
+>
+  <p class="description">
+    Fill out the following information to help Attorneys better understand your
+    case
+  </p>
+
+  <div class="row">
+    <fieldset>
+      <label>
+        <span>Profile image</span>
+        <jlc-profile-image-edit
+          [profileImage]="form.value.avatar"
+          (profileImageChange)="onProfileImageChanged(form, $event)"
+        ></jlc-profile-image-edit>
+        <jlc-form-control-validation-message
+          controlName="avatar"
+        ></jlc-form-control-validation-message>
+      </label>
+    </fieldset>
+  </div>
+
+  <div class="row">
+    <fieldset class="check-group-field">
+      <legend>
+        Which area of speciality do you need help with? (check all that apply)*
+      </legend>
+      <div class="check-group" formArrayName="specialties">
+        <label
+          class="checkbox"
+          *ngFor="let specialty of specialties$ | async; let i = index"
+          [formGroupName]="i"
+          [title]="specialty.title"
+        >
+          <input type="checkbox" formControlName="isChecked" />
+          <span class="ellipsis">{{ specialty.title }}</span>
+        </label>
+      </div>
+      <jlc-form-control-validation-message controlName="specialties">
+      </jlc-form-control-validation-message>
+    </fieldset>
+  </div>
+
+  <div class="row">
+    <label class="select">
+      State*
+      <select
+        formControlName="state"
+        [jlcApiValidation]="validationError"
+        [compareWith]="compareWithIdFn"
+      >
+        <option [value]="null" disabled>- Select -</option>
+        <option *ngFor="let stateItem of states$ | async" [ngValue]="stateItem">
+          {{ stateItem.name }}
+        </option>
+      </select>
+      <jlc-form-control-validation-message
+        controlName="state"
+      ></jlc-form-control-validation-message>
+    </label>
+  </div>
+
+  <div class="row">
+    <label class="help-description">
+      What are you looking for help with?
+      <textarea
+        cols="30"
+        rows="3"
+        formControlName="helpDescription"
+        jlcInputStatus
+        [jlcApiValidation]="validationError"
+      ></textarea>
+      <jlc-form-control-validation-message
+        controlName="helpDescription"
+      ></jlc-form-control-validation-message>
+    </label>
+  </div>
+
+  <div class="button-pane">
+    <button class="secondary" type="button" (click)="onCancelClicked()">
+      Cancel
+    </button>
+
+    <button
+      *ngIf="isRegistration"
+      type="button"
+      class="secondary"
+      (click)="onBackClicked(form)"
+    >
+      &lt; Back
+    </button>
+
+    <button class="primary">Submit</button>
+  </div>
+</form>
+
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

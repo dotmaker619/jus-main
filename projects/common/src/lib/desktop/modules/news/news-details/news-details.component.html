@@ -1,0 +1,7 @@
+<div class="container" *ngIf="news$ | async as news; else loading">
+  <jlc-post-details [post]="news"> </jlc-post-details>
+</div>
+
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

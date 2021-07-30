@@ -1,0 +1,18 @@
+<div class="user-info" *ngIf="user">
+  <img class="user-image" [src]="user.avatar || avatarFallbackUrl" alt="" />
+
+  <div class="user-name">
+    {{ user.fullName }}
+  </div>
+</div>
+<div class="menu-links">
+  <a
+    class="menu-link"
+    *ngFor="let menuLink of menuLinks"
+    [routerLink]="[menuLink.link]"
+    routerLinkActive="routerLinkActive"
+  >
+    {{ menuLink.label }}
+    <div class="badge" *ngIf="menuLink.badge">{{ menuLink.badge }}</div>
+  </a>
+</div>

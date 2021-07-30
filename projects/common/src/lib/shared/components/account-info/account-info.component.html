@@ -1,0 +1,40 @@
+<form [formGroup]="form">
+  <div class="row">
+    <label>
+      <span>First Name*</span>
+      <input type="text" readonly disabled formControlName="firstName" />
+    </label>
+    <label>
+      <span>Last Name*</span>
+      <input type="text" readonly disabled formControlName="lastName" />
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <span>Email*</span>
+      <input type="email" readonly disabled formControlName="email" />
+    </label>
+  </div>
+</form>
+
+<div class="actions">
+  <button
+    class="secondary"
+    type="button"
+    autocapitalize="on"
+    (click)="onChangePasswordClicked()"
+  >
+    Change Password
+  </button>
+  <button
+    *ngIf="isConsentProvided$ | async"
+    class="secondary"
+    type="button"
+    autocapitalize="on"
+    (click)="onResetDocusignClicked()"
+  >
+    Reset Docusign Account
+  </button>
+</div>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

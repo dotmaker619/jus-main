@@ -1,0 +1,18 @@
+.more-btn {
+  transform: rotate(90deg);
+}
+
+ion-content {
+  --background: var(--primary-background-color);
+}
+
+ion-content .expandable-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  justify-content: space-between;
+}
+
+.specialities {
+  font-size: 0.86rem;
+}

@@ -1,0 +1,48 @@
+:host {
+  --space: 10px;
+}
+
+ion-content {
+  --background: var(--primary-background-color);
+}
+
+ion-content,
+ion-footer ion-toolbar {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+  --padding-top: var(--space);
+  --padding-bottom: var(--space);
+}
+
+form > * {
+  display: block;
+  margin-bottom: var(--space);
+}
+
+.label-text {
+  color: var(--primary-font-color);
+  font-weight: bold;
+}
+
+label.all-day-check {
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+}
+
+button[type="submit"] {
+  width: 100%;
+}
+
+.date-time-container {
+  display: flex;
+  align-items: center;
+}
+
+.date-time-container span {
+  flex: 1;
+}
+
+.date-time-container jlc-date-time-picker {
+  flex: 2;
+}

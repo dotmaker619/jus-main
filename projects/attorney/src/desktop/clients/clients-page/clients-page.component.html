@@ -1,0 +1,48 @@
+<div class="page-container">
+  <div class="header">
+    <h1>My clients</h1>
+    <button class="primary create-invite" (click)="onCreateInviteClicked()">
+      <img src="/assets/icons/person_icon.svg" alt="Person icon" />
+      Invite new user
+    </button>
+  </div>
+  <mat-tab-group disableRipple dynamicHeight [(selectedIndex)]="activeTabIndex">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div class="tab-label" [class.active]="activeTabIndex === 0">
+          Active
+          <div
+            class="badge"
+            *ngIf="(matters$ | async)?.length as mattersLength"
+          >
+            <span>{{ mattersLength }}</span>
+          </div>
+        </div>
+      </ng-template>
+      <div class="tab-content">
+        <jlat-active-clients-table
+          [matters]="matters$ | async"
+        ></jlat-active-clients-table>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div class="tab-label" [class.active]="activeTabIndex === 1">
+          Pending
+          <div class="badge" *ngIf="(invites$ | async)?.length">
+            <span>{{ (invites$ | async)?.length }}</span>
+          </div>
+        </div>
+      </ng-template>
+      <div class="tab-content">
+        <jlat-pending-invites-table
+          [invites]="invites$ | async"
+          (clickResend)="onResendClicked($event)"
+        ></jlat-pending-invites-table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<ng-container *ngIf="isLoading$ | async">
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-container>

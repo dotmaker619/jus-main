@@ -1,0 +1,94 @@
+<jlc-dialog-header class="header">
+  <h2>Invite New Client</h2>
+</jlc-dialog-header>
+<jlc-dialog-content class="content">
+  <form
+    *ngIf="form$ | async as form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmitted(form)"
+  >
+    <div class="row">
+      <label class="radio-label">
+        <input
+          type="radio"
+          [value]="clientTypeOptions.Individual"
+          formControlName="clientType"
+          [jlcApiValidation]="validationError$"
+        />
+        <span>Individual</span>
+      </label>
+      <label class="radio-label">
+        <input
+          type="radio"
+          [value]="clientTypeOptions.Organization"
+          formControlName="clientType"
+        />
+        <span>Organization</span>
+      </label>
+    </div>
+    <!-- Organization name. Hidden for Individual client.-->
+    <label *ngIf="form.controls.organizationName" [@enterFormFieldAnimation]>
+      <span>Organization Name*</span>
+      <input
+        type="text"
+        formControlName="organizationName"
+        [jlcApiValidation]="validationError$"
+      />
+      <jlc-form-control-validation-message controlName="organizationName">
+      </jlc-form-control-validation-message>
+    </label>
+    <!-- First name. -->
+    <label>
+      First name*
+      <input
+        type="text"
+        formControlName="firstName"
+        [jlcApiValidation]="validationError$"
+      />
+      <jlc-form-control-validation-message controlName="firstName">
+      </jlc-form-control-validation-message>
+    </label>
+    <!-- Last name. -->
+    <label>
+      Last name*
+      <input
+        type="text"
+        formControlName="lastName"
+        [jlcApiValidation]="validationError$"
+      />
+      <jlc-form-control-validation-message controlName="lastName">
+      </jlc-form-control-validation-message>
+    </label>
+    <!-- Email. -->
+    <label>
+      Email*
+      <input
+        type="text"
+        autocapitalize="none"
+        formControlName="email"
+        [jlcApiValidation]="validationError$"
+      />
+      <jlc-form-control-validation-message controlName="email">
+      </jlc-form-control-validation-message>
+    </label>
+    <!-- Message. -->
+    <label>
+      Message*
+      <textarea
+        formControlName="message"
+        [jlcApiValidation]="validationError$"
+      ></textarea>
+      <jlc-form-control-validation-message controlName="message">
+      </jlc-form-control-validation-message>
+    </label>
+    <div class="buttons">
+      <button class="secondary" type="button" (click)="onCloseClicked()">
+        Cancel
+      </button>
+      <button class="primary" type="submit">Submit</button>
+    </div>
+  </form>
+</jlc-dialog-content>
+<ng-container *ngIf="isLoading$ | async">
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-container>

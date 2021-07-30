@@ -1,0 +1,39 @@
+.subheader {
+  height: 150px;
+}
+
+.subheader h1 {
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+.content {
+  margin: 15px;
+}
+
+jlc-details-card header {
+  color: white;
+  font-size: 1.5rem;
+  padding: 20px;
+}
+
+jlc-details-card ul {
+  padding: 15px;
+  list-style-position: inside;
+}
+
+jlc-details-card li {
+  margin: 5px;
+}
+
+jlc-details-card footer {
+  padding: 0 20px 20px 20px;
+}
+
+jlc-details-card .primary {
+  width: 100%;
+}
+
+jlc-details-card {
+  margin-bottom: 15px;
+}

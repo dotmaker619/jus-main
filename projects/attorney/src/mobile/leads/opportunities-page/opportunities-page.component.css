@@ -1,0 +1,10 @@
+.opportunities-list {
+  padding: 0;
+}
+
+.message {
+  text-align: center;
+  font-style: italic;
+  color: var(--medium-color);
+  font-size: 0.9rem;
+}

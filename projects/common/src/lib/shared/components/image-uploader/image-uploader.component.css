@@ -1,0 +1,45 @@
+:host {
+  --space: 10px;
+
+  display: block;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+div.selected-image {
+  width: 150px;
+  height: 150px;
+  margin-right: calc(var(--space) * 2);
+}
+
+div.selected-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.action-buttons > * {
+  cursor: pointer;
+  margin-bottom: var(--space);
+}
+
+.load-btn {
+  padding: var(--space);
+}
+
+.remove-btn {
+  background: transparent;
+  text-decoration: underline;
+  border: none;
+  color: var(--tertiary-color);
+}

@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" *ngIf="isCreateButtonShown$ | async">
+      <ion-button fill="clear" (click)="onStartPostClick()">
+        New Post
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Social</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ng-container *ngIf="pagination$ | async as pagination; else loading">
+    <ion-list lines="full">
+      <ion-item
+        *ngFor="let socialPost of pagination.items; trackBy: trackPost"
+        [routerLink]="['/social', socialPost.id]"
+        detail="false"
+      >
+        <jlc-post-list-item
+          [post]="mapSocialPostToPostData(socialPost)"
+        ></jlc-post-list-item>
+      </ion-item>
+      <ion-item *ngIf="pagination.items.length === 0">
+        <ion-label class="item-message">
+          No posts found
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll
+      [disabled]="pagination.items.length >= pagination.itemsCount"
+      (ionInfinite)="loadMorePosts($event)"
+      threshold="200px"
+    >
+      <ion-infinite-scroll-content loadingText="Loading more posts...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ng-container>
+</ion-content>
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

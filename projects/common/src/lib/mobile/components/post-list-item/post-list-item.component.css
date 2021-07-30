@@ -1,0 +1,38 @@
+:host {
+  --space: 10px;
+
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.post-image {
+  height: 80px;
+  width: 30%;
+  margin-right: calc(var(--space) * 2);
+}
+
+.post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--space);
+}
+
+.post-info {
+  width: 70%;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: calc(var(--space) * 0.5);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.author-date {
+  color: var(--primary-light-font-color);
+  font-size: 0.86rem;
+}

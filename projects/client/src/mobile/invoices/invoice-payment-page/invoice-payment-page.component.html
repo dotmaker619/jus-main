@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        *ngIf="invoice$ | async as i"
+        [defaultHref]="['/invoices', i.id]"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Review Payment
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ng-container [ngSwitch]="viewState$ | async">
+    <ng-container *ngSwitchCase="PaymentViewState.InProgress">
+      <jlc-invoice-details-card
+        class="card"
+        [invoice]="invoice$ | async"
+        [billings]="billings$ | async"
+        [isInfoForAttorney]="false"
+      >
+      </jlc-invoice-details-card>
+      <jlc-header-with-icon src="/assets/icons/clock_icon.svg" class="card">
+        BILLABLE TIME
+      </jlc-header-with-icon>
+
+      <p class="card">Payment Information</p>
+      <jlc-card class="card payment-card">
+        <jlc-payment-method-form
+          [showControls]="false"
+        ></jlc-payment-method-form>
+      </jlc-card>
+      <button class="primary" (click)="onPaymentFormSubmitted()">
+        Submit
+      </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="PaymentViewState.NotAvailable">
+      <jlc-payment-not-available
+        [invoice]="invoice$ | async"
+        class="payment-not-available"
+      >
+      </jlc-payment-not-available>
+    </ng-container>
+  </ng-container>
+</ion-content>
+
+<ng-template #skeletonTemplate>
+  <span>
+    <ion-skeleton-text animated class="skeleton"></ion-skeleton-text>
+  </span>
+</ng-template>
+
+<jlc-loading
+  *ngIf="isLoading$ | async"
+  mode="fullscreen"
+  message="Processing the payment..."
+></jlc-loading>

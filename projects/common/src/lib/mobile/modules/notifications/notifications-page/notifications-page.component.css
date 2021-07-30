@@ -1,0 +1,39 @@
+:host {
+  --space: 10px;
+}
+
+ion-item {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+  --inner-padding-end: 0;
+}
+
+jlc-notification-item {
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge {
+  padding: calc(var(--space) / 4) calc(var(--space) / 2);
+  display: inline-block;
+  color: var(--header-badge-color);
+  background-color: var(--header-badge-background-color);
+  font-size: 0.9rem;
+  border-radius: 10px;
+  min-width: 2rem;
+  text-align: center;
+  margin-left: calc(var(--space) / 2);
+}
+
+.preferences-btn ion-icon {
+  font-size: 1.5rem;
+}
+
+.message {
+  text-align: center;
+}

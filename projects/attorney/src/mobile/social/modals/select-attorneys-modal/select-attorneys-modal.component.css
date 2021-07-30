@@ -1,0 +1,69 @@
+/* Layout */
+
+:host {
+  --space: 10px;
+}
+
+.attorney-item {
+  --padding-start: 0;
+}
+
+.filter-form,
+.selected-items-container {
+  margin: var(--space);
+}
+
+.filter-form > * {
+  width: 100%;
+}
+
+.filter-form > * + * {
+  margin-top: var(--space);
+}
+
+/* Selected attorneys */
+
+.selected-items-container p {
+  /* Message */
+  text-align: center;
+  font-style: italic;
+  color: var(--medium-color);
+}
+
+/* Attorney chip */
+
+.attorney-chip {
+  --color: white;
+  --background: var(--secondary-shade-color);
+  font-weight: bold;
+}
+
+.attorney-chip ion-icon {
+  color: inherit;
+}
+
+/* Message */
+
+.no-items-message {
+  text-align: center;
+  font-style: italic;
+  color: var(--medium-color);
+  width: 100%;
+}
+
+/* Pagination */
+
+.pagination-loading {
+  margin: 30px 0;
+}
+
+/* List item */
+
+ion-item.preselected {
+  filter: brightness(0.8);
+}
+
+ion-chip.preselected {
+  --background: var(--medium-color);
+  --color: var(--primary-font-color);
+}

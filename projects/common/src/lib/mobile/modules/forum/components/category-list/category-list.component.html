@@ -1,0 +1,27 @@
+<ion-list>
+  <ng-container *ngIf="categories; else skeletonList">
+    <ng-container *ngIf="categories.length; else noItemsMessage">
+      <ion-item
+        *ngFor="let category of categories; trackBy: trackById"
+        [routerLink]="['category', category.id]"
+      >
+        <jlc-category-list-item [category]="category"></jlc-category-list-item>
+      </ion-item>
+    </ng-container>
+  </ng-container>
+</ion-list>
+
+<ng-template #skeletonList>
+  <!-- Provide skeleton list. -->
+  <ion-item *ngFor="let i of [null, null, null]">
+    <jlc-category-list-item></jlc-category-list-item>
+  </ion-item>
+</ng-template>
+
+<ng-template #noItemsMessage>
+  <ion-item lines="full">
+    <ion-label class="item-message">
+      No categories found
+    </ion-label>
+  </ion-item>
+</ng-template>

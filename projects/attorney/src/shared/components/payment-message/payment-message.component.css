@@ -1,0 +1,13 @@
+.conditions-list {
+  color: var(--primary-font-color);
+  margin: 0;
+}
+
+.conditions-list dt {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.conditions-list dd {
+  margin: 0;
+}

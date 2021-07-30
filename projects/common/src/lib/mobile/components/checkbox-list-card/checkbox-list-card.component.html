@@ -1,0 +1,25 @@
+<jlc-card>
+  <ion-list *ngIf="options; else skeletonListTemplate">
+    <ion-item
+      detail="false"
+      lines="full"
+      [attr.button]="isDisabled ? null : true"
+      *ngFor="let option of options; trackBy: trackByValue"
+      (click)="toggleSelectedOption(option)"
+    >
+      <ion-icon slot="start" [src]="getIconSrc(option)"></ion-icon>
+      <ion-label>{{ option[descriptionPropertyName] }}</ion-label>
+    </ion-item>
+  </ion-list>
+</jlc-card>
+
+<ng-template #skeletonListTemplate>
+  <ion-list class="skeleton-list" *ngFor="let i of [1, 2, 3]">
+    <ion-item detail="false" lines="full">
+      <ion-skeleton-text slot="start" animated></ion-skeleton-text>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ng-template>

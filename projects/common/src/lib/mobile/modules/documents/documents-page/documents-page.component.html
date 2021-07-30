@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onSearchClick()" fill="clear">
+        <ion-icon
+          *ngIf="shouldDisplaySearchbar; else searchIconTemplate"
+          slot="icon-only"
+          name="close"
+        ></ion-icon>
+        <ng-template #searchIconTemplate>
+          <ion-icon slot="icon-only" name="search"></ion-icon>
+        </ng-template>
+      </ion-button>
+    </ion-buttons>
+    <ion-searchbar
+      class="searchbar"
+      (ionChange)="onSearchChange($event.target.value)"
+      [debounce]="250"
+      inputmode="text"
+      type="text"
+      *ngIf="shouldDisplaySearchbar; else titleTemplate"
+      mode="ios"
+    ></ion-searchbar>
+    <ng-template #titleTemplate>
+      <ion-title>Document Library</ion-title>
+    </ng-template>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <jlc-tab-bar>
+    <jlc-tab-button absoluteLink="/documents/personal">
+      My Files
+    </jlc-tab-button>
+    <jlc-tab-button absoluteLink="/documents/matter">
+      Client Docs
+    </jlc-tab-button>
+    <jlc-tab-button absoluteLink="/documents/templates">
+      Templates
+    </jlc-tab-button>
+  </jlc-tab-bar>
+</ion-header>
+<ion-content>
+  <ion-router-outlet></ion-router-outlet>
+</ion-content>

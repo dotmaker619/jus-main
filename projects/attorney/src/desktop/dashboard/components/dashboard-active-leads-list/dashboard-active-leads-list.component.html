@@ -1,0 +1,48 @@
+<header class="header">
+  <h2 class="title">
+    {{title}}
+  </h2>
+  <span class="badge">
+    {{chats.length}}
+  </span>
+</header>
+  
+<ul
+  *ngIf="chats.length > 0"
+  class="list"
+>
+  <li
+    *ngFor="let chat of chats; trackBy: trackByChatId "
+    class="item"
+  >
+    <a
+      class="link"
+      [routerLink]="['/leads', 'active']"
+      [queryParams]="{ leadId: chat.lead.id }"
+    >
+      <img class="icon" src="/assets/icons/arrows-circle-yellow.svg" alt="">
+      <div class="content">
+        <div class="item-title">
+          <span class="name">
+            {{chat.lead.client.shortName}}
+          </span>
+          <div>
+            <span class="priority">
+              {{chat.lead.priority}}
+            </span>
+            <span class="last-activity">
+              {{chat.lastActivityDate | jusLawNamedOffsetFromNow}}
+            </span>
+          </div>
+        </div>
+        <span class="last-message">
+          {{ chat.lastMessageText }}
+        </span>
+      </div>
+    </a>
+  </li>
+</ul>
+
+<div *ngIf="chats.length === 0">
+  No Active Leads
+</div>

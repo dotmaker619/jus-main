@@ -1,0 +1,26 @@
+.registration-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 30px;
+  max-width: 50rem;
+}
+
+.button-panel,
+.description-label {
+  grid-column: span 2;
+}
+
+.password-label,
+.first-name-label {
+  grid-column: 1;
+}
+
+.button-panel {
+  display: grid;
+  grid-template-columns: repeat(2, 170px);
+  column-gap: 20px;
+}
+
+.description-label textarea {
+  resize: vertical;
+}

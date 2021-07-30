@@ -1,0 +1,8 @@
+:host {
+  display: block;
+  margin: 10px 0;
+}
+
+jlc-chat-announce-message {
+  padding: 15px;
+}

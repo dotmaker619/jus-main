@@ -1,0 +1,83 @@
+<!-- Billable time section  -->
+<div class="billable-section">
+  <table *ngIf="billingItems?.length; else notBilled" class="section-table">
+    <thead>
+      <tr>
+        <th class="small-width-width">Date</th>
+        <th>Description</th>
+        <th *ngIf="isLoggedByColumnDisplayed">Logged by</th>
+        <th class="small-width-width">Time Logged</th>
+        <ng-container *ngIf="RateType.Hourly === matter.rateType">
+          <th class="medium-width-column">Fees (Time x Rate)</th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container
+        *ngFor="let timeBilling of billingItems; trackBy: trackById"
+      >
+        <ng-container
+          [ngTemplateOutlet]="
+            timeBilling.isEditableForCurrentUser ? clickableRow : staticRow
+          "
+          [ngTemplateOutletContext]="{ timeBilling: timeBilling }"
+        >
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+  <ng-container *ngIf="!isAllBillingsDisplayed">
+    <button class="unfold-table-button" (click)="onTableUnfold()">
+      Show All {{ numberOfBillings }}
+    </button>
+  </ng-container>
+
+  <ng-template #notBilled>
+    <ng-content select="[no-content]"></ng-content>
+  </ng-template>
+
+  <ng-template #staticRow let-timeBilling="timeBilling">
+    <tr class="row">
+      <ng-container
+        [ngTemplateOutlet]="tableRow"
+        [ngTemplateOutletContext]="{ billing: timeBilling }"
+      ></ng-container>
+    </tr>
+  </ng-template>
+
+  <ng-template #clickableRow let-timeBilling="timeBilling">
+    <tr
+      class="row clickable"
+      role="button"
+      (click)="onRowClick(timeBilling)"
+      title="Edit job"
+    >
+      <ng-container
+        [ngTemplateOutlet]="tableRow"
+        [ngTemplateOutletContext]="{ billing: timeBilling }"
+      ></ng-container>
+    </tr>
+  </ng-template>
+
+  <ng-template #tableRow let-billing="billing">
+    <td class="date-width">
+      {{ billing.date | date: "shortDate" }}
+    </td>
+    <td>
+      <p class="ellipsis">
+        {{ billing.description }}
+      </p>
+    </td>
+    <td class="medium-width-column" *ngIf="isLoggedByColumnDisplayed">
+      {{ billing.createdBy.fullName }}
+    </td>
+    <td class="medium-width-column">
+      {{ billing.spentMinutes | jusLawFormatMinutes: "hh:mm" }}
+    </td>
+    <ng-container *ngIf="RateType.Hourly === matter.rateType">
+      <td class="medium-width-column">
+        {{ billing.fees | currency }}
+      </td>
+    </ng-container>
+  </ng-template>
+</div>

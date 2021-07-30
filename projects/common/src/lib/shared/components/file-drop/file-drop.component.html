@@ -1,0 +1,74 @@
+<ng-container *ngIf="!documents.length; else filesTemplate">
+  <div
+    class="file-drop"
+    [class.active]="isFileDragged"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
+    <div class="tip">
+      <ng-container *ngIf="onlyBrowseButton; else browserTooltipTemplate">
+        <span>
+          Browse
+          <span *ngIf="!multiple">a file</span>
+          <span *ngIf="multiple">files</span>
+          to be uploaded
+        </span>
+      </ng-container>
+      <ng-template #browserTooltipTemplate>
+        <span>
+          Browse or Drag and Drop
+          <span *ngIf="!multiple">a file</span>
+          <span *ngIf="multiple">files</span>
+          to be uploaded
+        </span>
+      </ng-template>
+
+      <ng-container [ngTemplateOutlet]="fileInputTemplate"></ng-container>
+    </div>
+  </div>
+</ng-container>
+<ng-template #filesTemplate>
+  <div
+    class="file-drop"
+    [ngClass]="{
+      multiple: multiple,
+      single: !multiple,
+      active: isFileDragged
+    }"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
+    <div *ngFor="let file of documents" class="file">
+      <img src="/assets/icons/document_icon.svg" alt="" />
+      <span class="ellipsis">{{ file.name }}</span>
+      <button
+        (click)="onRemoveFileClick(file)"
+        class="remove-button"
+        type="button"
+      >
+        Remove
+      </button>
+    </div>
+
+    <ng-container
+      *ngIf="multiple"
+      [ngTemplateOutlet]="fileInputTemplate"
+    ></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #fileInputTemplate>
+  <input
+    hidden
+    type="file"
+    #inputFile
+    [attr.multiple]="multiple"
+    (change)="onFileChange($event)"
+  />
+
+  <button type="button" class="upload-button" (click)="inputFile.click()">
+    Browse
+  </button>
+</ng-template>

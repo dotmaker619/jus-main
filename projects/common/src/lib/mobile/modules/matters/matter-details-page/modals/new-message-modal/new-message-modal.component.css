@@ -1,0 +1,46 @@
+:host {
+  --space: 10px;
+}
+
+ion-content,
+ion-footer ion-toolbar {
+  --background: var(--primary-background-color);
+}
+
+.recipient {
+  padding: calc(var(--space) * 1.5) var(--space);
+  border-bottom: 0.55px solid var(--primary-border-color);
+}
+
+.to {
+  font-weight: bold;
+}
+
+.recipient span {
+  margin-left: var(--space);
+}
+
+form {
+  padding: var(--space);
+}
+
+form label {
+  display: block;
+  margin-bottom: var(--space);
+}
+
+ion-footer {
+  padding: var(--space);
+}
+
+ion-footer.footer-md::before {
+  background-image: none;
+}
+
+ion-footer ion-toolbar {
+  --border-width: 0;
+}
+
+ion-footer button {
+  width: 100%;
+}

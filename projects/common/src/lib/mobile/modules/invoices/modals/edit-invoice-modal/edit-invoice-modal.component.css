@@ -1,0 +1,26 @@
+:host {
+  --space: 10px;
+}
+
+form {
+  margin: var(--space);
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-panel {
+  margin: var(--space);
+  display: flex;
+}
+
+.button-panel button {
+  flex: 1;
+}

@@ -1,0 +1,18 @@
+<h2 class="title">{{ options.title }}</h2>
+<hr/>
+<div class="dialog-body">
+  <p class="message">
+    Are you sure you want to delete this?
+    <span *ngIf="type === CustomizationType.Stage">
+      Any matter that currently has this label will be switched to “No label”.
+    </span>
+  </p>
+</div>
+<div class="buttons-container">
+  <button class="secondary" (click)="onCloseClicked()">
+    Cancel
+  </button>
+  <button class="confirm danger" (click)="onDeleteClicked()">
+    Delete
+  </button>
+</div>

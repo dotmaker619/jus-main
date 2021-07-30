@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button
+        fill="clear"
+        *ngIf="form$ | async as form"
+        (click)="onSubmit(form)"
+      >
+        Save
+      </ion-button>
+    </ion-buttons>
+    <ion-title>My Profile</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    #profileForm="ngForm"
+    *ngIf="form$ | async as form"
+    [formGroup]="form"
+    id="mobile-attorney-profile-edit-form"
+    (ngSubmit)="onSubmit(form)"
+  >
+    <jlc-mobile-attorney-profile-form
+      formControlName="attorney"
+      [namesDisabled]="true"
+      [jlcApiValidation]="validationError$ | async"
+    ></jlc-mobile-attorney-profile-form>
+  </form>
+</ion-content>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

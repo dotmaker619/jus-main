@@ -1,0 +1,66 @@
+:host {
+  height: 100%;
+}
+
+.page-container {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+}
+
+.title {
+  margin: 20px 40px;
+}
+
+.statistic {
+  display: flex;
+  box-shadow: var(--dashboard-statistic-shadow);
+  min-height: 340px;
+  padding: 0 40px;
+  margin: 0;
+}
+
+.cards-col {
+  flex-basis: 50%;
+}
+
+.cards {
+  display: flex;
+  flex-basis: 100%;
+}
+
+.lists {
+  display: flex;
+  padding: 20px 42px 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.column {
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+}
+
+.column:not(:last-child) {
+  margin-right: 20px;
+}
+
+@media (min-width: 1281px) {
+  /* Desktop styles. */
+
+  .page-container {
+    height: auto;
+  }
+
+  .lists {
+    flex-wrap: wrap;
+  }
+
+  .column {
+    flex: none;
+    width: 100%;
+  }
+}

@@ -1,0 +1,36 @@
+:host {
+  --space: 10px;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.note-author-content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: var(--space);
+  font-size: 0.9rem;
+}
+
+.date {
+  font-style: italic;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  /* To avoid truncation letters with italic style. */
+  padding-right: 3px;
+}
+
+.date span {
+  color: var(--medium-color);
+}
+
+.note-content {
+  font-size: 0.9rem;
+}
+
+ion-item {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+}

@@ -1,0 +1,37 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Documents library</h1>
+  </div>
+  <mat-tab-group disableRipple dynamicHeight>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div class="tab-label">
+          My Files
+        </div>
+      </ng-template>
+      <div class="tab-container">
+        <jlc-private-docs></jlc-private-docs>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div class="tab-label">
+          Client Documents
+        </div>
+      </ng-template>
+      <div class="tab-container">
+        <jlc-client-docs></jlc-client-docs>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div class="tab-label">
+          Templates
+        </div>
+      </ng-template>
+      <div class="tab-container">
+        <jlc-template-docs></jlc-template-docs>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

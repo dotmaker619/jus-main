@@ -1,0 +1,15 @@
+h1 {
+  font-weight: normal;
+}
+
+.pagination-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+a.primary {
+  width: 10rem;
+  padding: 0.5rem;
+}

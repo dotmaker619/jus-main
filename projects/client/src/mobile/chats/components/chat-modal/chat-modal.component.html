@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCancelClick()" shape="round" fill="clear">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="chat$ | async as chat">
+      <button
+        class="attorney-name"
+        (click)="onAttorneyNameClick(chat.recipient.id)"
+      >
+        {{ chat.recipient.fullName }}
+      </button>
+    </ion-title>
+    <ion-buttons slot="end">
+      <button
+        *ngIf="chat$ | async as chat"
+        class="special-button"
+        (click)="onCallClicked(chat)"
+      >
+        <ion-icon
+          size="small"
+          slot="icon-only"
+          src="/assets/icons/phone_icon.svg"
+        ></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [scrollY]="false">
+  <ng-container *ngIf="chat$ | async as chat">
+    <jlc-chat [chat]="chat"></jlc-chat>
+  </ng-container>
+</ion-content>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

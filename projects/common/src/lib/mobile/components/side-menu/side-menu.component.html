@@ -1,0 +1,39 @@
+<div class="mobile-side-menu">
+  <section class="mobile-side-menu__user-info" *ngIf="user">
+    <jlc-profile-image
+      class="mobile-side-menu__user-info__avatar"
+      [src]="user.avatar"
+    ></jlc-profile-image>
+    <span class="mobile-side-menu__user-info__name">
+      {{ user.fullName }}
+    </span>
+  </section>
+  <ion-list *ngIf="links" class="mobile-side-menu__links-list">
+    <div class="menu-items">
+      <ion-menu-toggle *ngFor="let item of links; trackBy: trackMenuItem">
+        <ion-item
+          class="mobile-side-menu__menu-link"
+          [routerLink]="item.link"
+          routerDirection="root"
+          detail="false"
+          lines="full"
+        >
+          <ion-label>{{ item.label }}</ion-label>
+          <div class="mobile-side-menu__menu-link__badge" *ngIf="item.badge">
+            {{ item.badge }}
+          </div>
+        </ion-item>
+      </ion-menu-toggle>
+    </div>
+
+    <ion-item
+      class="mobile-side-menu__logout"
+      detail="false"
+      lines="none"
+      button
+      routerLink="/auth/logout"
+    >
+      <ion-label>Log out</ion-label>
+    </ion-item>
+  </ion-list>
+</div>

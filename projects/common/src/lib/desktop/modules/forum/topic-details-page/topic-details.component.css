@@ -1,0 +1,144 @@
+.paginator-panel {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.forum-paginator {
+  align-self: flex-end;
+}
+
+.follow-button {
+  margin-left: auto;
+  margin-right: 1rem;
+  background: url("/assets/icons/bookmark_icon.svg") no-repeat 0;
+  background-size: 2rem;
+  padding: 0.7rem 0 0.7rem 2.5rem;
+  border: none;
+  color: var(--medium-color);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.follow-button.activated {
+  background: url("/assets/icons/bookmark_icon_activated.svg") no-repeat 0;
+  background-size: 2rem;
+}
+
+a.primary {
+  font-size: 12px;
+}
+
+.topic-header {
+  margin: 0;
+  padding: 1rem;
+  background: var(--primary-color);
+  color: var(--primary-contrast-color);
+  font-weight: bold;
+  min-width: 20rem;
+}
+
+.post {
+  display: flex;
+  border-left: 1px solid var(--light-color);
+  border-bottom: 1px solid var(--light-color);
+  border-right: 1px solid var(--light-color);
+  min-width: 20rem;
+}
+
+.post-author {
+  flex: 1;
+  min-width: 10rem;
+  flex-shrink: 0;
+  border-right: 1px solid var(--light-tint-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--primary-font-color);
+  padding: 10px 5px;
+}
+
+.post-content {
+  flex: 8;
+}
+
+.post-content header {
+  border-bottom: 1px solid var(--light-tint-color);
+  padding: 0.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-content p {
+  padding: 1rem 2rem;
+}
+
+.profile-image {
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+  background-color: var(--light-color);
+  margin: 0 auto 1rem;
+}
+
+.author-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bold;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.posts-number {
+  text-align: center;
+}
+
+.post-author-verification {
+  display: flex;
+  align-items: center;
+}
+
+.post-author-verification span {
+  color: var(--medium-shade-color);
+  font-size: 12px;
+  padding-left: 0.5rem;
+}
+
+.post-author-verification svg {
+  fill: white;
+  background: var(--success-color);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+}
+
+.send-message {
+  background: var(--secondary-tint-color);
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 3rem;
+  padding: 0.5rem;
+  color: var(--secondary-color);
+  cursor: pointer;
+  text-align: center;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  margin: 0 5px;
+  background-color: transparent;
+}
+
+.button-edit {
+  background-image: url("/assets/icons/edit_icon.svg");
+}
+
+.button-delete {
+  background-image: url("/assets/icons/delete_icon.svg");
+}

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCloseClick()" shape="round">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>My Opportunities</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onEditClick()" shape="round">
+        <ion-icon src="/assets/icons/edit_icon.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container" *ngIf="attorney$ | async as attorney; else loading">
+    <ion-card class="card" *ngIf="location$ | async as location">
+      <ion-card-title>
+        <h3>My Location</h3>
+      </ion-card-title>
+      <ion-card-content>
+        <jlat-badge-list [badges]="location"></jlat-badge-list>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="card" *ngIf="specialties$ | async as specialties">
+      <ion-card-title>
+        <h3>My Expertise</h3>
+      </ion-card-title>
+      <ion-card-content>
+        <jlat-badge-list [badges]="specialties"></jlat-badge-list>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="card" *ngIf="keywords$ | async as keywords">
+      <ion-card-title>
+        <h3>Related Keywords</h3>
+      </ion-card-title>
+      <ion-card-content>
+        <jlat-badge-list [badges]="keywords"></jlat-badge-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<ng-template #loading>
+  <ion-card class="card">
+    <ion-card-title>
+      <h3>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </h3>
+    </ion-card-title>
+    <ion-card-content>
+      <ion-skeleton-text animated></ion-skeleton-text>
+    </ion-card-content>
+  </ion-card>
+</ng-template>

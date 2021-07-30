@@ -1,0 +1,99 @@
+<form class="dialog" [formGroup]="formGroup" (submit)="onSubmit()">
+  <h2>Log Time</h2>
+  <hr />
+  <div class="row">
+    <!-- Using div.label to avoid autofocus on input clicking on the datepicker -->
+    <div class="half date label" (click)="$event.stopPropagation()">
+      <span>Date*</span>
+      <div class="date-input">
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [matDatepickerFilter]="filterDatesForMatter"
+          formControlName="date"
+          [jlcApiValidation]="validationError$"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker startView="multi-year" touchUi #picker></mat-datepicker>
+      </div>
+      <jlc-form-control-validation-message controlName="date">
+      </jlc-form-control-validation-message>
+    </div>
+    <label class="half">
+      Time Spent*
+      <jlc-time-log-input
+        formControlName="spentMinutes"
+        [jlcApiValidation]="validationError$ | async"
+      ></jlc-time-log-input>
+      <jlc-form-control-validation-message controlName="spentMinutes">
+      </jlc-form-control-validation-message>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      Client
+      <input type="text" disabled [value]="clientInfo" />
+      <jlc-form-control-validation-message>
+      </jlc-form-control-validation-message>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      Related Matter*
+      <select formControlName="matter">
+        <option
+          *ngFor="let matter of matterOptions$ | async"
+          [value]="matter.id"
+        >
+          {{ matter.title }}
+        </option>
+      </select>
+      <jlc-form-control-validation-message controlName="matter">
+      </jlc-form-control-validation-message>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      Description*
+      <textarea
+        formControlName="description"
+        [jlcApiValidation]="validationError$"
+      ></textarea>
+      <jlc-form-control-validation-message controlName="description">
+      </jlc-form-control-validation-message>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <!-- To display an error connected with invoice. -->
+      <input
+        hidden
+        [jlcApiValidation]="validationError$"
+        formControlName="invoice"
+      />
+      <jlc-form-control-validation-message controlName="invoice">
+      </jlc-form-control-validation-message>
+    </label>
+  </div>
+  <ng-container *ngIf="!(isLoading$ | async); else loading">
+    <div class="button-panel">
+      <button
+        class="danger"
+        type="button"
+        *ngIf="isEditingMode"
+        (click)="onDeleteClicked()"
+      >
+        Delete
+      </button>
+      <button class="secondary" type="button" (click)="onCloseClicked()">
+        Cancel
+      </button>
+      <button class="primary" type="submit">
+        Log
+      </button>
+    </div>
+  </ng-container>
+</form>
+<ng-template #loading>
+  <jlc-loading class="loading"></jlc-loading>
+</ng-template>

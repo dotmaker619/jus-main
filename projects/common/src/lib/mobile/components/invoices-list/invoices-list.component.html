@@ -1,0 +1,20 @@
+<ion-list *ngIf="invoices$ | async as invoices; else skeletonListTemplate">
+  <ion-item lines="full" *ngIf="invoices.length === 0">
+    <div class="message">
+      <ng-content select="[empty]"></ng-content>
+    </div>
+  </ion-item>
+  <ion-item
+    detail="false"
+    lines="full"
+    button
+    *ngFor="let invoice of invoices; trackBy: trackInvoiceById"
+    [routerLink]="['/invoices', invoice.id]"
+  >
+    <jlc-invoice-item [invoice]="invoice" [forClient]="isClient$ | async"></jlc-invoice-item>
+  </ion-item>
+</ion-list>
+
+<ng-template #skeletonListTemplate>
+  <jlc-skeleton-list></jlc-skeleton-list>
+</ng-template>

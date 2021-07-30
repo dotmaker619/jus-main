@@ -1,0 +1,109 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  padding: 20px;
+  align-items: center;
+}
+
+header .search-input {
+  grid-column: span 3;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  border-top: 1px solid var(--primary-border-color);
+  margin-top: auto;
+  font-weight: bold;
+}
+
+section {
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+}
+
+.networks-icon {
+  filter: invert(0.5);
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+}
+
+.new-network-button {
+  background: var(--secondary-tint-color);
+  color: var(--secondary-color);
+  font-weight: bold;
+  border-radius: 30px;
+  border: none;
+  padding: 8px 15px;
+}
+
+@media (max-width: 900px) {
+  .new-network-button {
+    grid-column: span 2;
+  }
+}
+
+/* Networks placeholder */
+
+.networks-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  margin: auto;
+  background: var(--light-tint-color);
+  flex: 1;
+}
+
+.networks-placeholder > *:not(:last-child) {
+  margin-bottom: calc(var(--space) * 2);
+}
+
+.networks-placeholder h2 {
+  margin-bottom: var(--space);
+}
+
+.networks-placeholder p {
+  color: var(--primary-light-font-color);
+}
+
+.networks-placeholder button {
+  border-radius: 20px;
+}
+
+/* Networks list item */
+
+.networks-list {
+  overflow: auto;
+}
+
+.networks-list a {
+  display: block;
+  background: var(--primary-background-color);
+  border-bottom: 1px solid var(--primary-border-color);
+  padding: 0 10px;
+}
+
+.networks-list a:hover {
+  background: var(--primary-light-color);
+  text-decoration: none;
+}
+
+.no-found-message {
+  padding: 20px;
+  font-style: italic;
+  color: var(--medium-color);
+}

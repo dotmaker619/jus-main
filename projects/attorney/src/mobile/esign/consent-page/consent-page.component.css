@@ -1,0 +1,18 @@
+:host {
+  --space: 16px;
+}
+
+ion-content {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+  --padding-top: var(--space);
+  --padding-bottom: var(--space);
+}
+
+p {
+  margin-bottom: 1.2rem;
+}
+
+button {
+  width: 100%;
+}

@@ -1,0 +1,39 @@
+<form *ngIf="form$ | async as form" [formGroup]="form">
+  <label>
+    <span>Email*</span>
+    <input
+      jlcInputStatus
+      formControlName="email"
+      autocomplete="email"
+      type="email"
+      [jlcApiValidation]="validationError$ | async"
+    />
+    <jlc-form-control-validation-message controlName="email">
+    </jlc-form-control-validation-message>
+  </label>
+  <label>
+    <span>Password*</span>
+    <input
+      jlcInputStatus
+      type="password"
+      autocomplete="new-password"
+      formControlName="password"
+      [jlcApiValidation]="validationError$ | async"
+    />
+    <jlc-form-control-validation-message controlName="password">
+    </jlc-form-control-validation-message>
+  </label>
+  <label>
+    <span>Password Confirmation*</span>
+    <input
+      jlcInputStatus
+      type="password"
+      autocomplete="new-password"
+      formControlName="passwordRepeat"
+      [jlcApiValidation]="validationError$ | async"
+    />
+    <jlc-form-control-validation-message controlName="passwordRepeat">
+    </jlc-form-control-validation-message>
+  </label>
+  <input type="submit" hidden />
+</form>

@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Network</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="form" *ngIf="form$ | async as form">
+    <label>
+      <span>Network Group Name*</span>
+      <input type="text" placeholder="Type..." formControlName="title" />
+      <jlc-form-control-validation-message
+        controlName="title"
+      ></jlc-form-control-validation-message>
+    </label>
+    <label class="label-w-button">
+      <span>People to Invite*</span>
+      <ion-button fill="clear" (click)="onInviteButtonClick(form)">
+        {{ (attorneys$ | async)?.length > 0 ? "Edit" : "Add" }}
+      </ion-button>
+      <jlc-form-control-validation-message
+        controlName="attorneys"
+      ></jlc-form-control-validation-message>
+    </label>
+    <ion-list
+      *ngIf="(attorneys$ | async)?.length > 0; else noSelectedItems"
+      lines="full"
+    >
+      <ion-item
+        *ngFor="let attorney of attorneys$ | async"
+        [routerLink]="['/attorneys', 'profile', attorney.id]"
+      >
+        <jlc-selectable-user-item [user]="attorney"></jlc-selectable-user-item>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer>
+  <div class="button-panel">
+    <button
+      class="primary"
+      *ngIf="form$ | async as form"
+      (click)="onFormSubmit(form)"
+    >
+      Create
+    </button>
+  </div>
+</ion-footer>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>
+
+<ng-template #noSelectedItems>
+  <span class="no-items-message">
+    Tap 'Add' to select whom to invite
+  </span>
+</ng-template>

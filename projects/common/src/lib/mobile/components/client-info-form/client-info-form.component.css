@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+form {
+  margin: 10px;
+}
+
+form > * + * {
+  display: block;
+  margin-top: 10px;
+}
+
+label > span {
+  font-weight: bold;
+}
+
+.avatar {
+  margin-left: auto;
+  margin-right: auto;
+}

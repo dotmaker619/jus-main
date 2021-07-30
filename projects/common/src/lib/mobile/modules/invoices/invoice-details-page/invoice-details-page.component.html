@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/invoices"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <span *ngIf="pageTitle$ | async as title; else skeletonTemplate">
+        {{ title }}
+      </span>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        *ngIf="isInvoiceEditable$ | async"
+        (click)="onLogTimeButtonClick()"
+        shape="round"
+      >
+        <ion-icon
+          slot="icon-only"
+          size="small"
+          src="/assets/icons/clock_icon.svg"
+        ></ion-icon>
+      </ion-button>
+      <ion-button (click)="onMoreButtonClick()">
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <jlc-invoice-details-card
+    class="card"
+    [invoice]="invoice$ | async"
+    [billings]="timeBillings$ | async"
+  ></jlc-invoice-details-card>
+  <div class="button-panel card">
+    <button
+      class="primary"
+      type="button"
+      title="Download invoice"
+      (click)="onDownloadInvoiceClick()"
+    >
+      Download invoice
+    </button>
+    <button
+      class="primary"
+      *ngIf="isInvoiceEditable$ | async"
+      (click)="onSentToClientButtonClick()"
+    >
+      <ion-icon src="/assets/icons/arrow-right-circled_icon.svg"></ion-icon>
+      <span>Send to Client</span>
+    </button>
+  </div>
+  <jlc-header-with-icon src="/assets/icons/clock_icon.svg" class="card">
+    BILLABLE TIME
+  </jlc-header-with-icon>
+  <jlc-billable-time-card
+    class="card"
+    [billings]="timeBillings$ | async"
+    [showFilter]="false"
+    [editable]="true"
+    (billingClick)="onBillingClick($event)"
+  ></jlc-billable-time-card>
+</ion-content>
+
+<ng-template #skeletonTemplate>
+  <span>
+    <ion-skeleton-text animated class="skeleton"></ion-skeleton-text>
+  </span>
+</ng-template>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

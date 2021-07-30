@@ -1,0 +1,11 @@
+<ion-item button [detail]="false">
+  <div class="content">
+    <div class="icon">
+      <ion-icon src="/assets/icons/document_icon.svg"></ion-icon>
+    </div>
+    <div class="header">
+      <span class="title ellipsis">{{ note.title }}</span>
+      <span class="date">{{ note.created | jusLawNamedOffsetFromNow }}</span>
+    </div>
+  </div>
+</ion-item>

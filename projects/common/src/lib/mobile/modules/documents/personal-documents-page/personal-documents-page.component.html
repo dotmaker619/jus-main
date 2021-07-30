@@ -1,0 +1,18 @@
+<ion-content>
+  <div class="button-panel">
+    <button class="primary" (click)="onCreateFolderClick()">
+      + Folder
+      <ion-icon src="/assets/icons/folder_icon.svg"></ion-icon>
+    </button>
+    <button class="primary" (click)="onUploadFileClick()">
+      + File
+      <ion-icon src="/assets/icons/document_icon.svg"></ion-icon>
+    </button>
+  </div>
+
+  <jlc-documents-tree
+    class="docs-tree"
+    [documents]="privateDocuments$ | async"
+    (documentAction)="onNodeAction($event)"
+  ></jlc-documents-tree>
+</ion-content>

@@ -1,0 +1,110 @@
+nav {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  background-color: var(--header-color);
+  height: 4.29rem;
+  display: flex;
+  justify-content: center;
+  padding: 0 14px;
+}
+
+.logo {
+  margin-right: auto;
+  flex-shrink: 0;
+  width: 100px;
+  background-image: url("/assets/juslaw-horizontal.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+@media (max-width: 864px) {
+  .logo {
+    display: none;
+  }
+}
+
+.links {
+  display: flex;
+  justify-content: space-evenly;
+  flex-grow: 10;
+}
+
+.links a {
+  padding: 0 14px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  min-width: 100px;
+}
+
+.links a.active {
+  box-shadow: inset 0 7px 0 var(--primary-highlight-color);
+  color: var(--primary-active-color);
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  width: 60px;
+}
+
+.menu.active {
+  fill: var(--primary-highlight-color);
+}
+
+.menu svg {
+  height: 32px;
+  width: 32px;
+  transition: fill 0.2s ease;
+}
+
+.menu-button {
+  position: relative;
+  display: flex;
+  border: none;
+  background: none;
+}
+
+.badge {
+  position: absolute;
+  color: var(--header-badge-color);
+  background: var(--header-badge-background-color);
+  font-size: 11px;
+  font-weight: bold;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  right: 0;
+  padding: 2px;
+  border-radius: 3px;
+}
+
+.menu.active .badge {
+  opacity: 0;
+}
+
+jlat-header-menu {
+  display: block;
+  background-color: var(--header-color);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+  min-width: 13.75rem;
+  margin-top: 5px;
+}
+
+jlat-header-menu::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 9px;
+  width: 0;
+  height: 0;
+  box-sizing: border-box;
+  border: 7px solid black;
+  border-color: var(--header-color) var(--header-color) transparent transparent;
+  transform: rotate(-45deg);
+  box-shadow: 2px -2px 3px 0 rgba(0, 0, 0, 0.2);
+}

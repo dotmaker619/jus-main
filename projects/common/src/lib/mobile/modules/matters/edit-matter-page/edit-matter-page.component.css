@@ -1,0 +1,75 @@
+:host {
+  --space: 10px;
+}
+
+ion-content {
+  --background: var(--primary-background-color);
+}
+
+.form-part {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form-part > *:not(.legend) {
+  margin: calc(var(--space) * 1.5) var(--space);
+}
+
+.form-part-content > * {
+  width: 100%;
+}
+
+select,
+input {
+  width: 100%;
+}
+
+.dollar-input {
+  background-image: url("/assets/icons/currency_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 1rem;
+  background-position: left center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.row > *:not(:last-child) {
+  margin-right: 5px;
+}
+
+.legend {
+  padding: calc(var(--space) * 1.5) var(--space);
+  border-top: 0.55px solid var(--primary-border-color);
+  border-bottom: 0.55px solid var(--primary-border-color);
+  text-transform: uppercase;
+  width: 100%;
+  color: var(--primary-font-color);
+  background: var(--light-color);
+}
+
+.legend-with-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.legend-with-button ion-button {
+  margin: 0;
+  height: inherit;
+}
+
+ion-footer button {
+  width: 100%;
+}
+
+ion-footer ion-toolbar {
+  --padding-bottom: calc(var(--space) * 1.5);
+  --padding-top: calc(var(--space) * 1.5);
+  --padding-start: calc(var(--space) * 1.5);
+  --padding-end: calc(var(--space) * 1.5);
+}

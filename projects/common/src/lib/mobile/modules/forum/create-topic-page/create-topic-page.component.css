@@ -1,0 +1,22 @@
+:host {
+  --space: 10px;
+}
+
+form {
+  margin: var(--space);
+}
+
+textarea,
+input,
+select {
+  width: 100%;
+}
+
+.button-panel {
+  margin: var(--space);
+  display: flex;
+}
+
+.button-panel .primary {
+  flex: 1;
+}

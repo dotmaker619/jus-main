@@ -1,0 +1,39 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.feed-container {
+  overflow: auto;
+  flex: 1;
+}
+
+.header {
+  height: 65px;
+  padding-left: 29px;
+  border-bottom: 1px solid var(--light-shade-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.client-name {
+  margin-left: 30px;
+  color: var(--primary-font-color);
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+.actions {
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.priority {
+  width: 100px;
+  font-size: 0.875rem;
+  padding-left: 20px;
+  margin-right: 10px;
+}

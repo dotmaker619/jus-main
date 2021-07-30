@@ -1,0 +1,91 @@
+<jlc-card>
+  <ng-container *ngIf="showFilter">
+    <form class="form" *ngIf="filterForm$ | async as form" [formGroup]="form">
+      <ion-datetime
+        display-format="MMMM YYYY"
+        formControlName="month"
+      ></ion-datetime>
+    </form>
+    <hr />
+  </ng-container>
+  <details open class="details">
+    <summary [class.hidden-arrow]="shouldHideArrow">
+      <div class="header">
+        <p class="announce">
+          Total for the month
+        </p>
+        <div class="info">
+          <span *ngIf="billings; else skeletonShortTextTemplate">
+            Time {{ billings.totalTime }}
+          </span>
+          <span *ngIf="billings; else skeletonShortTextTemplate">
+            Fees {{ billings.totalFees || 0 | currency }}
+          </span>
+        </div>
+      </div>
+    </summary>
+    <ion-list
+      class="billings-list"
+      *ngIf="billings; else skeletonListTemplate"
+      lines="full"
+    >
+      <ng-container *ngFor="let billing of billings?.items; trackBy: trackById">
+        <ng-container
+          [ngTemplateOutlet]="
+            (isBillingLogEditable(billing) | async) ? editableLog : staticLog
+          "
+          [ngTemplateOutletContext]="{ billing: billing }"
+        >
+        </ng-container>
+      </ng-container>
+    </ion-list>
+  </details>
+</jlc-card>
+
+<ng-template #editableLog let-billing="billing">
+  <ion-item (click)="onBillingClick(billing)" [detail]="false" button>
+    <ng-container
+      [ngTemplateOutlet]="logData"
+      [ngTemplateOutletContext]="{ billing: billing }"
+    ></ng-container>
+  </ion-item>
+</ng-template>
+
+<ng-template #staticLog let-billing="billing">
+  <ion-item [detail]="false">
+    <ng-container
+      [ngTemplateOutlet]="logData"
+      [ngTemplateOutletContext]="{ billing: billing }"
+    ></ng-container>
+  </ion-item>
+</ng-template>
+
+<ng-template #logData let-billing="billing">
+  <div class="item-content">
+    <div class="time">
+      {{ billing.spentMinutes | jusLawFormatMinutes }}
+    </div>
+    <p class="description">
+      {{ billing.description }}
+    </p>
+    <p class="logger" *ngIf="isLoggedByColumnDisplayed">
+      {{ billing.createdBy.fullName }}
+    </p>
+    <div class="column">
+      <div class="price">
+        {{ billing.fees | currency }}
+      </div>
+      <div class="date">
+        {{ billing.created | date: "shortDate" }}
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #skeletonShortTextTemplate>
+  <ion-skeleton-text animated class="short skeleton"></ion-skeleton-text>
+</ng-template>
+
+<ng-template #skeletonListTemplate>
+  <jlc-skeleton-list></jlc-skeleton-list>
+</ng-template>

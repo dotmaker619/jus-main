@@ -1,0 +1,29 @@
+:host,
+form {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+hr {
+  border: none;
+  background: var(--primary-border-color);
+  height: 1px;
+  margin: 16px 0;
+}
+
+jlc-user-selectlist,
+jlc-people-filter-input {
+  overflow: auto;
+}
+
+jlc-people-filter-input {
+  max-height: 150px;
+  flex-shrink: 0;
+}
+
+.no-items-message {
+  text-align: center;
+  font-style: italic;
+  color: var(--medium-color);
+}

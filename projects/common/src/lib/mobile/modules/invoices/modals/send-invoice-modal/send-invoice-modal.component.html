@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="onCancelClick()">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Send Invoice</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    id="send-invoice-modal-form"
+    *ngIf="form$ | async as form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form)"
+  >
+    <label>
+      <span>To*</span>
+      <jlc-dynamic-values-list
+        formControlName="recipientList"
+        [jlcApiValidation]="validationError$ | async"
+        [itemValidators]="validatorsForDynamicListField"
+      ></jlc-dynamic-values-list>
+      <jlc-form-control-validation-message controlName="recipientList">
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Note (optional)</span>
+      <textarea
+        placeholder="Type..."
+        class="textarea-long"
+        [jlcApiValidation]="validationError$ | async"
+        formControlName="note"
+      ></textarea>
+      <jlc-form-control-validation-message controlName="note">
+      </jlc-form-control-validation-message>
+    </label>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="buttons-panel">
+      <button type="submit" form="send-invoice-modal-form" class="primary">
+        Send
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<ng-container *ngIf="isLoading$ | async">
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-container>

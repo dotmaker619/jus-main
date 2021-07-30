@@ -1,0 +1,31 @@
+:host {
+  --space: 10px;
+}
+
+label {
+  margin: var(--space);
+  display: block;
+}
+
+.label-w-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label-w-button ion-button {
+  margin-left: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.button-panel {
+  display: flex;
+  margin: var(--space);
+}
+
+.button-panel .primary {
+  flex: 1;
+}

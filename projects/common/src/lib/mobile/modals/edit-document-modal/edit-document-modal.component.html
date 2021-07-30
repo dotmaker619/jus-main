@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCancelClick()" fill="clear">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Edit document</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content #content [scrollY]="false">
+  <div class="container" *ngIf="form$ | async as form">
+    <form
+      [@hideOpen]="(pageMode$ | async) === pageModes.Show ? 'open' : 'hide'"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit(form)"
+    >
+      <label>
+        <span>Filename*</span>
+        <input formControlName="title" />
+        <jlc-form-control-validation-message
+          controlName="title"
+        ></jlc-form-control-validation-message>
+      </label>
+      <label>
+        <span>Folder*</span>
+        <select formControlName="folder">
+          <option
+            [ngValue]="folder.id"
+            *ngFor="let folder of folders$ | async; trackBy: trackById"
+          >
+            {{ folder.title }}
+          </option>
+        </select>
+        <jlc-form-control-validation-message
+          controlName="folder"
+        ></jlc-form-control-validation-message>
+      </label>
+      <div class="validation-error">
+        <span>
+          {{ (validationError$ | async) || "" }}
+        </span>
+      </div>
+      <div class="action-buttons">
+        <button
+          type="button"
+          title="Edit file"
+          class="secondary"
+          (click)="onEditClick()"
+        >
+          Edit
+        </button>
+        <button type="submit" title="Save edited file" class="primary">
+          Save
+        </button>
+      </div>
+    </form>
+    <jlc-pdf-editor
+      [jlpDoc]="document"
+      [hideToolbar]="(pageMode$ | async) === pageModes.Show"
+      (save)="onFileSave($event)"
+    ></jlc-pdf-editor>
+  </div>
+</ion-content>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

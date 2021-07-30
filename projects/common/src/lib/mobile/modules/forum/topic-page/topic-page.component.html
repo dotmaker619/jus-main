@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ng-container *ngTemplateOutlet="paginationPanel"></ng-container>
+  <div class="header" *ngIf="topic$ | async as topic">
+    <h1>{{ topic.title }}</h1>
+  </div>
+  <div class="action-panel">
+    <button
+      class="follow-button activated"
+      *ngIf="isFollowed$ | async as followed; else followButton"
+      (click)="onUnfollowClick(followed.id)"
+    >
+      Unfollow this Topic
+    </button>
+    <ng-template #followButton>
+      <button class="follow-button" (click)="onFollowClick()">
+        Follow this Topic
+      </button>
+    </ng-template>
+    <button (click)="onReplyClick()" title="Add your reply" class="primary">
+      + Reply
+    </button>
+  </div>
+  <jlc-posts-list (postClick)="onPostClick($event)" [posts]="posts$ | async">
+  </jlc-posts-list>
+  <ng-container *ngTemplateOutlet="paginationPanel"></ng-container>
+</ion-content>
+
+<ng-template #paginationPanel>
+  <div class="pagination-panel">
+    <ng-container *ngIf="pagesCount$ | async as pagesCount">
+      <jlc-forum-paginator
+        [pagesCount]="pagesCount"
+        [currentPage]="pageChange$ | async"
+        (pageChange)="onPageChange($event)"
+      ></jlc-forum-paginator>
+    </ng-container>
+  </div>
+</ng-template>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

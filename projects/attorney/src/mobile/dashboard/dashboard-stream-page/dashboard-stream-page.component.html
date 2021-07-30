@@ -1,0 +1,59 @@
+<ion-content>
+  <div class="dashboard-cards-container">
+    <jlat-dashboard-card-mini
+      class="dashboard-card card-opportunities"
+      [count]="(opportunities$ | async)?.length"
+      [iconUrl]="opportunitiesCardIconUrl"
+      routerDirection="root"
+      title="Opportunities"
+      routerLink="/leads"
+      routerDirection="root"
+    ></jlat-dashboard-card-mini>
+    <jlat-dashboard-card-mini
+      class="dashboard-card card-leads"
+      [count]="(activeLeads$ | async)?.length"
+      [iconUrl]="activeLeadsCardIconUrl"
+      title="Active Leads"
+      routerLink="/leads/active"
+      routerDirection="root"
+    ></jlat-dashboard-card-mini>
+    <jlat-dashboard-card-mini
+      class="dashboard-card card-matters"
+      [count]="(activeMatters$ | async)?.length"
+      [iconUrl]="activeMattersCardIconUrl"
+      title="Active Matters"
+      routerLink="/matters"
+      routerDirection="root"
+    ></jlat-dashboard-card-mini>
+    <jlat-dashboard-card-mini
+      class="dashboard-card card-documents"
+      [count]="(documents$ | async)?.length"
+      [iconUrl]="activeDocumentsCardIconUrl"
+      title="Document Library"
+      routerLink="/documents"
+      routerDirection="root"
+    ></jlat-dashboard-card-mini>
+  </div>
+  <div class="divider">
+    <h2 class="subheader">
+      Opportunities (Activity Stream)
+    </h2>
+    <ion-button [routerLink]="['/leads']" expand="block" fill="clear">
+      View All
+    </ion-button>
+  </div>
+  <ion-list
+    *ngIf="opportunities$ | async as topics; else topicsLoadingTemplate"
+    class="topic-list"
+  >
+    <jlat-opportunity-item
+      *ngFor="let topic of topics; trackBy: trackById"
+      class="item"
+      [topic]="topic"
+    ></jlat-opportunity-item>
+  </ion-list>
+
+  <ng-template #topicsLoadingTemplate>
+    <jlc-skeleton-list></jlc-skeleton-list>
+  </ng-template>
+</ion-content>

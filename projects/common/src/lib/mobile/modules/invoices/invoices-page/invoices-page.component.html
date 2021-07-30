@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button shape="round" fill="clear" (click)="onSearchButtonClick()">
+        <ion-icon
+          slot="icon-only"
+          name="search"
+          *ngIf="!shouldDisplaySearchbar; else closeIconTemplate"
+        ></ion-icon>
+        <ng-template #closeIconTemplate>
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ng-template>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span *ngIf="!shouldDisplaySearchbar; else searchbarTemplate">
+        Invoices
+      </span>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <jlc-tab-bar *ngIf="tabs$ | async as tabs" (tabChange)="onTabChange($event)">
+    <jlc-tab-button
+      *ngFor="let tab of tabs"
+      [tab]="tab.name"
+      [showBadge]="true"
+      [count]="tab.totalCount"
+    > {{ tab.name }} </jlc-tab-button>
+  </jlc-tab-bar>
+</ion-header>
+<ion-content>
+  <ng-container
+    *ngIf="selectedTab$ | async as tab"
+    [ngTemplateOutlet]="tabTemplate"
+    [ngTemplateOutletContext]="{ tab: tab }"
+  ></ng-container>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="expand"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="onCreateInvoiceClick()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="isExportAvailable$ | async" (click)="onExportStatisticsClick()">
+        <ion-icon name="download"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
+
+<ng-template #tabTemplate let-tab="tab">
+  <form [formGroup]="tab.filterForm">
+    <ion-datetime
+      display-format="MMMM YYYY"
+      formControlName="month"
+    ></ion-datetime>
+  </form>
+  <jlc-invoices-list [invoices]="tab.invoices">
+    <span empty>No invoices for the period</span>
+  </jlc-invoices-list>
+</ng-template>
+
+<ng-template #searchbarTemplate>
+  <ion-searchbar
+    inputmode="text"
+    type="text"
+    mode="ios"
+    class="searchbar"
+    [debounce]="250"
+    (ionChange)="onQueryChange($event.target.value)"
+  ></ion-searchbar>
+</ng-template>

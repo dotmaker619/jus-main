@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCancelClick()" fill="clear">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span *ngIf="matter">[{{ matter.code }}]</span>
+      <span *ngIf="!matter">
+        <ng-container [ngTemplateOutlet]="skeletonTextTemplate"> </ng-container>
+      </span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <jlc-matter-detail-card
+    class="card"
+    [matter]="matter"
+    [isCollapsed]="true"
+  ></jlc-matter-detail-card>
+  <form
+    id="close-matter-modal-form"
+    *ngIf="form$ | async as form"
+    (ngSubmit)="onSubmit(form)"
+    [formGroup]="form"
+  >
+    <div class="container">
+      <label>
+        <span>Close Date*</span>
+        <ion-datetime
+          formControlName="completed"
+          [jlcApiValidation]="validationError$"
+          display-format="MM/DD/YYYY"
+        ></ion-datetime>
+        <jlc-form-control-validation-message controlName="date">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+    <div class="container">
+      <div class="legend">
+        Closing Checklist
+      </div>
+      <div class="tip">
+        Carefully check that you've completed the following
+      </div>
+      <jlc-checkbox-list-card
+        formControlName="checklist"
+        [jlcApiValidation]="validationError$"
+        idPropertyName="value"
+        descriptionPropertyName="label"
+        [options]="checklist$ | async"
+      ></jlc-checkbox-list-card>
+      <jlc-form-control-validation-message controlName="checklist">
+      </jlc-form-control-validation-message>
+    </div>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="button-panel">
+      <button
+        class="primary"
+        form="close-matter-modal-form"
+        [disabled]="isSubmitDisabled$ | async"
+      >
+        Close Matter
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+<ng-template #skeletonTextTemplate>
+  <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+</ng-template>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

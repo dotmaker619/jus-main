@@ -1,0 +1,193 @@
+<div class="create-matter-container">
+  <form
+    *ngIf="form$ | async as form; else loading"
+    [formGroup]="form"
+    (ngSubmit)="onFormSubmitted(form)"
+  >
+    <div class="page-heading">
+      <h1>{{ pageTitle }}</h1>
+      <a routerLink="/matters" tabindex="0" class="secondary">Cancel</a>
+      <button class="primary" type="submit">Send with Docusign</button>
+    </div>
+    <hr />
+    <!-- Client input -->
+    <div class="row">
+      <label class="third-width">
+        Client*
+        <select
+          formControlName="client"
+          [jlcApiValidation]="validationError$"
+          [compareWith]="compareWithIdFn"
+        >
+          <option [ngValue]="null" disabled>- Select -</option>
+          <option
+            [ngValue]="client"
+            *ngFor="let client of clients$ | async; trackBy: trackById"
+          >
+            {{ client.fullName }}
+          </option>
+        </select>
+        <jlc-form-control-validation-message controlName="client">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+    <!-- Code field -->
+    <div class="row">
+      <label class="short-width">
+        Matter ID*
+        <input
+          type="text"
+          formControlName="code"
+          [jlcApiValidation]="validationError$"
+        />
+        <jlc-form-control-validation-message controlName="code">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+    <!-- Title input -->
+    <div class="row">
+      <label class="full-width">
+        Title*
+        <input
+          type="text"
+          formControlName="title"
+          [jlcApiValidation]="validationError$"
+        />
+        <jlc-form-control-validation-message controlName="title">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+    <!-- Description textarea -->
+    <div class="row">
+      <label class="full-width">
+        Description*
+        <textarea
+          formControlName="description"
+          [jlcApiValidation]="validationError$"
+        ></textarea>
+        <jlc-form-control-validation-message controlName="description">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+    <!-- Rate type and rate fields -->
+    <div class="row">
+      <label class="third-width">
+        <div>Rate Type*</div>
+        <select
+          formControlName="rateType"
+          [jlcApiValidation]="validationError$"
+        >
+          <option [ngValue]="null" disabled>- Select -</option>
+          <option
+            [ngValue]="rateType.value"
+            *ngFor="let rateType of rateTypes$ | async"
+          >
+            {{ rateType.label }}
+          </option>
+        </select>
+        <jlc-form-control-validation-message controlName="rateType">
+        </jlc-form-control-validation-message>
+      </label>
+      <label class="short-width">
+        <div>Rate*</div>
+        <input
+          [jlcApiValidation]="validationError$"
+          formControlName="rate"
+          min="0"
+          type="number"
+          class="dollar-input"
+        />
+        <jlc-form-control-validation-message controlName="rate">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+    <!-- State, city, country fields -->
+    <fieldset>
+      <legend>Jurisdiction</legend>
+      <div class="row">
+        <label class="short-width">
+          State*
+          <select
+            formControlName="state"
+            [jlcApiValidation]="validationError$"
+            [compareWith]="compareWithIdFn"
+          >
+            <option [ngValue]="null" disabled>- Select -</option>
+            <option
+              [ngValue]="state"
+              *ngFor="let state of states$ | async; trackBy: trackById"
+            >
+              {{ state.name }}
+            </option>
+          </select>
+          <jlc-form-control-validation-message controlName="state">
+          </jlc-form-control-validation-message>
+        </label>
+        <label class="third-width">
+          City
+          <input
+            type="text"
+            formControlName="city"
+            [matAutocomplete]="cityAutocomplete"
+            [jlcApiValidation]="validationError$"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #cityAutocomplete="matAutocomplete"
+            [displayWith]="displayCity"
+          >
+            <mat-option
+              *ngFor="let city of cities$ | async; trackBy: trackById"
+              [value]="city"
+            >
+              {{ city.name }}
+            </mat-option>
+          </mat-autocomplete>
+          <jlc-form-control-validation-message controlName="city">
+          </jlc-form-control-validation-message>
+        </label>
+        <label class="third-width">
+          Country
+          <select
+            formControlName="country"
+            [jlcApiValidation]="validationError$"
+            [compareWith]="compareWithIdFn"
+          >
+            <option [ngValue]="null" disabled>- Select -</option>
+            <option
+              [ngValue]="country"
+              *ngFor="let country of countries$ | async; trackBy: trackById"
+            >
+              {{ country.name }}
+            </option>
+          </select>
+          <jlc-form-control-validation-message controlName="country">
+          </jlc-form-control-validation-message>
+        </label>
+      </div>
+    </fieldset>
+    <!-- Required documents -->
+    <div class="row documents">
+      <fieldset>
+        <legend>Required Document(s)*</legend>
+        <jlc-file-drop
+          class="file-drop"
+          [documents]="form.controls.documents.value"
+          (documentsChange)="form.controls.documents.setValue($event)"
+          [fileValidators]="fileValidators"
+          [onlyBrowseButton]="true"
+          [multiple]="true"
+          (errors)="onErrorsChange($event)"
+        ></jlc-file-drop>
+      </fieldset>
+    </div>
+    <jlc-form-control-validation-message controlName="documents">
+    </jlc-form-control-validation-message>
+  </form>
+</div>
+
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

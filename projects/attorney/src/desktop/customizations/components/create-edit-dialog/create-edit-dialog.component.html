@@ -1,0 +1,27 @@
+<form class="dialog" *ngIf="!(isLoading$ | async); else loading"
+  [formGroup]="form"
+  (ngSubmit)="onFormSubmitted()"
+>
+  <h2 class="title">{{ options.title }}</h2>
+  <hr/>
+  <div class="dialog-body">
+    <label>
+      <div>Title*</div>
+      <input type="text" formControlName="title"/>
+    </label>
+  </div>
+  <div class="buttons-container">
+    <button class="secondary" type="button" (click)="onCloseClicked()">
+      Cancel
+    </button>
+    <button class="confirm primary"
+      type="submit"
+      [disabled]="!form.valid"
+    >
+      Save
+    </button>
+  </div>
+</form>
+<ng-template #loading>
+  <jlc-loading></jlc-loading>
+</ng-template>

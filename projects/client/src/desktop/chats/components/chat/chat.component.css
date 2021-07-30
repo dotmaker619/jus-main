@@ -1,0 +1,54 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.contact-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 27px 16px 24px;
+  border-bottom: 1px solid var(--light-shade-color);
+  min-height: 66px;
+}
+
+.contact-info {
+  padding-right: 23px;
+}
+
+.actions {
+  flex-shrink: 0;
+}
+
+.contact-name {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.feed-container {
+  flex: 1;
+  min-height: 1px;
+}
+
+.view-profile {
+  border-radius: 14px;
+  padding: 5px 21px 4px 22px;
+  background-color: var(--secondary-tint-color);
+  color: var(-secondary-color);
+}
+
+.approved-indicator {
+  flex-shrink: 0;
+  margin-left: 10px;
+  width: 13px;
+  height: 13px;
+  border-radius: 100%;
+  background: var(--success-shade-color);
+}
+
+.approved-indicator svg {
+  fill: var(--success-contrast-color);
+}

@@ -1,0 +1,51 @@
+:host {
+  --space: 10px;
+}
+
+ion-content {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+}
+
+.tip {
+  text-transform: uppercase;
+  margin: var(--space) 0;
+}
+
+jlc-card {
+  margin: var(--space) 0;
+}
+
+.card-content {
+  margin: var(--space);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.description {
+  font-style: italic;
+  font-weight: normal;
+  margin-top: var(--space);
+  color: var(--medium-color);
+}
+
+.price {
+  font-weight: normal;
+}
+
+.card-info {
+  margin-left: var(--space);
+}
+
+.button-panel {
+  margin: var(--space);
+  display: flex;
+}
+
+.button-panel .primary {
+  flex: 1;
+}

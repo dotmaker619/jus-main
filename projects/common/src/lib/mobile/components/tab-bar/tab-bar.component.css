@@ -1,0 +1,13 @@
+:host {
+  --color: var(--primary-shade-color);
+  display: flex;
+  height: 50px;
+  box-shadow: 0px -4px 0px -1px var(--color) inset;
+  background-color: var(--header-color);
+  overflow-x: auto;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+:host::-webkit-scrollbar {
+  display: none;
+}

@@ -1,0 +1,16 @@
+.searchbar {
+  height: 44px;
+  padding-bottom: 0;
+}
+
+form {
+  padding: 10px;
+}
+
+/*
+  Buttons inside fab-list don't have the same color as the main fab-button.
+  Set color manually.
+*/
+ion-fab ion-icon {
+  color: var(--primary-contrast-color);
+}

@@ -1,0 +1,67 @@
+.client-docs-filter {
+  display: flex;
+  align-items: center;
+  padding: calc(var(--space) / 4) var(--space);
+}
+
+.client-docs-filter a {
+  font-weight: bold;
+}
+
+.client-docs-filter > * {
+  width: 25%;
+  min-width: 10rem;
+}
+
+.client-docs-filter > *:not(:last-child) {
+  margin-right: calc(var(--space) / 4);
+}
+
+.client-docs-filter > *:last-child {
+  margin-left: auto;
+}
+
+input[type="search"] {
+  --icon-size: 15px;
+  --icon-margin: 5px;
+
+  background: url("/assets/icons/search_icon.svg") no-repeat var(--icon-margin);
+  background-size: var(--icon-size);
+  padding-left: calc(var(--icon-size) + var(--icon-margin) * 2);
+}
+
+.buttons {
+  display: flex;
+  margin: calc(var(--space) / 4) var(--space);
+  justify-content: flex-end;
+}
+
+.buttons > button:not(:last-child) {
+  margin-right: calc(var(--space) / 4);
+}
+
+.primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  min-width: fit-content;
+  padding: 0.5rem 1rem;
+}
+
+.primary span {
+  color: currentColor;
+  margin: 0 auto;
+}
+
+.primary img {
+  filter: invert(1);
+  margin-left: 1rem;
+  height: 14px;
+  width: 14px;
+}
+
+.message {
+  margin: 0 40px;
+  color: var(--medium-color);
+}

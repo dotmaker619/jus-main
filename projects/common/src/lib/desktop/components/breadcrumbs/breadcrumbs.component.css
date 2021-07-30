@@ -1,0 +1,37 @@
+:host {
+  display: block;
+
+  --text-color: var(--medium-color);
+}
+
+ul {
+  display: flex;
+  align-items: center;
+}
+
+li {
+  display: flex;
+  align-items: center;
+}
+
+li,
+li > a {
+  color: var(--text-color, black);
+}
+
+a,
+span {
+  margin: 5px;
+  display: inline-block;
+}
+
+li + li::before {
+  content: "/";
+}
+
+.skeleton span {
+  display: inline-block;
+  width: 6rem;
+  background-color: var(--light-shade-color);
+  height: 1rem;
+}

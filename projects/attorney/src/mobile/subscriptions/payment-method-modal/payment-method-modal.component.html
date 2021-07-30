@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCloseClick()" fill="clear">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Edit payment method</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <jlc-card class="card">
+    <jlc-payment-method-form
+      class="form"
+      [showControls]="false"
+      (ready)="onPaymentMethodFormComponentIsReady()"
+      (formSubmit)="onPaymentMethodFormSubmitted($event)"
+      [class.hidden]="isBusy$ | async"
+    ></jlc-payment-method-form>
+  </jlc-card>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="button-panel">
+      <button class="primary" (click)="onSubmitClick()">
+        Save
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading mode="fullscreen" class="loading" *ngIf="isBusy$ | async">
+</jlc-loading>

@@ -1,0 +1,11 @@
+<jlc-header
+  [navigationButtons]="navigationButtons"
+  [navigationLinks]="navigationLinks$ | async"
+  [menuLinks]="menuLinks$ | async"
+></jlc-header>
+
+<div class="content-container">
+  <router-outlet></router-outlet>
+</div>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

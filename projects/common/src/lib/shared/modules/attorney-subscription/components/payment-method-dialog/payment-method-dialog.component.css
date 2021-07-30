@@ -1,0 +1,51 @@
+:host {
+  display: block;
+  position: relative;
+  padding: 30px 40px;
+  width: 80vw;
+  max-width: 500px;
+}
+
+.message {
+  overflow-y: auto;
+}
+
+button.close {
+  border: 0;
+  background: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 19px;
+  cursor: pointer;
+}
+
+.close svg {
+  width: 2rem;
+  height: 2rem;
+  fill: var(--medium-color);
+}
+
+.button-pane {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.header {
+  text-align: left;
+}
+
+.content {
+  margin-top: 40px;
+  overflow: hidden;
+}
+
+.loading {
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none;
+}

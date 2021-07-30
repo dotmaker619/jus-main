@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onClose()" title="Close modal">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Network Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item
+      *ngFor="let participant of network.participants; trackBy: trackById"
+      [routerLink]="['/attorneys', 'profile', participant.id]"
+      (click)="onClose()"
+      detail="false"
+    >
+      <ion-avatar slot="start">
+        <img
+          [src]="participant.avatar || '/assets/profile_image.jpg'"
+          [alt]="participant.fullName + ' avatar'"
+        />
+      </ion-avatar>
+      <ion-label>
+        <h3>{{ participant.fullName }}</h3>
+        <p class="specialities">{{ participant.description }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

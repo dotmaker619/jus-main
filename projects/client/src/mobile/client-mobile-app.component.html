@@ -1,0 +1,20 @@
+<ion-content id="mobile-client-content" main [scrollY]="false">
+  <ion-app>
+    <ion-router-outlet></ion-router-outlet>
+  </ion-app>
+</ion-content>
+<ion-menu
+  contentId="mobile-client-content"
+  menuId="mobile-client-content"
+  side="end"
+  type="overlay"
+>
+  <ion-content>
+    <jlc-side-menu
+      [links]="menuLinks$ | async"
+      [user]="currentUser$ | async"
+    ></jlc-side-menu>
+  </ion-content>
+</ion-menu>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

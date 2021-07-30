@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/social/networks"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ng-container *ngIf="networkName$ | async as title; else skeletonText">
+        {{ title }}
+      </ng-container>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        fill="clear"
+        (click)="onChatActionsClick()"
+        title="Open actions"
+      >
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [scrollY]="false">
+  <jlc-chat [visibleAuthors]="true" [chat]="chat$ | async"> </jlc-chat>
+</ion-content>
+
+<ng-template #skeletonText>
+  <ion-skeleton-text animated></ion-skeleton-text>
+</ng-template>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

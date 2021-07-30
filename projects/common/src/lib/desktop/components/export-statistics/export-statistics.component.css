@@ -1,0 +1,23 @@
+:host {
+  --space: 20px;
+
+  display: block;
+  padding: calc(var(--space) * 2);
+}
+
+:host > *:not(:first-child) {
+  margin-top: var(--space);
+}
+
+hr {
+  margin: var(--space) 0 0 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.row > *:not(:first-child) {
+  margin-left: var(--space);
+}

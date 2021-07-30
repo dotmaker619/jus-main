@@ -1,0 +1,70 @@
+<section class="post" *ngIf="post$ | async as post; else skeletonTemplate">
+  <div class="header">
+    <jlc-profile-image
+      [routerLink]="getProfileLink(post)"
+      [src]="post.author.avatar"
+    ></jlc-profile-image>
+    <div class="column">
+      <div class="row">
+        <a [routerLink]="getProfileLink(post)" class="name">
+          {{ post.author.fullName | titlecase }}
+        </a>
+        <ion-button
+          class="options-button"
+          *ngIf="canEditPost$ | async"
+          fill="clear"
+          shape="round"
+          size="small"
+          (click)="onPostOptionsClick(post)"
+        >
+          <ion-icon
+            slot="icon-only"
+            src="/assets/icons/more_icon.svg"
+          ></ion-icon>
+        </ion-button>
+      </div>
+      <div class="row">
+        <span class="date">
+          {{ post.created | jusLawDate }}
+        </span>
+        <ng-container *ngIf="post.author.isVerified">
+          <span class="divider">|</span>
+          <span class="verification-status">
+            <ion-icon src="/assets/icons/verified_icon.svg"></ion-icon>
+            Verified Attorney
+          </span>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <p class="content">
+    {{ post.text }}
+  </p>
+  <div class="footer" *ngIf="canSendMessage$ | async">
+    <a class="message-button" (click)="onChatClick(post)">
+      Send a Message
+    </a>
+  </div>
+</section>
+
+<ng-template #skeletonTemplate>
+  <div class="post skeleton">
+    <div class="header">
+      <jlc-profile-image></jlc-profile-image>
+      <div class="column">
+        <div class="name">
+          <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+        </div>
+        <div class="date">
+          <ion-skeleton-text animated style="width: 30%;"></ion-skeleton-text>
+        </div>
+      </div>
+    </div>
+    <p class="content">
+      <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 35%;"></ion-skeleton-text>
+    </p>
+    <div class="footer"></div>
+  </div>
+</ng-template>

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button
+        *ngIf="shouldDisplayFilterButton"
+        (click)="onFiltersClick()"
+        shape="round"
+      >
+        <ion-icon src="/assets/icons/filter_icon.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Leads</ion-title>
+  </ion-toolbar>
+  <jlc-tab-bar>
+    <jlc-tab-button
+      absoluteLink="/leads/opportunities"
+      [showBadge]="true"
+      [count]="numberOfOpportunities$ | async"
+    >
+      Opportunities
+    </jlc-tab-button>
+    <jlc-tab-button
+      absoluteLink="/leads/active"
+      [showBadge]="true"
+      [count]="numberOfActiveLeads$ | async"
+    >
+      Active Leads
+    </jlc-tab-button>
+  </jlc-tab-bar>
+</ion-header>
+<ion-content>
+  <ion-router-outlet></ion-router-outlet>
+</ion-content>

@@ -1,0 +1,36 @@
+:host {
+  display: block;
+  padding: 61px 19px 19px 19px;
+  position: relative;
+  text-align: center;
+}
+
+.message {
+  overflow-y: auto;
+}
+
+button.confirm {
+  margin: auto 2rem 2rem 2rem;
+}
+
+button.close {
+  border: 0;
+  background: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 19px;
+}
+
+.close svg {
+  width: 2rem;
+  height: 2rem;
+  fill: var(--medium-color);
+}
+
+.button-pane {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

@@ -1,0 +1,19 @@
+<img src="/assets/icons/search_icon.svg" class="search-icon" />
+<div class="person-badge" *ngFor="let person of selected; trackBy: trackById">
+  {{ person.firstName }} {{ person.lastName }}
+  <button
+    *ngIf="canBeUnselected(person)"
+    type="button"
+    class="delete-button focusable"
+    (click)="onDeleteClicked(person)"
+  >
+    <img src="/assets/icons/close_icon.svg" />
+  </button>
+</div>
+<input
+  #filterInput
+  class="filter-input"
+  [attr.placeholder]="placeholder"
+  (input)="onValueChange($event.target.value)"
+  (keydown.enter)="onEnterClicked()"
+/>

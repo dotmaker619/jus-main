@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="40px" viewBox="0 0 27 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61.1 (89650) - https://sketch.com -->
+    <title>ic/map-pin</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M11.5,0 C5.70238462,0 1,4.73085694 1,10.5659043 C1,16.4025707 11.5,34 11.5,34 C11.5,34 22,16.4025707 22,10.5659043 C22,4.73085694 17.2976154,0 11.5,0 L11.5,0 Z" id="path-1"></path>
+        <filter x="-23.8%" y="-11.8%" width="147.6%" height="129.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.206976617 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#FAD702" offset="0%"></stop>
+            <stop stop-color="#F4AF01" offset="100%"></stop>
+        </linearGradient>
+        <path d="M11.5,0 C5.70238462,0 1,4.73085694 1,10.5659043 C1,16.4025707 11.5,34 11.5,34 C11.5,34 22,16.4025707 22,10.5659043 C22,4.73085694 17.2976154,0 11.5,0 L11.5,0 Z M11.5,15.6934279 C8.98,15.6934279 6.93653846,13.6388566 6.93653846,11.101809 C6.93653846,8.56638059 8.98,6.50857115 11.5,6.50857115 C14.02,6.50857115 16.0634615,8.56638059 16.0634615,11.101809 C16.0634615,13.6388566 14.02,15.6934279 11.5,15.6934279 L11.5,15.6934279 Z" id="path-4"></path>
+        <filter x="-23.8%" y="-11.8%" width="147.6%" height="129.4%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.206976617 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Element-Sheet" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-951.000000, -128.000000)" id="map/pin">
+            <g transform="translate(953.000000, 130.000000)">
+                <g>
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#F4AF01" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <g>
+                    <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                    <use fill="url(#linearGradient-3)" fill-rule="evenodd" xlink:href="#path-4"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

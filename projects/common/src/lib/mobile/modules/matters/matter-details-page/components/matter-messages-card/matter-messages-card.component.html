@@ -1,0 +1,36 @@
+<jlc-card>
+  <ion-list *ngIf="messages; else skeletonListTemplate">
+    <ion-item
+      class="message"
+      *ngIf="messages.length === 0"
+      [detail]="false"
+      lines="full"
+    >
+      <ion-label>No messages</ion-label>
+    </ion-item>
+    <ion-item
+      button
+      *ngFor="let message of messages; trackBy: trackById"
+      [routerLink]="['/matters', 'messages', message.id]"
+      [detail]="false"
+      lines="full"
+    >
+      <div class="item-content">
+        <div class="title ellipsis">
+          {{ message.title }}
+        </div>
+        <div class="info">
+          <div class="replies">{{ message.postCount }} Replies</div>
+          <div class="date">
+            Last Reply:
+            {{ message.created | date: "shortDate" }}
+          </div>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+</jlc-card>
+
+<ng-template #skeletonListTemplate>
+  <jlc-skeleton-list></jlc-skeleton-list>
+</ng-template>

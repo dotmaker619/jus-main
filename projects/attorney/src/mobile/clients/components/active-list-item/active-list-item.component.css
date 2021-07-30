@@ -1,0 +1,79 @@
+:host {
+  --space: 10px;
+  --message-color: var(--medium-color);
+  --header-font-color: var(--primary-font-color);
+  --font-size: 1rem;
+
+  display: block;
+  width: 100%;
+  font-size: var(--font-size);
+  /* To avoid truncation letters with italic style. */
+  padding-right: 2px;
+}
+
+.avatar {
+  width: 2.57rem;
+  height: 2.57rem;
+  background: var(--primary-active-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.client-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.row.space {
+  justify-content: space-between;
+}
+
+.header {
+  flex: 1;
+  color: var(--header-font-color);
+  margin-left: var(--space);
+}
+
+.location,
+.client-id,
+.last-activity {
+  color: var(--primary-placeholder-color);
+  font-size: 0.86rem;
+}
+
+.name {
+  text-transform: capitalize;
+  font-weight: bold;
+  max-width: 185px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.location {
+  white-space: nowrap;
+}
+
+.active-matter {
+  margin-top: calc(var(--space) / 1.5);
+  color: var(--message-color);
+}
+
+.active-matter p {
+  margin-left: var(--space);
+  font-weight: normal;
+}

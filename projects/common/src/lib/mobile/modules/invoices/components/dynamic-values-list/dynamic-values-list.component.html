@@ -1,0 +1,27 @@
+<form *ngIf="form$ | async as form" [formGroup]="form">
+  <ng-container
+    *ngFor="let control of form.controls; let i = index; trackBy: trackControl"
+  >
+    <label class="row">
+      <input
+        [formControl]="control"
+        [formControlName]="i"
+        [jlcApiValidation]="jlcApiValidation"
+      />
+      <ion-button
+        fill="clear"
+        shape="round"
+        (click)="onRemoveControlClick(form, control)"
+        [attr.hidden]="i === 0 ? true : null"
+      >
+        <ion-icon slot="icon-only" name="remove"></ion-icon>
+      </ion-button>
+    </label>
+    <jlc-form-control-validation-message
+      [controlName]="i"
+    ></jlc-form-control-validation-message>
+  </ng-container>
+  <ion-button fill="clear" shape="round" (click)="onAddControlClick()">
+    <ion-icon slot="icon-only" name="add"></ion-icon>
+  </ion-button>
+</form>

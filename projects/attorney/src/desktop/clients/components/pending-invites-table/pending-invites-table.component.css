@@ -1,0 +1,72 @@
+button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 1rem;
+  text-align: initial;
+}
+
+.no-items {
+  margin: 20px 40px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  width: 100%;
+}
+
+.row:not(:last-child) {
+  border-bottom: 1px solid var(--table-row-separator-color);
+}
+
+.row.active {
+  background-color: var(--table-row-highlight-color);
+}
+
+.thead {
+  border-bottom: 1px solid var(--table-head-bottom-border-color);
+  font-size: 0.85rem;
+  font-weight: bold;
+  padding: 12px 40px;
+}
+
+.cell-client {
+  display: flex;
+  align-items: center;
+  flex: 6;
+  padding-left: 40px;
+  font-weight: bold;
+}
+
+.cell-sent {
+  flex: 2;
+}
+
+.cell-controls {
+  flex: 1;
+}
+
+.client-icon {
+  background: var(--primary-active-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  height: 2.57rem;
+  width: 2.57rem;
+  min-width: 2.57rem;
+  margin-right: 12px;
+}
+
+.resend {
+  color: var(--secondary-color);
+  border-radius: 3px;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.resend:active {
+  background: var(--light-shade-color);
+}

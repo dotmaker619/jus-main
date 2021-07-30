@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  padding: 27px;
+  text-align: center;
+}
+
+hr {
+  width: 100%;
+}
+
+.button-pane {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.button-pane button + button {
+  margin-left: 10px;
+}
+
+.message {
+  text-align: left;
+  margin-bottom: 14px;
+}

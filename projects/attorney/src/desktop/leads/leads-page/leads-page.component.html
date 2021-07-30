@@ -1,0 +1,45 @@
+<div class="page-container">
+  <header class="page-header">
+    <h1 class="page-title">Leads</h1>
+  </header>
+
+  <div class="page-content">
+    <nav mat-tab-nav-bar disableRipple>
+      <a
+        mat-tab-link
+        routerLink="/leads"
+        routerLinkActive
+        #leads="routerLinkActive"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [active]="leads.isActive"
+      >
+        <div class="tab-label">
+          My Opportunities
+
+          <div class="badge">
+            <span>{{ opportunitiesCount$ | async }}</span>
+          </div>
+        </div>
+      </a>
+      <a
+        mat-tab-link
+        routerLink="active"
+        routerLinkActive
+        #active="routerLinkActive"
+        [active]="active.isActive"
+      >
+        <div class="tab-label">
+          Active Leads
+
+          <div class="badge">
+            <span>{{ activeLeadsCount$ | async }}</span>
+          </div>
+        </div>
+      </a>
+    </nav>
+
+    <div class="tab-content-container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

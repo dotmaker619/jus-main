@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+}
+
+.datepicker {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: var(--primary-label-input-color);
+  font-weight: initial;
+
+  --padding-top: 9px;
+  --padding-bottom: 10px;
+  --padding-start: 25px;
+  --padding-end: 25px;
+}
+
+.datepicker:first-child {
+  margin-right: 10px;
+}

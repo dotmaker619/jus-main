@@ -1,0 +1,87 @@
+:host {
+  --space: 15px;
+
+  display: block;
+  padding: calc(var(--space) * 2);
+  width: min(80vw, 900px);
+}
+
+:host > *:not(:first-child) {
+  margin-top: var(--space);
+}
+
+form > * {
+  display: block;
+}
+
+form > *:not(:first-child) {
+  margin-top: var(--space);
+}
+
+textarea {
+  height: 6rem;
+  resize: none;
+}
+
+.button-panel {
+  text-align: center;
+}
+
+.button-panel > button {
+  border-radius: 10px;
+}
+
+.button-panel > button:not(:first-child) {
+  margin-left: var(--space);
+}
+
+.email-message {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin: calc(var(--space) * 2) 0;
+}
+
+.email-message span {
+  background: var(--header-color);
+  padding: 0 var(--space);
+}
+
+jlc-people-filter-input,
+.email-input {
+  background: var(--primary-background-color);
+}
+
+.attorneys-list-label {
+  font-weight: bold;
+}
+
+.attorneys-list {
+  background: var(--primary-background-color);
+  padding: var(--space);
+  border: 1px solid var(--primary-border-color);
+  border-radius: 4px;
+  margin-top: var(--space);
+  height: 250px;
+}
+
+.attorneys-list jlc-user-selectlist {
+  display: block;
+  height: 100%;
+  overflow: auto;
+}
+
+.select-attorneys {
+  background: var(--header-color);
+  border: 1px solid var(--primary-border-color);
+  border-radius: 4px;
+  padding: var(--space);
+  margin-top: 9px;
+}
+
+.no-items-message {
+  text-align: center;
+  font-style: italic;
+  color: var(--medium-color);
+}

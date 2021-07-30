@@ -1,0 +1,58 @@
+<div class="page-container">
+  <h1 *ngIf="currentStep$ | async as currentStep">
+    {{ currentStep.title }}
+  </h1>
+
+  <hr />
+
+  <div
+    class="current-step"
+    *ngIf="currentStep$ | async as currentStep"
+    [ngSwitch]="currentStep.id"
+    [attr.disabled]="(isSubmitting$ | async) ? true : null"
+  >
+    <jlc-create-account
+      *ngSwitchCase="1"
+      [registrationData]="registrationData"
+      [validationError]="validationError$ | async"
+      (isFormNotEmpty)="canDeactivate = !$event"
+      (formSubmit)="onCreateAccountSubmitted($event)"
+      (cancel)="onCurrentStepCancelled()"
+    ></jlc-create-account>
+    <jlc-attorney-profile-form
+      *ngSwitchCase="2"
+      [attorneyData]="registrationData"
+      [validationError]="validationError$ | async"
+      [isRegistration]="true"
+      submitButtonText="Next"
+      (formSubmit)="onAdditionalInfoSubmitted($event)"
+      (back)="onBackCurrentStep($event)"
+      (cancel)="onCurrentStepCancelled()"
+    >
+      <div class="attachments-fieldset">
+        <h4>Attachments</h4>
+        <span class="label">
+          Please upload verification documents such as a resume, bar admissions,
+          etc...
+        </span>
+        <div class="row">
+          <jlc-file-drop
+            class="file-drop"
+            [(documents)]="attachedDocs"
+            (errors)="onFileDropErrors($event)"
+            [multiple]="true"
+          ></jlc-file-drop>
+        </div>
+      </div>
+    </jlc-attorney-profile-form>
+    <jlc-add-payment-method
+      *ngSwitchCase="3"
+      [registrationData]="registrationData"
+      (formSubmit)="onPaymentSubmitted($event)"
+      (cancel)="onCurrentStepCancelled()"
+      (back)="onBackCurrentStep()"
+    ></jlc-add-payment-method>
+  </div>
+</div>
+
+<jlc-loading mode="fullscreen" *ngIf="isSubmitting$ | async"></jlc-loading>

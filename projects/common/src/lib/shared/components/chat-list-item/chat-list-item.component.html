@@ -1,0 +1,43 @@
+<ng-container *ngIf="chat; else skeleton">
+  <div class="unread-badge" [class.active]="chat.countUnreadMessages > 0"></div>
+  <div class="avatars-container">
+    <img
+      [src]="user.avatar"
+      *ngFor="let user of chat.recipients | slice: 1:3"
+    />
+  </div>
+  <p class="title">
+    {{ chat.title }}
+  </p>
+  <p class="date">
+    {{ chat.lastActivityDate | jusLawNamedOffsetFromNow }}
+  </p>
+  <p
+    class="last-message ellipsis"
+    [title]="chat.lastMessageText"
+    *ngIf="chat.lastMessageText; else messagePlaceholder"
+  >
+    {{ chat.lastMessageText }}
+  </p>
+</ng-container>
+
+<ng-template #skeleton>
+  <div class="unread-badge skeleton"></div>
+  <div class="avatars-container">
+    <img src="/assets/icons/person_icon.svg" alt="" />
+    <img src="/assets/icons/person_icon.svg" alt="" />
+  </div>
+  <p class="title">
+    <span class="skeleton-text"></span>
+  </p>
+  <p class="date"></p>
+  <p class="last-message ellipsis">
+    <span class="skeleton-text"></span>
+  </p>
+</ng-template>
+
+<ng-template #messagePlaceholder>
+  <p class="last-message ellipsis placeholder">
+    No messages yet
+  </p>
+</ng-template>

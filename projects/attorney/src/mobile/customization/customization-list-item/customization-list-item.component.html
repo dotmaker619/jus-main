@@ -1,0 +1,11 @@
+<div class="content ellipsis">
+  <ng-content></ng-content>
+</div>
+<div class="action-buttons">
+  <ion-button fill="clear" shape="round" (click)="onEditButton()">
+    <ion-icon src="assets/icons/edit_icon.svg" slot="icon-only"></ion-icon>
+  </ion-button>
+  <ion-button fill="clear" shape="round" (click)="onDeleteButton()">
+    <ion-icon src="assets/icons/delete_icon.svg" slot="icon-only"></ion-icon>
+  </ion-button>
+</div>

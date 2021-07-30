@@ -1,0 +1,134 @@
+<div class="page-container">
+  <header class="page-header">
+    <h1>
+      My Network
+      <ng-container *ngIf="chats$ | async as chats">
+        ({{ chats.length }})
+      </ng-container>
+    </h1>
+    <button class="primary" (click)="onNewNetworkClick()">+ New Network</button>
+  </header>
+
+  <ng-container
+    *ngIf="!(shouldPresentPlaceholder$ | async); else chatPlaceholder"
+  >
+    <!-- List of chats -->
+    <aside>
+      <ng-container *ngIf="chats$ | async as chats; else loading">
+        <header class="aside-header">
+          <input
+            type="search"
+            class="search-input"
+            placeholder="Search..."
+            (input)="onSearchQueryChange($event.target.value)"
+          />
+        </header>
+        <ng-container
+          *ngIf="
+            chats.length > 0 || (queryChange$ | async);
+            else noChatsFoundByQuery
+          "
+        >
+          <ul class="chats-list">
+            <li *ngFor="let chat of chats; trackBy: trackChat">
+              <a
+                class="focusable"
+                [routerLink]="['/social', 'networks', chat.network.id]"
+                routerLinkActive="active"
+              >
+                <jlc-chat-list-item [chat]="chat"></jlc-chat-list-item>
+              </a>
+            </li>
+          </ul>
+        </ng-container>
+      </ng-container>
+    </aside>
+    <!-- Chat -->
+    <main>
+      <ng-container
+        *ngIf="selectedChat$ | async as chat; else notSelectedChatPlaceholder"
+      >
+        <header class="chat-header">
+          <h2 class="chat-title ellipsis" [title]="chat.network.title">
+            {{ chat.network.title }}
+          </h2>
+          <button
+            class="focusable options-button"
+            [matMenuTriggerFor]="chatMenu"
+          >
+            <img src="assets/icons/more_icon.svg" />
+          </button>
+          <ul class="participants-list">
+            <li *ngFor="let p of chat.network.participants | slice: 0:3">
+              {{ p.fullName }}
+            </li>
+            <ng-container
+              *ngIf="chat.network.participants.length - 3 as numOfOthers"
+            >
+              <li *ngIf="numOfOthers > 0">{{ numOfOthers }} other</li>
+            </ng-container>
+          </ul>
+        </header>
+        <jlc-chat [visibleAuthors]="true" [chat]="chat"></jlc-chat>
+      </ng-container>
+    </main>
+  </ng-container>
+</div>
+
+<ng-template #loading>
+  <jlc-loading mode="fullsize"></jlc-loading>
+</ng-template>
+
+<ng-template #notSelectedChatPlaceholder>
+  <!-- Supposed to be displayed when chat is not selected. -->
+  <div class="chat-placeholder">
+    <img src="/assets/icons/network.svg" />
+    <span>Select network to start chatting</span>
+  </div>
+</ng-template>
+
+<ng-template #chatPlaceholder>
+  <!-- To be displayed when user has no networks. -->
+  <div class="chat-placeholder fullsize">
+    <img src="/assets/icons/network.svg" />
+    <p>You are not in any network</p>
+    <span>
+      Get started by clicking on the button '+ New Network' button to start
+      inviting people
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #noChatsFoundByQuery>
+  <p class="no-chats-found-message">
+    No chats found
+  </p>
+</ng-template>
+
+<!-- Chat options menu -->
+<mat-menu #chatMenu="matMenu">
+  <ul class="mat-menu-options-list" *ngIf="selectedChat$ | async as chat">
+    <li>
+      <button (click)="viewNetworkInfo(chat.network)">
+        View Network Info
+      </button>
+    </li>
+    <li>
+      <button (click)="editNetworkName(chat)">
+        Edit Network Name
+      </button>
+    </li>
+    <li>
+      <button (click)="invitePeopleToNetwork(chat.network)">
+        Invite More People
+      </button>
+    </li>
+    <li>
+      <button (click)="leaveCurrentNetwork(chat.network)">
+        Leave Network
+      </button>
+    </li>
+  </ul>
+</mat-menu>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

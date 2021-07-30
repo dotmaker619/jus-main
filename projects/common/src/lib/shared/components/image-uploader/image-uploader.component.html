@@ -1,0 +1,32 @@
+<input
+  type="file"
+  [(ngModel)]="value"
+  hidden
+  accept="image/png, image/jpeg"
+  name="image"
+  #inputFile
+/>
+<div class="container">
+  <div *ngIf="imgSrc$ | async as imgSrc" class="selected-image">
+    <img [src]="imgSrc" />
+  </div>
+  <div class="action-buttons">
+    <button
+      type="button"
+      class="load-btn primary"
+      (click)="inputFile.click()"
+      value="Open file picker"
+    >
+      Choose image
+    </button>
+    <button
+      type="button"
+      class="remove-btn"
+      *ngIf="imgSrc$ | async"
+      (click)="removeImage()"
+      value="Remove selected image"
+    >
+      Remove
+    </button>
+  </div>
+</div>

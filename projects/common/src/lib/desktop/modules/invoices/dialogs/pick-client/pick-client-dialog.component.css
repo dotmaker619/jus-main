@@ -1,0 +1,78 @@
+:host {
+  --space: 15px;
+
+  padding: var(--space);
+  width: min(80vw, 300px);
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+:host > * + * {
+  margin-top: var(--space);
+}
+
+hr {
+  margin: var(--space) 0 0 0;
+}
+
+/* Header. */
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-button {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: 0;
+  height: 33px;
+  width: 33px;
+  border-radius: 50%;
+}
+
+/* Clients list. */
+
+.clients-list {
+  margin: -5px;
+  list-style: none;
+  overflow: auto;
+}
+
+/* List item. */
+
+.client {
+  margin: 5px;
+}
+
+.client button {
+  width: 100%;
+  background: none;
+  border: 1px solid var(--primary-border-color);
+  text-align: start;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  color: var(--primary-font-color);
+  background-color: var(--light-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.client .preselected {
+  background-color: var(--primary-light-color);
+}
+
+.client span {
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.email {
+  font-style: italic;
+  font-weight: normal;
+  color: var(--medium-color);
+  font-size: 0.8rem;
+}

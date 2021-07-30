@@ -1,0 +1,96 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$juslaw-primary: (
+  50: white,
+  100: white,
+  200: #fef0d3,
+  300: #f2c502,
+  400: #f2c502,
+  500: #f2c502,
+  600: #f2c502,
+  700: #f2c502,
+  800: #f2c502,
+  900: #f2c502,
+  A100: #f2c502,
+  A200: #f4af01,
+  A400: #f4af01,
+  A700: #f4af01,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$juslaw-accent: (
+  50: white,
+  100: white,
+  200: white,
+  300: #e9f2fc,
+  400: #e9f2fc,
+  500: #e9f2fc,
+  600: #e9f2fc,
+  700: #4a90e2,
+  800: #4a90e2,
+  900: #4a90e2,
+  A100: #4a90e2,
+  A200: #417fc7,
+  A400: #417fc7,
+  A700: #417fc7,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #000,
+    500: #000,
+    600: #000,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  ),
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$web-app-primary: mat-palette($juslaw-primary);
+$web-app-accent: mat-palette($juslaw-accent);
+
+// The warn palette is optional (defaults to red).
+$web-app-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$web-app-theme: mat-light-theme(
+  $web-app-primary,
+  $web-app-accent,
+  $web-app-warn
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($web-app-theme);

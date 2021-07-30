@@ -1,0 +1,41 @@
+<ion-list *ngIf="notes; else skeletonListTemplate">
+  <ion-item
+    class="message"
+    *ngIf="notes.items.length === 0; else notesListTemplate"
+  >
+    <ion-label>No notes</ion-label>
+  </ion-item>
+</ion-list>
+
+<ng-template #notesListTemplate>
+  <jlc-note-item
+    *ngFor="let note of notes.items; trackBy: trackByNote"
+    [note]="note"
+    (click)="openNote(note)"
+  ></jlc-note-item>
+
+  <div class="button-panel">
+    <ion-button
+      shape="round"
+      fill="none"
+      *ngIf="shouldDisplayExpandButton"
+      (click)="onExpandClick()"
+    >
+      <ion-icon size="small" slot="icon-only" name="arrow-down"></ion-icon>
+    </ion-button>
+    <ion-button
+      shape="round"
+      fill="none"
+      *ngIf="shouldDisplayFoldButton"
+      (click)="onFoldClick()"
+    >
+      <ion-icon size="small" slot="icon-only" name="arrow-up"></ion-icon>
+    </ion-button>
+  </div>
+</ng-template>
+
+<ng-template #skeletonListTemplate>
+  <jlc-skeleton-list
+    [itemsCount]="notesLimitChange | async"
+  ></jlc-skeleton-list>
+</ng-template>

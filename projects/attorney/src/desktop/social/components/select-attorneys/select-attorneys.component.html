@@ -1,0 +1,29 @@
+<form [formGroup]="form" *ngIf="form$ | async as form">
+  <ng-container *ngIf="attorneys$ | async as attorneys; else loading">
+    <jlc-people-filter-input
+      [selected]="selectedAttorneys$ | async"
+      [preselected]="preselectedAttorneys"
+      (enterClick)="onFilterSubmit(attorneys.items, form)"
+      (unselectClick)="onUnselectClick($event, form)"
+      (ngModelChange)="onFilterChange($event)"
+      placeholder="Search for people to invite..."
+    ></jlc-people-filter-input>
+    <hr />
+    <jlc-user-selectlist
+      *ngIf="attorneys.items.length > 0; else noItemsMessage"
+      [options]="attorneys.items"
+      [preselected]="preselectedAttorneys"
+      formControlName="attorneys"
+      [canLoadMore]="attorneys.items.length < attorneys.itemsCount"
+      (loadMore)="onMoreAttorneysRequested()"
+    ></jlc-user-selectlist>
+  </ng-container>
+</form>
+<ng-template #noItemsMessage>
+  <div class="no-items-message">
+    We haven't found anyone
+  </div>
+</ng-template>
+<ng-template #loading>
+  <jlc-loading class="loading"></jlc-loading>
+</ng-template>

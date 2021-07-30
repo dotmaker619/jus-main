@@ -1,0 +1,62 @@
+<!-- Form for filtering documents tree. -->
+<form [formGroup]="clientDocsForm" class="client-docs-filter">
+  <!-- Client select. -->
+  <select formControlName="client">
+    <option hidden [ngValue]="null">Select client</option>
+    <option [ngValue]="client.id" *ngFor="let client of clients$ | async">
+      {{ client.fullName }}
+    </option>
+  </select>
+  <!-- Matter select. -->
+  <select formControlName="matter">
+    <option hidden [ngValue]="null">Select matter</option>
+    <option [ngValue]="matter.id" *ngFor="let matter of matters$ | async">
+      [{{ matter.code }}] {{ matter.title }}
+    </option>
+  </select>
+  <!-- View Matter link. Visible only when matter is selected. -->
+  <a
+    *ngIf="clientDocsForm.controls.matter.value"
+    [routerLink]="['/matters', clientDocsForm.controls.matter.value]"
+  >
+    View Matter
+  </a>
+
+  <!-- Input for searching the file. -->
+  <input type="search" formControlName="filter" placeholder="Search files..." />
+</form>
+
+<ng-container
+  *ngIf="
+    selectedMatter$ | async as selectedMatter;
+    else noSelectedMatterTemplate
+  "
+>
+  <div class="buttons" *ngIf="!selectedMatter.isCompleted">
+    <!-- Add folder button. -->
+    <button class="primary" type="button" (click)="onCreateFolderClick()">
+      <span>+ Folder</span>
+      <img src="/assets/icons/folder_icon.svg" alt="" />
+    </button>
+
+    <!-- Add file button. -->
+    <button class="primary" type="button" (click)="onUploadFileClick()">
+      <span>+ File</span>
+      <img src="/assets/icons/document_icon.svg" alt="" />
+    </button>
+  </div>
+
+  <!-- Documents tree. -->
+  <jlc-documents-tree
+    [documents]="clientDocuments$ | async"
+    (documentAction)="onNodeAction($event)"
+  ></jlc-documents-tree>
+</ng-container>
+
+<ng-template #noSelectedMatterTemplate>
+  <span class="message">Matter is not selected</span>
+</ng-template>
+
+<ng-container *ngIf="isLoading$ | async">
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-container>

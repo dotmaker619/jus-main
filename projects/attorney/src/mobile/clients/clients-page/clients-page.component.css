@@ -1,0 +1,9 @@
+.fab-button {
+  --background: var(--secondary-gradient);
+  --background-activated: var(--secondary-gradient);
+}
+
+.fab-button ion-icon {
+  height: 100%;
+  width: 100%;
+}

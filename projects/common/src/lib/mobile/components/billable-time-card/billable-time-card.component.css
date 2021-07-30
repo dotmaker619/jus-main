@@ -1,0 +1,118 @@
+:host {
+  display: block;
+  --space: 10px;
+  --border-color: var(--light-shade-color);
+}
+
+hr {
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  margin: var(--space) 0;
+}
+
+.form {
+  margin: var(--space);
+}
+
+.form select {
+  width: 100%;
+}
+
+.short {
+  width: 5rem;
+}
+
+.skeleton {
+  display: inline-block;
+}
+
+.header {
+  width: 100%;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--space);
+}
+
+.details summary {
+  margin: var(--space);
+}
+
+.announce {
+  font-weight: bold;
+}
+
+.billings-list {
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.billings-list ion-item {
+  --background: var(--light-color);
+}
+
+.item-content {
+  width: 100%;
+  font-size: 0.9rem;
+  margin: var(--space) 0;
+  display: grid;
+  grid-template-columns: 4rem 1fr auto auto;
+  column-gap: var(--space);
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  font-style: italic;
+  color: var(--medium-color);
+  padding: 0 var(--space);
+}
+
+.time {
+  font-weight: bold;
+}
+
+ion-datetime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+span {
+  color: var(--primary-font-color);
+}
+
+summary {
+  position: relative;
+}
+
+summary::-webkit-details-marker {
+  position: absolute;
+  right: 0;
+
+  /* 
+    Using this workaround because
+    Safari doesn't support flexbox on summary.
+  */
+  top: calc(50% - 5px);
+}
+
+summary.hidden-arrow::-webkit-details-marker {
+  display: none;
+}
+
+ion-datetime {
+  /* Fake select element. */
+  background: url(/assets/icons/triangle_icon.svg) no-repeat right 10px center;
+  background-size: 10px;
+}

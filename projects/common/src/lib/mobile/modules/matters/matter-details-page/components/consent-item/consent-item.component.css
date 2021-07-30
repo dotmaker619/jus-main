@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  width: 100%;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--primary-shade-color);
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.icon-container ion-icon {
+  height: 15px;
+  width: 15px;
+}
+
+.title {
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/** Skeleton styles */
+.icon-container.skeleton {
+  background: var(--light-color);
+}
+
+.title.skeleton {
+  width: 50%;
+}

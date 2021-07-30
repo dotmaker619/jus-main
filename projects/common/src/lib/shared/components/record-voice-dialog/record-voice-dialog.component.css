@@ -1,0 +1,100 @@
+/* Layout. */
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(350px, 80vw);
+  padding: 30px;
+}
+
+:host > * + * {
+  margin-top: 30px;
+}
+
+header {
+  align-self: stretch;
+  display: flex;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  height: 44px;
+  width: 44px;
+  margin-left: auto;
+}
+
+/* Message. */
+.hint {
+  font-weight: bold;
+  text-align: center;
+}
+
+.time {
+  font-size: 1.5rem;
+}
+
+/* Controls. */
+.button-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.primary-action {
+  width: 66px;
+  height: 66px;
+  background: var(--secondary-gradient);
+  border: none;
+  border-radius: 50%;
+  padding: 15px;
+}
+
+.primary-action:active {
+  background: var(--secondary-gradient-reversed);
+}
+
+.secondary-action {
+  background: var(--light-gradient);
+  border: 1px solid var(--medium-color);
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 10px;
+}
+
+.secondary-action:active {
+  background: var(--light-gradient-reversed);
+}
+
+button img {
+  width: 100%;
+  height: 100%;
+}
+
+img.white {
+  filter: invert(1);
+}
+img.grey {
+  filter: invert(0.6);
+}
+
+/* Animations. */
+.pulse-animation {
+  animation-duration: 2s;
+  animation-name: scale;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes scale {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.1);
+  }
+}

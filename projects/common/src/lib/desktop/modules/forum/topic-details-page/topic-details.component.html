@@ -1,0 +1,124 @@
+<jlc-forum-subheader>
+  <h1>Jus-Law Forums</h1>
+</jlc-forum-subheader>
+<div class="forum-page-container" *ngIf="topic$ | async as topic; else loading">
+  <jlc-breadcrumbs [links]="breadcrumbs$ | async"></jlc-breadcrumbs>
+  <div class="paginator-panel">
+    <jlc-forum-paginator
+      [pagesCount]="(pagesCount$ | async) || 0"
+      [currentPage]="pageChange$ | async"
+      (pageChange)="onPageChange($event)"
+      class="forum-paginator"
+    ></jlc-forum-paginator>
+
+    <button
+      class="follow-button activated focusable"
+      *ngIf="isFollowed$ | async as followed; else followButton"
+      (click)="onUnfollowClick(followed.id)"
+    >
+      Unfollow this Topic
+    </button>
+    <ng-template #followButton>
+      <button class="follow-button focusable" (click)="onFollowClick()">
+        Follow this Topic
+      </button>
+    </ng-template>
+
+    <a (click)="onReplyClick(topic.id)" title="Add your reply" class="primary">
+      + Reply
+    </a>
+  </div>
+  <div class="forum-page-child-container">
+    <ng-container *ngIf="posts$ | async as posts; else loading">
+      <header class="topic-header">{{ topic.title }}</header>
+      <section class="post" *ngFor="let post of posts; trackBy: trackById">
+        <div class="post-author">
+          <img
+            [src]="post.author.avatar || avatarFallbackUrl"
+            class="profile-image"
+            alt="User's photo"
+          />
+          <jlc-author-link
+            [author]="post.author"
+            [authorUserType]="post.userType"
+            class="author-name"
+          ></jlc-author-link>
+          <span
+            *ngIf="
+              post.author &&
+              post.author.forumStats &&
+              post.author.forumStats.postsCount
+            "
+            class="posts-number"
+          >
+            {{ post.author.forumStats.postsCount }} posts
+          </span>
+          <div
+            class="post-author-verification"
+            *ngIf="post.author && post.author.isVerified"
+          >
+            <!-- Success icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path
+                d="M186.301 339.893L96 249.461l-32 30.507L186.301 402 448 140.506 416 110z"
+              />
+            </svg>
+            <span>Verified Attorney</span>
+          </div>
+          <ng-template [ngxPermissionsOnly]="roles.Attorney">
+            <a
+              routerLink="/leads/active"
+              class="send-message"
+              [queryParams]="{ clientId: post.author.id, topicId: topic.id }"
+              *ngIf="post.userType === roles.Client"
+            >
+              Send a Message
+            </a>
+          </ng-template>
+          <ng-template [ngxPermissionsOnly]="roles.Client">
+            <a
+              routerLink="/chats"
+              class="send-message"
+              [queryParams]="{ attorneyId: post.author.id, topicId: topic.id }"
+              *ngIf="post.userType === roles.Attorney"
+            >
+              Send a Message
+            </a>
+          </ng-template>
+        </div>
+        <div class="post-content">
+          <header class="medium-color">
+            <span>{{ post.modified || post.created | jusLawDate }}</span>
+            <div>
+              <span *ngIf="post.author.id === (currentUser$ | async)?.id">
+                <button
+                  class="icon button-edit"
+                  (click)="onEditPostClick(post.id)"
+                  type="button"
+                ></button>
+                <button
+                  *ngIf="post.position !== 0"
+                  class="icon button-delete"
+                  (click)="onDeletePostClick(post.id)"
+                  type="button"
+                ></button>
+              </span>
+              <span>Post # {{ post.position + 1 }}</span>
+            </div>
+          </header>
+          <p>{{ post.text }}</p>
+        </div>
+      </section>
+    </ng-container>
+  </div>
+  <jlc-forum-paginator
+    [pagesCount]="(pagesCount$ | async) || 0"
+    [currentPage]="pageChange$ | async"
+    (pageChange)="onPageChange($event)"
+    class="forum-paginator"
+  ></jlc-forum-paginator>
+</div>
+
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

@@ -1,0 +1,53 @@
+:host {
+  --space: 10px;
+  --border-color: var(--light-shade-color);
+
+  display: block;
+}
+
+.short {
+  width: 5rem;
+}
+
+.skeleton {
+  display: inline-block;
+}
+
+.billings-list {
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--light-shade-color);
+  border-radius: 10px;
+}
+
+.item-content {
+  width: 100%;
+  font-size: 0.9rem;
+  margin: var(--space) 0;
+  display: grid;
+  grid-template-columns: 4rem 1fr auto auto;
+  column-gap: var(--space);
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  font-style: italic;
+  color: var(--medium-color);
+  padding: 0 var(--space);
+}
+
+.time {
+  font-weight: bold;
+}
+
+span {
+  color: var(--primary-font-color);
+}

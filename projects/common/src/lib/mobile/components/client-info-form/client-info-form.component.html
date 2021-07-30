@@ -1,0 +1,53 @@
+<form *ngIf="form$ | async as form" [formGroup]="form">
+  <jlc-editable-profile-image
+    class="avatar"
+    [profileImage]="form.value.avatar"
+    (profileImageChange)="onProfileImageChanged(form, $event)"
+  ></jlc-editable-profile-image>
+
+  <label>
+    <span>
+      Which area of speciality do you need help with? (check all that apply)*
+    </span>
+    <jlc-checkbox-list-card
+      formControlName="specialties"
+      [jlcApiValidation]="validationError$ | async"
+      [options]="specialties$ | async"
+      idPropertyName="id"
+      descriptionPropertyName="title"
+    >
+    </jlc-checkbox-list-card>
+    <jlc-form-control-validation-message
+      controlName="specialties"
+    ></jlc-form-control-validation-message>
+  </label>
+  <label>
+    <span>State*</span>
+    <select
+      [jlcApiValidation]="validationError$ | async"
+      [compareWith]="compareStates"
+      formControlName="state"
+    >
+      <option [ngValue]="undefined" hidden disabled>Select state</option>
+      <option [ngValue]="state" *ngFor="let state of states$ | async">
+        {{ state.name }}
+      </option>
+    </select>
+    <jlc-form-control-validation-message
+      controlName="state"
+    ></jlc-form-control-validation-message>
+  </label>
+  <label>
+    <span>
+      What are you looking for help with?*
+    </span>
+    <textarea
+      [jlcApiValidation]="validationError$ | async"
+      formControlName="helpDescription"
+      rows="10"
+    ></textarea>
+    <jlc-form-control-validation-message
+      controlName="helpDescription"
+    ></jlc-form-control-validation-message>
+  </label>
+</form>

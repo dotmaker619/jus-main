@@ -1,0 +1,44 @@
+:host {
+  --row-margin: 0.5rem;
+}
+
+form {
+  max-width: 50rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.row label {
+  width: calc(50% - 2 * var(--row-margin));
+  min-width: 200px;
+}
+
+label {
+  font-weight: bold;
+  display: inline-block;
+  margin: var(--row-margin) 0;
+}
+
+label input,
+label input {
+  margin-top: var(--row-margin);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.button-pane {
+  margin-top: 2rem;
+}
+
+.button-pane button {
+  height: 3rem;
+  width: 10rem;
+  margin-right: 1rem;
+  border-radius: 10px;
+}

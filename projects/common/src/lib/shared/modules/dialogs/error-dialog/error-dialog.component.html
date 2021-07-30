@@ -1,0 +1,27 @@
+<jlc-dialog-header>
+  <h2 class="title">{{ options.title || defaultTitle }}</h2>
+</jlc-dialog-header>
+<jlc-dialog-content class="content">
+  <p class="message">
+    {{ options.message || defaultMessage }}
+  </p>
+  <details>
+    <summary>Details</summary>
+    <p class="details-content">
+      {{ this.errorDetails }}
+    </p>
+  </details>
+  <div class="actions">
+    <button class="secondary"
+      type="button"
+      (click)="onCopyDetailsClicked()">
+      Copy details
+    </button>
+    <button
+      class="confirm primary"
+      type="button"
+      (click)="onCloseClicked()">
+      OK
+    </button>
+  </div>
+</jlc-dialog-content>

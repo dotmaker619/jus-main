@@ -1,0 +1,12 @@
+:host {
+  --border-radius: 10px;
+  --border-color: var(--light-shade-color);
+  --background: var(--primary-background-color);
+  --card-space: 10px;
+  display: block;
+
+  background: var(--background);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}

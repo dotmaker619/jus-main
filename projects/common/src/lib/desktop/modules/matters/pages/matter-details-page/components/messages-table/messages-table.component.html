@@ -1,0 +1,43 @@
+<!-- Messages section  -->
+<section>
+  <div class="section-header">
+    <div class="icon-container">
+      <img
+        src="/assets/icons/matter_message_icon.svg"
+        aria-hidden="true"
+        alt="Message icon"
+      />
+    </div>
+    <h2>Messages</h2>
+  </div>
+
+  <div *ngIf="matterTopics; else loading" class="section-table">
+    <div class="table-header">
+      <div>Description</div>
+      <div class="medium-width-column">Replies</div>
+      <div class="medium-width-column">Last Reply</div>
+    </div>
+
+    <a
+      class="table-content"
+      *ngFor="let matterTopic of matterTopics"
+      [routerLink]="['..', 'messages', matterTopic.id]"
+    >
+      <div class="topic-title">{{ matterTopic.title }}</div>
+      <div class="medium-width-column">{{ matterTopic.postCount }}</div>
+      <div class="medium-width-column">
+        {{ matterTopic.lastPost?.created | date: "shortDate" }}
+      </div>
+    </a>
+
+    <div class="table-content" *ngIf="!matterTopics.length">
+      <div>No messages</div>
+    </div>
+  </div>
+</section>
+
+<ng-template #loading>
+  <div class="loading">
+    <jlc-loading></jlc-loading>
+  </div>
+</ng-template>

@@ -1,0 +1,135 @@
+<div
+  class="page-container"
+  *ngIf="invoiceAndBillings$ | async as invoiceAndBillings; else loading"
+>
+  <jlc-breadcrumbs [links]="breadcrumbs$ | async"></jlc-breadcrumbs>
+
+  <div>
+    <section class="invoice-info">
+      <header class="header">
+        <div class="icon-wrapper">
+          <img src="/assets/icons/document_icon_white.svg" alt="Invoice icon" />
+        </div>
+
+        <div class="heading">
+          {{ getInvoiceTitle(invoiceAndBillings.invoice) }}
+        </div>
+
+        <div class="controls">
+          <button
+            class="primary"
+            type="button"
+            title="Download invoice"
+            (click)="onDownloadInvoiceClick()"
+          >
+            Download Invoice
+          </button>
+          <button
+            class="primary"
+            type="button"
+            *ngIf="isInvoiceEditable$ | async"
+            (click)="sendInvoice(invoiceAndBillings.invoice)"
+          >
+            Send to client
+          </button>
+          <button class="primary" (click)="exportToQuickbooks()">
+            QuickBooks
+          </button>
+          <button
+            *ngIf="isInvoiceEditable$ | async"
+            class="primary"
+            type="button"
+            (click)="onEditInvoiceClicked(invoiceAndBillings.invoice)"
+          >
+            Edit
+          </button>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="heading">
+          {{ invoiceAndBillings.invoice.title }}
+        </div>
+
+        <div class="invoice-info-data">
+          <div>
+            <b>Client</b>
+            <span class="client-name">
+              {{ invoiceAndBillings.invoice.client.fullName }}
+            </span>
+          </div>
+          <div>
+            <b>Start Date</b>
+            <span>{{
+              invoiceAndBillings.invoice.periodStart | date: "shortDate"
+            }}</span>
+          </div>
+          <div>
+            <b>Fee Structure</b>
+            <span>
+              {{
+                RateType.toReadable(invoiceAndBillings.invoice.matter.rateType)
+              }}
+            </span>
+          </div>
+          <div>
+            <b>Rate</b>
+            <span>
+              {{
+                invoiceAndBillings.invoice.matter.rate
+                  | currency: "USD":"symbol":"1.0-2"
+              }}
+            </span>
+          </div>
+          <div>
+            <b>Total Time Spent</b>
+            <span>{{ invoiceAndBillings.billings.totalTime }}</span>
+          </div>
+          <div>
+            <b>Total Fees Earned</b>
+            <span>
+              {{
+                invoiceAndBillings.billings.totalFees || 0
+                  | currency: "USD":"symbol":"1.2-2"
+              }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="billings">
+      <header class="header">
+        <div class="icon-wrapper">
+          <img src="/assets/icons/clock_icon.svg" alt="Invoice icon" />
+        </div>
+
+        <div class="heading">Billable time</div>
+        <button
+          class="primary log-time"
+          *ngIf="isInvoiceEditable$ | async"
+          (click)="openLogTimeDialog(invoiceAndBillings.invoice)"
+        >
+          Log time
+          <img src="/assets/icons/clock_icon.svg" alt="Clock icon" />
+        </button>
+      </header>
+      <jlc-billings-table
+        [matter]="invoiceAndBillings.invoice.matter"
+        [billings]="invoiceAndBillings.billings"
+        [isLoggedByColumnDisplayed]="true"
+        [active]="true"
+        (timeBillingSelected)="
+          onTimeBillingClicked(invoiceAndBillings.invoice, $event)
+        "
+      >
+      </jlc-billings-table>
+    </section>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading"><jlc-loading></jlc-loading></div>
+</ng-template>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

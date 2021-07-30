@@ -1,0 +1,36 @@
+main {
+  max-width: 600px;
+}
+
+/* Form. */
+
+.payment-form {
+  display: block;
+  margin: 10px 0;
+}
+
+/* Footer. */
+
+.form-footer {
+  display: flex;
+}
+
+.form-footer button + button {
+  margin-left: 10px;
+}
+
+h2 {
+  margin: 10px 0;
+  color: var(--primary-color);
+  font-weight: normal;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+jlc-payment-method-form {
+  padding: 15px;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 4px;
+}

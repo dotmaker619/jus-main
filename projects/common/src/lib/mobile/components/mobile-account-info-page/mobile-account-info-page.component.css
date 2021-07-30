@@ -1,0 +1,33 @@
+:host {
+  --space: 10px;
+}
+
+ion-content {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+  --padding-top: var(--space);
+  --padding-bottom: var(--space);
+  --background: var(--primary-background-color);
+}
+
+.form-field {
+  display: block;
+  margin-bottom: calc(var(--space) * 2);
+}
+
+.form-field > span {
+  color: var(--primary-label-input-color);
+}
+
+.form-field > input {
+  border-radius: 10px;
+}
+
+button {
+  width: 100%;
+  text-transform: uppercase;
+}
+
+button:not(:last-child) {
+  margin-bottom: var(--space);
+}

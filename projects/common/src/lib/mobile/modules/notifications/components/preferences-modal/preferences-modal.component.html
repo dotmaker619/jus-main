@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="onCloseClick()">Close</ion-button>
+    </ion-buttons>
+    <ion-title>Preferences</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    *ngIf="
+      notificationsTypesGrouped$ | async as typesGrouped;
+      else notificationsLoadingTemplate
+    "
+  >
+    <ng-container
+      *ngFor="let typeOrGroup of typesGrouped; trackBy: trackTypeOrGroup"
+      [ngTemplateOutlet]="typeOrGroup.types ? groupTemplate : typeTemplate"
+      [ngTemplateOutletContext]="typeOrGroup"
+    >
+    </ng-container>
+  </form>
+</ion-content>
+
+<ng-template #groupTemplate let-id="id" let-title="title" let-types="types">
+  <ng-container
+    *ngFor="let type of types; trackBy: trackTypeOrGroup"
+    [ngTemplateOutlet]="typeTemplate"
+    [ngTemplateOutletContext]="{
+      id: type.id,
+      title: type.title,
+      settings: type.settings
+    }"
+  ></ng-container>
+</ng-template>
+
+<ng-template
+  #typeTemplate
+  let-title="title"
+  let-id="id"
+  let-settings="settings"
+>
+  <div class="radio-group">
+    <p>{{ title }}</p>
+    <div class="radio-fields">
+      <label>
+        <input
+          type="checkbox"
+          [defaultChecked]="settings.byEmail"
+          (change)="changeByEmail(id, $event.target.checked)"
+        />
+        <span>Email</span>
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          [defaultChecked]="settings.byPush"
+          (change)="changeByPush(id, $event.target.checked)"
+        />
+        <span>App</span>
+      </label>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #notificationsLoadingTemplate>
+  <jlc-skeleton-list></jlc-skeleton-list>
+</ng-template>

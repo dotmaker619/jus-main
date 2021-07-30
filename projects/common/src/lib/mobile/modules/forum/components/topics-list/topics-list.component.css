@@ -1,0 +1,14 @@
+:host {
+  --space: 10px;
+}
+
+jlc-topics-list-item {
+  width: 100%;
+  padding: var(--space);
+}
+
+.item-message {
+  font-style: italic;
+  color: var(--medium-color);
+  text-align: center;
+}

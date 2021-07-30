@@ -1,0 +1,48 @@
+:host {
+  --space: 10px;
+}
+
+.form {
+  margin: var(--space);
+}
+
+label input,
+label textarea,
+label select {
+  width: 100%;
+}
+
+label ion-datetime {
+  background: url(/assets/icons/calendar_icon.svg) no-repeat 95%;
+  background-color: var(--primary-background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.col-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--space);
+}
+
+.primary {
+  width: 100%;
+}
+
+ion-content {
+  --background: none;
+}
+
+.button-panel {
+  margin: var(--space);
+  display: flex;
+}
+
+.button-panel button {
+  flex: 1;
+}
+
+.button-panel button:not(:first-child) {
+  margin-left: var(--space);
+}

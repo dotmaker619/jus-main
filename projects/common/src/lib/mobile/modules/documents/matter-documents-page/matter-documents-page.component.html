@@ -1,0 +1,40 @@
+<ion-content>
+  <form *ngIf="form$ | async as form" [formGroup]="form">
+    <select formControlName="client">
+      <option [ngValue]="client.id" *ngFor="let client of clients$ | async">
+        {{ client.fullName }}
+      </option>
+    </select>
+    <select formControlName="matter">
+      <option
+        [ngValue]="matter.id"
+        *ngFor="let matter of mattersChange$ | async"
+      >
+        {{ matter.title }}
+      </option>
+    </select>
+  </form>
+  <ng-container *ngIf="matter$ | async as matter">
+    <jlc-documents-tree
+      class="docs-tree"
+      [documents]="documents$ | async"
+      (documentAction)="onNodeAction($event)"
+    ></jlc-documents-tree>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="expand"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-fab-button (click)="uploadNewFile()">
+          <ion-icon src="/assets/icons/document_icon.svg"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="createFolder()">
+          <ion-icon src="/assets/icons/folder_icon.svg"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button [routerLink]="['/matters', matter.id]">
+          <ion-icon name="open"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </ng-container>
+</ion-content>

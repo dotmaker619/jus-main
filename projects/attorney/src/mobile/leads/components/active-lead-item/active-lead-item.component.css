@@ -1,0 +1,123 @@
+:host {
+  --icon-background: var(--primary-shade-color);
+  --icon-size: 20px;
+  --icon-container-padding: 10px;
+  --icon-container-size: calc(
+    var(--icon-size) + var(--icon-container-padding) * 2
+  );
+  --space: 10px;
+  --message-color: var(--medium-color);
+  --header-font-color: var(--primary-font-color);
+  --font-size: 1rem;
+}
+
+.item {
+  --padding-start: 0;
+}
+
+.content {
+  width: 100%;
+  margin: var(--space);
+  font-size: var(--font-size);
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--icon-background);
+  border-radius: 50%;
+  padding: var(--icon-container-padding);
+  width: fit-content;
+  flex-shrink: 0;
+  margin-right: var(--space);
+}
+
+.icon ion-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  color: var(--primary-contrast-color);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.row.space {
+  justify-content: space-between;
+}
+
+.header {
+  flex: 1;
+  color: var(--header-font-color);
+}
+
+.author {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.message {
+  color: var(--message-color);
+  font-style: italic;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin: calc(var(--space) / 2) 0;
+  flex: 1;
+}
+
+.info {
+  flex: 1;
+  display: flex;
+}
+
+.date {
+  color: var(--medium-color);
+  font-style: italic;
+}
+
+.badge-container {
+  width: calc(var(--icon-container-size) + var(--space));
+  flex-shrink: 0;
+}
+
+.badge.active {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--tertiary-color);
+  margin-left: auto;
+  margin-right: var(--space);
+}
+
+.priority {
+  padding: calc(var(--space) / 4);
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.priority.medium {
+  background: var(--medium-lead-priority);
+}
+
+.priority.high {
+  background: var(--high-lead-priority);
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.priority.high::before {
+  --size: 20px;
+
+  content: "";
+  display: block;
+  position: absolute;
+  left: calc(var(--size) * (-1));
+  width: var(--size);
+  height: var(--size);
+  background: url(/assets/icons/high_priority_icon.svg) no-repeat center center;
+}

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button
+        fill="clear"
+        shape="round"
+        class="preferences-btn"
+        (click)="onPreferencesClick()"
+      >
+        <ion-icon slot="icon-only" src="assets/icons/settings.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <div class="title">
+        <span>Notifications</span>
+        <div class="badge" *ngIf="unreadNotificationsAmount$ | async as count">
+          <span>{{ count }}</span>
+        </div>
+      </div>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list
+    *ngIf="
+      notifications$ | async as notifications;
+      else notificationsLoadingTemplate
+    "
+  >
+    <ion-item class="message" *ngIf="notifications.length === 0" lines="full">
+      <ion-label>No Notifications</ion-label>
+    </ion-item>
+    <ion-item
+      *ngFor="let notification of notifications; trackBy: trackNotification"
+      lines="full"
+      button
+      detail="false"
+      (click)="onNotificationClick(notification)"
+    >
+      <jlc-notification-item
+        [notification]="notification"
+      ></jlc-notification-item>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ng-template #notificationsLoadingTemplate>
+  <jlc-skeleton-list></jlc-skeleton-list>
+</ng-template>
+
+<ng-template #skeletonTextTemplate>
+  <ion-skeleton-text class="skeleton" animated></ion-skeleton-text>
+</ng-template>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  height: 72px;
+  border-bottom: solid 1px var(--light-shade-color);
+  padding: 18px 0;
+}
+
+.profile-image {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: var(--light-color);
+}
+
+.profile-data {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.profile-name {
+  font-weight: bold;
+  margin-left: 10px;
+  line-height: 36px;
+  text-align: center;
+}
+
+button.unfollow {
+  background: none;
+  border: 2px solid var(--tertiary-color);
+  color: var(--tertiary-color);
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 20px;
+  min-width: 120px;
+  height: 36px;
+  padding: 5px 0;
+  cursor: pointer;
+}

@@ -1,0 +1,33 @@
+<ion-content>
+  <ion-list
+    *ngIf="
+      checklistItems$ | async as checklistItems;
+      else checklistLoadingTemplate
+    "
+  >
+    <ion-item class="message" *ngIf="checklistItems.length === 0">
+      <ion-label>No checklist items</ion-label>
+    </ion-item>
+    <ion-item
+      *ngFor="let item of checklistItems; trackBy: trackChecklistItem"
+      lines="full"
+    >
+      <jlat-customization-list-item
+        [item]="item"
+        (edit)="onItemEdit($event)"
+        (delete)="onItemDelete($event)"
+      >
+        <p class="description">{{ item.description }}</p>
+      </jlat-customization-list-item>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="fab-button" (click)="onCreateCheckClick()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ng-template #checklistLoadingTemplate>
+  <jlc-skeleton-list></jlc-skeleton-list>
+</ng-template>

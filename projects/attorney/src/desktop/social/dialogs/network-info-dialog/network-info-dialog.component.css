@@ -1,0 +1,78 @@
+/* Dialog layout */
+:host {
+  --space: 20px;
+  height: 500px;
+  height: min(80vh, 600px);
+  width: 600px;
+  width: min(80vw, 600px);
+  display: block;
+  padding: var(--space);
+}
+
+/* Header */
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+hr {
+  margin: var(--space) 0;
+}
+
+/* Close button */
+
+.close-button {
+  width: 33px;
+  height: 33px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+}
+
+/* Announce message */
+
+.announce {
+  margin: 20px 0;
+}
+
+.attorneys-list li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 10px;
+  margin: 10px 0;
+}
+
+.avatar {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--primary-border-color);
+  overflow: hidden;
+  grid-row: span 2;
+}
+
+.name {
+  font-weight: bold;
+  align-self: flex-end;
+}
+
+.specialty {
+  grid-column: 2;
+  font-weight: normal;
+  color: var(--medium-color);
+  font-style: italic;
+}
+
+.profile-button {
+  grid-row: 1 / span 2;
+  grid-column: 3;
+  align-self: center;
+  color: var(--secondary-color);
+  font-weight: bold;
+  border: none;
+  background: var(--secondary-tint-color);
+  padding: 8px 15px;
+  border-radius: 30px;
+}

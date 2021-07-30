@@ -1,0 +1,30 @@
+<div class="event-container">
+  <!-- Start date. -->
+  <time class="date" [dateTime]="event.start | date: 'yyyy-MM-dd'">
+    <div class="month">{{ event.start | date: 'MMM' : event.location.timezone }}</div>
+    <div class="day">{{ event.start | date: 'd' : event.location.timezone }}</div>
+  </time>
+
+  <div class="event-main">
+    <div class="title">
+      {{ event.title }}
+      <div class="buttons" *ngIf="displayButtons">
+        <a role="button" title="edit" (click)="onEditClicked(event)">
+          <img src="/assets/icons/edit_icon.svg" alt="Edit icon"/>
+        </a>
+        <a role="button" title="delete" (click)="onDeleteClicked(event)">
+          <img src="/assets/delete_icon.svg" alt="Delete icon"/>
+        </a>
+      </div>
+    </div>
+    <div class="location">
+      <span *ngIf="event.location">{{ event.location.name }} • </span>
+      <span *ngIf="!event.isAllDay; else allDay">{{ event.start | date: 'h:mma' : event.location.timezone | lowercase }}</span>
+    </div>
+    <div class="time"></div>
+    <div class="description">{{ event.description }}</div>
+  </div>
+</div>
+<ng-template #allDay>
+  All Day
+</ng-template>

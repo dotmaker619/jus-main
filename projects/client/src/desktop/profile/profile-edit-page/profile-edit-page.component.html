@@ -1,0 +1,14 @@
+<header>
+  <h1 class="page-title">Additional Information</h1>
+</header>
+
+<hr />
+
+<jlc-client-additional-info
+  [additionalInfo]="additionalInfo$ | async"
+  [validationError]="validationError$ | async"
+  (formSubmit)="onAdditionalInfoSubmitted($event)"
+  (cancel)="onCurrentStepCancelled()"
+></jlc-client-additional-info>
+
+<jlc-loading mode="fullscreen" *ngIf="isSubmitting$ | async"></jlc-loading>

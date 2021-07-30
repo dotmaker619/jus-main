@@ -1,0 +1,16 @@
+<div class="dialog">
+  <h3>Upgrade Plan</h3>
+
+  <hr />
+
+  <div class="content">
+    <p class="description">{{ descriptionText }}</p>
+    <p class="charge-info">{{ chargeInfoText }}</p>
+    <p>{{ renewalDateInfoText }}</p>
+  </div>
+
+  <div class="button-panel">
+    <button class="secondary" (click)="onCloseClick()">Cancel</button>
+    <button class="primary" (click)="onSaveClick()">Save</button>
+  </div>
+</div>

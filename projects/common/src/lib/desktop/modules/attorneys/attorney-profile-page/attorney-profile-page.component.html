@@ -1,0 +1,218 @@
+<div class="page-container">
+  <ng-container *ngIf="attorney$ | async as attorney; else loading">
+    <aside class="col">
+      <div class="profile-image">
+        <img
+          [src]="attorney.avatar || profileImageFallbackUrl"
+          alt="Attorney's profile image"
+        />
+      </div>
+      <div class="contact-information">
+        <h3>Contact Information</h3>
+        <!-- Phone. -->
+        <div class="row">
+          <div class="col">
+            <div class="title">Phone Number</div>
+            <a class="text" href="tel:{{ attorney.phone }}">
+              {{ attorney.phone }}
+            </a>
+          </div>
+        </div>
+        <!-- Location. -->
+        <div class="row">
+          <div class="col">
+            <div class="title">Location</div>
+            <div class="text">
+              {{ attorney.firmLocationData?.formatted_address }}
+            </div>
+          </div>
+        </div>
+        <agm-map
+          class="attorney-location"
+          [latitude]="attorney.firmLocation.latitude"
+          [longitude]="attorney.firmLocation.longitude"
+        >
+          <agm-marker
+            iconUrl="/assets/icons/map-pin.svg"
+            [latitude]="attorney.firmLocation.latitude"
+            [longitude]="attorney.firmLocation.longitude"
+          ></agm-marker>
+        </agm-map>
+      </div>
+    </aside>
+    <main class="col">
+      <div class="header">
+        <!-- Attorney name. -->
+        <h1>{{ attorney.fullName }}</h1>
+        <!-- Header buttons. -->
+        <div class="buttons" *ngIf="areContactButtonsVisible$ | async">
+          <ng-container *ngIf="(isFollowed$ | async) !== null">
+            <button
+              type="button"
+              class="tertiary follow"
+              *ngIf="isFollowed$ | async as isFollowed; else follow"
+              (click)="onFollowClicked()"
+            >
+              Unfollow
+            </button>
+          </ng-container>
+          <button
+            type="button"
+            class="primary"
+            title="Start chatting"
+            (click)="onStartChatClicked(attorney)"
+          >
+            <img
+              class="chat-icon"
+              src="/assets/icons/chat.svg"
+              alt="Chat icon"
+            />
+            Chat
+          </button>
+          <ng-template #follow>
+            <button
+              type="button"
+              class="primary follow"
+              (click)="onFollowClicked()"
+            >
+              Follow
+            </button>
+          </ng-template>
+        </div>
+      </div>
+      <div class="tabs">
+        <mat-tab-group
+          class="no-offset-before-tabs"
+          disableRipple
+          dynamicHeight
+        >
+          <!-- Basic info. -->
+          <mat-tab>
+            <!-- Tab label. -->
+            <ng-template mat-tab-label>
+              <div class="tab-label">
+                Profile
+              </div>
+            </ng-template>
+            <div class="basic-info">
+              <!-- Education. -->
+              <div class="section">
+                <h2 class="section-title">Education</h2>
+                <ng-container *ngIf="attorney.education as education">
+                  <div class="row">
+                    <div class="col">
+                      <div class="title">Law School</div>
+                      <div class="text">{{ education.university }}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="title">Year of Graduation</div>
+                      <div class="text">{{ education.year }}</div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+              <!-- Practice. -->
+              <div class="section">
+                <h2 class="section-title">Practice</h2>
+                <!-- Practice jurisdiction. -->
+                <div class="row">
+                  <div class="col">
+                    <div class="title">
+                      State(s) or federal jurisdictions you are licensed or
+                      authorized to practice in?
+                    </div>
+                    <div class="text">{{ practiceJurisdiction$ | async }}</div>
+                  </div>
+                </div>
+                <!-- Practice description. -->
+                <div class="row" *ngIf="attorney.practiceDescription">
+                  <div class="col">
+                    <div class="title">Describe your legal practice</div>
+                    <div class="text">{{ attorney.practiceDescription }}</div>
+                  </div>
+                </div>
+                <!-- Years of experience. -->
+                <div class="row" *ngIf="attorney.yearsOfExperience">
+                  <div class="col">
+                    <div class="title">Years of experience</div>
+                    <div class="text">{{ attorney.yearsOfExperience }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Specialty. -->
+              <div class="section">
+                <h2 class="section-title">Specialty</h2>
+                <!-- Specialties. -->
+                <div
+                  class="row"
+                  *ngIf="attorneySpecialties$ | async as attorneySpecialties"
+                >
+                  <div class="col">
+                    <div class="title">Area(s) of Speciality</div>
+                    <div class="text">{{ attorneySpecialties }}</div>
+                  </div>
+                </div>
+                <ng-container
+                  *ngIf="
+                    attorney.specialtyTime || attorney.specialtyMattersCount
+                  "
+                >
+                  <!-- Specialty time. -->
+                  <div class="row" *ngIf="attorney.specialtyTime">
+                    <div class="col">
+                      <div class="title">
+                        Number of years practice in the specialized area
+                      </div>
+                      <div class="text">{{ attorney.specialtyTime }}</div>
+                    </div>
+                  </div>
+                  <!-- Specialty matters count. -->
+                  <div class="row" *ngIf="attorney.specialtyMattersCount">
+                    <div class="col">
+                      <div class="title">
+                        Approximate number of matters you, in the last 5 years,
+                        have handled in the specialized area
+                      </div>
+                      <div class="text">
+                        {{ attorney.specialtyMattersCount }}
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </mat-tab>
+          <!-- Events. -->
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div class="tab-label">
+                Events
+              </div>
+            </ng-template>
+            <div class="events">
+              <h2>Upcoming events</h2>
+              <!-- Event list -->
+              <ng-container *ngIf="events$ | async as events; else loading">
+                <ul *ngIf="events.length; else noEvents">
+                  <li *ngFor="let event of events; trackBy: trackById">
+                    <jlc-event-info [event]="event"></jlc-event-info>
+                  </li>
+                </ul>
+              </ng-container>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </main>
+  </ng-container>
+</div>
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>
+<ng-template #loading>
+  <jlc-loading class="loading"></jlc-loading>
+</ng-template>
+<ng-template #noEvents>
+  <span>No upcoming events.</span>
+</ng-template>

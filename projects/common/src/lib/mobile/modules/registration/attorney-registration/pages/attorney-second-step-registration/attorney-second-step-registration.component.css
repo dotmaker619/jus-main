@@ -1,0 +1,37 @@
+:host {
+  --space: 10px;
+}
+
+ion-content {
+  --padding-start: var(--space);
+  --padding-bottom: var(--space);
+  --padding-top: var(--space);
+  --padding-end: var(--space);
+}
+
+jlc-registration-heading {
+  margin-bottom: 20px;
+}
+
+jlc-mobile-attorney-profile-form {
+  display: block;
+}
+
+.button-panel {
+  margin: var(--space);
+  display: flex;
+}
+
+.primary {
+  flex: 1;
+}
+
+.attachments-container {
+  margin: var(--space);
+}
+
+.attachments-container h4 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: normal;
+}

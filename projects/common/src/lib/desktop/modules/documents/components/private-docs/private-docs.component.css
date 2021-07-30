@@ -1,0 +1,53 @@
+:host {
+  --space: 40px;
+}
+
+.page-header {
+  margin: calc(var(--space) / 2) var(--space);
+}
+
+.tab-label {
+  width: 10rem;
+  text-align: start;
+}
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 var(--space);
+}
+
+header > * {
+  margin: 10px 10px 10px 0;
+}
+
+.primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: fit-content;
+  min-width: auto;
+  padding: 0.5rem 1rem;
+}
+
+.primary span {
+  color: currentColor;
+  margin: 0 auto;
+}
+
+.primary img {
+  filter: invert(1);
+  margin-left: 1rem;
+  height: 14px;
+  width: 14px;
+}
+
+input[type="search"] {
+  --icon-size: 15px;
+  --icon-margin: 5px;
+
+  background: url("/assets/icons/search_icon.svg") no-repeat var(--icon-margin);
+  background-size: var(--icon-size);
+  padding-left: calc(var(--icon-size) + var(--icon-margin) * 2);
+}

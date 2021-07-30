@@ -1,0 +1,65 @@
+<form
+  *ngIf="form$ | async as form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit(form)"
+  class="account-form"
+>
+  <label>
+    <span>First Name*</span>
+    <input
+      formControlName="firstName"
+      autocomplete="given-name"
+      jlcInputStatus
+      [jlcApiValidation]="validationError$ | async"
+    />
+    <jlc-form-control-validation-message controlName="firstName">
+    </jlc-form-control-validation-message>
+  </label>
+  <label>
+    <span>Last Name*</span>
+    <input
+      formControlName="lastName"
+      autocomplete="family-name"
+      jlcInputStatus
+      [jlcApiValidation]="validationError$ | async"
+    />
+    <jlc-form-control-validation-message controlName="lastName">
+    </jlc-form-control-validation-message>
+  </label>
+  <label>
+    <span>Email*</span>
+    <input
+      formControlName="email"
+      type="email"
+      inputmode="email"
+      autocomplete="email"
+      jlcInputStatus
+      [jlcApiValidation]="validationError$ | async"
+    />
+    <jlc-form-control-validation-message controlName="email">
+    </jlc-form-control-validation-message>
+  </label>
+  <label>
+    <span>Password*</span>
+    <input
+      formControlName="password"
+      type="password"
+      autocomplete="new-password"
+      jlcInputStatus
+      [jlcApiValidation]="validationError$ | async"
+    />
+    <jlc-form-control-validation-message controlName="password">
+    </jlc-form-control-validation-message>
+  </label>
+  <label>
+    <span>Confirm Password</span>
+    <input
+      type="password"
+      formControlName="passwordConfirm"
+      jlcInputStatus
+      [jlcApiValidation]="validationError$ | async"
+    />
+    <jlc-form-control-validation-message controlName="passwordConfirm">
+    </jlc-form-control-validation-message>
+  </label>
+</form>

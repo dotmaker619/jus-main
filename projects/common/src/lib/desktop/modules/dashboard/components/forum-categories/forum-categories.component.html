@@ -1,0 +1,36 @@
+<ng-template [ngxPermissionsOnly]="roles.Client">
+  <div class="question">
+    <jlc-create-topic></jlc-create-topic>
+  </div>
+</ng-template>
+
+<header class="header">
+  <h2 class="title">Forum Categories</h2>
+
+  <div class="controls">
+    <button class="primary" routerLink="/forum">See all categories</button>
+  </div>
+</header>
+
+<div
+  *ngIf="(forumCategories$ | async | slice:0:12) as categories; else loading"
+  class="categories"
+>
+  <a
+    *ngFor="let category of categories"
+    class="category"
+    [routerLink]="['/forum/category', category.id]"
+  >
+    <div class="icon-wrapper">
+      <img [src]="category.icon || iconFallbackUrl" alt="" />
+    </div>
+
+    <div class="title">{{ category.title }}</div>
+  </a>
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    <jlc-loading></jlc-loading>
+  </div>
+</ng-template>

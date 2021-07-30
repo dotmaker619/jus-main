@@ -1,0 +1,19 @@
+<ion-content id="mobile-staff-content" main [scrollY]="false">
+  <ion-app>
+    <ion-router-outlet></ion-router-outlet>
+  </ion-app>
+</ion-content>
+<ion-menu
+  contentId="mobile-staff-content"
+  menuId="mobile-staff-content"
+  side="end"
+  type="overlay"
+>
+  <ion-content>
+    <jlc-side-menu
+      [links]="menuLinks$ | async"
+      [user]="currentUser$ | async"
+      (logoutClick)="onLogOutClick()"
+    ></jlc-side-menu>
+  </ion-content>
+</ion-menu>

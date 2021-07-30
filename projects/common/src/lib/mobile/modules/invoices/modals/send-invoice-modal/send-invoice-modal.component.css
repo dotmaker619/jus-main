@@ -1,0 +1,29 @@
+:host {
+  --space: 10px;
+}
+
+form {
+  margin: var(--space);
+}
+
+label {
+  display: block;
+  margin-bottom: var(--space);
+}
+
+.buttons-panel {
+  display: flex;
+  margin: var(--space);
+}
+
+.buttons-panel > .primary {
+  flex-grow: 1;
+}
+
+.textarea-long {
+  min-height: 15rem;
+}
+
+ion-content {
+  --background: var(--primary-background-color);
+}

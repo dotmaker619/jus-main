@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+
+img {
+  width: 30px;
+  height: 30px;
+}
+
+.announce-description {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: bold;
+}

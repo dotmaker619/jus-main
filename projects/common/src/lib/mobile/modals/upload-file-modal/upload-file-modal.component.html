@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCancelClicked()" fill="clear">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Upload a File</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    *ngIf="form$ | async as form"
+    (ngSubmit)="onSubmit(form)"
+    id="upload-file-modal-form"
+    [formGroup]="form"
+  >
+    <label>
+      <span>Folder*</span>
+      <select formControlName="folder">
+        <option
+          [ngValue]="folder.id"
+          *ngFor="let folder of folders$ | async; trackBy: trackById"
+        >
+          {{ folder.title }}
+        </option>
+      </select>
+    </label>
+    <jlc-mobile-file-drop
+      class="files-container"
+      [(documents)]="documents"
+      [fileValidators]="fileValidators"
+      (errors)="onErrorChange($event)"
+    ></jlc-mobile-file-drop>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="footer-toolbar">
+      <ng-container *ngIf="docusignAvailable">
+        <button
+          class="primary"
+          [disabled]="documents.length === 0"
+          (click)="onDocusignButtonClick()"
+        >
+          Send with DocuSign
+        </button>
+        <div class="button-space"></div>
+      </ng-container>
+      <button
+        class="primary"
+        [disabled]="documents.length === 0"
+        form="upload-file-modal-form"
+      >
+        <ion-icon src="/assets/icons/folder_icon.svg"> </ion-icon>
+        Upload to Docs
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

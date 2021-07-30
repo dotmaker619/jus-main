@@ -1,0 +1,65 @@
+<ng-container *ngIf="(notificationsTypesGrouped$ | async) as typesGrouped; else loading">
+  <form class="notifications-settings">
+    <div class="header">
+      <div class="column column-type">Type</div>
+      <div class="column column-email">Email</div>
+      
+      <ng-container *ngIf="shouldDisplayAppConfig">
+        <div class="column column-push">App</div>
+      </ng-container>
+    </div>
+
+    <ng-container
+      *ngFor="let typeOrGroup of typesGrouped"
+      [ngTemplateOutlet]="typeOrGroup.types ? groupTemplate : typeTemplate"
+      [ngTemplateOutletContext]="typeOrGroup"
+    ></ng-container>
+
+    <div *ngIf="isUpdating$ | async" class="loading-placeholder">
+      <ng-container *ngTemplateOutlet="loading"></ng-container>
+    </div>
+  </form>
+</ng-container>
+
+<ng-template #groupTemplate let-id="id" let-title="title" let-types="types">
+  <div class="group">{{ title }}</div>
+
+  <ng-container
+    *ngFor="let type of types"
+    [ngTemplateOutlet]="typeTemplate"
+    [ngTemplateOutletContext]="{
+      id: type.id,
+      title: type.title,
+      settings: type.settings,
+      isInGroup: true
+    }"
+  ></ng-container>
+</ng-template>
+
+<ng-template #typeTemplate let-title="title" let-id="id" let-settings="settings" let-isInGroup="isInGroup">
+  <div
+    class="item"
+    [class.is-in-group]="isInGroup"
+  >
+    <div class="column column-title">{{ title }}</div>
+    <label class="column column-email">
+      <input type="checkbox"
+        [defaultChecked]="settings.byEmail"
+        (change)="changeByEmail(id, $event.target.checked)"
+      />
+    </label>
+
+    <ng-container *ngIf="shouldDisplayAppConfig">
+      <label class="column column-push">
+        <input type="checkbox"
+           [defaultChecked]="settings.byPush"
+           (change)="changeByPush(id, $event.target.checked)"
+        />
+      </label>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <jlc-loading></jlc-loading>
+</ng-template>

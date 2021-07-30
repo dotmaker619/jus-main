@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Select Customer</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="close(null)">
+        Create New
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form *ngIf="filterForm$ | async as form" [formGroup]="form">
+    <ion-searchbar
+      inputmode="text"
+      type="text"
+      mode="ios"
+      [debounce]="250"
+      (ionChange)="onSearchQueryChange(form, $event.target.value)"
+      class="searchbar"
+    ></ion-searchbar>
+  </form>
+  <ng-container *ngIf="filteredClients$ | async as clients">
+    <ion-list
+      class="client-list"
+      lines="full"
+      *ngIf="clients.length > 0; else noClientsMessage"
+    >
+      <ion-item
+        (click)="close(client)"
+        *ngFor="let client of clients; trackBy: trackById"
+        class="client"
+        [class.preselected]="client.id === preselectedClient?.id"
+      >
+        <div class="client-content">
+          <span class="name">{{ client.displayName }}</span>
+          <span class="email">{{ client.email }}</span>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+</ion-content>
+
+<ng-template #noClientsMessage>
+  <div class="message">You have no existing customers</div>
+</ng-template>

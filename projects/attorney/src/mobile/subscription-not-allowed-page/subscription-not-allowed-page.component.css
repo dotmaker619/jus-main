@@ -1,0 +1,30 @@
+:host {
+  --space: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space);
+}
+
+.message {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.icon-container {
+  background: var(--primary-gradient);
+  margin-top: var(--space);
+  border-radius: 30px;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-icon {
+  color: var(--primary-contrast-color);
+}

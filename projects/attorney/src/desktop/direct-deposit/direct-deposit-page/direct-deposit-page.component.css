@@ -1,0 +1,57 @@
+:host {
+  --space: 40px;
+}
+
+.page-container {
+  padding: var(--space);
+  width: auto;
+}
+
+hr {
+  margin-bottom: 25px;
+}
+
+.no-account {
+  --space: 25px;
+
+  border-radius: 2px;
+  box-shadow: 0 0 2px 0 var(--medium-shade-color);
+  text-align: center;
+  padding: var(--space) 0;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.buttons > *:not(:first-child) {
+  margin-left: 20px;
+}
+
+.no-account a {
+  width: fit-content;
+  margin: 20px auto 0 auto;
+}
+
+.pending-message {
+  width: 60%;
+  margin: auto;
+}
+
+.pending-message p {
+  margin-bottom: 10px;
+}
+
+.message {
+  color: var(--primary-light-font-color);
+}
+
+.pending-message a {
+  background-image: url("/assets/icons/edit_icon.svg");
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: 2px;
+  padding: 3px 30px 3px 0;
+}

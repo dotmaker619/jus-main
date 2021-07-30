@@ -1,0 +1,14 @@
+.container {
+  max-width: 1000px;
+  width: 90%;
+  margin: 40px auto 0 auto;
+}
+
+jlc-news-list-item {
+  margin-bottom: 15px;
+}
+
+button.primary {
+  display: block;
+  margin: 15px auto 0 auto;
+}

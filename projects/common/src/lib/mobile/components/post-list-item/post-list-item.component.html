@@ -1,0 +1,9 @@
+<div *ngIf="post.image" class="post-image" slot="start">
+  <img [src]="post.image" />
+</div>
+<div class="post-info">
+  <p class="title">{{ post.title }}</p>
+  <p class="author-date">
+    {{ post.author.name }} | {{ post.created | date: "mediumDate" }}
+  </p>
+</div>

@@ -1,0 +1,115 @@
+<jlc-expandable-card [isCollapsed]="false">
+  <header *ngIf="invoice; else headerSkeleton" class="header">
+    [{{ invoice.matter.code }}] {{ invoice.matter.title }}
+    <jlc-badge class="paid-badge" *ngIf="invoice.isPaid">Paid</jlc-badge>
+  </header>
+  <article *ngIf="invoice && billings; else bodySkeleton">
+    <div class="invoice-details">
+      <section class="user-info">
+        <ng-container
+          *ngIf="isInfoForAttorney; then clientInfo; else attorneyInfo"
+        ></ng-container>
+        <ng-template #clientInfo>
+          <div class="title">Client</div>
+          <div class="data">
+            {{ invoice.client.fullName }}
+          </div>
+        </ng-template>
+        <ng-template #attorneyInfo>
+          <div class="title">Attorney</div>
+          <div class="data">
+            {{ invoice.matter.attorney.fullName }}
+          </div>
+        </ng-template>
+      </section>
+      <section class="start-date">
+        <div class="title">Start Date</div>
+        <div class="data">
+          {{ invoice.periodStart | date: "shortDate" }}
+        </div>
+      </section>
+      <section class="total-fees">
+        <div class="title">Total Fees Earned</div>
+        <div class="data">
+          {{ billings.totalFees || 0 | currency: "USD":"symbol":"1.2-2" }}
+        </div>
+      </section>
+      <section class="fee-structure">
+        <div class="title">Fee Structure</div>
+        <div class="data">
+          {{ RateType.toReadable(invoice.matter.rateType) }}
+        </div>
+      </section>
+      <section class="rate">
+        <div class="title">Rate</div>
+        <div class="data">
+          {{ invoice.matter.rate | currency: "USD":"symbol":"1.0-2" }}
+        </div>
+      </section>
+      <section class="total-time">
+        <div class="title">Total Time Spent</div>
+        <div class="data">
+          {{ billings.totalTime }}
+        </div>
+      </section>
+    </div>
+  </article>
+  <footer *ngIf="invoice; else footerSkeleton" class="footer">
+    {{ invoice.matter.description }}
+  </footer>
+</jlc-expandable-card>
+
+<ng-template #headerSkeleton>
+  <header class="header">
+    <ion-skeleton-text animated></ion-skeleton-text>
+  </header>
+</ng-template>
+<ng-template #bodySkeleton>
+  <article>
+    <div class="invoice-details">
+      <section class="user-info">
+        <div class="title">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </div>
+        <div class="data">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </div>
+      </section>
+      <section class="start-date">
+        <div class="title">Start Date</div>
+        <div class="data">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </div>
+      </section>
+      <section class="total-fees">
+        <div class="title">Total Fees Earned</div>
+        <div class="data">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </div>
+      </section>
+      <section class="fee-structure">
+        <div class="title">Fee Structure</div>
+        <div class="data">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </div>
+      </section>
+      <section class="rate">
+        <div class="title">Rate</div>
+        <div class="data">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </div>
+      </section>
+      <section class="total-time">
+        <div class="title">Total Time Spent</div>
+        <div class="data">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </div>
+      </section>
+    </div>
+  </article>
+</ng-template>
+<ng-template #footerSkeleton>
+  <footer class="footer">
+    <ion-skeleton-text animated></ion-skeleton-text>
+  </footer>
+</ng-template>

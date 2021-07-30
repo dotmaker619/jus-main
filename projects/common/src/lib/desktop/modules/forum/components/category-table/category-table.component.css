@@ -1,0 +1,43 @@
+table th {
+  background: var(--primary-color);
+  color: var(--primary-contrast-color);
+  border: 1px solid var(--primary-color);
+  font-weight: bold;
+  padding: 0 2rem;
+}
+
+table td {
+  border: 1px solid var(--primary-border-color);
+  padding: 1rem 2rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.title-cell {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.title-cell .title {
+  width: 70%;
+  color: var(--primary-font-color);
+}
+
+.numeric-cell {
+  text-align: center;
+  min-width: 130px;
+}
+
+th.wide {
+  width: 65%;
+}
+
+.small {
+  width: 10%;
+  max-width: 10rem;
+}

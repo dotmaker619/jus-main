@@ -1,0 +1,57 @@
+<ng-container *ngIf="matters; else loading">
+  <div class="thead row">
+    <div class="cell cell-icon"></div>
+    <div class="cell cell-client">Client Name</div>
+    <div class="cell cell-matter">Current Active Matter</div>
+    <div class="cell cell-location">Location</div>
+    <div class="cell cell-activity">Last Activity</div>
+  </div>
+  <ng-container *ngIf="matters.length; else noActive">
+    <div class="row" *ngFor="let matter of matters; trackBy: trackById">
+      <!-- Client icon. -->
+      <div class="cell cell-icon">
+        <div class="client-icon">
+          <img
+            [src]="matter.client.avatar || '/assets/icons/profile_icon.svg'"
+            alt=""
+          />
+        </div>
+      </div>
+      <!-- Client. -->
+      <div class="cell cell-client">
+        <span class="ellipsis">
+          {{ matter.client.fullName }}
+        </span>
+        <div class="identifier">ID #{{ matter.client.id }}</div>
+      </div>
+      <!-- Matter. -->
+      <div class="cell cell-matter">
+        <a [routerLink]="['/matters', matter.id]">
+          <img
+            class="matter-icon"
+            src="/assets/icons/document_icon_brown.svg"
+            alt=""
+          />
+          <div class="ellipsis">[{{ matter.code }}] {{ matter.title }}</div>
+        </a>
+      </div>
+      <!-- Location. -->
+      <div class="cell cell-location">
+        {{ matter.city?.name }}<span *ngIf="matter.city">,</span>
+        {{ matter.state?.name }}
+      </div>
+      <!-- Activity. -->
+      <div class="cell cell-activity">
+        {{ matter.modified | date: "shortDate" }}
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noActive>
+    <div class="no-items">
+      No Active Matters.
+    </div>
+  </ng-template>
+</ng-container>
+<ng-template #loading>
+  <jlc-loading></jlc-loading>
+</ng-template>

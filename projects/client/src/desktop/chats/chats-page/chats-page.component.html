@@ -1,0 +1,43 @@
+<header class="page-header">
+  <h1>My Chats</h1>
+</header>
+
+<div *ngIf="chats$ | async as chats; else loading" class="chats-wrapper">
+  <ul class="contacts">
+    <li *ngFor="let chat of chats; trackBy: trackByChatId">
+      <a
+        class="contact"
+        [routerLink]="[]"
+        [queryParams]="{ chatId: chat.id }"
+        routerLinkActive="selected"
+      >
+        <span
+          class="new-messages-indicator"
+          [class.no-new-messages]="chat.countUnreadMessages === 0"
+        >
+        </span>
+
+        <img class="avatar" [src]="chat.recipient.avatar" alt="" />
+
+        <div class="contact-info">
+          <div class="contact-name">
+            {{ chat.recipient.fullName }}
+          </div>
+          <div class="last-message-preview">
+            {{ chat.lastMessageText }}
+          </div>
+        </div>
+        <div class="last-message-date">
+          {{ chat.lastMessageDate | jusLawNamedOffsetFromNow }}
+        </div>
+      </a>
+    </li>
+  </ul>
+  <div class="current-chat-container">
+    <jlcl-chat [chat]="selectedChat$ | async"> </jlcl-chat>
+  </div>
+</div>
+
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

@@ -1,0 +1,99 @@
+:host {
+  --space: 10px;
+}
+
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--space);
+}
+
+.form-section:not(:first-child) {
+  margin-top: calc(var(--space) * 1.5);
+}
+
+.section-title {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+jlc-card {
+  margin-top: var(--space);
+}
+
+.fields {
+  padding: var(--space);
+}
+
+.fields label {
+  display: block;
+}
+
+.fields select {
+  width: 100%;
+}
+
+.fields > *:not(:first-child) {
+  margin-top: calc(var(--space) * 0.75);
+}
+
+.row {
+  display: flex;
+}
+
+.row > * {
+  flex: 1;
+}
+
+.row > *:not(:first-child) {
+  margin-left: var(--space);
+}
+
+.radio-group .radio-fields {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: var(--space);
+}
+
+.radio-group p {
+  font-weight: bold;
+}
+
+.radio-fields label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.radio-fields label span {
+  font-weight: normal;
+}
+
+.radio-fields label:not(:first-child) {
+  margin-left: calc(var(--space) * 5);
+}
+
+.radio-fields input {
+  margin: 0 var(--space) 0 0;
+}
+
+.checkbox-group p {
+  font-weight: bold;
+  margin-bottom: calc(var(--space) / 2);
+}
+
+.title-with-note {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 5px;
+  width: 100%;
+}
+
+.title-with-note .note {
+  font-weight: normal;
+  font-size: 0.86rem;
+  font-style: italic;
+  color: var(--primary-placeholder-color);
+}

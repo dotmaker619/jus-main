@@ -1,0 +1,11 @@
+:host {
+  --space: 10px;
+}
+
+.form {
+  margin: var(--space);
+}
+
+.button-panel {
+  margin: var(--space);
+}

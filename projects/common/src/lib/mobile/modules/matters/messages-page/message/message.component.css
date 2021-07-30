@@ -1,0 +1,76 @@
+:host {
+  display: block;
+  --triangle-size: 10px;
+  --message-radius: 5px;
+}
+
+.post:not(:first-child) {
+  margin-top: 15px;
+}
+
+.post-content {
+  background: var(--primary-background-color);
+  padding: 14px 22px;
+  font-size: 1rem;
+  margin-top: 4px;
+  white-space: pre-line;
+  position: relative;
+  color: var(--primary-font-color);
+  width: calc(100% - var(--triangle-size));
+}
+
+.post-content::after {
+  content: " ";
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  border: var(--triangle-size) solid;
+  border-color: transparent transparent var(--primary-background-color)
+    transparent;
+}
+
+.my-message {
+  margin-left: 0;
+  border-radius: var(--message-radius) var(--message-radius) 0
+    var(--message-radius);
+}
+
+.my-message::after {
+  right: calc(-1 * var(--triangle-size));
+}
+
+.reply {
+  margin-left: auto;
+  border-radius: var(--message-radius) var(--message-radius)
+    var(--message-radius) 0;
+}
+
+.reply::after {
+  left: calc(-1 * var(--triangle-size));
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.author {
+  font-weight: bold;
+}
+
+.date {
+  color: var(--primary-placeholder-color);
+  font-style: italic;
+  font-size: 0.857rem;
+  text-align: right;
+  padding-right: 2px;
+}
+
+.red {
+  background: red;
+}
+
+.blue {
+  background: blue;
+}

@@ -1,0 +1,87 @@
+<jlc-expandable-card [isCollapsed]="false">
+  <header>
+    <h3 *ngIf="matterValue; else skeletonTextTemplate">
+      [{{ matterValue.code }}] {{ matterValue.title }}
+    </h3>
+  </header>
+  <article>
+    <table>
+      <tbody>
+        <tr>
+          <td colspan="3">
+            <div class="cell-header">
+              {{ isInfoForAttorney ? "Client" : "Attorney" }}
+            </div>
+            <div class="cell-content">
+              <span *ngIf="matterValue; else skeletonTextTemplate">
+                {{
+                  isInfoForAttorney
+                    ? matterValue.client.fullName
+                    : matterValue.attorney.fullName
+                }}
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div class="cell-header">
+              Start Date
+            </div>
+            <div class="cell-content">
+              <div class="span" *ngIf="matterValue; else skeletonTextTemplate">
+                {{ matterValue.created | date: "shortDate" }}
+              </div>
+            </div>
+          </td>
+          <td *ngIf="shouldDisplayTotalFeesCell">
+            <div class="cell-header">Total Fees Earned</div>
+            <div class="cell-content">
+              <span *ngIf="matterValue; else skeletonTextTemplate">
+                {{ matterValue.earned || 0 | currency }}
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="cell-header">Fee Structure</div>
+            <div class="cell-content">
+              <span *ngIf="matterValue; else skeletonTextTemplate">
+                {{ RateType.toReadable(matterValue.rateType) }}
+              </span>
+            </div>
+          </td>
+          <td>
+            <div class="cell-header">Rate</div>
+            <div class="cell-content">
+              <span *ngIf="matterValue; else skeletonTextTemplate">
+                {{ matterValue.rate | currency }}
+              </span>
+            </div>
+          </td>
+          <td>
+            <div class="cell-header">
+              Total Time Spent
+            </div>
+            <div class="cell-content">
+              <span *ngIf="matterValue; else skeletonTextTemplate">
+                {{ matterValue.timeBilled || 0 | jusLawFormatMinutes: "hh:mm" }}
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-content></ng-content>
+  </article>
+  <footer>
+    <p class="description" *ngIf="matterValue; else skeletonTextTemplate">
+      {{ matterValue.description }}
+    </p>
+  </footer>
+</jlc-expandable-card>
+
+<ng-template #skeletonTextTemplate>
+  <ion-skeleton-text animated class="skeleton-text"></ion-skeleton-text>
+</ng-template>

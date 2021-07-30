@@ -1,0 +1,30 @@
+<div class="files-container">
+  <div *ngFor="let file of documents; trackBy: trackByFileName" class="file">
+    <div class="icon">
+      <ion-icon src="/assets/icons/document_icon.svg"></ion-icon>
+    </div>
+    <span class="ellipsis file-name">{{ file.name }}</span>
+    <ion-button (click)="onRemoveFileClick(file)" fill="clear" shape="round">
+      <ion-icon
+        slot="icon-only"
+        src="/assets/icons/remove_file_icon.svg"
+      ></ion-icon>
+    </ion-button>
+  </div>
+</div>
+<input
+  hidden
+  type="file"
+  #inputFile
+  [attr.multiple]="multiple ? true : null"
+  (change)="onFileChange($event)"
+/>
+<button
+  *ngIf="shouldDisplayButton()"
+  type="button"
+  class="secondary"
+  (click)="inputFile.click()"
+>
+  <ion-icon src="/assets/icons/upload_icon.svg"></ion-icon>
+  Browse
+</button>

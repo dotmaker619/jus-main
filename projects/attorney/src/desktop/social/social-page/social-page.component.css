@@ -1,0 +1,46 @@
+/* Layout */
+
+:host {
+  --space: 15px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: var(--max-layout-width);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+button.primary {
+  display: block;
+}
+
+button.create-post {
+  margin: 0 0 var(--space) auto;
+}
+
+button.show-more {
+  margin: var(--space) auto 0 auto;
+}
+
+.posts {
+  width: 70%;
+  padding: 24px;
+  overflow: auto;
+}
+
+/* Aside */
+
+.aside {
+  overflow: auto;
+  width: 30%;
+  max-height: calc(100vh - 60px);
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -1px 0 3px rgba(0, 0, 0, 0.2);
+}

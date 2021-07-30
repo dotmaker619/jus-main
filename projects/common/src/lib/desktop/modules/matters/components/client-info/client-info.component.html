@@ -1,0 +1,23 @@
+<div class="client" *ngIf="client">
+  <!-- Client profile image. -->
+  <img
+    [src]="client.avatar || '/assets/icons/profile_icon.svg'"
+    alt="Client profile image"
+  />
+  <!-- 
+    Client name
+    Display full name
+  -->
+  <ng-container *ngIf="fullName; else shortLastName">
+    <span class="nowrap ellipsis">
+      {{ client.fullName }}
+    </span>
+  </ng-container>
+  <!-- Else short name -->
+  <ng-template #shortLastName>
+    <!-- Name format - 'Alex F.' -->
+    <span class="ellipsis">
+      {{ client.shortName }}
+    </span>
+  </ng-template>
+</div>

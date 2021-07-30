@@ -1,0 +1,62 @@
+:root {
+  --radio-input-size: 20px;
+}
+
+/* Adjust size of original  */
+[type="radio"] {
+  border: none;
+  position: relative;
+  width: var(--radio-input-size);
+  height: var(--radio-input-size);
+  padding: 0;
+  margin-right: 6px;
+}
+
+[type="radio"][disabled] {
+  --radio-button-color: var(--medium-color);
+}
+
+/* Render custom radio */
+[type="radio"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  width: var(--radio-input-size);
+  height: var(--radio-input-size);
+  border: 2px solid var(--radio-button-color, black);
+  border-radius: 100%;
+  background: var(--primary-contrast-color, white);
+}
+
+/* Render custom "checked" mark */
+[type="radio"]:checked::after,
+[type="radio"]:not(:checked)::after {
+  content: "";
+  width: calc(var(--radio-input-size) - 10px);
+  height: calc(var(--radio-input-size) - 10px);
+  background: var(--radio-button-color, black);
+  position: absolute;
+  top: calc((var(--radio-input-size) - 10px) / 2);
+  left: calc((var(--radio-input-size) - 10px) / 2);
+  border-radius: 100%;
+  transition: all 0.2s ease;
+}
+
+/* Hide mark for unchecked */
+[type="radio"]:not(:checked)::after {
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* Show mark for unchecked */
+[type="radio"]:checked::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Fix appearance of custom checkbox for ios devices */
+html.plt-cordova.plt-ios [type="radio"] {
+  appearance: borderless-attachment;
+}

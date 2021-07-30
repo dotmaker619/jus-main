@@ -1,0 +1,10 @@
+<ng-container *ngIf="formControl$ | async as formControl">
+  <ng-container *ngIf="shouldDisplayErrorMessage(formControl); else fakeBlock">
+    <jlc-validation-message [errors]="formControl.errors">
+    </jlc-validation-message>
+  </ng-container>
+  <ng-template #fakeBlock>
+    <!-- Use fake block to avoid markup moving when error is occurred. -->
+    <jlc-validation-message> </jlc-validation-message>
+  </ng-template>
+</ng-container>

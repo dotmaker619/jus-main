@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <span *ngIf="matterTopic$ | async as topic; else skeletonTextTemplate">
+        {{ topic.title }}
+      </span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="matterPosts$ | async as matterPosts; else loading">
+    <jlc-message
+      *ngFor="let post of matterPosts; trackBy: trackMessage"
+      [matterPost]="post"
+    ></jlc-message>
+  </ng-container>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <form
+      class="submit-input"
+      *ngIf="sendForm$ | async as sendForm"
+      [formGroup]="sendForm"
+      (ngSubmit)="onSend(sendForm)"
+    >
+      <input
+        type="text"
+        placeholder="Post a Reply..."
+        formControlName="message"
+      />
+      <ion-button fill="clear" type="submit">
+        <ion-icon slot="icon-only" src="assets/icons/send_icon.svg"></ion-icon>
+      </ion-button>
+    </form>
+  </ion-toolbar>
+</ion-footer>
+
+<ng-template #loading>
+  <div class="loading">
+    <jlc-loading></jlc-loading>
+  </div>
+</ng-template>
+
+<ng-template #skeletonTextTemplate>
+  <span>
+    <ion-skeleton-text animated class="skeleton"></ion-skeleton-text>
+  </span>
+</ng-template>

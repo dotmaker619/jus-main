@@ -1,0 +1,16 @@
+<ion-content>
+  <div class="button-panel">
+    <button class="primary" (click)="onUploadFileClick()">
+      + File
+      <ion-icon src="/assets/icons/document_icon.svg"></ion-icon>
+    </button>
+  </div>
+  <jlc-documents-tree
+    class="docs-tree"
+    (documentAction)="onNodeAction($event)"
+    [documents]="templates$ | async"
+  >
+  </jlc-documents-tree>
+</ion-content>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

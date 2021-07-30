@@ -1,0 +1,24 @@
+<jlc-dialog-header>
+  <h2 class="title">{{ options.title }}</h2>
+  <hr class="line"/>
+</jlc-dialog-header>
+<jlc-dialog-content class="content">
+  <p class="message"
+    *ngIf="isTextContent">
+    {{ options.message }}
+  </p>
+  <div [innerHtml]="options.message"
+    *ngIf="!isTextContent">
+  </div>
+  <div class="buttons-container">
+    <button class="secondary" (click)="onCloseClicked()">
+      {{ options.cancelButtonText }}
+    </button>
+    <button *ngIf="options.confirmationButtonText"
+      [class]="options.confirmationButtonClass"
+      (click)="onConfirmClicked()"
+    >
+      {{ options.confirmationButtonText }}
+    </button>
+  </div>
+</jlc-dialog-content>

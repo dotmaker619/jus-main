@@ -1,0 +1,47 @@
+:host {
+  display: block;
+  --space: 10px;
+}
+
+.file {
+  margin: var(--space) 0;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  border: 2px solid var(--light-color);
+  border-radius: 3px;
+  padding: var(--space);
+}
+
+.icon {
+  background: var(--medium-color);
+  padding: 10px;
+  height: 40px;
+  border-radius: 50%;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: var(--space);
+}
+
+.icon ion-icon {
+  color: var(--primary-background-color);
+  width: 22px;
+  height: 22px;
+}
+
+.file ion-button ion-icon {
+  height: 15px;
+  width: 15px;
+}
+
+.secondary {
+  width: 100%;
+  margin-top: var(--space);
+}
+
+.file-name {
+  flex: 1;
+}

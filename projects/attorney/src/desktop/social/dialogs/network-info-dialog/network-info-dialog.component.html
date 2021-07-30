@@ -1,0 +1,26 @@
+<header>
+  <h2>Network Information</h2>
+  <button class="close-button focusable" (click)="close()">
+    <img src="assets/icons/close_icon.svg" />
+  </button>
+</header>
+<hr />
+<p class="announce">
+  ({{ options.participants.length }}) member in the network
+</p>
+<ul class="attorneys-list">
+  <li *ngFor="let participant of options.participants; trackBy: trackById">
+    <img [src]="participant.avatar" class="avatar" />
+    <p class="name ellipsis" [title]="participant.fullName">
+      {{ participant.fullName }}
+    </p>
+    <p class="specialty ellipsis">{{ participant.description }}</p>
+    <a
+      (click)="close()"
+      [routerLink]="['/attorneys', 'profile', participant.id]"
+      class="profile-button focusable"
+    >
+      View Profile
+    </a>
+  </li>
+</ul>

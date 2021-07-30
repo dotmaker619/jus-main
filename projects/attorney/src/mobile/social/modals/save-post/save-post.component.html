@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="onCancelClick()">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{ (isEdit$ | async) ? "Edit Post" : "Start Your New Post" }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    id="save-post-form"
+    *ngIf="socialPostForm$ | async as form"
+    [formGroup]="form"
+    (ngSubmit)="onFormSubmit(form)"
+  >
+    <label>
+      <span>Title*</span>
+      <input formControlName="title" type="text" />
+      <jlc-form-control-validation-message controlName="title">
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Text preview*</span>
+      <textarea formControlName="preview"></textarea>
+      <jlc-form-control-validation-message controlName="preview">
+      </jlc-form-control-validation-message>
+    </label>
+    <div>
+      <jlc-image-uploader formControlName="image"></jlc-image-uploader>
+      <jlc-form-control-validation-message controlName="image">
+      </jlc-form-control-validation-message>
+    </div>
+    <div>
+      <jlc-html-editor formControlName="body"></jlc-html-editor>
+      <jlc-form-control-validation-message controlName="body">
+      </jlc-form-control-validation-message>
+    </div>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button type="submit" class="primary" form="save-post-form">
+      Submit post
+    </button>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

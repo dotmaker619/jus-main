@@ -1,0 +1,68 @@
+:host {
+  display: block;
+}
+
+.badge {
+  color: var(--header-badge-color);
+  background: var(--header-badge-background-color);
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 2px 7px;
+  margin-left: 0.5rem;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-links a {
+  position: relative;
+  padding: 0.5rem calc(1.5rem + 15px) 0.5rem 1.5rem;
+  border-top: 1px solid var(--header-menu-separator-color);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+}
+
+.menu-links a::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  margin-top: -6px;
+  right: 1.5rem;
+  width: 7px;
+  height: 12px;
+  background: url("/assets/icons/arrow-right_icon.svg") no-repeat -8px;
+  background-size: 22px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem;
+}
+
+.user-image {
+  height: 46px;
+  width: 46px;
+  object-fit: cover;
+}
+
+.user-name {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.badge {
+  color: var(--header-badge-color);
+  background: var(--header-badge-background-color);
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 2px 7px;
+  margin-left: auto;
+  border-radius: 2px;
+}

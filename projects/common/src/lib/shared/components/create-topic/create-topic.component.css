@@ -1,0 +1,72 @@
+.create-topic-container {
+  border-radius: 3px;
+  border: 2px solid var(--light-tint-color);
+}
+
+header {
+  background-color: var(--primary-tint-color);
+  padding: 1.5rem 2rem;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+form {
+  padding: 1rem 3rem;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+}
+
+label {
+  margin-top: 1rem;
+  min-width: 200px;
+  display: block;
+  font-weight: bold;
+}
+
+label > * {
+  margin-top: 0.5rem;
+}
+
+hr {
+  margin: 0;
+  width: 100%;
+}
+
+footer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+textarea {
+  min-height: 4rem;
+  resize: vertical;
+}
+
+button {
+  border-radius: 50px;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.annotation {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.label-input {
+  flex: 5;
+}
+
+.label-select {
+  padding-left: 2rem;
+  flex: 3;
+}

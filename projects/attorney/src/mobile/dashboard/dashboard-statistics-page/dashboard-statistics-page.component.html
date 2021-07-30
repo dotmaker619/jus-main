@@ -1,0 +1,16 @@
+<jlat-dashboard-charts
+  *ngIf="
+    periodStatistic$ | async as periodStatistic;
+    else diagramLoadingTemplate
+  "
+  [quarter]="quarter$ | async"
+  [periodStatistic]="periodStatistic"
+  (quarterChange)="onQuarterChange($event)"
+  class="dashboard-statistics"
+></jlat-dashboard-charts>
+
+<ng-template #diagramLoadingTemplate>
+  <div class="loading-container">
+    <jlc-loading></jlc-loading>
+  </div>
+</ng-template>

@@ -1,0 +1,34 @@
+:host {
+  --space: 10px;
+
+  display: block;
+  width: 100%;
+}
+
+header {
+  align-items: center;
+  background: var(--primary-tint-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--space) * 2) 0;
+  border-bottom: 1px solid var(--list-item-border-color);
+}
+
+header > *:not(:last-child) {
+  margin-bottom: var(--space);
+}
+
+.title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.content {
+  padding: 0 calc(var(--space) * 1.5);
+}
+
+.preview-image {
+  width: 100%;
+  object-fit: cover;
+}

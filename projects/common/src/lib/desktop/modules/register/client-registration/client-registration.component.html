@@ -1,0 +1,30 @@
+<div class="page-container">
+  <h1 *ngIf="currentStep$ | async as currentStep">{{ currentStep.title }}</h1>
+  <hr />
+  <div
+    class="current-step"
+    *ngIf="currentStep$ | async as currentStep"
+    [ngSwitch]="currentStep.id"
+    [attr.disabled]="(isSubmitting$ | async) ? true : null"
+  >
+    <jlc-create-account
+      *ngSwitchCase="1"
+      [registrationData]="registrationData$ | async"
+      [validationError]="validationError$ | async"
+      (isFormNotEmpty)="canDeactivate = !$event"
+      (formSubmit)="onCreateAccountSubmitted($event)"
+      (cancel)="onCurrentStepCancelled()"
+    ></jlc-create-account>
+    <jlc-client-additional-info
+      *ngSwitchCase="2"
+      [additionalInfo]="registrationData$ | async"
+      [validationError]="validationError$ | async"
+      [isRegistration]="true"
+      (formSubmit)="onAdditionalInfoSubmitted($event)"
+      (back)="onBackCurrentStep($event)"
+      (cancel)="onCurrentStepCancelled()"
+    ></jlc-client-additional-info>
+  </div>
+</div>
+
+<jlc-loading mode="fullscreen" *ngIf="isSubmitting$ | async"></jlc-loading>

@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+
+.subtitle,
+h2 {
+  text-align: center;
+}
+
+hr {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+p {
+  text-align: center;
+}

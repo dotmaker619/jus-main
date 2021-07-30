@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Select Attorneys</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="close(selectedAttorneys)">
+        Select
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    [formGroup]="form"
+    *ngIf="filterForm$ | async as form"
+    class="filter-form"
+  >
+    <input
+      type="text"
+      formControlName="filter"
+      placeholder="Search for Attorney..."
+    />
+    <select formControlName="category">
+      <option [ngValue]="null">All Categories</option>
+      <option
+        [ngValue]="specialty"
+        *ngFor="let specialty of specialties$ | async"
+      >
+        {{ specialty.title }}
+      </option>
+    </select>
+  </form>
+  <div class="selected-items-container">
+    <p *ngIf="selectedAttorneys.length === 0">
+      Tap on Attorney to select
+    </p>
+    <ng-container
+      *ngFor="let attorney of selectedAttorneys; trackBy: trackById"
+    >
+      <ion-chip
+        *ngIf="!isAttorneyPreselected(attorney); else preselectedAttorneyChip"
+        class="attorney-chip"
+        (click)="onToggleAttorney(attorney)"
+      >
+        <ion-label>{{ attorney.fullName }}</ion-label>
+        <ion-icon name="close"></ion-icon>
+      </ion-chip>
+      <ng-template #preselectedAttorneyChip>
+        <ion-chip class="attorney-chip preselected">
+          <ion-label>{{ attorney.fullName }}</ion-label>
+        </ion-chip>
+      </ng-template>
+    </ng-container>
+  </div>
+  <ion-list
+    *ngIf="filteredAttorneys$ | async as attorneys; else skeletonList"
+    lines="full"
+  >
+    <ng-container *ngIf="attorneys.items.length > 0; else noItemsMessage">
+      <ng-container
+        *ngFor="let attorney of attorneys.items; trackBy: trackById"
+      >
+        <ion-item
+          class="attorney-item"
+          button
+          *ngIf="!isAttorneyPreselected(attorney); else preselectedAttorney"
+          detail="false"
+          (click)="onToggleAttorney(attorney)"
+        >
+          <jlc-selectable-user-item
+            [user]="attorney"
+            [isSelected]="isAttorneySelected(attorney)"
+          ></jlc-selectable-user-item>
+        </ion-item>
+        <ng-template #preselectedAttorney>
+          <ion-item class="attorney-item preselected" detail="false">
+            <jlc-selectable-user-item
+              [user]="attorney"
+              [isSelected]="isAttorneySelected(attorney)"
+            ></jlc-selectable-user-item>
+          </ion-item>
+        </ng-template>
+      </ng-container>
+      <ion-infinite-scroll
+        *ngIf="attorneys.items.length < attorneys.itemsCount"
+        threshold="70px"
+        (ionInfinite)="loadMoreAttorneys($event)"
+      >
+        <jlc-loading class="pagination-loading"></jlc-loading>
+      </ion-infinite-scroll>
+    </ng-container>
+  </ion-list>
+</ion-content>
+
+<ng-template #skeletonList>
+  <ion-item class="attorney-item" detail="false" *ngFor="let i of [1, 2, 3]">
+    <jlc-selectable-user-item></jlc-selectable-user-item>
+  </ion-item>
+</ng-template>
+
+<ng-template #noItemsMessage>
+  <ion-item detail="false">
+    <p class="no-items-message">
+      We haven't found anyone
+    </p>
+  </ion-item>
+</ng-template>

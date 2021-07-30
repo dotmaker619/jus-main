@@ -1,0 +1,31 @@
+<form
+  *ngIf="form$ | async as form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit(form)"
+>
+  <label>
+    <span>Organization Name*</span>
+    <input
+      type="text"
+      formControlName="organizationName"
+      autocomplete="organization"
+      jlcInputStatus
+      [jlcApiValidation]="validationError$ | async"
+    />
+    <jlc-form-control-validation-message
+      controlName="organizationName"
+    ></jlc-form-control-validation-message>
+  </label>
+
+  <!-- So that the form might be submitted clicking on enter -->
+  <input type="submit" hidden />
+</form>
+
+<!-- Use form for individual account to reuse fields from there. -->
+<jlc-create-individual-account
+  [data]="data$ | async"
+  (submit)="onInnerFormSubmit($event)"
+  [validationError]="validationError$ | async"
+  [disabled]="disabled$ | async"
+>
+</jlc-create-individual-account>

@@ -1,0 +1,20 @@
+:host {
+  --space: 10px;
+}
+
+form {
+  margin: 10px;
+}
+
+textarea {
+  width: 100%;
+}
+
+.button-panel {
+  margin: var(--space);
+  display: flex;
+}
+
+.button-panel .primary {
+  flex: 1;
+}

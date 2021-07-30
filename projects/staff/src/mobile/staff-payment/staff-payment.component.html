@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Payment Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<main class="content">
+  <section>
+    <h2>Payment Type</h2>
+    <jlc-staff-payment-plan-info [price]="price$ | async">
+    </jlc-staff-payment-plan-info>
+  </section>
+  <section>
+    <h2>Card Information</h2>
+    <jlc-payment-method-form
+      class="payment-form"
+      [showControls]="false"
+    ></jlc-payment-method-form>
+  </section>
+  <div class="buttons-panel">
+    <button class="secondary" (click)="onLogoutClick()">Cancel</button>
+    <button class="primary" (click)="onSubmit()">Submit</button>
+  </div>
+</main>
+
+<jlc-loading
+  mode="fullscreen"
+  message="Processing the payment..."
+  *ngIf="isLoading$ | async"
+></jlc-loading>

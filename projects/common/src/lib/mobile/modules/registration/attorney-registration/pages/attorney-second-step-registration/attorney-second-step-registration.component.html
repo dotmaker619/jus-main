@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="presaveRegistrationData()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <jlc-registration-heading stepNum="2" text="Verify Attorney Information">
+    To become a verified Attorney on JusLaw, we need to validate the following
+    information:
+  </jlc-registration-heading>
+  <form
+    *ngIf="form$ | async as form"
+    id="attorney-second-step-registration-form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form)"
+  >
+    <jlc-mobile-attorney-profile-form
+      [jlcApiValidation]="validationError$ | async"
+      formControlName="data"
+    >
+    </jlc-mobile-attorney-profile-form>
+    <section class="attachments-container">
+      <h4>Attachments</h4>
+      <jlc-mobile-file-drop
+        [documents]="form.value.attachedDocs"
+        (documentsChange)="onDocumentsChange(form, $event)"
+        (errors)="onFileDropErrors($event)"
+        [multiple]="true"
+      >
+      </jlc-mobile-file-drop>
+      <jlc-form-control-validation-message controlName="attachedDocs">
+      </jlc-form-control-validation-message>
+    </section>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="button-panel">
+      <button
+        class="primary"
+        type="submit"
+        form="attorney-second-step-registration-form"
+      >
+        Next
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

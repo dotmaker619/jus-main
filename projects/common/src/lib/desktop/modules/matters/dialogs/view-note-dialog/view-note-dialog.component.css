@@ -1,0 +1,53 @@
+:host {
+  --space: 20px;
+}
+
+h2 {
+  max-width: 50vw;
+}
+
+.dialog {
+  max-width: 780px;
+  width: 80vw;
+}
+
+.dialog > * {
+  margin: var(--space);
+}
+
+.subheader,
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.body p {
+  margin-right: auto;
+  word-wrap: break-word;
+  max-height: 20rem;
+  overflow-y: auto;
+  white-space: pre;
+}
+
+.button-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.close-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.tertiary {
+  text-transform: uppercase;
+  border: none;
+}

@@ -1,0 +1,75 @@
+<div class="page-container">
+  <header class="page-header">
+    <h1>Invoices</h1>
+  </header>
+
+  <mat-tab-group
+    *ngIf="tabs$ | async as tabs; else loading"
+    class="tab-group"
+    disableRipple
+    animationDuration="0ms"
+  >
+    <mat-tab *ngFor="let tab of tabs">
+      <ng-template mat-tab-label>
+        <div class="tab-label">
+          {{ tab.name }}
+          <div class="badge">
+            <span>{{ tab.totalCount }}</span>
+          </div>
+        </div>
+      </ng-template>
+      <div class="tab-body" *ngIf="tab">
+        <ng-container
+          *ngTemplateOutlet="
+            actionPanelTemplate;
+            context: { form: tab.filterForm }
+          "
+        ></ng-container>
+        <jlc-invoices-table
+          [invoices]="tab.invoices"
+          [isAttorneyTable]="false"
+          (orderChange)="onOrderChange($event, tab)"
+        ></jlc-invoices-table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+  <ng-template #loading>
+    <div class="loading">
+      <jlc-loading></jlc-loading>
+    </div>
+  </ng-template>
+
+  <ng-template #actionPanelTemplate let-form="form">
+    <div class="action-panel">
+      <form class="filter" [formGroup]="form">
+        <div class="date-filter">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [matDatepickerFilter]="filterDatesForMatter"
+            placeholder="Choose a date"
+            formControlName="month"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            (monthSelected)="onMonthSelected($event, picker, form)"
+            startView="multi-year"
+            touchUi
+            #picker
+          ></mat-datepicker>
+        </div>
+
+        <input
+          formControlName="query"
+          type="text"
+          placeholder="Search"
+          class="search"
+        />
+      </form>
+    </div>
+  </ng-template>
+</div>

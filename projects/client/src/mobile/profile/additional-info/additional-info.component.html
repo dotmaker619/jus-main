@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button
+        fill="clear"
+        *ngIf="form$ | async as form"
+        (click)="onSubmit(form)"
+      >
+        Save
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Additional Information</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form *ngIf="form$ | async as form" [formGroup]="form">
+    <jlc-client-info-form
+      formControlName="client"
+      [jlcApiValidation]="validationError$ | async"
+    >
+    </jlc-client-info-form>
+  </form>
+</ion-content>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

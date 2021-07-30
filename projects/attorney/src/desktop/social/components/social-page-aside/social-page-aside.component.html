@@ -1,0 +1,84 @@
+<ng-container [ngSwitch]="asideState$ | async">
+  <ng-container
+    *ngSwitchCase="asideStates.Loading"
+    [ngTemplateOutlet]="loading"
+  >
+  </ng-container>
+
+  <ng-container
+    *ngSwitchCase="asideStates.NoChats"
+    [ngTemplateOutlet]="networksPlaceholder"
+  >
+  </ng-container>
+
+  <ng-container *ngSwitchDefault [ngTemplateOutlet]="asideContent">
+  </ng-container>
+</ng-container>
+
+<ng-template #asideContent>
+  <header>
+    <img class="networks-icon" src="assets/icons/people_icon.svg" alt="" />
+    <h2>
+      My Network
+      <span *ngIf="chats$ | async as chats">({{ chats.length }})</span>
+    </h2>
+    <button
+      class="new-network-button focusable"
+      (click)="onCreateNetworkClick()"
+    >
+      + New
+    </button>
+    <input
+      class="search-input"
+      type="search"
+      placeholder="Search..."
+      #filterInput
+      (input)="onNetworksSearchChange($event.target.value)"
+    />
+  </header>
+  <section [ngSwitch]="asideState$ | async" class="chats-list-section">
+    <ng-container *ngSwitchCase="asideStates.Found">
+      <ul class="networks-list" *ngIf="chats$ | async as chats">
+        <li *ngFor="let chat of chats; trackBy: trackById">
+          <a class="focusable" [routerLink]="['networks', chat.network.id]">
+            <jlc-chat-list-item [chat]="chat"></jlc-chat-list-item>
+          </a>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-container *ngSwitchCase="asideStates.NotFound">
+      <p class="no-found-message">No chats found</p>
+    </ng-container>
+    <ng-container
+      *ngSwitchCase="asideStates.Searching"
+      [ngTemplateOutlet]="loading"
+    ></ng-container>
+  </section>
+  <footer>
+    <a routerLink="networks">
+      See All Messages
+    </a>
+  </footer>
+</ng-template>
+
+<ng-template #networksPlaceholder>
+  <div class="networks-placeholder">
+    <div class="image-container">
+      <img src="/assets/icons/network.svg" alt="" />
+    </div>
+    <div>
+      <h2>Create New Network</h2>
+      <p class="italic">
+        To get started, click on the button ‘Create Network’ and select people
+        to invite to your network.
+      </p>
+    </div>
+    <button class="primary" (click)="onCreateNetworkClick()">
+      + New Network
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <jlc-loading [diameter]="50" mode="fullsize"></jlc-loading>
+</ng-template>

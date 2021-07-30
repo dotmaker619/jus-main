@@ -1,0 +1,31 @@
+<ion-header>
+  <jlc-forum-subheader>
+    <div class="subheader-content">
+      <h1>Jus-Law Forums</h1>
+      <ion-menu-button class="back-button"></ion-menu-button>
+    </div>
+  </jlc-forum-subheader>
+</ion-header>
+<ion-content>
+  <jlc-topic-search
+    (searchQueryChange)="onTopicSearchChange($event)"
+  ></jlc-topic-search>
+  <jlc-category-list [categories]="categories$ | async">
+    <span no-items>No categories found</span>
+  </jlc-category-list>
+  <ng-container *ngIf="foundTopics$ | async as topics">
+    <h2 *ngIf="topics.items.length">Topics</h2>
+
+    <jlc-topics-list [topics]="topics.items"></jlc-topics-list>
+
+    <ion-infinite-scroll
+      *ngIf="topics.items.length < topics.itemsCount"
+      threshold="200px"
+      (ionInfinite)="loadMoreTopics($event)"
+    >
+      <jlc-loading></jlc-loading>
+      <ion-infinite-scroll-content loadingText="Loading more topics...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ng-container>
+</ion-content>

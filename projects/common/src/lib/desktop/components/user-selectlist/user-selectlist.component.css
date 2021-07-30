@@ -1,0 +1,33 @@
+/* List */
+
+.attorney-list {
+  list-style: none;
+}
+
+.attorney-list li + li {
+  margin-top: 10px;
+}
+
+/* Pagination control */
+
+.pagination {
+  display: flex;
+  align-items: center;
+}
+
+.pagination hr {
+  flex: 1;
+  margin: 0;
+  border: none;
+  height: 1px;
+  background: var(--primary-border-color);
+}
+
+.pagination button {
+  background: none;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 3px;
+  margin: 10px;
+  color: var(--medium-color);
+  cursor: pointer;
+}

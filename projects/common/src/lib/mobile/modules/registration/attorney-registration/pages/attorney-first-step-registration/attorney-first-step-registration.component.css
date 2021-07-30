@@ -1,0 +1,19 @@
+:host {
+  --space: 10px;
+}
+
+ion-content {
+  --padding-start: var(--space);
+  --padding-bottom: var(--space);
+  --padding-top: var(--space);
+  --padding-end: var(--space);
+}
+
+.button-panel {
+  display: flex;
+  margin: var(--space);
+}
+
+.primary {
+  flex: 1;
+}

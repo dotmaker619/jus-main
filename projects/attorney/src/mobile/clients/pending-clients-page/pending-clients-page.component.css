@@ -1,0 +1,15 @@
+:host {
+  --space: 10px;
+}
+
+ion-item {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+  --padding-top: var(--space);
+  --padding-bottom: var(--space);
+  --inner-padding-end: 0;
+}
+
+.message {
+  text-align: center;
+}

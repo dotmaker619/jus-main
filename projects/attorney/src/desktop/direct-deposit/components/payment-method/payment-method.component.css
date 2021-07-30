@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 24px;
+  box-shadow: 0 0 2px 0 var(--medium-shade-color);
+}
+
+.payment-info {
+  flex: 1;
+  padding: 0 15px;
+}
+
+.payment-info > * {
+  display: block;
+  margin: 2px 0;
+}
+
+.payment-info .additional {
+  font-size: 0.9rem;
+}
+
+.additional .not-verified {
+  color: var(--tertiary-color);
+}
+
+.action-buttons > * {
+  display: inline-block;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  height: 18px;
+  padding: 5px;
+  margin-right: 35px;
+  width: 18px;
+  /* To set padding without increasing height and width */
+  box-sizing: content-box;
+}
+
+.btn-icon{
+  height: 100%;
+  width: 100%;
+}

@@ -1,0 +1,72 @@
+/* Layout */
+
+:host {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: min(80vh, 800px);
+  width: min(80vw, 900px);
+}
+
+hr {
+  margin: 16px 0;
+}
+
+.fields > * + *:not(jlc-form-control-validation-message),
+.form-content > * + *:not(jlc-form-control-validation-message),
+.primary {
+  margin-top: 10px;
+}
+
+.fields,
+.form-content,
+.network-form {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+}
+
+.network-form,
+.form-content {
+  flex: 1;
+}
+
+.network-form {
+  align-items: center;
+}
+
+.fields > *:not(jlat-select-attorneys) {
+  flex-shrink: 0;
+}
+
+/* Header */
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Close button */
+
+.close-button {
+  padding: 0;
+  background: none;
+  margin: 0;
+  border: none;
+  height: 33px;
+  width: 33px;
+}
+
+.close-button img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Form */
+
+.form-content {
+  border: 1px solid var(--primary-border-color);
+  padding: 10px;
+  border-radius: 5px;
+}

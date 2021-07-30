@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="onCloseClick()">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Share Matter</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    id="refer-form"
+    [formGroup]="referForm"
+    (ngSubmit)="onFormSubmit(referForm)"
+  >
+    <div class="padding">
+      <label>
+        <span>Title</span>
+        <input type="text" formControlName="title" />
+        <jlc-form-control-validation-message controlName="title">
+        </jlc-form-control-validation-message>
+      </label>
+      <label>
+        <span>Message</span>
+        <textarea formControlName="message"></textarea>
+        <jlc-form-control-validation-message controlName="message">
+        </jlc-form-control-validation-message>
+      </label>
+      <label>
+        <span>Sent to: </span>
+        <input
+          type="text"
+          formControlName="filter"
+          placeholder="Search for Attorney..."
+        />
+      </label>
+      <div class="selected-items-container">
+        <p *ngIf="selectedUsers.length === 0">
+          Tap on Attorney to select
+        </p>
+        <ion-chip
+          class="attorney-chip"
+          (click)="onToggleUser(attorney)"
+          *ngFor="let attorney of selectedUsers; trackBy: trackById"
+        >
+          <ion-label>{{ attorney.fullName }}</ion-label>
+          <ion-icon name="close"></ion-icon>
+        </ion-chip>
+      </div>
+    </div>
+    <div *ngIf="users$ | async as attorneys; else skeletonList">
+      <ion-list lines="full">
+        <ng-container *ngIf="attorneys.items.length > 0; else noItemsMessage">
+          <ion-item
+            *ngFor="let attorney of attorneys.items; trackBy: trackById"
+            class="attorney-item"
+            button
+            detail="false"
+            (click)="onToggleUser(attorney)"
+          >
+            <jlc-selectable-user-item
+              [user]="attorney"
+              [isSelected]="isUserSelected(attorney)"
+            ></jlc-selectable-user-item>
+          </ion-item>
+        </ng-container>
+      </ion-list>
+      <button
+        class="pagination"
+        *ngIf="attorneys.items.length < attorneys.itemsCount"
+        type="button"
+        (click)="onLoadMoreUsers()"
+        [disabled]="isUsersLoading$ | async"
+      >
+        More
+      </button>
+    </div>
+    <div class="padding">
+      <p class="email-message">OR Not listed above? Invite by email address</p>
+      <label>
+        <jlc-email-list-input
+          class="email-input"
+          formControlName="emails"
+          [jlcApiValidation]="validationError$ | async"
+        ></jlc-email-list-input>
+        <jlc-form-control-validation-message
+          controlName="emails"
+        ></jlc-form-control-validation-message>
+      </label>
+    </div>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button form="refer-form" class="primary" type="submit">
+      {{ selectedUsers.length > 0 ? "Update" : "Send" }}
+    </button>
+  </ion-toolbar>
+</ion-footer>
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>
+
+<ng-template #skeletonList>
+  <ion-item
+    class="attorney-item"
+    detail="false"
+    lines="full"
+    *ngFor="let i of [1, 2, 3]"
+  >
+    <jlc-selectable-user-item></jlc-selectable-user-item>
+  </ion-item>
+</ng-template>
+
+<ng-template #noItemsMessage>
+  <ion-item detail="false">
+    <p class="no-items-message">
+      We haven't found anyone
+    </p>
+  </ion-item>
+</ng-template>

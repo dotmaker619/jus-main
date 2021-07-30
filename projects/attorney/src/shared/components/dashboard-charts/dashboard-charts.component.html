@@ -1,0 +1,20 @@
+<div class="quarter-nav">
+  <button type="button" class="forward-button prev" (click)="onPrevClick()">
+    <img src="/assets/icons/forward_icon.svg" alt="" />
+  </button>
+  <h2 class="charts-title">{{ year }} Quarter {{ quarter.quarterNumber }}</h2>
+  <button type="button" class="forward-button next" (click)="onNextClick()">
+    <img src="/assets/icons/forward_icon.svg" alt="" />
+  </button>
+</div>
+
+<jlat-quarter-statistic
+  [opportunitiesStatistic]="periodStatistic.opportunities"
+  [activeMattersStatistic]="periodStatistic.activeMatters"
+  [activeLeadsStatistic]="periodStatistic.activeLeads"
+  [convertedStatistic]="periodStatistic.converted"
+></jlat-quarter-statistic>
+<jlat-billable-hours
+  [quarter]="quarter"
+  [timeBilled]="periodStatistic.timeBilled"
+></jlat-billable-hours>

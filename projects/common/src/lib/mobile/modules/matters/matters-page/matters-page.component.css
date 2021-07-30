@@ -1,0 +1,13 @@
+.filtering-form {
+  padding: 10px;
+}
+
+.filtering-form > select {
+  width: 100%;
+  background-color: var(--primary-background-color);
+}
+
+.fab-button {
+  --background: var(--secondary-gradient);
+  --background-activated: var(--secondary-gradient);
+}

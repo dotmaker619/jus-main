@@ -1,0 +1,48 @@
+:host {
+  display: block;
+  height: 100px;
+}
+
+.jumbotron {
+  background-size: auto;
+  color: var(--header-color);
+  font-size: 2.5rem;
+  margin: 0 auto;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  filter: brightness(0.7);
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video {
+  position: absolute;
+  top: -150px;
+  left: 0;
+  width: 100%;
+}
+
+@media (orientation: portrait) and (max-width: 450px) {
+  .video {
+    top: 0;
+  }
+}

@@ -1,0 +1,40 @@
+<nav>
+  <div class="logo"></div>
+  <div class="links">
+    <a
+      *ngFor="let navigation of navigationLinks"
+      [routerLink]="[navigation.link]"
+      routerLinkActive="active"
+    >
+      {{ navigation.label }}
+    </a>
+  </div>
+  <div class="menu" [class.active]="isOpened$ | async">
+    <button
+      class="menu-button"
+      [matMenuTriggerFor]="headerMenu"
+      (click)="onOpenMenuClicked()"
+    >
+      <!-- Burger menu icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path
+          d="M432 176H80c-8.8 0-16-7.2-16-16s7.2-16 16-16h352c8.8 0 16 7.2 16 16s-7.2 16-16 16zM432 272H80c-8.8 0-16-7.2-16-16s7.2-16 16-16h352c8.8 0 16 7.2 16 16s-7.2 16-16 16zM432 368H80c-8.8 0-16-7.2-16-16s7.2-16 16-16h352c8.8 0 16 7.2 16 16s-7.2 16-16 16z"
+        ></path>
+      </svg>
+
+      <div class="badge" *ngIf="notifications$ | async as notificationsCount">
+        {{ notificationsCount }}
+      </div>
+    </button>
+    <mat-menu
+      #headerMenu="matMenu"
+      (closed)="onMenuClosed()"
+      class="header-menu"
+    >
+      <jlat-header-menu
+        [menuLinks$]="menuLinks$"
+        [attorney]="attorney$ | async"
+      ></jlat-header-menu>
+    </mat-menu>
+  </div>
+</nav>

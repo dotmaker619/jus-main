@@ -1,0 +1,22 @@
+<div class="topic-search-container">
+  <div class="greeting">
+    <span *ngIf="currentUser$ | async as user; else authLinkTemplate">
+      <span *ngIf="isAttorney(user.role); else greetClient">
+        Explore the Jus-Law Forum! Help those in need of legal advice and gain
+        them as potential clients.
+      </span>
+      <ng-template #greetClient>
+        Hello, <b>{{ user.fullName }}</b>
+      </ng-template>
+    </span>
+    <ng-template #authLinkTemplate>
+      <div>
+        <a [routerLink]="['/auth', 'login']">Login</a>
+        <span> in order to post in forum</span>
+      </div>
+    </ng-template>
+  </div>
+  <div class="search">
+    <input type="search" (change)="onInputChange($event.target.value)" />
+  </div>
+</div>

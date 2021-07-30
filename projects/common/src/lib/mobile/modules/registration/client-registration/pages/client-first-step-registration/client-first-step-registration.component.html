@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/auth/register"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Create an Account
+    </ion-title>
+  </ion-toolbar>
+  <jlc-tab-bar (tabChange)="onClientTypeChange($event)">
+    <jlc-tab-button [tab]="clientType.Individual">
+      Individual
+    </jlc-tab-button>
+    <jlc-tab-button [tab]="clientType.Organization">
+      Organization
+    </jlc-tab-button>
+  </jlc-tab-bar>
+</ion-header>
+<ion-content>
+  <div class="form-container" [ngSwitch]="currentClientType$ | async">
+    <ng-container *ngSwitchCase="clientType.Individual">
+      <jlc-create-individual-account
+        [data]="initialData$ | async"
+        [validationError]="validationError$ | async"
+        #individualAccountForm
+        (submit)="onSubmit($event)"
+      ></jlc-create-individual-account>
+      <div class="button-panel">
+        <button
+          class="primary"
+          (click)="individualAccountForm.submitManually()"
+        >
+          Next
+        </button>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="clientType.Organization">
+      <jlc-create-organization-account
+        [data]="initialData$ | async"
+        [validationError]="validationError$ | async"
+        #organizationAccountForm
+        (submit)="onSubmit($event)"
+      ></jlc-create-organization-account>
+      <div class="button-panel">
+        <button
+          class="primary"
+          (click)="organizationAccountForm.submitManually()"
+        >
+          Next
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</ion-content>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

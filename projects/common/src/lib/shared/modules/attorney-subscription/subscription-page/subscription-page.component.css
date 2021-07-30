@@ -1,0 +1,98 @@
+:host {
+  display: block;
+  padding: 32px 40px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.elements-group {
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 2px;
+}
+
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.571rem;
+  height: 2.571rem;
+  background: var(--primary-gradient);
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.icon-wrapper > img {
+  height: 1.429rem;
+  width: 1.429rem;
+  filter: invert(1);
+}
+
+.plan-info,
+.payment-method-info {
+  flex-grow: 1;
+}
+
+.plan-info > .title,
+.payment-method-info > .title {
+  font-weight: bold;
+}
+
+.plan-info > .price,
+.payment-method-info > .date {
+  font-size: 0.929rem;
+}
+
+.renewal-date {
+  margin-right: 28px;
+  color: var(--primary-placeholder-color);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.renewal-date > .date {
+  font-size: 0.929rem;
+}
+
+.cancel-subscription {
+  display: block;
+  margin: 10px 30px 10px auto;
+  padding: 5px 10px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--tertiary-color);
+  cursor: pointer;
+}
+
+.cancel-subscription[disabled],
+.cancel-subscription:disabled {
+  opacity: 0.5;
+}
+
+.button-edit {
+  border: none;
+  background: none;
+  margin-right: 24px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.icon-card-wrapper {
+  display: flex;
+  margin-right: 16px;
+}
+
+.icon-card-wrapper > img {
+  width: 2.786rem;
+  height: 2.786rem;
+}
+
+.no-active-subscription-message {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

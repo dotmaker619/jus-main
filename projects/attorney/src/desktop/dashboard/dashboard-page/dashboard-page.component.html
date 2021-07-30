@@ -1,0 +1,70 @@
+<div class="page-container">
+  <ng-container *ngIf="dashboard$ | async as dashboard; else loading">
+    <h1 class="title">
+      My Dashboard
+    </h1>
+
+    <div class="statistic">
+      <div class="cards">
+        <div class="cards-col">
+          <jlat-dashboard-card
+            [count]="dashboard.opportunities.length"
+            [iconUrl]="opportunitiesCardIconUrl"
+            title="Opportunities"
+            link="/leads"
+          ></jlat-dashboard-card>
+          <jlat-dashboard-card
+            [count]="dashboard.activeMatters.length"
+            [iconUrl]="activeMattersCardIconUrl"
+            title="Active Matters"
+            link="/matters"
+          ></jlat-dashboard-card>
+        </div>
+        <div class="cards-col">
+          <jlat-dashboard-card
+            [count]="dashboard.activeLeads.length"
+            [iconUrl]="activeLeadsCardIconUrl"
+            title="Active Leads"
+            link="/leads/active"
+          ></jlat-dashboard-card>
+          <jlat-dashboard-card
+            [count]="dashboard.documents.length"
+            [iconUrl]="activeDocumentsCardIconUrl"
+            title="Document Library"
+            link="/documents"
+          ></jlat-dashboard-card>
+        </div>
+      </div>
+
+      <jlat-dashboard-charts
+        [quarter]="quarter$ | async"
+        [periodStatistic]="dashboard.periodStatistic"
+        (quarterChange)="onQuarterChange($event)"
+      ></jlat-dashboard-charts>
+    </div>
+
+    <div class="lists">
+      <div class="column">
+        <jlat-dashboard-opportunities-list
+          title="Opportunities (Activity Stream)"
+          [opportunities]="dashboard.opportunities"
+        ></jlat-dashboard-opportunities-list>
+      </div>
+      <div class="column">
+        <jlat-dashboard-active-leads-list
+          title="Active Leads"
+          [chats]="dashboard.activeLeads"
+        ></jlat-dashboard-active-leads-list>
+      </div>
+      <div class="column">
+        <jlat-dashboard-active-matters-list
+          title="Active Matters"
+          [matters]="dashboard.activeMatters"
+        ></jlat-dashboard-active-matters-list>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<ng-template #loading>
+  <jlc-loading mode="fullsize"></jlc-loading>
+</ng-template>

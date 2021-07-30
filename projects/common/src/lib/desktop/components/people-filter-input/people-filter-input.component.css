@@ -1,0 +1,69 @@
+/* Layout */
+
+:host {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border-radius: 4px;
+  border: 1px solid var(--primary-border-color);
+  padding: 5px;
+}
+
+:host:focus-within {
+  box-shadow: var(--focus-shadow);
+}
+
+.search-icon,
+.person-badge {
+  margin: 5px;
+  flex-shrink: 0;
+}
+
+/* Input */
+
+input.filter-input {
+  /* Complex selector to override global one. `input:not([type="checkbox"]):not([type="radio"])` */
+  flex: 1;
+  min-width: 10rem;
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+
+/* Icons */
+
+.search-icon {
+  filter: invert(0.5);
+  width: 24px;
+  height: 24px;
+}
+
+/* Person badge. */
+
+.person-badge {
+  background: var(--primary-light-color);
+  border: 1px solid var(--primary-shade-color);
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 20px;
+  text-transform: capitalize;
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  height: 2rem;
+}
+
+.delete-button {
+  padding: 3px;
+  border: none;
+  height: 22px;
+  width: 22px;
+  background: none;
+  border-radius: 22px;
+  filter: invert(0.5);
+}
+
+.person-badge .delete-button {
+  margin-left: 10px;
+}

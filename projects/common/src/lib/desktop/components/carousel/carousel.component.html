@@ -1,0 +1,42 @@
+<header class="header">
+  <h2 class="title">{{ header }}</h2>
+
+  <div class="controls" *ngIf="areButtonsShown">
+    <button
+      type="button"
+      class="to-left"
+      value="Scroll left"
+      (click)="swipeToLeft()"
+    ></button>
+    <button
+      type="button"
+      class="to-right"
+      value="Scroll right"
+      (click)="swipeToRight()"
+    ></button>
+  </div>
+</header>
+
+<div class="attorneys">
+  <mat-tab-group
+    [selectedIndex]="tabChange$ | async"
+    (selectedIndexChange)="selectTab($event)"
+    class="hide-header"
+    disableRipple
+  >
+    <mat-tab *ngFor="let group of groupedItems">
+      <div class="items-list">
+        <div class="item" *ngFor="let item of group; trackBy: trackFn">
+          <ng-container
+            *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"
+          >
+          </ng-container>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<div class="loading" *ngIf="!groupedItems">
+  <jlc-loading></jlc-loading>
+</div>

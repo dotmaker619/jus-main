@@ -1,0 +1,37 @@
+<jlc-forum-subheader>
+  <h1>Jus-Law Forums</h1>
+</jlc-forum-subheader>
+<div class="forum-page-container" *ngIf="category$ | async as category">
+  <jlc-breadcrumbs [links]="breadcrumbs$ | async"></jlc-breadcrumbs>
+
+  <h1>{{ category.title }}</h1>
+
+  <ng-container *ngTemplateOutlet="paginationPanel"></ng-container>
+
+  <jlc-topics-table [topics$]="topics$"></jlc-topics-table>
+
+  <ng-container *ngTemplateOutlet="paginationPanel"></ng-container>
+
+  <ng-template #paginationPanel>
+    <div class="pagination-panel">
+      <ng-container *ngIf="pagesCount$ | async as pagesCount">
+        <jlc-forum-paginator
+          [pagesCount]="pagesCount"
+          [currentPage]="pageChange$ | async"
+          (pageChange)="onPageChange($event)"
+        ></jlc-forum-paginator>
+        <ng-template [ngxPermissionsOnly]="roles.Client">
+          <a
+            [routerLink]="['/forum']"
+            [queryParams]="{ categoryId: category.id }"
+            queryParamsHandling="merge"
+            class="primary"
+            *ngIf="currentUser$ | async"
+          >
+            New Post
+          </a>
+        </ng-template>
+      </ng-container>
+    </div>
+  </ng-template>
+</div>

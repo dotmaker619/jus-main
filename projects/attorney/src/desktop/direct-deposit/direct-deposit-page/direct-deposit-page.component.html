@@ -1,0 +1,64 @@
+<div class="page-container">
+  <h1>
+    Direct Deposit
+  </h1>
+  <hr />
+  <ng-container [ngSwitch]="viewState$ | async">
+    <ng-container
+      *ngSwitchCase="accountState.Unknown"
+      [ngTemplateOutlet]="loading"
+    ></ng-container>
+    <ng-container
+      *ngSwitchCase="accountState.Exist"
+      [ngTemplateOutlet]="content"
+    ></ng-container>
+    <ng-container
+      *ngSwitchCase="accountState.Pending"
+      [ngTemplateOutlet]="pending"
+    ></ng-container>
+    <ng-container
+      *ngSwitchCase="accountState.NotExist"
+      [ngTemplateOutlet]="noAccount"
+    ></ng-container>
+  </ng-container>
+</div>
+
+<ng-template #loading>
+  <jlc-loading
+    message="Trying to get your account information..."
+  ></jlc-loading>
+</ng-template>
+
+<ng-template #content>
+  <ng-container *ngIf="accountInfo$ | async as account">
+    <jlat-payment-method
+      [paymentAccount]="account"
+      [editLink]="editLink$ | async"
+    ></jlat-payment-method>
+  </ng-container>
+</ng-template>
+
+<ng-template #pending>
+  <section class="pending-message">
+    <p class="message">
+      {{ templateMessages.accountInProcessing }}
+    </p>
+    <a [href]="editLink$ | async">
+      Edit account
+    </a>
+  </section>
+</ng-template>
+
+<ng-template #noAccount>
+  <section class="no-account">
+    <jlat-payment-message></jlat-payment-message>
+    <div class="buttons">
+      <a routerLink=".." class="secondary">
+        Back
+      </a>
+      <a [href]="registerLink$ | async" class="primary">
+        Add account
+      </a>
+    </div>
+  </section>
+</ng-template>

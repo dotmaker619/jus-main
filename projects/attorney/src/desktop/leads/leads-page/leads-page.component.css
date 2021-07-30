@@ -1,0 +1,57 @@
+:host {
+  display: flex;
+  position: relative;
+  height: 100%;
+}
+
+.page-container {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+}
+
+.page-header {
+  margin: 20px 40px;
+}
+
+.page-title {
+  color: var(--page-title-color);
+}
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0;
+  height: 100%;
+}
+
+.tab-label {
+  width: 185px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tab-label .badge {
+  background: currentColor;
+  border-radius: 11px;
+  width: 35px;
+}
+
+.tab-label .badge span {
+  color: white;
+  line-height: 22px;
+}
+
+.tab-content-container {
+  flex: 1;
+  min-height: 400px;
+  border: 1px solid var(--primary-border-color);
+  border-top: none;
+  max-height: 900px;
+}

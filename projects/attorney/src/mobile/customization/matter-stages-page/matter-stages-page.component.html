@@ -1,0 +1,25 @@
+<ion-content>
+  <ion-list *ngIf="stages$ | async as stages; else stagesLoadingTemplate">
+    <ion-item class="message" *ngIf="stages.length === 0">
+      <ion-label>No stages</ion-label>
+    </ion-item>
+    <ion-item *ngFor="let stage of stages; trackBy: trackStage" lines="full">
+      <jlat-customization-list-item
+        [item]="stage"
+        (edit)="onStageEdit($event)"
+        (delete)="onStageDelete($event)"
+      >
+        <p class="title">{{ stage.title }}</p>
+      </jlat-customization-list-item>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="fab-button" (click)="onCreateStage()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ng-template #stagesLoadingTemplate>
+  <jlc-skeleton-list></jlc-skeleton-list>
+</ng-template>

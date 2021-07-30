@@ -1,0 +1,465 @@
+<div
+  class="page-child-container"
+  *ngIf="additionalDataForm$ | async as additionalDataForm; else loadingForm"
+>
+  <p *ngIf="isRegistration">
+    To become a verified Attorney on Jus-Law, we need to validate the following
+    information:
+  </p>
+
+  <form
+    class="column"
+    [formGroup]="additionalDataForm"
+    (ngSubmit)="onFormSubmitted(additionalDataForm)"
+  >
+    <div class="personal-info">
+      <div>
+        <fieldset>
+          <div class="row name-input">
+            <label>
+              First Name*
+              <input
+                jlcInputStatus
+                formControlName="firstName"
+                [jlcApiValidation]="validationError$"
+              />
+              <jlc-form-control-validation-message controlName="firstName">
+              </jlc-form-control-validation-message>
+            </label>
+            <label>
+              Last Name*
+              <input
+                jlcInputStatus
+                formControlName="lastName"
+                [jlcApiValidation]="validationError$"
+              />
+              <jlc-form-control-validation-message controlName="lastName">
+              </jlc-form-control-validation-message>
+            </label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="row">
+            <label>
+              Phone*
+              <input
+                [jlcApiValidation]="validationError$"
+                jlcInputStatus
+                [formControl]="additionalDataForm.controls['phone']"
+                [path]="['phone']"
+                prefix="+1"
+                mask="(000) 000 0000"
+              />
+              <jlc-form-control-validation-message controlName="phone">
+              </jlc-form-control-validation-message>
+            </label>
+          </div>
+        </fieldset>
+        <fieldset formGroupName="education">
+          <h4>
+            Education
+          </h4>
+          <div class="row">
+            <label>
+              Law School*
+              <input
+                jlcInputStatus
+                type="text"
+                formControlName="university"
+                [jlcApiValidation]="validationError$"
+              />
+              <jlc-form-control-validation-message controlName="university">
+              </jlc-form-control-validation-message>
+            </label>
+            <label class="short">
+              Year of Graduation*
+              <input
+                jlcInputStatus
+                formControlName="year"
+                type="number"
+                placeholder="YYYY"
+                [jlcApiValidation]="validationError$"
+              />
+              <jlc-form-control-validation-message controlName="year">
+              </jlc-form-control-validation-message>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <label>
+        Profile Image*
+        <jlc-profile-image-edit
+          [profileImage]="additionalDataForm.value.avatar"
+          (profileImageChange)="
+            onProfileImageChanged(additionalDataForm, $event)
+          "
+        ></jlc-profile-image-edit>
+        <jlc-form-control-validation-message
+          controlName="avatar"
+        ></jlc-form-control-validation-message>
+      </label>
+    </div>
+
+    <div class="additional-info">
+      <fieldset>
+        <h4>
+          Practice
+        </h4>
+        <div class="row">
+          <fieldset>
+            <legend>
+              State(s) or federal jurisdictions you are licensed or authorized
+              to practice in?*
+            </legend>
+            <div formArrayName="practiceJurisdictions">
+              <div
+                *ngFor="
+                  let jurisdictionState of additionalDataForm.value
+                    .practiceJurisdictions;
+                  let i = index
+                "
+                class="control-wrap"
+              >
+                <select
+                  [compareWith]="compareWithIdFn"
+                  [formControlName]="i"
+                  class="practice-jurisdictions-control"
+                >
+                  <option [value]="null" disabled>- Select -</option>
+                  <option
+                    *ngFor="
+                      let state of getJurisdictionStates(
+                        jurisdictionState,
+                        additionalDataForm.value.practiceJurisdictions
+                      ) | async
+                    "
+                    [ngValue]="state"
+                  >
+                    {{ state.name }}
+                  </option>
+                </select>
+                <jlc-form-control-validation-message [controlName]="i">
+                </jlc-form-control-validation-message>
+                <button
+                  *ngIf="
+                    displayPracticeJurisdictionsAddButton(additionalDataForm, i)
+                  "
+                  type="button"
+                  class="practice-jurisdiction-button"
+                  (click)="onAddPracticeJurisdictionClicked(additionalDataForm)"
+                >
+                  +
+                </button>
+                <button
+                  *ngIf="
+                    displayPracticeJurisdictionsRemoveButton(additionalDataForm)
+                  "
+                  type="button"
+                  class="practice-jurisdiction-button"
+                  (click)="
+                    onRemovePracticeJurisdictionClicked(
+                      additionalDataForm,
+                      jurisdictionState
+                    )
+                  "
+                >
+                  &#215;
+                  <!-- x sign-->
+                </button>
+              </div>
+            </div>
+            <jlc-form-control-validation-message
+              controlName="practiceJurisdictions"
+            >
+            </jlc-form-control-validation-message>
+          </fieldset>
+        </div>
+        <div class="row">
+          <label class="wide">
+            Please list the state, agency, date of admission and bar membership
+            number.*
+            <textarea
+              jlcInputStatus
+              formControlName="licenseInfo"
+              [jlcApiValidation]="validationError$"
+            ></textarea>
+            <jlc-form-control-validation-message controlName="licenseInfo">
+            </jlc-form-control-validation-message>
+          </label>
+        </div>
+        <div class="row medium-width">
+          <label>
+            Primary Practice Address - Jus-Law will use this address to match
+            you with potential clients in your proximity.*
+            <input
+              jlcLocationAutocomplete
+              formControlName="firmLocationData"
+              [jlcApiValidation]="firmLocationValidationError$"
+              placeholder="Search for Location"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+            />
+            <jlc-form-control-validation-message controlName="firmLocationData">
+            </jlc-form-control-validation-message>
+          </label>
+        </div>
+        <div class="row">
+          <label class="short">
+            How many years have you been practicing?*
+            <input
+              jlcInputStatus
+              formControlName="yearsOfExperience"
+              type="number"
+              [jlcApiValidation]="validationError$"
+            />
+            <jlc-form-control-validation-message
+              controlName="yearsOfExperience"
+            >
+            </jlc-form-control-validation-message>
+          </label>
+        </div>
+        <div class="row">
+          <label class="wide">
+            Describe your legal practice (1000 characters) - optional
+            <textarea
+              jlcInputStatus
+              formControlName="practiceDescription"
+              [jlcApiValidation]="validationError$"
+            ></textarea>
+            <jlc-form-control-validation-message
+              controlName="practiceDescription"
+            >
+            </jlc-form-control-validation-message>
+          </label>
+        </div>
+      </fieldset>
+      <fieldset class="row">
+        <legend>
+          Have you ever been suspended, censured, or otherwise
+          disciplined/disqualified as a member of the legal or any other
+          profession? We will not share your response to app users. This is only
+          for verification purposes.*
+        </legend>
+        <div class="line-radio-group">
+          <label class="radio-label">
+            <input
+              type="radio"
+              [value]="true"
+              formControlName="isDisciplined"
+              [jlcApiValidation]="validationError$"
+            />
+            <span>Yes</span>
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              [value]="false"
+              formControlName="isDisciplined"
+            />
+            <span>No</span>
+          </label>
+        </div>
+        <jlc-form-control-validation-message controlName="isDisciplined">
+        </jlc-form-control-validation-message>
+      </fieldset>
+      <fieldset>
+        <h4>
+          Specialty
+        </h4>
+        <fieldset class="row">
+          <legend>
+            Do you have a specialty, or do you emphasize one specific type of
+            legal matter?
+          </legend>
+          <div class="line-radio-group">
+            <label class="radio-label">
+              <input
+                type="radio"
+                [value]="true"
+                formControlName="haveSpecialty"
+                [jlcApiValidation]="validationError$"
+              />
+              <span>Yes</span>
+            </label>
+            <label class="radio-label">
+              <input
+                type="radio"
+                [value]="false"
+                formControlName="haveSpecialty"
+              />
+              <span>No</span>
+            </label>
+          </div>
+          <jlc-form-control-validation-message controlName="haveSpecialty">
+          </jlc-form-control-validation-message>
+        </fieldset>
+        <fieldset>
+          <legend>Area of Specialty (check all that apply)*</legend>
+          <div
+            class="check-group area-of-speciality"
+            formArrayName="specialties"
+          >
+            <label
+              class="checkbox"
+              *ngFor="let specialty of specialties$ | async; let i = index"
+              [formGroupName]="i"
+            >
+              <input type="checkbox" formControlName="isChecked" />
+              <span>{{ specialty.title }}</span>
+            </label>
+          </div>
+          <jlc-form-control-validation-message controlName="specialties">
+          </jlc-form-control-validation-message>
+        </fieldset>
+        <div class="row practice-years-details">
+          <label class="short">
+            <span>
+              Number of years practice in the specialized area
+            </span>
+            <div>
+              <input
+                jlcInputStatus
+                formControlName="specialtyTime"
+                type="number"
+                class="short"
+                [jlcApiValidation]="validationError$"
+              />
+              <jlc-form-control-validation-message controlName="specialtyTime">
+              </jlc-form-control-validation-message>
+            </div>
+          </label>
+          <label>
+            <span>
+              Approximate number of matters you, in the last 5 years, have
+              handled in the specialized area
+            </span>
+            <div>
+              <input
+                jlcInputStatus
+                formControlName="specialtyMattersCount"
+                type="number"
+                class="short"
+                [jlcApiValidation]="validationError$"
+              />
+              <jlc-form-control-validation-message
+                controlName="specialtyMattersCount"
+              >
+              </jlc-form-control-validation-message>
+            </div>
+          </label>
+        </div>
+        <div class="row">
+          <label class="wide">
+            Practice Related Keywords - These keywords will search forum
+            posts/replies from potential clients and match them to you! Be sure
+            to use as many keywords as you'd like and separate them by commas.
+            You can come back and add more later.
+            <textarea
+              jlcInputStatus
+              formControlName="keywords"
+              placeholder="eg. Defamation, Damage Recovery, etc."
+              [jlcApiValidation]="validationError$"
+            >
+            </textarea>
+            <jlc-form-control-validation-message controlName="keywords">
+            </jlc-form-control-validation-message>
+          </label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <h4>
+          Service Fees
+        </h4>
+        <div class="row">
+          <label>
+            What is your hourly fee?*
+            <input
+              jlcInputStatus
+              formControlName="feeRate"
+              type="number"
+              [jlcApiValidation]="validationError$"
+            />
+            <jlc-form-control-validation-message controlName="feeRate">
+            </jlc-form-control-validation-message>
+          </label>
+        </div>
+        <div class="row">
+          <fieldset>
+            <legend>
+              Will you consider (check all that apply)*
+            </legend>
+            <div class="check-group" formArrayName="feeKinds">
+              <label
+                class="checkbox"
+                *ngFor="let feeKind of feeKinds$ | async; let i = index"
+                [formGroupName]="i"
+              >
+                <input type="checkbox" formControlName="isChecked" />
+                <span>{{ feeKind.title }}</span>
+              </label>
+            </div>
+            <jlc-form-control-validation-message controlName="feeKinds">
+            </jlc-form-control-validation-message>
+          </fieldset>
+        </div>
+      </fieldset>
+      <fieldset>
+        <h4>
+          Additional Information
+        </h4>
+        <div class="row">
+          <label class="wide">
+            Name any volunteer or charitable organizations you work with or are
+            a member of
+            <input
+              jlcInputStatus
+              formControlName="charityOrganizations"
+              [jlcApiValidation]="validationError$"
+            />
+            <jlc-form-control-validation-message
+              controlName="charityOrganizations"
+            >
+            </jlc-form-control-validation-message>
+          </label>
+        </div>
+        <div class="row">
+          <label class="wide">
+            Any other information you want Jus-Law to know
+            <textarea
+              jlcInputStatus
+              formControlName="extraInfo"
+              [jlcApiValidation]="validationError$"
+            ></textarea>
+            <jlc-form-control-validation-message controlName="extraInfo">
+            </jlc-form-control-validation-message>
+          </label>
+        </div>
+      </fieldset>
+      <div class="content">
+        <ng-content></ng-content>
+      </div>
+      <div class="button-pane">
+        <button type="button" class="secondary" (click)="onCancelClicked()">
+          Cancel
+        </button>
+        <button
+          *ngIf="isRegistration"
+          type="button"
+          class="secondary"
+          (click)="onBackClicked(additionalDataForm)"
+        >
+          &lt; Back
+        </button>
+        <button type="submit" class="primary">
+          {{ submitButtonText }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<ng-template #loadingForm>
+  <h3>Initializing form...</h3>
+</ng-template>

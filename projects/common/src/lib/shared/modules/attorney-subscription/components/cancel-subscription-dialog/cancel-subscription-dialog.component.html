@@ -1,0 +1,20 @@
+<div class="dialog">
+  <h3>{{ header }}</h3>
+
+  <hr />
+
+  <div class="content">
+    <p *ngFor="let message of messages">
+      {{ message }}
+    </p>
+  </div>
+
+  <div class="button-panel">
+    <button class="secondary" (click)="onCloseClick()">
+      No, not yet
+    </button>
+    <button class="danger" (click)="onSaveClick()">
+      Cancel Plan
+    </button>
+  </div>
+</div>

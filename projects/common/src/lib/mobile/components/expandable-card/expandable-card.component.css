@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+.card__header {
+  position: relative;
+  padding-right: 20px;
+}
+
+.card__header::-webkit-details-marker {
+  position: absolute;
+  right: 5px;
+
+  /* 
+    Using this workaround because
+    Safari doesn't support flexbox on summary.
+  */
+  top: calc(50% - 5px);
+}
+
+.card__body {
+  --card-body-border: 1px solid var(--primary-border-color);
+
+  border-top: var(--card-body-border);
+  border-bottom: var(--card-body-border);
+}

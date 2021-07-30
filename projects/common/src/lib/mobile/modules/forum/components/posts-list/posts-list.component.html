@@ -1,0 +1,14 @@
+<ng-container *ngIf="posts; else skeletonListTemplate">
+  <jlc-posts-list-item
+    class="post"
+    *ngFor="let post of posts; trackBy: trackById"
+    [post]="post"
+    (postClick)="onPostClick($event)"
+  ></jlc-posts-list-item>
+</ng-container>
+
+<ng-template #skeletonListTemplate>
+  <jlc-posts-list-item
+    *ngFor="let i of [null, null, null]"
+  ></jlc-posts-list-item>
+</ng-template>

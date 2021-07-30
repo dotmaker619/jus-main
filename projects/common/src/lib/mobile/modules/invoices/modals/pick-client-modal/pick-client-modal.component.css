@@ -1,0 +1,43 @@
+/* Searchbar */
+.searchbar {
+  background-color: var(--primary-background-color);
+}
+
+/* Client list */
+
+.client-list {
+  padding: 0;
+}
+
+/* Client */
+
+.client-content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.name {
+  font-weight: bold;
+  color: var(--primary-font-color);
+}
+
+.email {
+  font-style: italic;
+  color: var(--medium-color);
+}
+
+.client.preselected {
+  --background: var(--primary-light-color);
+}
+
+/* Message */
+
+.message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  font-style: italic;
+  color: var(--medium-color);
+}

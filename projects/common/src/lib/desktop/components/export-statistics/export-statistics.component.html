@@ -1,0 +1,57 @@
+<header>
+  <h2>Export statistics</h2>
+</header>
+<hr />
+<form [formGroup]="form" (ngSubmit)="onFormSubmit(form)">
+  <div class="row" formGroupName="period">
+    <label>
+      <span>Period Start Date*</span>
+      <jlc-date-time-picker
+        formControlName="start"
+        mode="date"
+        [datePickerOptions]="datePickerOptions"
+      ></jlc-date-time-picker>
+      <jlc-form-control-validation-message controlName="start">
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Period End Date*</span>
+      <jlc-date-time-picker
+        formControlName="end"
+        mode="date"
+        [datePickerOptions]="datePickerOptions"
+      ></jlc-date-time-picker>
+      <jlc-form-control-validation-message controlName="end">
+      </jlc-form-control-validation-message>
+    </label>
+  </div>
+  <jlc-form-control-validation-message
+    class="period-error"
+    controlName="period"
+  ></jlc-form-control-validation-message>
+  <label>
+    <span>File format</span>
+    <select formControlName="format">
+      <option *ngFor="let format of formats" [ngValue]="format.key">
+        {{ format.value }}
+      </option>
+    </select>
+    <jlc-form-control-validation-message
+      controlName="format"
+    ></jlc-form-control-validation-message>
+  </label>
+  <div class="action-buttons row">
+    <button
+      type="button"
+      class="secondary"
+      title="Close the modal"
+      (click)="onCloseClick()"
+    >
+      Close
+    </button>
+    <button type="submit" class="primary" title="Export file">
+      Export
+    </button>
+  </div>
+</form>
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

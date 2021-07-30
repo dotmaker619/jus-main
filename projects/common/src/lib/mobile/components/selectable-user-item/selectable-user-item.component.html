@@ -1,0 +1,29 @@
+<ng-container *ngIf="user; else skeleton">
+  <div class="avatar-container" [class.selected]="isSelected">
+    <jlc-profile-image [src]="user.avatar"> </jlc-profile-image>
+    <img src="/assets/icons/checked_blue.svg" class="checked-badge" />
+  </div>
+  <div class="info">
+    <p class="name ellipsis">
+      {{ user.fullName }}
+    </p>
+    <p class="specialty ellipsis">
+      {{ user.description }}
+    </p>
+  </div>
+</ng-container>
+
+<ng-template #skeleton>
+  <div class="avatar-container">
+    <jlc-profile-image></jlc-profile-image>
+  </div>
+  <div class="info skeleton">
+    <div class="name ellipsis">
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+    </div>
+    <div class="specialty ellipsis">
+      <ion-skeleton-text animated></ion-skeleton-text>
+    </div>
+  </div>
+</ng-template>

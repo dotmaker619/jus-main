@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  padding: 30px;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 2px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.price {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+.text {
+  font-style: italic;
+  color: var(--medium-color);
+}

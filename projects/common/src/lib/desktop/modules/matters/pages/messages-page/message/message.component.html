@@ -1,0 +1,10 @@
+<div class="post">
+  <div class="post-header">
+    <div class="author">{{ matterPost.author.fullName }}</div>
+    <div class="date">{{ matterPost.created | jusLawDate }}</div>
+  </div>
+
+  <div class="post-content">
+    {{ matterPost.text }}
+  </div>
+</div>

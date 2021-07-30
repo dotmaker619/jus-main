@@ -1,0 +1,37 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 15rem;
+  max-height: 80vh;
+  padding: 21px;
+  width: 30rem;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.message {
+  color: var(--primary-font-color);
+  white-space: pre-line;
+  margin-bottom: 14px;
+}
+
+hr.line {
+  margin-bottom: 0;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+button.tertiary {
+  border: none;
+  background: var(--tertiary-gradient);
+  color: white;
+}

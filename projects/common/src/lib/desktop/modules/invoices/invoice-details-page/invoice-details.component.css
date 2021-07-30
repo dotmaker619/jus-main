@@ -1,0 +1,143 @@
+.loading {
+  margin: 100px 0;
+}
+
+.page-container {
+  padding: 18px 40px;
+}
+
+.invoice-info {
+  margin-top: 33px;
+}
+
+.header,
+.controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: -5px;
+  padding: 10px 0;
+}
+
+.controls > .primary {
+  min-width: auto;
+  padding: 0 15px;
+  margin: 5px;
+}
+
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  background: var(--primary-gradient);
+  border-radius: 50%;
+  margin-right: 11px;
+  flex-shrink: 0;
+}
+
+.icon-wrapper > img {
+  max-width: 18px;
+}
+
+.log-time > img {
+  width: 18px;
+  height: 18px;
+  filter: invert(1);
+}
+
+.billings .header .icon-wrapper img {
+  filter: invert(1);
+}
+
+.controls > * {
+  width: auto;
+  margin-right: 9px;
+  font-size: 0.95rem;
+}
+
+.controls > .primary:last-child {
+  margin-right: 0;
+}
+
+.header > .heading {
+  flex-grow: 1;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.428;
+  color: var(--primary-font-color);
+  margin-right: 10px;
+}
+
+.content {
+  margin-top: 14px;
+  background: var(--tertiary-contrast-color);
+  border: 1px solid var(--list-item-border-color);
+  border-radius: 4px;
+  padding: 24px 22px;
+}
+
+.content > .heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.invoice-info-data {
+  display: flex;
+  justify-content: space-between;
+  color: var(--primary-font-color);
+  font-size: 0.857rem;
+  line-height: 1.417;
+  flex-wrap: wrap;
+  white-space: nowrap;
+}
+
+.invoice-info-data div {
+  max-width: 100px;
+}
+
+.client-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (orientation: portrait) {
+  .invoice-info-data {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}
+
+.invoice-info-data > * {
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+  margin-top: 17px;
+}
+
+.client-info {
+  font-size: 1rem;
+  line-height: normal;
+  font-weight: bold;
+}
+
+.billings {
+  margin-top: 30px;
+}
+
+.log-time {
+  position: relative;
+  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 160px;
+  padding: 0 25px 0 38px;
+  margin-bottom: 10px;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}

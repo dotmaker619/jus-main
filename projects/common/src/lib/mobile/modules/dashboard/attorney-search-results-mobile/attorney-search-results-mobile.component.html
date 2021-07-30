@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="attorneys$ | async as attorneys">
+      {{ attorneys.length }}
+      Attorneys Found
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <div class="subtitle">
+      <span *ngIf="currentState$ | async as state">
+        in
+        <b>"{{ state }}"</b>
+      </span>
+      <span *ngIf="currentSpeciality$ | async as specialty">
+        with
+        <b>"{{ specialty.title }}"</b>
+      </span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content [scrollY]="false">
+  <div class="content" [class.fullscreen-map]="isMapExpanded$ | async">
+    <div class="search-results-map" #mapContainer>
+      <ng-container *ngIf="attorneys$ | async as attorneys; else skeleton">
+        <agm-map
+          [latitude]="(mapLocation$ | async)?.latitude"
+          [longitude]="(mapLocation$ | async)?.longitude"
+          [styles]="mapStyles"
+          [streetViewControl]="false"
+        >
+          <agm-marker
+            *ngFor="let attorney of attorneys; trackBy: trackByAttorneyId"
+            iconUrl="/assets/icons/map-pin.svg"
+            [latitude]="attorney.firmLocation.latitude"
+            [longitude]="attorney.firmLocation.longitude"
+            (markerClick)="onMapAttorneySelect(attorney)"
+          >
+          </agm-marker>
+        </agm-map>
+        <button class="secondary expand-map-button" (click)="toggleMap()">
+          <ion-icon
+            size="large"
+            *ngIf="!(isMapExpanded$ | async)"
+            name="expand"
+          ></ion-icon>
+          <ion-icon
+            size="large"
+            *ngIf="isMapExpanded$ | async"
+            name="contract"
+          ></ion-icon>
+        </button>
+      </ng-container>
+    </div>
+    <div class="attorney-container" #attorneyContainer>
+      <ng-container *ngIf="attorneys$ | async as attorneys; else skeletonList">
+        <ng-container *ngIf="attorneys.length !== 0; else noItemsMessage">
+          <jlc-attorney-card
+            (click)="onAttorneyClick(attorney)"
+            [attorney]="attorney"
+            *ngFor="let attorney of attorneys"
+            [id]="'attorney-card-' + attorney.id"
+          >
+            <ng-container
+              *ngTemplateOutlet="
+                attorneyCardPanel;
+                context: { attorney: attorney }
+              "
+            ></ng-container>
+          </jlc-attorney-card>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</ion-content>
+
+<ng-template #skeletonList>
+  <jlc-attorney-card *ngFor="let i of [1, 2, 3]"> </jlc-attorney-card>
+</ng-template>
+
+<ng-template #skeleton>
+  <ion-skeleton-text></ion-skeleton-text>
+</ng-template>
+
+<ng-template #noItemsMessage>
+  <div class="no-items-message">
+    <ion-icon name="information-circle" size="large" color="medium"></ion-icon>
+    <ion-text color="medium">No attorneys found</ion-text>
+  </div>
+</ng-template>
+
+<ng-template #attorneyCardPanel let-attorney="attorney">
+  <ng-container *ngIf="selectedAttorney$ | async as selectedAttorney">
+    <ng-container *ngIf="selectedAttorney.id === attorney.id">
+      <div class="attorney-card-backdrop" [@easeInOut]>
+        <ion-button shape="round" fill="clear" (click)="onLocationClick()">
+          <ion-icon
+            size="large"
+            color="light"
+            slot="icon-only"
+            src="assets/icons/location_icon.svg"
+          ></ion-icon>
+        </ion-button>
+        <ion-button
+          shape="round"
+          fill="clear"
+          [routerLink]="['/attorneys', 'profile', attorney.id]"
+        >
+          <ion-icon
+            size="large"
+            color="light"
+            slot="icon-only"
+            name="person"
+          ></ion-icon>
+        </ion-button>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-template>

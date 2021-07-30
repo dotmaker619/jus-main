@@ -1,0 +1,34 @@
+<form [formGroup]="form" (ngSubmit)="onFormSubmitted(form)">
+  <label class="stripe-form-field">
+    <div class="stripe-card-container" #stripeAnchor></div>
+    <jlc-form-control-validation-message
+      controlName="isCardCompleted">
+    </jlc-form-control-validation-message>
+  </label>
+  <label>
+    <input
+      type="text"
+      placeholder="Cardholder name"
+      jlcInputStatus
+      formControlName="cardholderName"
+      aria-label="Cardholder name"
+      aria-placeholder="Cardholder name"
+    />
+    <jlc-form-control-validation-message
+      controlName="cardholderName">
+    </jlc-form-control-validation-message>
+  </label>
+  <input type="hidden" formControlName="isCardCompleted" />
+  <div class="error-message" *ngIf="error$ | async as error">
+    {{ error }}
+  </div>
+  <div class="actions" *ngIf="showControls">
+    <button
+      type="submit"
+      class="primary"
+      [disabled]="form.invalid || (isSubmitting$ | async)"
+    >
+      Submit
+    </button>
+  </div>
+</form>

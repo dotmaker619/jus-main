@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-button (click)="onCancelClick()" shape="round" fill="clear">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span *ngIf="chat$ | async as chat; else skeletonTextTemplate">
+        {{ chat.lead.client.shortName | titlecase }}
+      </span>
+      <div class="subtitle">
+        <ng-container *ngIf="chat$ | async as chat; else skeletonTextTemplate">
+          <span *ngIf="chat.lead.client?.state?.name as state">
+            {{ state }}
+          </span>
+        </ng-container>
+
+        <ng-container
+          [ngTemplateOutlet]="priorityControlTemplate"
+        ></ng-container>
+      </div>
+    </ion-title>
+    <ion-buttons slot="end" *ngIf="chat$ | async as chat">
+      <button
+        class="special-button"
+        (click)="onCreateMatterClick(chat.lead.client)"
+      >
+        <ion-icon
+          size="small"
+          slot="icon-only"
+          src="/assets/icons/arrows.svg"
+        ></ion-icon>
+      </button>
+      <button class="special-button" (click)="onCallClicked(chat.lead)">
+        <ion-icon
+          size="small"
+          slot="icon-only"
+          src="/assets/icons/phone_icon.svg"
+        ></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [scrollY]="false">
+  <jlc-chat [chat]="chat$ | async"></jlc-chat>
+</ion-content>
+
+<ng-template #skeletonTextTemplate>
+  <span>
+    <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+  </span>
+</ng-template>
+
+<ng-template #priorityControlTemplate>
+  <form *ngIf="priorityForm$ | async as form" [formGroup]="form">
+    <select formControlName="priority" class="priority">
+      <option value="high">HIGH</option>
+      <option value="medium">MEDIUM</option>
+      <option value="low">LOW</option>
+    </select>
+  </form>
+</ng-template>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

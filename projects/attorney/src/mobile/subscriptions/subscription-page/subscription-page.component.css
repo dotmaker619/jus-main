@@ -1,0 +1,66 @@
+:host {
+  --space: 10px;
+}
+
+span,
+div {
+  color: var(--primary-font-color);
+}
+
+h3 {
+  font-weight: normal;
+  text-transform: uppercase;
+  margin: var(--space) 0;
+}
+
+ion-content {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+}
+
+ion-button {
+  margin: 0;
+}
+
+.content-header,
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-content {
+  margin: var(--space);
+}
+
+.card-icon-container {
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space);
+  color: var(--primary-contrast-color);
+  background: var(--primary-gradient);
+}
+
+.card-icon {
+  font-size: 1.5rem;
+}
+
+.card-info {
+  flex-grow: 1;
+  margin-left: var(--space);
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-date {
+  font-style: italic;
+  color: var(--medium-color);
+}
+
+.danger {
+  color: var(--tertiary-color);
+}

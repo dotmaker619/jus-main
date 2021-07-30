@@ -1,0 +1,22 @@
+:host {
+  --space: 40px;
+}
+
+.page-header {
+  margin: calc(var(--space) / 2) var(--space);
+}
+
+.tab-label {
+  width: 10rem;
+  text-align: start;
+}
+
+.page-container {
+  width: auto;
+}
+
+.tab-container {
+  border: 1px solid var(--primary-border-color);
+  border-top: none;
+  padding-bottom: 20px;
+}

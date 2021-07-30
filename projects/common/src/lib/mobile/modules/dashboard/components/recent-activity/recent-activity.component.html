@@ -1,0 +1,43 @@
+<header class="header">
+  <h2 class="title">Recent Activity</h2>
+</header>
+
+<div
+  *ngIf="recentActivity$ | async as recentActivity; else loading"
+  class="recent-activities"
+>
+  <ion-item
+    *ngFor="let topic of recentActivity"
+    class="recent-activity"
+    lines="none"
+    detail="false"
+    [routerLink]="['/forum/topic', topic.id]"
+  >
+    <div class="icon-wrapper">
+      <img src="/assets/icons/category_icon.svg" alt="Chat icon" />
+    </div>
+
+    <div class="content">
+      <p class="ellipsis">
+        <b>{{ topic.lastPost?.author.shortName }}</b> posted in
+      </p>
+      <p>
+        <b>“{{ topic?.title }}”</b>
+      </p>
+      <p class="text italic ellipsis">{{ topic.lastPost?.text }}</p>
+      <p class="date italic">
+        Posted: {{ topic.lastPost?.created | date: "MM/dd/yy" }}
+        <span class="replies"
+          >{{ topic.postCount }}
+          {{ topic.postCount > 1 ? "Replies" : "Reply" }}</span
+        >
+      </p>
+    </div>
+  </ion-item>
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    <jlc-loading></jlc-loading>
+  </div>
+</ng-template>

@@ -1,0 +1,34 @@
+<div>
+  <div class="row">
+    <div class="icon-container">
+      <ion-icon src="/assets/icons/document_icon.svg"></ion-icon>
+    </div>
+    <div class="header">
+      <div class="name ellipsis">
+        {{ forClient ? invoice.attorney.shortName : invoice.client.shortName }}
+      </div>
+      <div class="title ellipsis">
+        [{{ invoice.matter.code }}] {{ invoice.title }}
+      </div>
+    </div>
+  </div>
+  <footer class="meta-info">
+    <section>
+      <time [dateTime]="invoice.periodStart">
+        {{ invoice.periodStart | date: "MMM dd, yyyy" }}
+      </time>
+      -
+      <time [dateTime]="invoice.periodEnd">
+        {{ invoice.periodEnd | date: "MMM dd, yyyy" }}
+      </time>
+    </section>
+    <section>
+      <time [dateTime]="invoice.modified">
+        {{ invoice.modified | date: "shortDate" }}
+      </time>
+    </section>
+    <section>
+      {{ invoice.readablePaymentStatus }}
+    </section>
+  </footer>
+</div>

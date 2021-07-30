@@ -1,0 +1,40 @@
+:host {
+  --space: 15px;
+}
+
+.container {
+  border: var(--post-border);
+}
+
+header {
+  align-items: center;
+  background: var(--primary-tint-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--space) * 2) 0;
+  border-bottom: 1px solid var(--list-item-border-color);
+}
+
+header > *:not(:last-child) {
+  margin-bottom: var(--space);
+}
+
+.title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.back-btn {
+  color: var(--primary-font-color);
+  cursor: pointer;
+}
+
+.content {
+  padding: calc(var(--space) * 2);
+}
+
+.preview-image {
+  width: 100%;
+  object-fit: cover;
+}

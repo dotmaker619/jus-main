@@ -1,0 +1,57 @@
+<div class="page-child-container">
+  <form *ngIf="attorneyForm$ | async as attorneyForm" [formGroup]="attorneyForm" (ngSubmit)="onFormSubmitted(attorneyForm)">
+    <div class="row">
+      <label>
+        Email*
+        <input 
+          jlcInputStatus
+          class="full-width"
+          formControlName="email"
+          autocomplete="username"
+          type="email"
+          [jlcApiValidation]="validationError" />
+        <jlc-form-control-validation-message
+          controlName="email">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        Password*
+        <input
+          jlcInputStatus
+          type="password"
+          class="full-width"
+          autocomplete="new-password"
+          formControlName="password"
+          [jlcApiValidation]="validationError"
+        />
+        <jlc-form-control-validation-message
+          controlName="password">
+        </jlc-form-control-validation-message>
+      </label>
+      <label>
+        Password Confirmation*
+        <input
+          jlcInputStatus
+          type="password"
+          class="full-width"
+          autocomplete="new-password"
+          formControlName="passwordConfirmation"
+          [jlcApiValidation]="validationError"
+        />
+        <jlc-form-control-validation-message
+          controlName="passwordConfirmation">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+    <div class="button-pane">
+      <button type="button" class="secondary" (click)="onCancelClicked()">
+        Cancel
+      </button>
+      <button class="primary" type="submit">
+        Next
+      </button>
+    </div>
+  </form>
+</div>

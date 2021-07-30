@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/invoices"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <span *ngIf="pageTitle$ | async as title; else skeletonTemplate">
+        {{ title }}
+      </span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <jlc-invoice-details-card
+    class="card"
+    [invoice]="invoice$ | async"
+    [billings]="timeBillings$ | async"
+  ></jlc-invoice-details-card>
+  <div class="button-panel card">
+    <a
+      class="primary"
+      [href]="(invoice$ | async)?.downloadUrl"
+      [attr.download]="(invoice$ | async)?.downloadFileName"
+      jusLawDownload
+    >
+      <ion-icon src="/assets/icons/upload_icon.svg"></ion-icon>
+      <span>Download Invoice</span>
+    </a>
+    <a
+      class="primary payment-btn"
+      routerLink="payment"
+      *ngIf="!(invoice$ | async)?.isPaid"
+    >
+      Make a Payment
+    </a>
+  </div>
+  <jlc-header-with-icon src="/assets/icons/clock_icon.svg" class="card">
+    BILLABLE TIME
+  </jlc-header-with-icon>
+  <jlc-billable-time-card
+    [billings]="timeBillings$ | async"
+    [showFilter]="false"
+  ></jlc-billable-time-card>
+</ion-content>
+
+<ng-template #skeletonTemplate>
+  <span>
+    <ion-skeleton-text animated class="skeleton"></ion-skeleton-text>
+  </span>
+</ng-template>

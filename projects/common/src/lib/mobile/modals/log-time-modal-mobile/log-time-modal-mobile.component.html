@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCloseClicked()" fill="clear">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Log Time</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    id="log-time-modal-form"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="formGroup"
+    class="form"
+  >
+    <div class="col-2">
+      <label>
+        <span>Date*</span>
+        <ion-datetime
+          display-format="MM/DD/YY"
+          formControlName="date"
+          [jlcApiValidation]="validationError$ | async"
+        ></ion-datetime>
+
+        <jlc-form-control-validation-message controlName="date">
+        </jlc-form-control-validation-message>
+      </label>
+      <label>
+        <span>Time Spent*</span>
+        <jlc-time-log-input
+          formControlName="spentMinutes"
+          [jlcApiValidation]="validationError$ | async"
+          class="label-margin"
+        ></jlc-time-log-input>
+        <jlc-form-control-validation-message controlName="spentMinutes">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+    <label>
+      <span>Client</span>
+      <input type="text" disabled [value]="clientInfo" />
+      <jlc-form-control-validation-message>
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Related Matter*</span>
+      <select formControlName="matter">
+        <option
+          *ngFor="let matter of matterOptions$ | async"
+          [value]="matter.id"
+        >
+          {{ matter.title }}
+        </option>
+      </select>
+      <jlc-form-control-validation-message controlName="matter">
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Description*</span>
+      <textarea
+        formControlName="description"
+        [jlcApiValidation]="validationError$ | async"
+        placeholder="Type..."
+        rows="10"
+      ></textarea>
+      <jlc-form-control-validation-message controlName="description">
+      </jlc-form-control-validation-message>
+    </label>
+
+    <div class="row">
+      <label>
+        <!-- To display an error connected with invoice. -->
+        <input
+          hidden
+          [jlcApiValidation]="validationError$ | async"
+          formControlName="invoice"
+        />
+        <jlc-form-control-validation-message controlName="invoice">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="button-panel">
+      <button class="primary" form="log-time-modal-form">Log</button>
+      <button class="secondary" type="button" (click)="onDeleteClicked()">Delete</button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

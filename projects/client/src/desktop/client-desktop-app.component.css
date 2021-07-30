@@ -1,0 +1,11 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-container {
+  flex: 1;
+  min-height: 1px; /* Hack to limit max height. */
+  overflow-y: auto;
+}

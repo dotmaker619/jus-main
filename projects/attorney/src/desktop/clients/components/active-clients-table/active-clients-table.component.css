@@ -1,0 +1,102 @@
+:host {
+  --row-padding: 15px 0;
+  --thead-row-padding: 12px 0;
+}
+
+a {
+  color: inherit;
+}
+
+.no-items {
+  margin: 20px 40px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: var(--row-padding);
+  margin-left: -6px;
+  margin-right: -6px;
+}
+
+.row:not(:last-child) {
+  border-bottom: 1px solid var(--table-row-separator-color);
+}
+
+.row.active {
+  background-color: var(--table-row-highlight-color);
+}
+
+.thead {
+  border-bottom: 1px solid var(--table-head-bottom-border-color);
+  font-size: 0.85rem;
+  font-weight: bold;
+  padding: var(--thead-row-padding);
+}
+
+.cell {
+  padding: 0 6px;
+}
+
+.cell-icon {
+  flex-basis: calc(2.57rem + 18px);
+}
+
+.cell-client {
+  flex: 3 0 25%;
+  max-width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.cell-matter {
+  flex: 7 0 40%;
+  max-width: 40%;
+  font-weight: bold;
+  display: flex;
+}
+
+.cell-matter a {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+.matter-icon {
+  width: 1rem;
+  margin-right: 11px;
+}
+
+.cell-location {
+  flex: 3;
+}
+
+.cell-activity {
+  flex: 2;
+}
+
+.client-icon {
+  background-color: var(--light-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  height: 2.57rem;
+  width: 2.57rem;
+}
+
+.client-icon img {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.identifier {
+  color: #c6c3c3;
+  font-size: 0.85rem;
+  font-style: italic;
+  font-weight: normal;
+}

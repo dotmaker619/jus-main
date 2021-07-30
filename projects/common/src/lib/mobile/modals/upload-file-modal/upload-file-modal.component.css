@@ -1,0 +1,33 @@
+:host {
+  --space: 10px;
+}
+
+ion-content {
+  --background: var(--primary-background-color);
+}
+
+.files-container {
+  margin: var(--space) 0;
+}
+
+form {
+  margin: var(--space);
+}
+
+form select {
+  width: 100%;
+}
+
+.footer-toolbar {
+  display: flex;
+  margin: var(--space);
+}
+
+.footer-toolbar button {
+  flex: 1;
+}
+
+.button-space {
+  width: var(--space);
+  flex-shrink: 0;
+}

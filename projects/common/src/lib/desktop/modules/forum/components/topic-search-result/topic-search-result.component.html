@@ -1,0 +1,23 @@
+<div class="forum-page-child-container">
+  <span>
+    <a routerLink="/forum" class="back-link">
+      < Jus-Law Forums / Search
+    </a>
+  </span>
+  <h1 *ngIf="categoryLength$ | async as length">Category Results ({{ length }})</h1>
+  <jlc-category-table [categories$]="categories$"></jlc-category-table>
+  <jlc-forum-paginator
+    *ngIf="categoryPagesCount$ | async as pagesCount"
+    [pagesCount]="pagesCount"
+    [currentPage]="categoryPageChange$ | async"
+    (pageChange)="onCategoryPageChange($event)"
+  ></jlc-forum-paginator>
+  <h1 *ngIf="topicLength$ | async as length">Forum Posts & Replies Results ({{ length }})</h1>
+  <jlc-topics-table [topics$]="topics$"></jlc-topics-table>
+  <jlc-forum-paginator
+    *ngIf="topicPagesCount$ | async as pagesCount"
+    [pagesCount]="pagesCount"
+    [currentPage]="topicPageChange$ | async"
+    (pageChange)="onTopicPageChange($event)"
+  ></jlc-forum-paginator>
+</div>

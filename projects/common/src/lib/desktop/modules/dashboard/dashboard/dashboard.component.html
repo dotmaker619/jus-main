@@ -1,0 +1,8 @@
+<div class="page-container">
+  <jlc-attorney-search [place]="place$ | async" (search)="onAttorneySearch($event)">
+  </jlc-attorney-search>
+  <jlc-forum-categories></jlc-forum-categories>
+  <jlc-featured-attorneys [place]="place$ | async"> </jlc-featured-attorneys>
+  <jlc-sponsored-attorneys [place]="place$ | async"> </jlc-sponsored-attorneys>
+  <jlc-recent-activity></jlc-recent-activity>
+</div>

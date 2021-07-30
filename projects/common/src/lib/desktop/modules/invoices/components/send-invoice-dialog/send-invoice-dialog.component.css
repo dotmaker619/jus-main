@@ -1,0 +1,81 @@
+:host {
+  --space: 25px;
+}
+
+.dialog {
+  padding: var(--space);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80vw;
+}
+
+hr {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+label {
+  width: 100%;
+}
+
+textarea {
+  height: 10rem;
+  padding: var(--space);
+  resize: none;
+}
+
+label > span {
+  font-weight: bold;
+  display: block;
+}
+
+label > input,
+label > textarea {
+  width: 100%;
+}
+
+h3 {
+  max-width: 50vw;
+  margin: 10px auto 0 0;
+}
+
+.button-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.button-panel > button {
+  border-radius: 10px;
+  margin: 0 var(--space);
+}
+
+.invoice-sent {
+  padding: 45px 100px 64px;
+  text-align: center;
+}
+
+.invoice-sent > h3 {
+  color: var(--page-title-color);
+  font-size: 1.72rem;
+  margin-top: 28px;
+}
+
+.invoice-sent > p {
+  font-size: 1rem;
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+
+.icon-wrapper {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  background: var(--success-icon-color);
+  border-radius: 50%;
+}
+
+.icon-wrapper > img {
+  filter: invert(1);
+  width: 100%;
+}

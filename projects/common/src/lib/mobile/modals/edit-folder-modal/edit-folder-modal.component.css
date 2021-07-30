@@ -1,0 +1,16 @@
+:host {
+  --space: 10px;
+}
+
+ion-content {
+  --background: var(--primary-background-color);
+}
+
+form {
+  margin: var(--space);
+}
+
+.button-panel {
+  display: grid;
+  margin: var(--space);
+}

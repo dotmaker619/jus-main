@@ -1,0 +1,71 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  max-width: 300px;
+  min-height: 150px;
+  border-radius: 4px;
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-light-color);
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.card-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: relative;
+}
+
+.content {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.count {
+  color: var(--primary-highlight-color);
+  font-size: 2.85rem;
+  letter-spacing: -0.56px;
+  height: 50px;
+}
+
+.icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 100%;
+  padding-bottom: 30%;
+}
+
+.icon img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 100px;
+  width: 25%;
+  height: 80%;
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.link-wrapper {
+  height: 28px;
+  background-color: var(--dashboard-link-color);
+  padding-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.link {
+  color: var(--primary-font-color);
+  font-weight: bold;
+  font-size: 0.78rem;
+}

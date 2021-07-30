@@ -1,0 +1,12 @@
+<ul>
+  <li *ngFor="let page of displayPages">
+    <ng-container *ngIf="page !== BLANK; else blankButton">
+      <a class="pagination-button" [routerLink]="link.concat([page * itemsPerPage])">
+        {{ page + 1 }}
+      </a>
+    </ng-container>
+    <ng-template #blankButton>
+      <span class="blank">...</span>
+    </ng-template>
+  </li>
+</ul>

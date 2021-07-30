@@ -1,0 +1,34 @@
+<form [formGroup]="form">
+  <div class="payment-plans-container">
+    <label
+      *ngFor="let paymentPlan of paymentPlans"
+      class="payment-item-container"
+    >
+      <div class="payment-plan-heading">
+        <input
+          type="radio"
+          formControlName="paymentPlan"
+          [value]="paymentPlan.id"
+        />
+        <span class="payment-plan-name">
+          <div>{{ paymentPlan.name | titlecase }}</div>
+          <div>({{ paymentPlan.intervalTitle }})</div>
+        </span>
+        <div class="payment-details">
+          <span class="payment-amount-per-day">
+            ({{ paymentPlan.amountPerDay | currency: paymentPlan.currency }} /
+            day)
+          </span>
+          <span class="payment-amount">
+            {{ paymentPlan.amount | currency: paymentPlan.currency }}
+          </span>
+        </div>
+      </div>
+      <p class="payment-description">
+        {{ paymentPlan.description }}
+      </p>
+    </label>
+  </div>
+  <jlc-form-control-validation-message controlName="paymentPlan">
+  </jlc-form-control-validation-message>
+</form>

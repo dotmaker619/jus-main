@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 63.1 (101010) - https://sketch.com -->
+    <title>35E7C65D-69DE-46AD-BA43-3CB87B14E9F3</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <circle id="path-1" cx="15" cy="15" r="15"></circle>
+        <filter x="-10.0%" y="-10.0%" width="120.0%" height="120.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.626188859   0 0 0 0 0.626188859   0 0 0 0 0.626188859  0 0 0 0.474868881 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Element-Sheet" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-328.000000, -767.000000)" id="Icons/ic-circle-edit">
+            <g transform="translate(330.000000, 769.000000)">
+                <g id="Oval">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#333333" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <g id="ic/edit" transform="translate(7.500000, 7.500000)" fill="#FFFFFF">
+                    <path d="M0,11.8745659 L0,15 L3.12543409,15 L12.3475483,5.77788582 L9.22211418,2.65245173 L0,11.8745659 Z M14.7562161,3.36921795 C15.0812613,3.0441728 15.0812613,2.51493263 14.7562161,2.18988748 L12.8101125,0.243783859 C12.4850674,-0.0812612863 11.9558272,-0.0812612863 11.6307821,0.243783859 L10.1055702,1.76899569 L13.2310043,4.89442978 L14.7562161,3.36921795 Z"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

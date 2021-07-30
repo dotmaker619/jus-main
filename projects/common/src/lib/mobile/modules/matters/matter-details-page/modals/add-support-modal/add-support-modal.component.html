@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="onCloseClick()">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Add Paralegal</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    id="refer-form"
+    [formGroup]="referForm"
+    (ngSubmit)="onFormSubmit(referForm)"
+  >
+    <div class="padding">
+      <label>
+        <span>Title</span>
+        <input type="text" formControlName="title" />
+        <jlc-form-control-validation-message controlName="title">
+        </jlc-form-control-validation-message>
+      </label>
+      <label>
+        <span>Message</span>
+        <textarea formControlName="message"></textarea>
+        <jlc-form-control-validation-message controlName="message">
+        </jlc-form-control-validation-message>
+      </label>
+      <label>
+        <span>Sent to: </span>
+        <input
+          type="text"
+          formControlName="filter"
+          placeholder="Search for Paralegal.."
+        />
+      </label>
+      <div class="selected-items-container">
+        <p *ngIf="selectedUsers.length === 0">
+          Tap on Paralegal to select
+        </p>
+        <ion-chip
+          (click)="onToggleUser(user)"
+          *ngFor="let user of selectedUsers; trackBy: trackById"
+        >
+          <ion-label>{{ user.fullName }}</ion-label>
+          <ion-icon name="close"></ion-icon>
+        </ion-chip>
+      </div>
+    </div>
+    <div *ngIf="users$ | async as users; else skeletonList">
+      <ion-list lines="full">
+        <ng-container *ngIf="users.items.length > 0; else noItemsMessage">
+          <ion-item
+            *ngFor="let support of users.items; trackBy: trackById"
+            button
+            detail="false"
+            (click)="onToggleUser(support)"
+          >
+            <jlc-selectable-user-item
+              [user]="support"
+              [isSelected]="isUserSelected(support)"
+            ></jlc-selectable-user-item>
+          </ion-item>
+        </ng-container>
+      </ion-list>
+      <button
+        class="pagination"
+        *ngIf="users.items.length < users.itemsCount"
+        type="button"
+        (click)="onLoadMoreUsers()"
+        [disabled]="isUsersLoading$ | async"
+      >
+        More
+      </button>
+    </div>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button form="refer-form" class="primary" type="submit">
+      {{ selectedUsers.length > 0 ? "Update" : "Send" }}
+    </button>
+  </ion-toolbar>
+</ion-footer>
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>
+
+<ng-template #skeletonList>
+  <ion-item detail="false" lines="full" *ngFor="let i of [1, 2, 3]">
+    <jlc-selectable-user-item></jlc-selectable-user-item>
+  </ion-item>
+</ng-template>
+
+<ng-template #noItemsMessage>
+  <ion-item detail="false">
+    <p class="no-items-message">
+      We haven't found anyone
+    </p>
+  </ion-item>
+</ng-template>

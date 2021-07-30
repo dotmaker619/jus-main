@@ -1,0 +1,63 @@
+:host {
+  display: block;
+  flex: 1;
+  --active-color: var(--primary-shade-color);
+  --active-badge-text-color: var(--primary-contrast-color);
+  --color: var(--light-shade-color);
+  --badge-text-color: var(--primary-font-color);
+  --padding: 5px;
+}
+
+.tab-button {
+  padding: var(--padding);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: normal;
+  color: var(--primary-font-color);
+  text-decoration: none;
+  background: none;
+  border: none;
+}
+
+:host:active {
+  background-color: var(--primary-tint-color);
+}
+
+.tab-button.active {
+  color: var(--active-color);
+  font-weight: bold;
+  box-shadow: 0px -6px 0px -1px var(--active-color) inset;
+}
+
+.badge {
+  background-color: currentColor;
+  border-radius: 10px;
+  min-width: 2rem;
+  text-align: center;
+  margin-left: 1rem;
+  opacity: 0.8;
+}
+
+.tab-button:not(.active) .badge {
+  background: var(--color);
+}
+
+.badge span {
+  font-weight: bold;
+}
+
+.tab-button:not(.active) .badge span {
+  color: var(--badge-text-color);
+}
+
+.active .badge span {
+  color: var(--active-badge-text-color);
+}
+
+.skeleton {
+  height: 1rem;
+  margin: 0;
+}

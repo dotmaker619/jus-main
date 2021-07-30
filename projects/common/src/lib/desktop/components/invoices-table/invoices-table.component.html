@@ -1,0 +1,81 @@
+<div class="invoices">
+  <div class="invoices-header">
+    <div class="column-name">Invoice Name</div>
+    <div class="column-member">
+      {{ isAttorneyTable ? "Client" : "Attorney" }}
+    </div>
+    <button
+      type="button"
+      class="column-date sorting"
+      *ngIf="currentOrdering$ | async as order"
+      [class.asc]="order === Ordering.ASC"
+      [class.desc]="order === Ordering.DESC"
+      (click)="toggleSortingByDate(order)"
+    >
+      Invoice Date <span class="sorting-icon"></span>
+    </button>
+  </div>
+
+  <ng-container *ngIf="invoices.length; else noInvoicesTemplate">
+    <a
+      *ngFor="let invoice of invoices; trackBy: trackById"
+      class="invoice"
+      [routerLink]="invoice.id"
+    >
+      <div class="column-file">
+        <img src="/assets/icons/document_icon_white.svg" alt="Document icon" />
+      </div>
+      <div class="column-name">
+        {{ invoice.title }}
+        <div class="date">
+          {{ invoice.periodStart | date: "MMM dd" }} -
+          {{ invoice.periodEnd | date: "MMM dd, yyyy" }}
+        </div>
+        <div class="status">
+          {{ invoice.readablePaymentStatus }}
+        </div>
+      </div>
+      <div class="column-member">
+        <ng-container *ngIf="isAttorneyTable; else attorneyColumn">
+          <div class="avatar-container">
+            <img
+              class="avatar"
+              [src]="invoice.client.avatar || '/assets/avatar.png'"
+              alt="Avatar"
+            />
+          </div>
+          <div class="user-name ellipsis">
+            {{ invoice.client.fullName }}
+          </div>
+        </ng-container>
+      </div>
+      <ng-template #attorneyColumn>
+        <div class="avatar-container">
+          <img
+            class="avatar"
+            [src]="invoice.attorney.avatar || '/assets/avatar.png'"
+            alt="Avatar"
+          />
+        </div>
+        <div class="user-name ellipsis">
+          {{ invoice.attorney.fullName }}
+        </div>
+      </ng-template>
+      <div class="column-date">
+        {{ invoice.periodEnd | date: "shortDate" }}
+      </div>
+    </a>
+  </ng-container>
+
+  <ng-template #noInvoicesTemplate>
+    <span class="no-items-message">
+      No invoices
+    </span>
+  </ng-template>
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    <jlc-loading></jlc-loading>
+  </div>
+</ng-template>

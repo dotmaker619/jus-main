@@ -1,0 +1,40 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Events Management</h1>
+    <a class="primary" [routerLink]="['create']">+ New event</a>
+  </div>
+  <div class="main">
+    <div class="filter">
+      <!-- Filter select -->
+      <select class="filter-select" (change)="onFilterChange($event)">
+        <option
+          *ngFor="let filter of filterOptions; trackBy: trackSelectOptions"
+          [value]="filter.value"
+        >
+          {{ filter.label }}
+        </option>
+      </select>
+    </div>
+    <!-- Event list -->
+    <ng-container *ngIf="events$ | async as events; else loading">
+      <ul *ngIf="events.length; else noEvents">
+        <li *ngFor="let event of events; trackBy: trackById">
+          <jlc-event-info
+            [event]="event"
+            [displayButtons]="true"
+            (clickEdit)="onEditClicked(event)"
+            (clickDelete)="onDeleteClicked($event)"
+          ></jlc-event-info>
+        </li>
+      </ul>
+    </ng-container>
+  </div>
+  <ng-template #noEvents>
+    No events.
+  </ng-template>
+  <ng-template #loading [ngIf]="isLoading$ | async">
+    <jlc-loading
+      [mode]="(isLoading$ | async) ? 'fullscreen' : 'inline'"
+    ></jlc-loading>
+  </ng-template>
+</div>

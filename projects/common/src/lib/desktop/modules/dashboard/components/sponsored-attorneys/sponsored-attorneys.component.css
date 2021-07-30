@@ -1,0 +1,55 @@
+:host {
+  display: block;
+  margin: 32px 0 0 0;
+}
+
+.attorney-el-wrapper {
+  position: relative;
+}
+
+.sponsor-link {
+  position: absolute;
+  bottom: 8px;
+  left: 29px;
+  color: var(--light-tint-color);
+  text-decoration: underline;
+}
+
+.attorney {
+  display: block;
+  position: relative;
+  background-color: var(--featured-attorneys-bg);
+  background-image: url(/assets/profile-image.png);
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.attorney::before {
+  content: "";
+  display: block;
+  width: 100%;
+  padding-bottom: 100%;
+}
+
+.attorney + .attorney {
+  margin-left: 15px;
+}
+
+.info {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding: 29px;
+  font-size: 0.929rem;
+  background: linear-gradient(transparent, #333 99%);
+  color: var(--light-tint-color);
+}
+
+.name {
+  color: inherit;
+  font-size: 1.286rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}

@@ -1,0 +1,13 @@
+<jlc-login-page-container class="page-container">
+  <main>
+    <p class="announce">
+      You already logged in as
+      <b>{{ currentName$ | async }}</b
+      >. Do you want to log out?
+    </p>
+  </main>
+  <footer>
+    <a routerLink="/" class="secondary">Back</a>
+    <button class="primary" routerLink="/auth/logout">Logout</button>
+  </footer>
+</jlc-login-page-container>

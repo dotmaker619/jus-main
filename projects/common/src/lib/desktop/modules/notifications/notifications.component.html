@@ -1,0 +1,44 @@
+<div class="page-container">
+  <jlc-notifications-header class="header"></jlc-notifications-header>
+
+  <ng-container *ngIf="notifications$ | async as notifications; else loading">
+    <!-- Notification list. -->
+    <ul
+      class="notifications-list"
+      *ngIf="notifications.length; else noNotificationsTemplate"
+    >
+      <li
+        *ngFor="let notification of notifications; trackBy: trackNotification"
+        [class.read]="notification.isRead"
+      >
+        <button
+          type="button"
+          class="notification focusable"
+          (click)="onNotificationClick(notification)"
+        >
+          <span class="badge"></span>
+
+          <!-- Notification message. -->
+          <span class="ellipsis content">
+            {{ notification.content }}
+          </span>
+
+          <!-- Notification date. -->
+          <span class="date">
+            {{ notification.date | jusLawDate }}
+          </span>
+        </button>
+      </li>
+    </ul>
+  </ng-container>
+
+  <ng-template #noNotificationsTemplate>
+    <span class="no-notifications-message">No notifications</span>
+  </ng-template>
+
+  <ng-template #loading>
+    <jlc-loading></jlc-loading>
+  </ng-template>
+
+  <jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>
+</div>

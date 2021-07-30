@@ -1,0 +1,53 @@
+/* Layout */
+
+:host {
+  --space: 10px;
+}
+
+form {
+  margin: var(--space) 0;
+}
+
+label {
+  display: block;
+  margin: 0 var(--space);
+}
+
+.label-w-button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label-w-button jlc-form-control-validation-message {
+  width: 100%;
+}
+
+/* Attorney ion-item */
+
+ion-item {
+  --padding-start: 0;
+}
+
+/* Message */
+
+.no-items-message {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-style: italic;
+  color: var(--medium-color);
+  margin-top: var(--space);
+}
+
+/* Footer */
+
+.button-panel {
+  display: flex;
+  margin: var(--space);
+}
+
+.button-panel button {
+  flex: 1;
+}

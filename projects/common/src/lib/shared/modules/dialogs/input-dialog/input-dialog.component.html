@@ -1,0 +1,19 @@
+<jlc-dialog-header>
+  <h3 class="title">{{ options.title }}</h3>
+</jlc-dialog-header>
+<jlc-dialog-content>
+  <hr />
+  <p class="message">{{ options.message }}</p>
+  <label>
+    <span>{{ options.inputLabelText }}</span>
+    <input #input type="text" [value]="options.value" />
+  </label>
+  <div class="button-pane">
+    <button class="confirm secondary" (click)="onCloseClicked()">
+      Cancel
+    </button>
+    <button class="confirm primary" (click)="onCloseClicked(input.value)">
+      {{ options.confirmButtonText }}
+    </button>
+  </div>
+</jlc-dialog-content>

@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.page-container {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  text-align: left;
+}
+
+div {
+  margin: 1rem 0;
+}
+
+
+button {
+  width: 100%;
+}
+
+input {
+  width: 100%;
+}
+
+.auth-container {
+  width: 300px;
+}
+
+.link-container {
+  text-align: center;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-container, .error-container > p {
+  color: var(--tertiary-color);
+  text-align: center;
+}
+
+.logo {
+  width: 25%;
+}

@@ -1,0 +1,17 @@
+.dashboard-statistics {
+  /* Override styles of the dashboard-statistics component. */
+  --header-background: #333333;
+  --header-font-color: white;
+  --header-text-transform: uppercase;
+  --header-justify-mode: space-between;
+  --header-button-filter: invert(1);
+  --header-button-size: 20px;
+  --header-padding: 15px;
+}
+
+.loading-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Subscriptions</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card class="card">
+    <ion-text>
+      <p class="message">
+        Please login into
+        <br />
+        <a [href]="appUrl">{{ appUrl }}</a>
+        <br />
+        on your web browser to edit your subscription
+      </p>
+    </ion-text>
+    <div class="icon-container">
+      <ion-icon name="lock"></ion-icon>
+    </div>
+  </ion-card>
+</ion-content>

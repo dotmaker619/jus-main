@@ -1,0 +1,52 @@
+<header>
+  <h1 class="page-title">My Account</h1>
+</header>
+
+<hr>
+
+<form *ngIf="form$ | async as form; else loading" [formGroup]="form">
+
+  <div class="row">
+    <label class="radio-label">
+      <input type="radio" [value]="clientTypeOptions.Individual" formControlName="clientType" />
+      <span>Individual</span>
+    </label>
+    <label class="radio-label">
+      <input type="radio" [value]="clientTypeOptions.Organization" formControlName="clientType" />
+      <span>Organization</span>
+    </label>
+  </div>
+  <div class="row">
+    <label *ngIf="form.controls.organizationName">
+      <span>Organization Name</span>
+      <input type="text" readonly formControlName="organizationName" class="full-width" />
+    </label>
+  </div>
+  <div class="row">
+
+    <label>
+      <span>First Name</span>
+      <input type="text" readonly formControlName="firstName" />
+    </label>
+    <label>
+      <span>Last Name</span>
+      <input type="text" readonly formControlName="lastName" />
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <span>Email</span>
+      <input type="email" readonly formControlName="email" />
+    </label>
+  </div>
+</form>
+
+<div class="actions">
+  <button class="secondary" type="button" autocapitalize="on" (click)="onChangePasswordClicked()">
+    Change Password
+  </button>
+</div>
+
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

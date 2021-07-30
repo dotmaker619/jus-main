@@ -1,0 +1,69 @@
+/* Styles for side menu. */
+
+.mobile-side-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100%;
+}
+
+.mobile-side-menu__links-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mobile-side-menu__user-info {
+  padding: 20px 0;
+  background: var(--light-color);
+}
+
+.mobile-side-menu__user-info__avatar {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 1px solid var(--medium-color);
+  overflow: hidden;
+}
+
+.mobile-side-menu__user-info__name {
+  color: var(--primary-font-color);
+  display: block;
+  font-size: var(--primary-font-size);
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.mobile-side-menu__menu-link {
+  --color: var(--primary-font-color);
+  --ion-font-family: var(--primary-font);
+  font-size: var(--primary-font-size);
+}
+
+ion-menu-toggle:first-child .mobile-side-menu__menu-link {
+  border-top: 1px solid var(--header-menu-separator-color);
+}
+
+ion-menu-toggle:nth-child(8) .mobile-side-menu__menu-link {
+  border-top: 1px solid var(--header-menu-separator-color);
+  margin-top: 32px;
+}
+
+.mobile-side-menu__logout {
+  --color: var(--tertiary-color);
+  margin-top: auto;
+}
+
+.mobile-side-menu__menu-link__badge {
+  color: var(--tertiary-contrast-color);
+  background: var(--tertiary-color);
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-align: center;
+  min-width: 32px;
+  padding: 2px 7px;
+  border-radius: 11px;
+}

@@ -1,0 +1,62 @@
+:host {
+  --space: 40px;
+}
+
+.header {
+  margin: var(--space);
+  display: block;
+}
+
+.page-container {
+  width: auto;
+}
+
+.notifications-list {
+  list-style: none;
+}
+
+.notifications-list li {
+  margin: 0 var(--space);
+  border-bottom: 1px solid var(--light-color);
+}
+
+button.notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(var(--space) / 2);
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+}
+
+.badge {
+  --size: 10px;
+
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+li:not(.read) .notification .badge {
+  background: var(--header-badge-background-color);
+}
+
+.notification .content {
+  flex: 0.8;
+  margin-right: auto;
+}
+
+li:not(.read) .notification .content {
+  font-weight: bold;
+}
+
+.notification .date {
+  color: var(--medium-color);
+}
+
+.no-notifications-message {
+  margin: 0 var(--space);
+}

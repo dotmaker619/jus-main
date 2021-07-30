@@ -1,0 +1,51 @@
+:host {
+  display: none;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.3;
+  display: none;
+  background: black;
+}
+
+.side-menu {
+  display: block;
+  overflow-y: auto;
+  width: 20rem;
+  height: calc(100vh - 4.29rem);
+  background: var(--dialog-background-color);
+  box-shadow: 0 0 4px 0 var(--light-shade-color);
+  border: 1px solid var(--light-shade-color);
+}
+
+/* Show fixed sidemenu with backdrop on small screens. */
+@media (max-width: 1024px) {
+  :host {
+    position: fixed;
+    right: 0;
+    top: 0;
+
+    /* To overlap other elements beside this component. */
+    z-index: 1;
+  }
+
+  .backdrop {
+    display: block;
+  }
+
+  .side-menu {
+    position: fixed;
+    right: 0;
+    top: 0;
+    box-shadow: 0 0 1rem 0 var(--medium-shade-color);
+    height: 100vh;
+
+    /* To overlap backdrop. */
+    z-index: 1;
+  }
+}

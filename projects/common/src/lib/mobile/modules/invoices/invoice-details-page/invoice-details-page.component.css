@@ -1,0 +1,37 @@
+:host {
+  --space: 10px;
+}
+
+.card {
+  margin: var(--space);
+}
+
+.primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-panel {
+  display: flex;
+  margin: var(--space);
+  justify-content: space-between;
+}
+
+.button-panel > *:not(:first-child) {
+  margin-left: var(--space);
+}
+
+.button-panel > .primary {
+  flex-basis: 100%;
+}
+
+.space {
+  width: var(--space);
+  height: var(--space);
+  flex-shrink: 0;
+}
+
+.skeleton {
+  width: 5rem;
+}

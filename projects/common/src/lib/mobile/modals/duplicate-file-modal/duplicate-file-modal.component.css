@@ -1,0 +1,26 @@
+:host {
+  --space: 10px;
+}
+
+form {
+  margin: var(--space);
+}
+
+form > * {
+  display: block;
+  margin: var(--space) 0;
+}
+
+label > select,
+label > input {
+  width: 100%;
+}
+
+ion-content {
+  --background: var(--primary-background-color);
+}
+
+.button-panel {
+  display: grid;
+  margin: var(--space);
+}

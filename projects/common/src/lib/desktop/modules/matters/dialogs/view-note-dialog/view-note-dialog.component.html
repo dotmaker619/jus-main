@@ -1,0 +1,36 @@
+<div class="dialog">
+  <div class="header">
+    <h3 class="ellipsis">{{ note.title }}</h3>
+    <button class="close-button" (click)="onCloseClicked()">
+      <!-- Close icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path
+          d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"
+        />
+      </svg>
+    </button>
+  </div>
+  <div class="subheader">
+    <jlc-client-info
+      [client]="note.createdBy"
+      [fullName]="true"
+    ></jlc-client-info>
+    <span class="medium-color italic">
+      Last Updated: {{ note.modified.toString() | jusLawDate }}
+    </span>
+  </div>
+  <hr />
+  <div class="body">
+    <p>
+      {{ note.text }}
+    </p>
+  </div>
+  <div class="button-panel" *ngIf="!isViewMode">
+    <button class="primary" (click)="onEditClicked()">
+      Edit Note
+    </button>
+    <button class="tertiary" (click)="onDeleteClicked()">
+      Delete Note
+    </button>
+  </div>
+</div>

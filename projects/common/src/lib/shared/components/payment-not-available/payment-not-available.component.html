@@ -1,0 +1,19 @@
+<ng-container *ngIf="invoice">
+  <ng-container *ngIf="!invoice?.isPaid; else paidMessage">
+    <header class="conditions-announce">
+      Unfortunately, you are not able to pay the invoice now
+    </header>
+    <dl class="conditions-list">
+      <dt>Make sure the following conditions are met:</dt>
+      <dd>The invoice is sent</dd>
+      <dd>Your attorney has a verified stripe account</dd>
+      <dd>The attorney logged time to the invoice</dd>
+    </dl>
+  </ng-container>
+  <ng-template #paidMessage>
+    <p>The invoice is already paid</p>
+  </ng-template>
+  <footer class="conditions-footer">
+    <ng-content></ng-content>
+  </footer>
+</ng-container>

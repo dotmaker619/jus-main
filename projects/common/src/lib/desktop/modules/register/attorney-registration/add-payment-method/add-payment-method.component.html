@@ -1,0 +1,63 @@
+<div class="page-child-container">
+  <div class="announce-container">
+    <jlc-registration-action-announce></jlc-registration-action-announce>
+  </div>
+  <div
+    class="content"
+    [hidden]="!(isAllComponentsAreReady$ | async)"
+    [attr.disabled]="(isSubmitting$ | async) ? true : null"
+  >
+    <section class="subscription-container">
+      <h4>Subscription type</h4>
+      <jlc-select-payment-plan-form
+        [paymentPlans]="paymentPlans$ | async"
+        [initPaymentPlan]="registrationData.paymentPlan"
+        (formSubmit)="onSelectPaymentPlanFormSubmitted($event)"
+      >
+      </jlc-select-payment-plan-form>
+    </section>
+    <section class="payment-information-container">
+      <h4>Payment Information</h4>
+      <div class="payment-method-form-container">
+        <jlc-payment-method-form
+          [showControls]="false"
+          (ready)="onPaymentMethodFormComponentIsReady()"
+          (formSubmit)="onPaymentMethodSubmitted($event)"
+          (submitFailed)="onPaymentMethodSubmitFailed($event)"
+        >
+        </jlc-payment-method-form>
+      </div>
+    </section>
+    <div class="actions">
+      <button
+        type="button"
+        class="secondary"
+        (click)="onCancelClicked()"
+        [disabled]="isSubmitting$ | async"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="secondary"
+        (click)="onBackClicked()"
+        [disabled]="isSubmitting$ | async"
+      >
+        &lt; Back
+      </button>
+      <button
+        type="button"
+        class="primary"
+        (click)="onSubmitClicked()"
+        [disabled]="isSubmitting$ | async"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
+<jlc-loading
+  class="loading"
+  *ngIf="!(isAllComponentsAreReady$ | async) || (isSubmitting$ | async)"
+>
+</jlc-loading>

@@ -1,0 +1,54 @@
+<div class="create-topic-container">
+  <header>
+    <span class="annotation">
+      Got a question? Ask away and get advice from legal experts!
+    </span>
+  </header>
+  <hr />
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <div class="row">
+      <label class="label-input">
+        Post Title*
+        <input jlcInputStatus
+               formControlName="topicTitle"
+               [jlcApiValidation]="validationError$ | async"
+        />
+        <jlc-form-control-validation-message
+          controlName="topicTitle">
+        </jlc-form-control-validation-message>
+      </label>
+      <label class="label-select">
+        Legal Category*
+        <select
+          formControlName="legalCategory"
+          [jlcApiValidation]="validationError$ | async"
+        >
+          <option value="null" selected>- Select -</option>
+          <option
+            *ngFor="let opt of forumCategories$ | async; trackBy: trackByValue"
+            [value]="opt.value"
+          >
+            {{ opt.label }}
+          </option>
+        </select>
+        <jlc-form-control-validation-message
+          controlName="legalCategory">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+    <label>
+      Message*
+      <textarea formControlName="message"
+                [jlcApiValidation]="validationError$ | async"
+      ></textarea>
+      <jlc-form-control-validation-message
+        controlName="message">
+      </jlc-form-control-validation-message>
+    </label>
+    <footer>
+      <button class="primary submit-button" type="submit">
+        Create New Post
+      </button>
+    </footer>
+  </form>
+</div>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "912991333997",
+    "firebase_url": "https://juslaw-platform.firebaseio.com",
+    "project_id": "juslaw-platform",
+    "storage_bucket": "juslaw-platform.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912991333997:android:70740515a7a4a267bf5964",
+        "android_client_info": {
+          "package_name": "com.saritasa.juslaw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912991333997-fge17pqcv8p6ee6mpsbmn4hcao4n88lk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk-r-qKyl83at8kSMEaJsZsOszLwUt_9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912991333997-fge17pqcv8p6ee6mpsbmn4hcao4n88lk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

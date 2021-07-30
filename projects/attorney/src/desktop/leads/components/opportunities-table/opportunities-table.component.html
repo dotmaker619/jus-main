@@ -1,0 +1,47 @@
+<ul *ngIf="opportunities">
+  <li class="" *ngFor="let topic of opportunities; trackBy: trackById">
+    <a class="row" [routerLink]="['/forum/topic', topic.id]">
+      <div class="col col-action">
+        <button
+          class="chat-button"
+          type="button"
+          title="Go to chat"
+          (click)="onChatButtonClicked($event, topic.firstPost)"
+        >
+          <img src="/assets/icons/opportunities-circle.svg" alt="" />
+        </button>
+      </div>
+      <!-- Topic. -->
+      <div class="col col-opportunity">
+        <div class="topic-title ellipsis">{{ topic.title }}</div>
+        <div
+          class="last-message ellipsis secondary-text"
+          *ngIf="topic.firstPost"
+        >
+          {{ topic.firstPost.text }}
+        </div>
+      </div>
+      <!-- Client. -->
+      <div class="col col-client">
+        <ng-container *ngIf="topic.firstPost">
+          <img
+            class="profile-image"
+            [src]="topic.firstPost?.author.avatar || profileImageFallbackUrl"
+            alt=""
+          />
+          <span class="name">
+            {{ topic.firstPost?.author.shortName }}
+          </span>
+        </ng-container>
+      </div>
+      <!-- Replies. -->
+      <div class="col col-replies secondary-text">
+        {{ topic.postCount }} Replies
+      </div>
+      <!-- Date. -->
+      <div class="col col-created secondary-text">
+        {{ topic.created | date: "MM/d/yy" }}
+      </div>
+    </a>
+  </li>
+</ul>

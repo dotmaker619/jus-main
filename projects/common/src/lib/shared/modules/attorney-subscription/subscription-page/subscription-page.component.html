@@ -1,0 +1,91 @@
+<ng-container *ngIf="currentPaymentProfile$ | async as currentPaymentProfile; else loading">
+  <section class="subscription">
+    <h1>My Subscription</h1>
+    <ng-container *ngIf="currentPaymentProfile.subscription as subscription; else noActiveSubscription">
+      <div class="elements-group">
+        <div class="icon-wrapper">
+          <img src="/assets/icons/document_icon.svg" alt="Plan icon" />
+        </div>
+
+        <div class="plan-info">
+          <div class="title">{{ subscription.plan.name }}</div>
+          <div class="price">{{ subscription.plan.amountPerDay | currency: subscription.plan.currency }} / day</div>
+        </div>
+
+        <div class="renewal-date">
+          <div class="title">
+            Status: {{ subscription.statusTitle }}
+          </div>
+          <div class="title"
+            *ngIf="!subscription.cancelAtPeriodEnd">
+            Renewal Date
+          </div>
+          <div class="title"
+            *ngIf="subscription.cancelAtPeriodEnd">
+            {{ currentPaymentProfile.nextSubscription == null ? 'Update Date' : 'Cancel Date' }}
+          </div>
+          <div class="date">
+            {{ subscription.renewalDate | date: 'MMM dd, yyyy' }}
+          </div>
+        </div>
+
+        <div>
+          <button
+            type="button"
+            class="primary"
+            [disabled]="!(canEdit$ | async)"
+            [routerLink]="['edit']"
+          >Edit Subscription</button>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="cancel-subscription"
+        (click)="onCancelClicked(subscription)"
+        *ngIf="canCancel$ | async"
+      >
+        Cancel Subscription
+      </button>
+      <!--For next release when the workflow will be clear.-->
+      <button
+        type="button"
+        class="cancel-subscription"
+        (click)="onReactivateClicked()"
+        *ngIf="canReactivate$ | async"
+      >
+        Reactivate
+      </button>
+    </ng-container>
+  </section>
+
+  <section class="payment-method" *ngIf="currentPaymentProfile.method">
+    <h1>Payment Method</h1>
+
+    <div class="elements-group">
+      <div class="icon-card-wrapper">
+        <img src="/assets/icons/credit_card-24px.svg" alt="Plan icon" />
+      </div>
+
+      <div class="payment-method-info">
+        <div class="title">{{ currentPaymentProfile.method.brand | titlecase }} ● *{{ currentPaymentProfile.method.last4 }}</div>
+        <div class="date">{{ currentPaymentProfile.method.expMonth }}/{{ currentPaymentProfile.method.expYear }}</div>
+      </div>
+
+      <button class="button-edit" (click)="editPaymentMethod()" title="Edit payment method">
+        <img src="/assets/icons/edit_icon.svg" alt="Edit icon"/>
+      </button>
+    </div>
+  </section>
+</ng-container>
+
+<ng-template #loading [ngIf]="isBusy$ | async">
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>
+
+<ng-template #noActiveSubscription>
+  <div class="no-active-subscription-message">
+    <p>You don't have an active subscription.</p>
+    <a class="primary" routerLink="./edit">Buy Subscription</a>
+  </div>
+</ng-template>

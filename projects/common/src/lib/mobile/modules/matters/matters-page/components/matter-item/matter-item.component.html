@@ -1,0 +1,23 @@
+<ion-item [attr.button]="routerLink ? true : null" [detail]="false">
+  <div class="content">
+    <div class="row">
+      <div class="icon">
+        <ion-icon src="/assets/icons/file.svg"></ion-icon>
+      </div>
+      <div class="header">
+        <div class="row space">
+          <div class="name">
+            {{ matter.client.shortName }}
+          </div>
+          <div class="status" [ngClass]="matter.status">
+            {{ matter.status | uppercase }}
+          </div>
+        </div>
+        <div class="title">[{{ matter.code }}] {{ matter.title }}</div>
+      </div>
+    </div>
+    <div class="description">
+      {{ matter.description }}
+    </div>
+  </div>
+</ion-item>

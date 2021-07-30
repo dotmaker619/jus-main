@@ -1,0 +1,20 @@
+<img
+  [src]="profileImageUrl || '/assets/profile-image.png'"
+  alt="Profile image"
+/>
+
+<ion-button
+  class="upload-button"
+  fill="clear"
+  shape="round"
+  (click)="onProfileEditClick()"
+>
+  <ion-icon slot="icon-only" src="assets/icons/edit_pen.svg"></ion-icon>
+</ion-button>
+<input
+  #fileInput
+  type="file"
+  hidden
+  accept="image/png, image/jpeg"
+  (change)="onProfileImageChange($event.target.files)"
+/>

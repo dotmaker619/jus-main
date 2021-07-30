@@ -1,0 +1,25 @@
+h1 {
+  font-weight: normal;
+  font-size: 2rem;
+}
+
+h2 {
+  margin: 10px;
+}
+
+jlc-loading {
+  margin-top: 20px;
+}
+
+.subheader-content {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-button {
+  position: absolute;
+  right: 10px;
+  --color: white;
+}

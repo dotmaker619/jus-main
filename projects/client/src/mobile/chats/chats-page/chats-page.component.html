@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Chats</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ng-container *ngIf="chats$ | async as chats">
+    <ion-list>
+      <ion-item
+        *ngFor="let chat of chats; trackBy: trackChat; last as isLast"
+        [lines]="isLast ? 'none' : 'inset'"
+      >
+        <ion-avatar
+          slot="start"
+          [routerLink]="['/attorneys', 'profile', chat.recipient.id]"
+        >
+          <img [src]="chat.recipient.avatar" />
+        </ion-avatar>
+        <ion-label (click)="onChatClick(chat)" class="chat-link">
+          <h2 class="recipient ellipsis">{{ chat.recipient.fullName }}</h2>
+          <p *ngIf="chat.lastMessageText" class="last-message ellipsis">
+            {{ chat.lastMessageText }}
+          </p>
+        </ion-label>
+        <div class="chat-info" slot="end">
+          <ion-note class="last-message-date">{{
+            chat.lastMessageDate | jusLawNamedOffsetFromNow
+          }}</ion-note>
+
+          <ion-badge *ngIf="chat.countUnreadMessages > 0" slot="end">
+            {{ chat.countUnreadMessages }}
+          </ion-badge>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+</ion-content>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

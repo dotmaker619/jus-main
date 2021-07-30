@@ -1,0 +1,279 @@
+<ng-container *ngIf="matter$ | async as matter; else fullScreenLoading">
+  <!-- Breadcrumb -->
+  <jlc-breadcrumbs [links]="breadcrumbs$ | async"></jlc-breadcrumbs>
+
+  <!-- Heading -->
+  <section>
+    <div class="section-header">
+      <div class="icon-container">
+        <img src="/assets/icons/document_icon.svg" aria-hidden="true" />
+      </div>
+      <h2>Matter Details</h2>
+
+      <div class="buttons-panel">
+        <button
+          *ngIf="isAble(permissions.CloseMatter) | async"
+          class="primary pull-right"
+          (click)="onCloseMatterClick()"
+        >
+          <img src="/assets/icons/forward_icon.svg" />
+          <span>Close matter</span>
+        </button>
+        <button
+          *ngIf="isAble(permissions.ReferMatter) | async"
+          class="primary"
+          (click)="onReferMatterClick(matter)"
+        >
+          <img src="/assets/icons/forward_icon.svg" />
+          <span>Refer matter</span>
+        </button>
+        <!-- We use the 'ReferMatter' here as well
+             because sharing a matter with an attorney and a support is the same operation  -->
+        <button
+          *ngIf="isAble(permissions.ReferMatter) | async"
+          type="button"
+          class="primary"
+          (click)="onAddSupportClick(matter)"
+        >
+          + Paralegal
+        </button>
+        <button
+          *ngIf="isAble(permissions.EditJobs) | async"
+          class="primary"
+          (click)="openLogTimeDialog()"
+        >
+          <img src="/assets/icons/clock_icon.svg" />
+          <span>Log time</span>
+        </button>
+        <button
+          *ngIf="isAble(permissions.SendPersonalMessage) | async"
+          class="icon-container contact-color"
+          type="button"
+          title="Send a message"
+          (click)="openMatterTopicDialog(matter)"
+        >
+          <img src="/assets/icons/matter_message_icon.svg" alt="Send message" />
+        </button>
+        <button
+          (click)="onCallClicked(matter)"
+          class="icon-container contact-color"
+          type="button"
+          title="Call"
+          *ngIf="isAble(permissions.InitiateCall) | async"
+        >
+          <img src="/assets/icons/phone_icon.svg" alt="Send message" />
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Matter details -->
+  <div class="matter-container">
+    <h3>[{{ matter.code | uppercase }}] {{ matter.title | titlecase }}</h3>
+    <div class="matter-info">
+      <!-- Matter info table -->
+      <jlc-matter-info [matter]="matter"> </jlc-matter-info>
+      <!-- Stage select -->
+      <div class="form-container" *ngIf="isAble(permissions.EditStage) | async">
+        <form [formGroup]="matterForm$ | async">
+          <select formControlName="stage">
+            <option [ngValue]="null" selected disabled>Select stage...</option>
+            <option
+              *ngFor="let stage of stageOptions$ | async; trackBy: trackById"
+              [ngValue]="stage.id"
+            >
+              {{ stage.title }}
+            </option>
+          </select>
+        </form>
+      </div>
+    </div>
+    <hr />
+    <p class="matter-description">{{ matter.description }}</p>
+  </div>
+
+  <!-- Documents, Notes tabs -->
+  <div class="tabs-container">
+    <!-- "Add note", "Folder", "Upload file" buttons -->
+    <div class="tabs-buttons">
+      <button
+        class="secondary"
+        *ngIf="isAble(permissions.RecordVoiceConsent) | async"
+        (click)="recordConsent()"
+      >
+        <img src="assets/icons/microphone.svg" />
+        <span>+ Consent</span>
+      </button>
+      <button
+        *ngIf="isAble(permissions.EditFolders) | async"
+        class="secondary"
+        (click)="onCreateFolderClick()"
+      >
+        <img src="/assets/icons/folder_icon.svg" aria-hidden="true" />
+        <span>+ Folder</span>
+      </button>
+      <button
+        *ngIf="isAble(permissions.EditFiles) | async"
+        class="secondary"
+        (click)="onUploadFileClick()"
+      >
+        <img src="/assets/icons/upload_icon.svg" aria-hidden="true" />
+        <span>Upload</span>
+      </button>
+      <button
+        *ngIf="isAble(permissions.EditNotes) | async"
+        class="secondary"
+        title="Add note"
+        (click)="addNoteClick()"
+      >
+        <img src="/assets/icons/document_icon.svg" aria-hidden="true" />
+        <span>+ Note</span>
+      </button>
+    </div>
+    <mat-tab-group disableRipple dynamicHeight>
+      <mat-tab>
+        <!-- Tab label -->
+        <ng-template mat-tab-label>
+          <div class="tab-label">
+            Documents
+            <div class="badge">
+              <span>
+                {{ documentsCount$ | async }}
+              </span>
+            </div>
+          </div>
+        </ng-template>
+        <div class="tab-container">
+          <jlc-documents-tree
+            [documents]="documents$ | async"
+            [showHeader]="true"
+            (documentAction)="onNodeAction($event)"
+          ></jlc-documents-tree>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <!-- Tab label -->
+        <ng-template mat-tab-label>
+          <div class="tab-label">
+            Notes
+            <div class="badge">
+              <span>
+                {{ notesNumber }}
+              </span>
+            </div>
+          </div>
+        </ng-template>
+        <div class="tab-container">
+          <jlc-notes-list
+            [matter]="matter"
+            [change$]="notesChange$"
+            (notesNumberChange)="onNotesNumberChange($event)"
+          >
+          </jlc-notes-list>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="tab-label">
+            Voice Consents
+            <div class="badge">
+              <span>
+                {{ (consents$ | async)?.itemsCount }}
+              </span>
+            </div>
+          </div>
+        </ng-template>
+        <div class="tab-container">
+          <jlc-consents-list
+            [consents]="(consents$ | async)?.items"
+            [editable]="isAble(permissions.EditConsents) | async"
+          >
+          </jlc-consents-list>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <!-- Billable time section. -->
+  <section *ngIf="billings$ | async as billings; else loading">
+    <div class="section-header">
+      <div class="icon-container">
+        <img src="/assets/icons/clock_icon.svg" aria-hidden="true" />
+      </div>
+      <h2>Billable Time</h2>
+      <!-- Month picker. -->
+      <form [formGroup]="billingsFilterForm" *ngIf="hasBilledTime(matter)">
+        <input
+          class="pull-right"
+          matInput
+          [matDatepicker]="picker"
+          [matDatepickerFilter]="filterDatesForMatter"
+          placeholder="Choose a date"
+          formControlName="time"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker
+          (monthSelected)="onMonthSelected($event, picker)"
+          startView="multi-year"
+          touchUi
+          #picker
+        ></mat-datepicker>
+      </form>
+      <!-- Total time column. -->
+      <div class="medium-width-column">
+        <div class="billable-time-info-heading">
+          Total Time (This Month)
+        </div>
+        <span>
+          {{ billings.totalTime || 0 }}
+        </span>
+      </div>
+      <!-- Total fees column. -->
+      <ng-container *ngIf="RateType.Hourly === matter.rateType">
+        <div class="medium-width-column">
+          <div class="billable-time-info-heading">
+            Total Fees (This Month)
+          </div>
+          <span>
+            {{ billings.totalFees || 0 | currency }}
+          </span>
+        </div>
+      </ng-container>
+    </div>
+    <jlc-billings-table
+      [matter]="matter"
+      [billings]="billings"
+      (limitChange)="onBillingsLimitChange($event)"
+      [active]="isAble(permissions.EditJobs) | async"
+      [isLoggedByColumnDisplayed]="true"
+      (timeBillingSelected)="onTimeBillingClicked($event)"
+    >
+      <div no-content>
+        <ng-container *ngIf="hasBilledTime(matter); else noBillings">
+          <!-- No billings for selected period. -->
+          <h4>No time billed for selected period.</h4>
+        </ng-container>
+        <ng-template #noBillings>
+          <!-- No time billings at all. -->
+          <h4>No time billed.</h4>
+        </ng-template>
+      </div>
+    </jlc-billings-table>
+  </section>
+
+  <!-- Messages section -->
+  <jlc-messages-table
+    [matterTopics]="matterTopics$ | async"
+  ></jlc-messages-table>
+</ng-container>
+
+<ng-template #loading>
+  <jlc-loading></jlc-loading>
+</ng-template>
+
+<ng-container *ngIf="isLoading$ | async" [ngTemplateOutlet]="fullScreenLoading">
+</ng-container>
+
+<ng-template #fullScreenLoading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

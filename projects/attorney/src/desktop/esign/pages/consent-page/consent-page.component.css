@@ -1,0 +1,12 @@
+.narrow-centered-container {
+  max-width: 400px;
+  margin: 7% auto;
+}
+
+.narrow-centered-container p {
+  margin-bottom: 1.2rem;
+}
+
+.button-container {
+  text-align: center;
+}

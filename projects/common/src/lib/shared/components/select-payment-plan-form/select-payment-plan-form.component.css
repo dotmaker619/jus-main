@@ -1,0 +1,61 @@
+:host {
+  --payment-plan-item-width: calc(50% - 29px);
+}
+
+.payment-plans-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  /* To have proper gaps in flex box */
+  margin: -10px;
+}
+
+.payment-item-container {
+  display: flex;
+  flex-direction: column;
+  width: var(--payment-plan-item-width);
+  padding: 21px 23px 45px 27px;
+  min-width: min-content;
+  font-size: 1rem;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 2px;
+  flex: 1;
+  font-weight: normal;
+  margin: 10px;
+}
+
+.payment-item-container:focus-within {
+  box-shadow: var(--focus-shadow);
+}
+
+.payment-plan-heading {
+  display: flex;
+}
+
+.payment-plan-name {
+  flex: 1;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.payment-description {
+  font-style: italic;
+  color: var(--primary-light-font-color);
+  margin-top: 20px;
+}
+
+.payment-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.payment-amount {
+  font-size: 1rem;
+}
+
+.payment-amount-per-day {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  width: max-content;
+}

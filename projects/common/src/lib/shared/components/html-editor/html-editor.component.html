@@ -1,0 +1,8 @@
+<quill-editor
+  [ngModel]="content"
+  [styles]="editorStyles"
+  (onContentChanged)="onEditorValueChange($event)"
+  (onEditorCreated)="onEditorCreated($event)"
+>
+</quill-editor>
+<input #imageUploader type="file" hidden />

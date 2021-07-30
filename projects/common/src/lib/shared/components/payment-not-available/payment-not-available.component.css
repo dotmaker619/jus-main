@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  width: max-content;
+}
+
+.conditions-announce {
+  font-weight: bold;
+  font-style: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--primary-font-color);
+}
+
+.conditions-list {
+  color: var(--primary-font-color);
+}
+
+.conditions-list dd {
+  display: list-item;
+  list-style-type: disc;
+}
+
+.conditions-footer {
+  margin-top: 20px;
+  display: flex;
+}

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Topics I follow
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ng-container *ngTemplateOutlet="paginationPanel"></ng-container>
+  <jlc-topics-list [topics]="topics$ | async"></jlc-topics-list>
+  <ng-container *ngTemplateOutlet="paginationPanel"></ng-container>
+</ion-content>
+
+<ng-template #paginationPanel>
+  <div class="pagination-panel">
+    <ng-container *ngIf="pagesCount$ | async as pagesCount">
+      <jlc-forum-paginator
+        [pagesCount]="pagesCount"
+        [currentPage]="pageChange$ | async"
+        (pageChange)="onPageChange($event)"
+      ></jlc-forum-paginator>
+    </ng-container>
+  </div>
+</ng-template>

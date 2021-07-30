@@ -1,0 +1,68 @@
+@import "../../../../theme/mobile-styles.css";
+
+.marketing-header-logo {
+  margin-right: auto;
+  flex-shrink: 0;
+  width: 100px;
+  height: 50px;
+  background-image: url("/assets/juslaw-horizontal.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  margin-left: 10px;
+}
+
+.marketing-header-list-container ion-label {
+  padding-left: 10px;
+}
+
+.marketing-header-list-container ion-list {
+  --background: transparent;
+}
+
+.marketing-header-list-container .buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.marketing-header-list-container .buttons .primary {
+  border-radius: 30px;
+  min-width: 40%;
+}
+
+.marketing-header-list-container {
+  position: absolute;
+  --padding-bottom: 0;
+}
+
+.marketing-header-list-container ion-list,
+ion-item {
+  --background: transparent;
+  background: transparent;
+}
+
+.marketing-header-list-container ion-item.active {
+  box-shadow: 10px 0px 0 0px var(--primary-shade-color) inset;
+  font-weight: bold;
+  color: var(--primary-shade-color);
+}
+
+ion-toolbar {
+  --background: var(--header-color);
+}
+
+ion-buttons ion-button,
+ion-buttons ion-menu-button {
+  --color: var(--primary-background-contrast-color);
+  color: var(--primary-background-contrast-color);
+}
+
+.marketing-layout-backdrop {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0.5;
+}

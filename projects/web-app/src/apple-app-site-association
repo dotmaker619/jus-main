@@ -1,0 +1,19 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "97CJYDC5AL.com.saritasa.juslaw",
+                "paths": [
+                  "*"
+                ]
+            },
+            {
+                "appID": "P9YK5V982S.com.jusglobal.jus-law",
+                "paths": [
+                  "*"
+                ]
+            },
+        ]
+    }
+}

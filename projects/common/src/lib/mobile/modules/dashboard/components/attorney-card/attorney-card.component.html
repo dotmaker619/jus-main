@@ -1,0 +1,51 @@
+<div class="content" *ngIf="attorney; else skeleton">
+  <div class="label" *ngIf="attorney.featured">
+    <span>
+      Featured
+    </span>
+  </div>
+  <div class="avatar">
+    <img [src]="avatarUrl" [alt]="attorney.firstName" />
+  </div>
+
+  <div class="info">
+    <div class="name">
+      {{ attorney.fullName }}
+    </div>
+    <div class="specialty">
+      {{ specialty }}
+    </div>
+    <div class="place">
+      <span class="place-name">
+        {{ attorney.firmLocationState }}
+      </span>
+      <span class="distance" *ngIf="attorney.distance as distance">
+        {{ distance | number: "1.1-1" }} mil
+      </span>
+    </div>
+  </div>
+</div>
+<div class="outside-content">
+  <ng-content></ng-content>
+</div>
+
+<ng-template #skeleton>
+  <div class="content skeleton">
+    <div class="avatar">
+      <ion-skeleton-text animated></ion-skeleton-text>
+    </div>
+
+    <div class="info">
+      <div class="name">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </div>
+      <div class="specialty">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </div>
+      <div class="place">
+        <ion-skeleton-text animated class="place-name"> </ion-skeleton-text>
+        <ion-skeleton-text animated class="distance"> </ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+</ng-template>

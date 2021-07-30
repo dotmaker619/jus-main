@@ -1,0 +1,44 @@
+<form [formGroup]="form" (ngSubmit)="onFormSubmitted(form)" class="form">
+  <label class="message-label">
+    <input
+      #messageInput
+      formControlName="message"
+      placeholder="Type here..."
+      autocomplete="off"
+      class="input"
+      aria-label="New message"
+      aria-placeholder="New message"
+    />
+  </label>
+  <div class="actions">
+    <input
+      hidden
+      type="file"
+      #attachFileInput
+      multiple
+      (change)="onAttachedFileChange($event.target.files)"
+    />
+    <button
+      type="button"
+      class="send attach"
+      (click)="attachFileInput.click()"
+      title="Upload files"
+      [disabled]="loading"
+    >
+      <img
+        [class.loading]="loading"
+        class="icon loading"
+        src="/assets/icons/attach_icon.svg"
+        alt=""
+      />
+    </button>
+    <button
+      type="submit"
+      class="send"
+      [disabled]="form.invalid || loading"
+      title="Send message"
+    >
+      <img class="icon" src="/assets/icons/send_icon.svg" alt="" />
+    </button>
+  </div>
+</form>

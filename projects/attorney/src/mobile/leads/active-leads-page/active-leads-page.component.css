@@ -1,0 +1,12 @@
+.leads-list {
+  padding: 0;
+}
+
+.message {
+  --padding-start: 0;
+  --padding-end: 0;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--medium-color);
+  text-align: center;
+}

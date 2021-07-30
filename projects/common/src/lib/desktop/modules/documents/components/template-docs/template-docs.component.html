@@ -1,0 +1,25 @@
+<header>
+  <!-- Add file button. -->
+  <button class="primary" type="button" (click)="onUploadFileClick()">
+    <span>+ File</span>
+    <img src="/assets/icons/document_icon.svg" alt="" />
+  </button>
+
+  <!-- Input for filtering files. -->
+  <form [formGroup]="templatesQueryForm">
+    <input
+      formControlName="filter"
+      type="search"
+      placeholder="Search files..."
+    />
+  </form>
+</header>
+<!-- Documents. -->
+<jlc-documents-tree
+  [documents]="templates$ | async"
+  (documentAction)="onNodeAction($event)"
+></jlc-documents-tree>
+
+<ng-container *ngIf="isLoading$ | async">
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-container>

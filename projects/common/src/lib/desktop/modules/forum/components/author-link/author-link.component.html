@@ -1,0 +1,22 @@
+<ng-container *ngIf="author; else noAuthor">
+  <ng-template [ngxPermissionsOnly]="roles.Attorney">
+    <span>
+      {{ author.fullName }}
+    </span>
+  </ng-template>
+  <ng-template [ngxPermissionsExcept]="[roles.Attorney]">
+    <a
+      [routerLink]="['/attorneys/profile', author.id]"
+      *ngIf="authorUserType == roles.Attorney; else client"
+    >
+      {{ author.fullName }}
+    </a>
+    <ng-template #client>
+      <span> {{ author.fullName }} </span>
+    </ng-template>
+  </ng-template>
+</ng-container>
+
+<ng-template #noAuthor>
+  <span>—</span>
+</ng-template>

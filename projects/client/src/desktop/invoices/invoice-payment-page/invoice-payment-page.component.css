@@ -1,0 +1,56 @@
+.page-container {
+  padding: 18px 40px;
+}
+
+.page-heading {
+  font-size: 1.75rem;
+  font-weight: normal;
+}
+
+hr {
+  margin-bottom: 22px;
+}
+
+.payment-form {
+  display: block;
+  width: max(40%, 400px);
+}
+
+.payment-form-heading {
+  margin: 25px 0 20px 0;
+  font-size: 1.5rem;
+  color: var(--primary-shade-color);
+  font-weight: normal;
+}
+
+.payment-finished {
+  margin: 20vh auto 0 auto;
+  width: fit-content;
+  text-align: center;
+}
+
+.payment-finished div {
+  width: 66px;
+  height: 66px;
+  margin: auto;
+}
+
+.payment-finished div img {
+  width: 100%;
+  height: 100%;
+}
+
+.payment-finished h2 {
+  font-size: 2.5rem;
+  font-weight: normal;
+  margin: 22px 0 15px 0;
+}
+
+.payment-finished p {
+  margin-bottom: 5px;
+}
+
+jlc-payment-not-available {
+  margin-left: auto;
+  margin-right: auto;
+}

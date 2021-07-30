@@ -1,0 +1,9 @@
+<jlc-header
+  [navigationLinks]="navigationLinks"
+  [navigationButtons]="navigationButtons"
+  [menuLinks]="menuLinks$ | async"
+  class="header"
+></jlc-header>
+<div class="page">
+  <router-outlet></router-outlet>
+</div>

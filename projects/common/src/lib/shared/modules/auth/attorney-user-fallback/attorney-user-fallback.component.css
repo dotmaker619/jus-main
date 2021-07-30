@@ -1,0 +1,12 @@
+@import "../auth.css";
+
+p {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.message-container {
+  max-width: 500px;
+  margin-left: calc(100%/2 - 250px);
+  margin-top: 17%;
+}

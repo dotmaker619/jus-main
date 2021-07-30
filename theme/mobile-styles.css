@@ -1,0 +1,131 @@
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/display.css";
+
+ion-menu,
+ion-content,
+ion-toolbar {
+  --background: var(--primary-background-color);
+}
+
+ion-menu > ion-content {
+  --background: var(--primary-background-color);
+}
+
+/*
+ To get the same styles for both android and ios.
+ Use classes to make sure we override default styles.
+*/
+ion-list.list-md,
+ion-list.list-ios {
+  margin: 0;
+  padding: 0;
+}
+
+/* GLOBAL STYLES FOR MOBILE */
+
+*:focus {
+  outline: none;
+}
+
+span {
+  color: unset;
+}
+
+ion-content {
+  --background: var(--light-color);
+}
+
+ion-item {
+  --border-color: var(--light-shade-color);
+}
+
+ion-toolbar {
+  --background: var(--header-color);
+}
+
+ion-back-button {
+  /* To override default primary color without complex selector. */
+  --color: var(--primary-background-contrast-color) !important;
+}
+
+.primary {
+  font-size: 0.9rem;
+  min-width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.primary ion-icon:first-child {
+  margin-right: 10px;
+}
+
+.primary ion-icon:last-child {
+  margin-left: 10px;
+}
+
+ion-title {
+  font-weight: bold;
+  font-size: 1.3rem;
+  --color: var(--header-contrast-color);
+}
+
+ion-buttons ion-button,
+ion-buttons ion-menu-button {
+  --color: var(--primary-background-contrast-color);
+  color: var(--primary-background-contrast-color);
+}
+
+ion-button[fill="clear"] {
+  font-weight: bold;
+  text-transform: capitalize;
+  --color: var(--secondary-color);
+  font-size: 0.9rem;
+}
+
+ion-toolbar ion-button[fill="clear"] {
+  /* For iOS */
+  --ion-toolbar-color: var(--primary-font-color);
+  /* For Android */
+  --color: var(--primary-font-color);
+  font-size: 1rem;
+}
+
+.alert-button.danger-button {
+  color: #eb2027;
+}
+
+ion-datetime {
+  display: flex;
+  align-items: center;
+}
+
+select,
+ion-datetime {
+  background-color: var(--primary-background-color);
+}
+
+ion-fab-button {
+  --background: var(--secondary-gradient);
+  --background-activated: var(--secondary-gradient);
+}
+
+ion-searchbar {
+  text-align: start;
+}
+
+/* Fix issue with truncating AM/PM options on ion-datetime */
+.picker-opt {
+  font-size: 18px;
+}
+
+/** To style ionic modal. */
+.transparent-ion-modal {
+  --background: none;
+}
+
+/* Remove redundant styles of input inside ion-alert. */
+.alert-input.sc-ion-alert-md:focus {
+  border: 1px solid var(--primary-border-color);
+  margin-bottom: 5px;
+}

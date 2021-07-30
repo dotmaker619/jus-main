@@ -1,0 +1,55 @@
+:host {
+  display: inline-block;
+  --icon-background: var(--medium-color);
+  --card-background: var(--dashboard-card-mini-background);
+  --card-border-color: var(--light-color);
+  --icon-size: 25px;
+  --space: 10px;
+  --font-size: 0.9rem;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  background: var(--card-background);
+  border: 1px solid var(--card-border-color);
+  border-radius: 8px;
+  padding: var(--space);
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--icon-background);
+  border-radius: 50%;
+  padding: 10px;
+  width: fit-content;
+}
+
+.icon ion-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  color: var(--primary-contrast-color);
+}
+
+.title {
+  margin: calc(var(--space) / 2);
+  text-align: center;
+}
+
+.title,
+.count {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: var(--font-size);
+  color: var(--primary-font-color);
+}
+
+.skeleton {
+  width: 3rem;
+}

@@ -1,0 +1,37 @@
+<ul *ngIf="pagesCount > 1">
+  <li>
+    <button
+      [disabled]="currentPage === 0"
+      (click)="onClickPrev()"
+      title="Show previous page"
+      class="focusable"
+    >
+      <
+    </button>
+  </li>
+  <li *ngFor="let pageNumber of displayPages; trackBy: trackByValue">
+    <ng-container *ngIf="pageNumber !== BLANK; else blankButton">
+      <button
+        class="pagination-button ellipsis focusable"
+        [title]="pageNumber + 1"
+        (click)="onClickPage(pageNumber)"
+        [class.active]="pageNumber === currentPage"
+      >
+        {{ pageNumber + 1 }}
+      </button>
+    </ng-container>
+    <ng-template #blankButton>
+      <button disabled class="blank">...</button>
+    </ng-template>
+  </li>
+  <li>
+    <button
+      [disabled]="isLastPage(currentPage)"
+      (click)="onClickNext()"
+      title="Show next page"
+      class="focusable"
+    >
+      >
+    </button>
+  </li>
+</ul>

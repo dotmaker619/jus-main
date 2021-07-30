@@ -1,0 +1,40 @@
+<div class="attorneys" *ngIf="sponsoredAttorneys$ | async as attorneys">
+  <ng-container *ngIf="attorneys.length > 0">
+    <jlc-carousel
+      [collection]="attorneys"
+      [groupSize]="4"
+      [itemTemplate]="listItem"
+      [trackFn]="trackAttorney"
+      header="Sponsored Attorneys"
+    ></jlc-carousel>
+  </ng-container>
+</div>
+
+<ng-template #listItem let-attorney>
+  <div class="attorney-el-wrapper">
+    <a
+      class="attorney"
+      [routerLink]="['/attorneys/profile/', attorney.id]"
+      [style.backgroundImage]="obtainBackground(attorney)"
+    >
+      <div class="info">
+        <span class="name">
+          {{ attorney.fullName }}
+        </span>
+        <div class="location">
+          {{ attorney?.firmLocationCity }},
+          {{ attorney?.firmLocationState }}
+        </div>
+      </div>
+    </a>
+
+    <a
+      *ngIf="attorney.sponsorLink"
+      [attr.href]="attorney.sponsorLink"
+      target="_blank"
+      class="sponsor-link"
+    >
+      Site
+    </a>
+  </div>
+</ng-template>

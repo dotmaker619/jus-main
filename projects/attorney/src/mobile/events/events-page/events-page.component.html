@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Events Management</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form *ngIf="form$ | async as form" [formGroup]="form">
+    <select formControlName="filter">
+      <option *ngFor="let option of filterOptions" [ngValue]="option">
+        {{ option.label }}
+      </option>
+    </select>
+  </form>
+  <ion-list *ngIf="events$ | async as events; else loading">
+    <ion-item class="message" *ngIf="events.length === 0" lines="none">
+      <ion-label>No events</ion-label>
+    </ion-item>
+    <ion-item
+      *ngFor="let event of events; trackBy: trackEvent"
+      lines="none"
+      button="false"
+    >
+      <jlc-event-card
+        [event]="event"
+        (optionsClicked)="onEventOptionsClicked($event)"
+        [showButton]="true"
+      ></jlc-event-card>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="fab-button" (click)="onAddEventClick()">
+      <ion-icon src="/assets/icons/add_event.svg"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

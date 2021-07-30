@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Attorneys I Follow</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ng-container *ngIf="attorneys$ | async as attorneys; else skeletonList">
+    <ion-list>
+      <ion-item
+        *ngFor="
+          let attorney of attorneys;
+          trackBy: trackAttorney;
+          last as isLast
+        "
+        [lines]="isLast ? 'none' : 'inset'"
+      >
+        <ion-avatar
+          slot="start"
+          [routerLink]="['/attorneys', 'profile', attorney.id]"
+        >
+          <img [src]="attorney.avatar" />
+        </ion-avatar>
+        <ion-label [routerLink]="['/attorneys', 'profile', attorney.id]">
+          {{ attorney.fullName }}
+        </ion-label>
+        <ion-button
+          color="danger"
+          fill="clear"
+          (click)="onUnfollowClick(attorney.id)"
+          slot="end"
+        >
+          Unfollow
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="attorneys.length === 0" lines="none">
+        <ion-label class="no-items">You do not follow any attorneys</ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+</ion-content>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>
+
+<ng-template #skeletonList>
+  <ion-list>
+    <ion-item *ngFor="let i of [1, 2, 3]">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ng-template>

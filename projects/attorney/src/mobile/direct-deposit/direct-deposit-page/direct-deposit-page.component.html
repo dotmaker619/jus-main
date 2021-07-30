@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Direct deposit
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ng-container [ngSwitch]="viewState$ | async">
+    <ng-container
+      *ngSwitchCase="accountState.Unknown"
+      [ngTemplateOutlet]="loading"
+    ></ng-container>
+    <ng-container
+      *ngSwitchCase="accountState.Exist"
+      [ngTemplateOutlet]="content"
+    ></ng-container>
+    <ng-container
+      *ngSwitchCase="accountState.Pending"
+      [ngTemplateOutlet]="pending"
+    ></ng-container>
+    <ng-container
+      *ngSwitchCase="accountState.NotExist"
+      [ngTemplateOutlet]="noAccount"
+    ></ng-container>
+  </ng-container>
+</ion-content>
+
+<ng-template #loading>
+  <jlc-loading
+    message="Trying to get your account information..."
+  ></jlc-loading>
+</ng-template>
+
+<ng-template #content>
+  <ng-container *ngIf="accountInfo$ | async as account">
+    <jlc-card>
+      <div class="account-container">
+        <div class="payment-info">
+          <b class="main"
+            >{{ account.brand }} &#9679; **** {{ account.last4 }}</b
+          >
+          <p class="additional">
+            {{ account.additionalInfo }}
+            <span class="italic not-verified">
+              {{ account.isVerified ? "" : "(not verified)" }}
+            </span>
+          </p>
+        </div>
+        <div class="action-buttons">
+          <a
+            title="Edit payment method"
+            target="_blank"
+            [href]="editLink$ | async"
+          >
+            <img class="btn-icon" src="assets/icons/edit_icon.svg" alt="" />
+          </a>
+        </div>
+      </div>
+    </jlc-card>
+  </ng-container>
+</ng-template>
+
+<ng-template #pending>
+  <section class="pending-message">
+    <p class="message">
+      {{ templateMessages.accountInProcessing }}
+    </p>
+    <a target="_blank" [href]="editLink$ | async">
+      Edit account
+    </a>
+  </section>
+</ng-template>
+
+<ng-template #noAccount>
+  <section class="no-account">
+    <jlat-payment-message></jlat-payment-message>
+    <a [href]="registerLink$ | async" class="primary" title="Add account">
+      Add account
+    </a>
+  </section>
+</ng-template>

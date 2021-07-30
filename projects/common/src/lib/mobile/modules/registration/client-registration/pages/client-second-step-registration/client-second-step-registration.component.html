@@ -1,0 +1,37 @@
+<ng-container *ngIf="form$ | async as form">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button
+          (click)="presaveAdditionalData(form)"
+          defaultHref="/auth/register"
+        ></ion-back-button>
+      </ion-buttons>
+      <ion-title>Additional Information</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <form
+      [formGroup]="form"
+      id="client-second-step-registration-form"
+      (ngSubmit)="onSubmit(form)"
+    >
+      <jlc-client-info-form
+        [jlcApiValidation]="validationError$ | async"
+        formControlName="client"
+      >
+      </jlc-client-info-form>
+    </form>
+  </ion-content>
+  <ion-footer>
+    <ion-toolbar>
+      <div class="button-panel">
+        <button class="primary" form="client-second-step-registration-form">
+          Submit
+        </button>
+      </div>
+    </ion-toolbar>
+  </ion-footer>
+</ng-container>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

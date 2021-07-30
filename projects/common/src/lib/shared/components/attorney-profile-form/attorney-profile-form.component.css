@@ -1,0 +1,172 @@
+:host {
+  --row-margin: 0.5rem;
+}
+
+h4 {
+  margin: 2rem 0 1rem 0;
+  color: var(--primary-color);
+  font-weight: normal;
+  font-size: 1.5rem;
+}
+
+legend {
+  font-weight: bold;
+  margin-bottom: var(--row-margin);
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+label input:not([type="radio"]):not([type="checkbox"]),
+label select,
+textarea {
+  display: block;
+  margin-top: var(--row-margin);
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+  padding: 1rem;
+  height: 4rem;
+  min-height: 3rem;
+}
+
+.personal-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.additional-info {
+  max-width: 50rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: stretch;
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 20px;
+  height: fit-content;
+}
+
+.row label {
+  min-width: 330px;
+}
+
+label:first-child {
+  margin-left: 0;
+}
+
+.practice-years-details > label {
+  /* For the same height of labels+input in the same row */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.row.name-input label {
+  width: unset;
+  min-width: unset;
+}
+
+.row.name-input label input {
+  width: 330px;
+}
+
+.row label.short {
+  width: calc(25% - 2 * var(--row-margin));
+  min-width: 150px;
+}
+
+label input.short {
+  width: 10rem;
+}
+
+.medium-width {
+  width: 35rem;
+}
+
+.row label.wide {
+  width: 100%;
+}
+
+.button-pane {
+  margin-top: 2rem;
+  display: flex;
+}
+
+.button-pane > * {
+  height: 3rem;
+  width: 10rem;
+  margin-right: 1rem;
+  border-radius: 10px;
+}
+
+.check-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.area-of-speciality {
+  flex-direction: column;
+  height: 600px;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.checkbox {
+  width: 33.3%;
+  font-weight: normal;
+  flex: 1 1 auto;
+  display: flex;
+  padding-right: 10px;
+  margin-right: 0;
+}
+
+.line-radio-group {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.radio-label {
+  flex: 0.1;
+  display: flex;
+  align-items: center;
+}
+
+.control-wrap {
+  display: flex;
+  align-items: center;
+}
+
+fieldset select.practice-jurisdictions-control {
+  width: 300px;
+}
+
+.practice-jurisdiction-button {
+  font-size: 2rem;
+  color: var(--primary-font-color);
+  width: 40px;
+  height: 40px;
+  line-height: 1;
+  outline: transparent;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  margin-right: 20px;
+}

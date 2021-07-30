@@ -1,0 +1,23 @@
+input {
+  border: none; /* The same stile as Stripe elements */
+}
+
+.error-message {
+  color: var(--error-color);
+}
+
+.stripe-card-container {
+  padding: 10px;
+  border: 1px solid var(--primary-border-color);
+  background-color: var(--primary-background-color);
+  border-radius: 4px;
+}
+
+.stripe-form-field {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.actions {
+  margin-top: 15px;
+}

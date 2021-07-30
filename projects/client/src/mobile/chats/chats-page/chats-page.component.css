@@ -1,0 +1,40 @@
+:host {
+  --space: 10px;
+}
+
+ion-list {
+  margin: 0;
+  padding: 0;
+}
+
+.recipient {
+  font-size: 1rem;
+}
+
+.last-message {
+  margin-top: calc(var(--space) * 0.5);
+  font-size: 0.86rem;
+}
+
+.chat-info {
+  height: 100%;
+  padding: var(--space) 0;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  min-width: var(--space);
+}
+
+.chat-info ion-note {
+  font-size: 1rem;
+}
+
+.chat-info ion-badge {
+  font-size: 0.75rem;
+}
+
+.chat-link {
+  margin: 0;
+  padding: 10px 0;
+}

@@ -1,0 +1,165 @@
+:host {
+  --space: 14px;
+  --nav-height: 60px;
+}
+
+/* Nav layout */
+nav {
+  height: var(--nav-height);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  background-color: var(--header-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 var(--space);
+}
+
+@media (max-width: 783px) {
+  .logo-link {
+    display: none;
+  }
+}
+
+/* Logo link. */
+.logo-img {
+  display: block;
+}
+
+/* Navigation links */
+.links {
+  height: var(--nav-height);
+  flex: 1;
+}
+
+.centred {
+  max-width: 700px;
+  display: flex;
+  justify-content: space-evenly;
+  height: var(--nav-height);
+  margin: 0 auto;
+}
+
+.links a {
+  --active-state-shadow: inset 0 8px 0 -1px var(--primary-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--primary-font-color);
+  flex-shrink: 0;
+  padding: 10px;
+}
+
+.links a.active {
+  box-shadow: var(--active-state-shadow);
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.links a:focus {
+  box-shadow: var(--focus-shadow);
+}
+
+.links a.active:focus {
+  box-shadow: var(--focus-shadow), var(--active-state-shadow);
+}
+
+/* Navigation buttons. */
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.buttons * + * {
+  margin-left: var(--space);
+}
+
+.buttons .primary {
+  min-width: 100px;
+}
+
+/* Menu button */
+.menu-button {
+  fill: black;
+}
+
+.menu-button svg {
+  width: 2rem;
+  transition: fill 0.2s linear;
+}
+
+.menu-button.active {
+  fill: var(--primary-highlight-color);
+}
+
+.menu-button:focus {
+  box-shadow: var(--focus-shadow);
+}
+
+/* Burger menu */
+jlc-header-menu {
+  background: var(--header-color);
+  min-width: 13.75rem;
+  padding-bottom: 0.5rem;
+}
+
+jlc-header-menu::after {
+  content: "";
+  position: absolute;
+  right: 9px;
+  top: -7px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 7px 7px 7px;
+  border-color: transparent transparent var(--header-color) transparent;
+}
+
+/* Icons bar */
+.notifications-bar {
+  display: flex;
+  margin-right: 2rem;
+}
+
+.notifications-bar > * {
+  position: relative;
+  height: 44px;
+  width: 44px;
+  padding: var(--space);
+  background-position: center center;
+  border-radius: 50%;
+}
+
+.topics {
+  background: url("/assets/icons/bookmark_icon.svg") no-repeat;
+  background-size: 34px;
+}
+
+.chats {
+  background: url("/assets/icons/message_icon.svg") no-repeat;
+}
+
+.notifications {
+  background: url("/assets/icons/notifications_icon.svg") no-repeat;
+}
+
+.badge {
+  background: var(--primary-highlight-color);
+  border-radius: 1.5rem;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: -0.45rem;
+  right: -0.5rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+}
+
+.badge-content {
+  color: white;
+}

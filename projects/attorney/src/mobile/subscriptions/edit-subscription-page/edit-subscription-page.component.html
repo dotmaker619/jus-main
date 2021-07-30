@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Subscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    *ngIf="form$ | async as form; else loading"
+    [formGroup]="form"
+    (ngSubmit)="onFormSubmitted(form)"
+    id="edit-subscription-modal-form"
+  >
+    <p class="tip">Select a Plan</p>
+    <jlc-card
+      *ngFor="
+        let paymentPlan of availablePaymentPlans$ | async;
+        trackBy: trackPlanById
+      "
+    >
+      <label class="card-content row">
+        <span class="control">
+          <input
+            type="radio"
+            formControlName="paymentPlan"
+            [value]="paymentPlan.id"
+          />
+        </span>
+        <span class="card-info">
+          <div class="row">
+            <span class="card-title">{{ paymentPlan.name | titlecase }}</span>
+            <div class="price">
+              {{ paymentPlan.amountPerDay | currency: paymentPlan.currency }} /
+              day
+            </div>
+          </div>
+          <div class="description">
+            {{ paymentPlan.description }}
+          </div>
+        </span>
+      </label>
+    </jlc-card>
+    <jlc-form-control-validation-message controlName="paymentPlan">
+    </jlc-form-control-validation-message>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="button-panel">
+      <button
+        class="primary"
+        [disabled]="isPlanTheSame$ | async"
+        form="edit-subscription-modal-form"
+      >
+        Save
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<ng-template #loading [ngIf]="isSubmitting$ | async">
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>My Clients</ion-title>
+  </ion-toolbar>
+  <jlc-tab-bar>
+    <jlc-tab-button
+      absoluteLink="/clients/active"
+      [showBadge]="true"
+      [count]="activeClientsNumber$ | async"
+    >
+      Active
+    </jlc-tab-button>
+    <jlc-tab-button
+      absoluteLink="/clients/pending"
+      [showBadge]="true"
+      [count]="pendingClientsNumber$ | async"
+    >
+      Pending
+    </jlc-tab-button>
+  </jlc-tab-bar>
+</ion-header>
+<ion-content>
+  <ion-router-outlet></ion-router-outlet>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="fab-button" (click)="onInviteClientClick()">
+      <ion-icon src="/assets/icons/add-client.svg"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

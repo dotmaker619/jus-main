@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap");
+
+:root {
+  /* Primary font for text elements. */
+  --primary-font: "Roboto Slab";
+  --ion-default-font: var(--primary-font);
+  --ion-font-family: var(--primary-font);
+  --secondary-font: "Open Sans";
+  --primary-font-size: 14px;
+
+  /* Headers */
+  --h1-font-size: 2.4rem;
+  --h2-font-size: 1.3rem;
+
+  /* Primary font for elements like buttons. */
+  --primary-element-font: "Roboto Slab";
+  --primary-font-color: #4a4a4a;
+  --primary-placeholder-color: #c6c3c3;
+  --primary-light-font-color: #a4a4a4;
+  --primary-background-color: #fff;
+  --primary-background-contrast-color: #000;
+  --header-color: #fafafa;
+  --header-contrast-color: #000;
+  --primary-color: #f2c502;
+  --primary-light-color: #fff7e2;
+  --primary-contrast-color: white;
+  --primary-shade-color: #f4af01;
+  --primary-tint-color: #fef0d3;
+  --primary-border-color: #ccc;
+  --primary-gradient: linear-gradient(135deg, #fad702 0%, #f4af01 100%);
+  --primary-gradient-reversed: linear-gradient(
+    135deg,
+    #f4af01 0%,
+    #fad702 100%
+  );
+  --primary-active-color: #f27926;
+  --primary-highlight-color: #f4af01;
+  --primary-label-input-color: #231f20;
+  --secondary-color: #4a90e2;
+  --secondary-contrast-color: white;
+  --secondary-shade-color: #2d678a;
+  --secondary-tint-color: #e9f2fc;
+  --secondary-gradient: linear-gradient(180deg, #569fc3 0%, #2d678a 100%);
+  --secondary-gradient-reversed: linear-gradient(
+    180deg,
+    #2d678a 0%,
+    #569fc3 100%
+  );
+  --tertiary-color: #e64e44;
+  --tertiary-contrast-color: #fff;
+  --tertiary-shade-color: #ca453c;
+  --tertiary-tint-color: #e96057;
+  --tertiary-gradient: linear-gradient(180deg, #ff666b 0%, #dc1c23 100%);
+  --success-color: #10dc60;
+  --success-contrast-color: #fff;
+  --success-shade-color: #1ec987;
+  --success-tint-color: #28e070;
+  --success-icon-color: #188c5f;
+  --medium-color: #afaaaa;
+  --medium-contrast-color: #000;
+  --medium-shade-color: #9a9696;
+  --medium-tint-color: #b7b3b3;
+  --light-color: #f4f5f8;
+  --light-contrast-color: #000;
+  --light-shade-color: #d7d8da;
+  --light-tint-color: #f5f6f9;
+  --light-gradient: linear-gradient(180deg, #fff 1.41%, #f2f2f2 99.1%);
+  --light-gradient-reversed: linear-gradient(180deg, #f2f2f2 1.41%, #fff 99.1%);
+  --error-color: red;
+  --box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+  --filter-drop-shadow: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
+  --page-title-color: #2d2d2d;
+  --special-button-gradient-color-1: #95dbd3;
+  --special-button-gradient-color-2: #5cb4a7;
+  --special-button-gradient-active: linear-gradient(
+    180deg,
+    #5bddce 0%,
+    #53efd8 100%
+  );
+  --special-button-text-color: #fff;
+
+  /* Dashboard. */
+  --dashboard-link-color: #ffde8d;
+  --dashboard-statistic-shadow: 0 2px 4px 0 #e0e0e0;
+  --opportunities-main-color: #e64e44;
+
+  /* Max width for layout of webpage. */
+  --max-layout-width: 1300px;
+
+  /* Dialog configuration variables. */
+  --dialog-backdrop-color: rgba(0, 0, 0, 0.6);
+  --dialog-background-color: #fff;
+
+  /* Matters statuses. */
+  --status-active-color: #1ec987;
+  --status-pending-color: var(--primary-shade-color);
+  --status-draft-color: var(--primary-shade-color);
+  --status-completed-color: #515151;
+  --status-revoked-color: #eb2027;
+
+  /* Header */
+  --header-badge-background-color: #eb2027;
+  --header-badge-color: #fff;
+  --header-menu-separator-color: #d8d8d8;
+
+  /* Chats */
+  --my-message-color: #fff7e2;
+  --me-message-border-color: #f2c502;
+  --interlocutor-message-color: #fff;
+  --interlocutor-message-border-color: #eee;
+  --contact-with-unread-message: #fff7e2;
+  --high-lead-priority: #ffe1e1;
+  --medium-lead-priority: #fbd6bd;
+
+  /* Lists */
+  --list-item-border-color: #dedede;
+
+  /* Radio button */
+  --radio-button-color: #009688;
+
+  /* Checkbox */
+  --checkbox-color: #009688;
+
+  /* Attorney's event */
+  --event-background-color: #fff7e2;
+  --event-date-background-color: #ffde8d;
+  --event-title-color: #333;
+
+  /** Client dashboard */
+  --featured-attorneys-bg: #f1f1f1;
+  --featured-attorney-name-color: #333;
+
+  /** Tabs. */
+  --tab-badge-background-color: #e2e2e2;
+
+  /** Tables. */
+  --table-head-bottom-border-color: var(--light-shade-color);
+  --table-row-highlight-color: #fff7e2;
+  --table-row-separator-color: #ececec;
+
+  /** Matter messages */
+  --matter-messages-border-color: #e1e1e1;
+
+  --dashboard-card-mini-background: #fbfbfb;
+  --card-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+  --focus-shadow: 0 0 0 2px var(--primary-color) inset;
+
+  /** Social post and News post. */
+  --post-footer-background: #f5f6fa;
+  --post-border: 1px solid #dedede;
+  --post-card-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
+  --post-card-blur-gradient: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.8)
+  );
+}

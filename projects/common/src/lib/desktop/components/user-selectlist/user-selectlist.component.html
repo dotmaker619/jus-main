@@ -1,0 +1,17 @@
+<ul class="attorney-list">
+  <li *ngFor="let user of options; trackBy: trackById">
+    <jlc-user-selectlist-item
+      [user]="user"
+      [isSelected]="isSelected(user) | async"
+      [disabled]="!isEditable(user)"
+      (toggleButtonClicked)="onToggleUser(user)"
+    ></jlc-user-selectlist-item>
+  </li>
+</ul>
+<div class="pagination" *ngIf="canLoadMore">
+  <hr />
+  <button type="button" class="focusable" (click)="onLoadMoreClick()">
+    More
+  </button>
+  <hr />
+</div>

@@ -1,0 +1,22 @@
+{
+	"ios": {
+		"debug": {
+			"codeSignIdentity": "iPhone Developer",
+			"provisioningProfile": "",
+			"developmentTeam": "97CJYDC5AL"
+		},
+		"release": {
+			"codeSignIdentity": "iPhone Distribution",
+			"provisioningProfile": "75898c1e-a61b-4ecb-a56f-ceb5687a9bcc",
+			"developmentTeam": "97CJYDC5AL",
+			"packageType": "enterprise"
+		}
+	},
+	"android": {
+		"release": {
+			"keystore": "../ci/keychains/android/keystore.jks",
+			"alias": "JusLaw",
+			"keystoreType": ""
+		}
+	}
+}

@@ -1,0 +1,32 @@
+:host {
+  position: relative;
+}
+
+.current-step[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.attachments-fieldset {
+  border: none;
+  padding: 0;
+}
+
+.attachments-fieldset h4 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin: 20px 0;
+}
+
+.file-drop {
+  width: 100%;
+  min-height: 100px;
+  border-radius: 5px;
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 9px;
+  display: block;
+}

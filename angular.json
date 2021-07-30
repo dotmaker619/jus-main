@@ -1,0 +1,578 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "common": {
+      "projectType": "library",
+      "root": "projects/common",
+      "sourceRoot": "projects/common/src",
+      "prefix": "jlc",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/common/tsconfig.lib.json",
+            "project": "projects/common/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/common/src/test.ts",
+            "tsConfig": "projects/common/tsconfig.spec.json",
+            "karmaConfig": "projects/common/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/common/tsconfig.lib.json",
+              "projects/common/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "web-app": {
+      "projectType": "application",
+      "root": "projects/web-app",
+      "sourceRoot": "projects/web-app/src",
+      "prefix": "jlw",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/web-app",
+            "index": "projects/web-app/src/index.html",
+            "main": "projects/web-app/src/main.ts",
+            "polyfills": "projects/web-app/src/polyfills.ts",
+            "tsConfig": "projects/web-app/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/web-app/src/favicon.ico",
+              "projects/web-app/src/assets",
+              "projects/web-app/src/apple-app-site-association",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@pdftron/webviewer/public",
+                "output": "./public/webviewer"
+              }
+            ],
+            "styles": [
+              "theme/variables.css",
+              "theme/custom-theme.scss",
+              "theme/styles.css",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "public-dev": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/common/src/environments/environment.ts",
+                  "with": "projects/common/src/environments/environment.public-dev.ts"
+                }
+              ]
+            },
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/common/src/environments/environment.ts",
+                  "with": "projects/common/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "stage": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/common/src/environments/environment.ts",
+                  "with": "projects/common/src/environments/environment.stage.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "web-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "web-app:build:production"
+            },
+            "stage": {
+              "browserTarget": "web-app:build:stage"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "web-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/web-app/src/test.ts",
+            "polyfills": "projects/web-app/src/polyfills.ts",
+            "tsConfig": "projects/web-app/tsconfig.spec.json",
+            "karmaConfig": "projects/web-app/karma.conf.js",
+            "assets": [
+              "projects/web-app/src/favicon.ico",
+              "projects/web-app/src/assets"
+            ],
+            "styles": [
+              "theme/variables.css",
+              "projects/web-app/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/web-app/tsconfig.app.json",
+              "projects/web-app/tsconfig.spec.json",
+              "projects/web-app/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/web-app/e2e/protractor.conf.js",
+            "devServerTarget": "web-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "web-app:serve:production"
+            }
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/angular-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "web-app:build"
+          },
+          "configurations": {
+            "public-dev": {
+              "browserTarget": "web-app:build:public-dev"
+            },
+            "production": {
+              "browserTarget": "web-app:build:production"
+            }
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/angular-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "web-app:ionic-cordova-build",
+            "devServerTarget": "web-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "web-app:ionic-cordova-build:production",
+              "devServerTarget": "web-app:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "mobile-app": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/mobile-app",
+      "sourceRoot": "projects/mobile-app/src",
+      "prefix": "jlt",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "www",
+            "index": "projects/mobile-app/src/index.html",
+            "main": "projects/mobile-app/src/main.ts",
+            "polyfills": "projects/mobile-app/src/polyfills.ts",
+            "tsConfig": "projects/mobile-app/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/mobile-app/src/favicon.ico",
+              "projects/mobile-app/src/assets",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@pdftron/webviewer/public",
+                "output": "./public/webviewer"
+              }
+            ],
+            "styles": [
+              "theme/variables.css",
+              "theme/custom-theme.scss",
+              "theme/styles.css",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "public-dev": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/common/src/environments/environment.ts",
+                  "with": "projects/common/src/environments/environment.public-dev.ts"
+                }
+              ]
+            },
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/common/src/environments/environment.ts",
+                  "with": "projects/common/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "stage": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/common/src/environments/environment.ts",
+                  "with": "projects/common/src/environments/environment.stage.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "mobile-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "mobile-app:build:production"
+            },
+            "stage": {
+              "browserTarget": "mobile-app:build:stage"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "mobile-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mobile-app/src/test.ts",
+            "polyfills": "projects/mobile-app/src/polyfills.ts",
+            "tsConfig": "projects/mobile-app/tsconfig.spec.json",
+            "karmaConfig": "projects/mobile-app/karma.conf.js",
+            "assets": [
+              "projects/mobile-app/src/favicon.ico",
+              "projects/mobile-app/src/assets"
+            ],
+            "styles": [
+              "theme/variables.css",
+              "projects/mobile-app/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/mobile-app/tsconfig.app.json",
+              "projects/mobile-app/tsconfig.spec.json",
+              "projects/mobile-app/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/mobile-app/e2e/protractor.conf.js",
+            "devServerTarget": "mobile-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "mobile-app:serve:production"
+            }
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/angular-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "mobile-app:build"
+          },
+          "configurations": {
+            "public-dev": {
+              "browserTarget": "mobile-app:build:public-dev"
+            },
+            "production": {
+              "browserTarget": "mobile-app:build:production"
+            },
+            "stage": {
+              "browserTarget": "mobile-app:build:stage"
+            }
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/angular-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "mobile-app:ionic-cordova-build",
+            "devServerTarget": "mobile-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "mobile-app:ionic-cordova-build:production",
+              "devServerTarget": "mobile-app:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "client": {
+      "projectType": "library",
+      "root": "projects/client",
+      "sourceRoot": "projects/client/src",
+      "prefix": "jlcl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/client/tsconfig.lib.json",
+            "project": "projects/client/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/client/src/test.ts",
+            "tsConfig": "projects/client/tsconfig.spec.json",
+            "karmaConfig": "projects/client/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/client/tsconfig.lib.json",
+              "projects/client/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "attorney": {
+      "projectType": "library",
+      "root": "projects/attorney",
+      "sourceRoot": "projects/attorney/src",
+      "prefix": "jlat",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/attorney/tsconfig.lib.json",
+            "project": "projects/attorney/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/attorney/src/test.ts",
+            "tsConfig": "projects/attorney/tsconfig.spec.json",
+            "karmaConfig": "projects/attorney/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/attorney/tsconfig.lib.json",
+              "projects/attorney/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "marketing": {
+      "projectType": "library",
+      "root": "projects/marketing",
+      "sourceRoot": "projects/marketing/src",
+      "prefix": "jlmar",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/marketing/tsconfig.lib.json",
+            "project": "projects/marketing/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/marketing/src/test.ts",
+            "tsConfig": "projects/marketing/tsconfig.spec.json",
+            "karmaConfig": "projects/marketing/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/marketing/tsconfig.lib.json",
+              "projects/marketing/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "staff": {
+      "projectType": "library",
+      "root": "projects/staff",
+      "sourceRoot": "projects/staff/src",
+      "prefix": "jlst",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/staff/tsconfig.lib.json",
+            "project": "projects/staff/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/staff/src/test.ts",
+            "tsConfig": "projects/staff/tsconfig.spec.json",
+            "karmaConfig": "projects/staff/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/staff/tsconfig.lib.json",
+              "projects/staff/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "changeDetection": "OnPush",
+      "spec": false,
+      "styleext": "css"
+    },
+    "@schematics/angular:directive": {
+      "spec": false,
+      "skipTests": true
+    },
+    "@schematics/angular:service": {
+      "spec": false,
+      "skipTests": true
+    },
+    "@schematics/angular:pipe": {
+      "spec": false,
+      "skipTests": true
+    },
+    "@schematics/angular:class": {
+      "spec": false,
+      "skipTests": true
+    },
+    "schematics": {
+      "@ionic/angular-toolkit:component": {
+        "styleext": "css",
+        "changeDetection": "OnPush",
+        "inlineStyle": false,
+        "inlineTemplate": false
+      },
+      "@ionic/angular-toolkit:page": {
+        "styleext": "css"
+      }
+    }
+  },
+  "defaultProject": "web-app"
+}

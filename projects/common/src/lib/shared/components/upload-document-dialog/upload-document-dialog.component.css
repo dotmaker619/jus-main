@@ -1,0 +1,74 @@
+:host {
+  --space: 20px;
+}
+
+.dialog {
+  width: 500px;
+  padding: var(--space);
+}
+
+hr {
+  width: 100%;
+}
+
+.button-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+select {
+  width: 100%;
+}
+
+button {
+  width: fit-content;
+  height: auto;
+  min-width: auto;
+  margin: calc(var(--space) / 2);
+  padding: calc(var(--space) / 2);
+}
+
+.primary {
+  box-sizing: content-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.primary img {
+  height: 1rem;
+  width: 1rem;
+  filter: invert(1);
+  margin-right: 0.5rem;
+}
+
+.primary span {
+  color: currentColor;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form > label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.validation-error span {
+  color: var(--error-color);
+  height: 1rem;
+  margin: 5px 0;
+}
+
+jlc-loading {
+  height: 250px;
+}
+
+.file-drop {
+  min-height: 100px;
+  margin-top: var(--space);
+}

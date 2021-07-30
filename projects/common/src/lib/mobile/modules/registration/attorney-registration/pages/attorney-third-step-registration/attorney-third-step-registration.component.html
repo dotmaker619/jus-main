@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="auth/register"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="content">
+    <jlc-registration-heading
+      stepNum="3"
+      text="Subscription & Payment Information"
+    >
+    </jlc-registration-heading>
+    <jlc-registration-action-announce></jlc-registration-action-announce>
+    <h3>Subscription Type</h3>
+
+    <jlc-select-payment-plan-form
+      [paymentPlans]="paymentPlans$ | async"
+    ></jlc-select-payment-plan-form>
+    <jlc-card class="card">
+      <jlc-payment-method-form [showControls]="false"></jlc-payment-method-form>
+    </jlc-card>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="button-panel">
+      <button class="primary" (click)="onSubmit()">
+        Submit
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

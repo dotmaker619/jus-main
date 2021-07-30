@@ -1,0 +1,12 @@
+ul li {
+  display: inline-block;
+  background: var(--primary-light-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 19px;
+  color: var(--primary-font-color);
+  font-size: 0.86rem;
+  font-weight: bold;
+  padding: 2px 20px 4px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}

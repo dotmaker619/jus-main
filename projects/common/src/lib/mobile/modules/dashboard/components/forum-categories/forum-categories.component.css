@@ -1,0 +1,90 @@
+:host {
+  --space: 16px;
+  --card-height: 64px;
+
+  display: block;
+  padding: calc(var(--space) * 2.5) var(--space);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: calc(var(--space) * 1.5);
+}
+
+.header > h2 {
+  color: var(--page-title-color);
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin-bottom: calc(var(--space) * 0.75);
+}
+
+.all-categories-btn {
+  border-radius: 10px;
+  height: 45px;
+  margin-top: var(--space);
+  padding: 0 28px;
+  width: 100%;
+}
+
+ion-item.category {
+  --padding-start: 0;
+  --background: var(--primary-background-color);
+
+  display: flex;
+  height: var(--card-height);
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0 rgba(123, 123, 123, 0.5);
+  margin-bottom: calc(var(--space) / 2);
+}
+
+.category::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 4px;
+  pointer-events: none;
+  border: 1px solid var(--primary-color);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.category,
+.category::before {
+  transition: all 0.15s ease;
+}
+
+.icon-wrapper {
+  width: var(--card-height);
+  background-image: var(--primary-gradient);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.icon-wrapper > img {
+  height: 40px;
+}
+
+.category > .title {
+  position: relative;
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: var(--space);
+  color: var(--primary-font-color);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.loading {
+  padding: 100px 0;
+}

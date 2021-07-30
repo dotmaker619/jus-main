@@ -1,0 +1,14 @@
+:host {
+  --space: 15px;
+}
+
+.container {
+  max-width: var(--max-layout-width);
+  width: 60%;
+  margin: 10vh auto;
+}
+
+button.show-more {
+  display: block;
+  margin: var(--space) auto 0 auto;
+}

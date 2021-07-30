@@ -1,0 +1,106 @@
+<div class="event-form-container">
+  <jlc-breadcrumbs [links]="breadcrumbs"></jlc-breadcrumbs>
+  <h1>{{ formTitle }} Event</h1>
+  <hr />
+  <form
+    *ngIf="eventForm$ | async as eventForm; else loading"
+    [formGroup]="eventForm"
+    (ngSubmit)="eventFormSubmitted(eventForm)"
+  >
+    <!-- Title input. -->
+    <label>
+      Title*
+      <input
+        type="text"
+        formControlName="title"
+        [jlcApiValidation]="validationError$"
+      />
+      <jlc-form-control-validation-message controlName="title">
+      </jlc-form-control-validation-message>
+    </label>
+    <!-- Start and end date input. -->
+    <label>
+      Date and Time*
+      <div class="start-end-container" formGroupName="dateTimeRange">
+        <div class="start-date-time-container">
+          <jlc-date-time-picker
+            formControlName="start"
+            [mode]="dateTimPickerMode$ | async"
+            [jlcApiValidation]="validationError$"
+            [datePickerOptions]="datePickerOptions"
+            [timePickerOptions]="timePickerOptions"
+            [timezone]="eventForm.get('locationTimezone').value"
+          ></jlc-date-time-picker>
+          <jlc-form-control-validation-message
+            *ngIf="eventForm['controls'].dateTimeRange['controls'].start.errors"
+            controlName="start"
+          >
+          </jlc-form-control-validation-message>
+        </div>
+        <ng-container *ngIf="!(isAllDayMode$ | async)">
+          <span class="separator">—</span>
+          <div class="end-date-time-container">
+            <jlc-date-time-picker
+              formControlName="end"
+              [jlcApiValidation]="validationError$"
+              [datePickerOptions]="datePickerOptions"
+              [timePickerOptions]="timePickerOptions"
+              [timezone]="eventForm.get('locationTimezone').value"
+            ></jlc-date-time-picker>
+            <jlc-form-control-validation-message
+              *ngIf="eventForm['controls'].dateTimeRange['controls'].end.errors"
+              controlName="end"
+            >
+            </jlc-form-control-validation-message>
+          </div>
+        </ng-container>
+      </div>
+      <jlc-form-control-validation-message
+        controlName="dateTimeRange"
+        *ngIf="eventForm.controls.dateTimeRange.errors"
+      >
+      </jlc-form-control-validation-message>
+    </label>
+    <!-- Is all day checkbox. -->
+    <label class="font-normal flex-v-center">
+      <input
+        type="checkbox"
+        formControlName="isAllDay"
+        [jlcApiValidation]="validationError$"
+      />
+      All day
+    </label>
+    <!-- Location input. -->
+    <label>
+      Location
+      <input
+        type="text"
+        formControlName="location"
+        [jlcApiValidation]="validationError$"
+      />
+      <jlc-form-control-validation-message controlName="location">
+      </jlc-form-control-validation-message>
+    </label>
+    <!-- Description input. -->
+    <label>
+      Description
+      <textarea
+        formControlName="description"
+        [jlcApiValidation]="validationError$"
+      ></textarea>
+      <jlc-form-control-validation-message controlName="description">
+      </jlc-form-control-validation-message>
+    </label>
+
+    <div>
+      <button class="secondary" type="button" [routerLink]="['/events']">
+        Cancel
+      </button>
+      <button class="primary" type="submit">Save</button>
+    </div>
+  </form>
+</div>
+
+<ng-template #loading [ngIf]="isLoading$ | async">
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

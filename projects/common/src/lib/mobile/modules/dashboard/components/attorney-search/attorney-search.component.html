@@ -1,0 +1,69 @@
+<div class="jumbotron">
+  <div class="video-wrapper">
+    <video class="video" autoplay loop muted playsinline>
+      <source [src]="videoURL" />
+    </video>
+  </div>
+
+  <div class="content">
+    <div class="title">
+      I am Looking for...
+    </div>
+    <form
+      class="form-container"
+      [formGroup]="form"
+      (ngSubmit)="onSearchFormSubmitted(form)"
+    >
+      <div class="input-container">
+        <img
+          class="input-icon"
+          src="/assets/icons/ic-message-circle.svg"
+          alt=""
+        />
+        <select
+          name="speciality"
+          formControlName="speciality"
+          class="input category-select"
+        >
+          <option [ngValue]="null" class="category-select-placeholder" selected>
+            All Categories
+          </option>
+          <option
+            *ngFor="
+              let speciality of specialities$ | async;
+              trackBy: trackSpecialties
+            "
+            [ngValue]="speciality.id"
+          >
+            {{ speciality.title }}
+          </option>
+        </select>
+      </div>
+      <div
+        class="input-container"
+        [class.invalid]="form.get('place').touched && form.get('place').invalid"
+      >
+        <img
+          class="input-icon"
+          src="/assets/icons/ic-mappin-circle.svg"
+          alt=""
+        />
+        <input
+          jlcLocationAutocomplete
+          formControlName="place"
+          class="input"
+          placeholder="Address"
+        />
+      </div>
+      <div class="input-container">
+        <input
+          type="text"
+          class="input"
+          formControlName="name"
+          placeholder="Enter Name"
+        />
+      </div>
+      <button type="submit" class="search-button primary">Search</button>
+    </form>
+  </div>
+</div>

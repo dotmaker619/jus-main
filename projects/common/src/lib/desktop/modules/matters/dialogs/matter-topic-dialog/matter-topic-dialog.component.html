@@ -1,0 +1,37 @@
+<form class="dialog" [formGroup]="matterTopicForm" (submit)="onSendClick()">
+  <h3 class="ellipsis">New Messages</h3>
+
+  <hr />
+
+  <div *ngIf="recipient$ | async as recipient" class="recipient">
+    <b>To*</b>
+    <span>{{ recipient.fullName }}</span>
+  </div>
+
+  <label>
+    <span>Title*</span>
+    <input maxlength="255" formControlName="title" />
+    <jlc-form-control-validation-message
+      controlName="title"
+    ></jlc-form-control-validation-message>
+  </label>
+
+  <label>
+    <span>Message*</span>
+    <textarea formControlName="message"></textarea>
+    <jlc-form-control-validation-message
+      controlName="message"
+    ></jlc-form-control-validation-message>
+  </label>
+
+  <div *ngIf="!(isLoading$ | async); else loading" class="button-panel">
+    <button class="confirm secondary" type="button" (click)="onCancelClick()">
+      Cancel
+    </button>
+    <button class="confirm primary" type="submit">Save</button>
+  </div>
+
+  <ng-template #loading>
+    <jlc-loading></jlc-loading>
+  </ng-template>
+</form>

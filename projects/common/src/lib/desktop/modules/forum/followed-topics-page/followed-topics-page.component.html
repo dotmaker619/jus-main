@@ -1,0 +1,20 @@
+<jlc-forum-subheader>
+  Jus-Law Forums
+</jlc-forum-subheader>
+<div class="forum-page-container">
+  <jlc-breadcrumbs [links]="breadcrumbs"></jlc-breadcrumbs>
+  <h1>Posts I Follow</h1>
+  <jlc-forum-paginator
+    *ngIf="pagesCount$ | async as pagesCount"
+    [pagesCount]="pagesCount"
+    [currentPage]="page$ | async"
+    (pageChange)="onPageChange($event)"
+  ></jlc-forum-paginator>
+  <jlc-topics-table [topics$]="topics$"></jlc-topics-table>
+  <jlc-forum-paginator
+    *ngIf="pagesCount$ | async as pagesCount"
+    [pagesCount]="pagesCount"
+    [currentPage]="page$ | async"
+    (pageChange)="onPageChange($event)"
+  ></jlc-forum-paginator>
+</div>

@@ -1,0 +1,15 @@
+<div class="card-body">
+  <div class="icon" *ngIf="iconUrl">
+    <ion-icon [src]="iconUrl"></ion-icon>
+  </div>
+  <span class="title">
+    {{ title }}
+  </span>
+  <span class="count" *ngIf="count != null; else skeletonTextTemplate">
+    {{ count }}
+  </span>
+</div>
+
+<ng-template #skeletonTextTemplate>
+  <ion-skeleton-text animated class="skeleton"></ion-skeleton-text>
+</ng-template>

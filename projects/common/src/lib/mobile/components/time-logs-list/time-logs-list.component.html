@@ -1,0 +1,37 @@
+<ion-list
+  class="billings-list"
+  *ngIf="billings; else skeletonListTemplate"
+  lines="full"
+>
+  <ion-item
+    *ngFor="let billing of billings?.items; last as isLast; trackBy: trackById"
+    [lines]="isLast ? 'none' : 'full'"
+  >
+    <div class="item-content">
+      <div class="time">
+        {{ billing.spentMinutes | jusLawFormatMinutes }}
+      </div>
+      <p class="description">
+        {{ billing.description }}
+      </p>
+      <p class="logger" *ngIf="isLoggedByColumnDisplayed">
+        {{ billing.createdBy.fullName }}
+      </p>
+      <div class="column">
+        <div class="price">
+          {{ billing.fees | currency }}
+        </div>
+        <div class="date">
+          {{ billing.created | date: "shortDate" }}
+        </div>
+      </div>
+    </div>
+  </ion-item>
+</ion-list>
+<ng-template #skeletonShortTextTemplate>
+  <ion-skeleton-text animated class="short skeleton"></ion-skeleton-text>
+</ng-template>
+
+<ng-template #skeletonListTemplate>
+  <jlc-skeleton-list></jlc-skeleton-list>
+</ng-template>

@@ -1,0 +1,8 @@
+.button-panel {
+  display: flex;
+  margin: 10px;
+}
+
+.primary {
+  flex: 1;
+}

@@ -1,0 +1,27 @@
+:host {
+  --space: 16px;
+}
+
+ion-content {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+  --padding-top: var(--space);
+  --padding-bottom: var(--space);
+}
+
+button[type="submit"] {
+  width: 100%;
+}
+
+form > * {
+  margin-bottom: calc(var(--space) * 0.5);
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.row > *:not(:first-child) {
+  margin-left: var(--space);
+}

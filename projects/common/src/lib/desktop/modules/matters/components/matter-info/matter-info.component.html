@@ -1,0 +1,52 @@
+<table>
+  <thead>
+    <tr>
+      <th>Client</th>
+      <th>Start Date</th>
+      <th>Fee Structure</th>
+      <!-- Fields available only for Hourly fee structure -->
+      <th>Rate</th>
+      <th>Total Time Spent</th>
+      <ng-container *ngIf="RateType.Hourly === matter.rateType">
+        <th>Total Fees Earned</th>
+      </ng-container>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="client-name ellipsis">
+        <span>
+          {{ matter.client.fullName }}
+        </span>
+      </td>
+      <td>
+        <span>
+          {{ matter.created | date: "shortDate" }}
+        </span>
+      </td>
+      <td>
+        <span>
+          {{ RateType.toReadable(matter.rateType) }}
+        </span>
+      </td>
+      <!-- Fields available only for Hourly fee structure -->
+      <td>
+        <span>
+          {{ matter.rate | currency }}
+        </span>
+      </td>
+      <td>
+        <span>
+          {{ matter.timeBilled || 0 | jusLawFormatMinutes: "hh:mm" }}
+        </span>
+      </td>
+      <ng-container *ngIf="RateType.Hourly === matter.rateType">
+        <td>
+          <span>
+            {{ matter.earned || 0 | currency }}
+          </span>
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>

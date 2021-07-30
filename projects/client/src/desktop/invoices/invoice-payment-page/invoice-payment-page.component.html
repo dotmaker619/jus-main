@@ -1,0 +1,57 @@
+<div class="page-container">
+  <ng-container [ngSwitch]="viewState$ | async">
+    <ng-container *ngSwitchCase="PaymentViewState.NotAvailable">
+      <ng-container *ngTemplateOutlet="paymentNotAvailable"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="PaymentViewState.InProgress">
+      <ng-container *ngTemplateOutlet="paymentInProgress"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="PaymentViewState.Finished">
+      <ng-container *ngTemplateOutlet="paymentFinished"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <jlc-loading mode="fullsize"></jlc-loading>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #paymentNotAvailable>
+  <jlc-payment-not-available [invoice]="invoice$ | async">
+    <a class="secondary" routerLink="..">
+      Back
+    </a>
+  </jlc-payment-not-available>
+</ng-template>
+
+<ng-template #paymentInProgress>
+  <section>
+    <h1 class="page-heading">Review Payment</h1>
+    <hr />
+    <jlcl-invoice-info-table
+      [invoice]="invoice$ | async"
+      [billings]="billings$ | async"
+    >
+    </jlcl-invoice-info-table>
+    <h2 class="payment-form-heading">Payment Information</h2>
+    <jlc-payment-method-form class="payment-form" [showControls]="false">
+    </jlc-payment-method-form>
+    <button class="primary" (click)="onPaymentFormSubmitted()">Submit</button>
+  </section>
+</ng-template>
+
+<ng-template #paymentFinished>
+  <section class="payment-finished">
+    <div>
+      <img src="/assets/icons/check-green.svg" alt="" />
+    </div>
+    <h2>Payment Submitted</h2>
+    <p>Your payment has been successfully submitted.</p>
+    <a routerLink="/invoices">&lt;&lt;Back to all invoices</a>
+  </section>
+</ng-template>
+
+<jlc-loading
+  *ngIf="isLoading$ | async"
+  message="Processing the payment..."
+  mode="fullscreen"
+></jlc-loading>

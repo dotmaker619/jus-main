@@ -1,0 +1,42 @@
+:host {
+  --space: 10px;
+}
+
+form {
+  background: var(--primary-background-color);
+}
+
+.radio-group {
+  padding: var(--space);
+  border-bottom: 1px solid var(--header-menu-separator-color);
+}
+
+.radio-group .radio-fields {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: var(--space);
+}
+
+.radio-group p {
+  font-weight: bold;
+}
+
+.radio-fields label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+}
+
+.radio-fields label span {
+  font-weight: normal;
+}
+
+.radio-fields label:not(:first-child) {
+  margin-left: calc(var(--space) * 5);
+}
+
+.radio-fields input {
+  margin: 0 var(--space) 0 0;
+}

@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="avatar">
+    <img src="/assets/icons/person_icon.svg" />
+  </div>
+  <div class="header">
+    <div class="row space">
+      <p class="name">
+        {{ invite.recipientName }}
+      </p>
+      <button class="resend-btn" (click)="onResendClicked()">Resend</button>
+    </div>
+    <div class="row space">
+      <p class="italic ellipsis client-email">{{ invite.email }}</p>
+      <p class="italic sent">Sent: {{ invite.sent | date: "shortDate" }}</p>
+    </div>
+  </div>
+</div>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"> </jlc-loading>

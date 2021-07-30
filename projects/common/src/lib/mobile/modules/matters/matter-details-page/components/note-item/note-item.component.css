@@ -1,0 +1,53 @@
+:host {
+  --icon-background: var(--primary-shade-color);
+  --icon-size: 15px;
+  --space: 10px;
+  --font-size: 0.9rem;
+}
+
+ion-item {
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  width: 100%;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--icon-background);
+  border-radius: 50%;
+  padding: 10px;
+  width: fit-content;
+  flex-shrink: 0;
+  margin-right: var(--space);
+}
+
+.icon ion-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  color: var(--primary-contrast-color);
+}
+
+.header {
+  font-size: var(--font-size);
+  display: flex;
+  flex: 1;
+}
+
+.title {
+  flex: 1;
+  font-weight: bold;
+  color: var(--primary-font-color);
+}
+
+.date {
+  font-style: italic;
+  color: var(--medium-color);
+}

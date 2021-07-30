@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Subscription</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content
+  *ngIf="currentPaymentProfile$ | async as currentPaymentProfile; else loading"
+>
+  <section
+    *ngIf="
+      currentPaymentProfile.subscription as subscription;
+      else noActiveSubscription
+    "
+  >
+    <div class="content-header">
+      <h3>Subscription</h3>
+      <ion-button
+        *ngIf="canCancel$ | async"
+        class="danger"
+        (click)="onCancelClicked(subscription)"
+        fill="clear"
+      >
+        Cancel Subscription
+      </ion-button>
+      <ion-button
+        (click)="onReactivateClicked()"
+        *ngIf="canReactivate$ | async"
+        fill="clear"
+      >
+        Reactivate
+      </ion-button>
+    </div>
+    <jlc-card class="card">
+      <div class="row card-content">
+        <div class="card-icon-container">
+          <ion-icon
+            class="card-icon"
+            size="medium"
+            src="/assets/icons/subscription_icon.svg"
+          ></ion-icon>
+        </div>
+        <div class="card-info">
+          <div class="row">
+            <div class="card-title">
+              {{ subscription.plan.name }}
+            </div>
+            <ion-button
+              routerLink="edit"
+              fill="clear"
+              [disabled]="!(canEdit$ | async)"
+            >
+              <ion-icon
+                slot="icon-only"
+                src="/assets/icons/edit_icon.svg"
+              ></ion-icon>
+            </ion-button>
+          </div>
+          <div class="row">
+            <div class="card-price">
+              {{
+                subscription.plan.amountPerDay
+                  | currency: subscription.plan.currency
+              }}
+            </div>
+            <div class="card-date">
+              Renewal Date:
+              {{ subscription.renewalDate | date: "MMM dd, yyyy" }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </jlc-card>
+  </section>
+
+  <section *ngIf="currentPaymentProfile.method">
+    <div class="content-header">
+      <h3>Payment Method</h3>
+    </div>
+    <jlc-card class="card">
+      <div class="card-content row">
+        <ion-icon
+          class="card-icon"
+          src="/assets/icons/credit_card-24px.svg"
+        ></ion-icon>
+        <div class="card-info">
+          <div class="row">
+            <div class="card-title">
+              {{ currentPaymentProfile.method.brand | titlecase }}● *{{
+                currentPaymentProfile.method.last4
+              }}
+            </div>
+            <ion-button (click)="editPaymentMethod()" fill="clear">
+              <ion-icon
+                slot="icon-only"
+                src="/assets/icons/edit_icon.svg"
+              ></ion-icon>
+            </ion-button>
+          </div>
+          <div>
+            {{ currentPaymentProfile.method.expMonth }}/{{
+              currentPaymentProfile.method.expYear
+            }}
+          </div>
+        </div>
+      </div>
+    </jlc-card>
+  </section>
+</ion-content>
+
+<ng-template #noActiveSubscription>
+  <jlc-card class="card empty-message">
+    <span>You don't have an active subscription.</span>
+    <a class="primary" routerLink="./edit">Buy Subscription</a>
+  </jlc-card>
+</ng-template>
+
+<ng-template #loading [ngIf]="isBusy$ | async">
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

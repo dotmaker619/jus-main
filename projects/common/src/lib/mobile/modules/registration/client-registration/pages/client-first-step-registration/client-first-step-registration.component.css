@@ -1,0 +1,16 @@
+.form-container {
+  margin: 10px;
+}
+
+.button-panel {
+  display: flex;
+  margin-top: 20px;
+}
+
+.button-panel .primary {
+  flex: 1;
+}
+
+jlc-tab-bar {
+  background-color: var(--primary-background-color);
+}

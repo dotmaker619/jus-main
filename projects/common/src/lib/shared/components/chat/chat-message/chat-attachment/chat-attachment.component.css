@@ -1,0 +1,82 @@
+:host {
+  display: block;
+  --space: 10px;
+}
+
+.attachment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--light-shade-color);
+  background: var(--light-color);
+  border-radius: 3px;
+  text-decoration: none;
+  padding: var(--space);
+  position: relative;
+}
+
+.icon-container {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--medium-color);
+  height: 40px;
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.icon-container img {
+  height: 50%;
+  width: 50%;
+  filter: invert(1);
+}
+
+.title {
+  font-weight: bold;
+  margin-right: auto;
+  margin-left: var(--space);
+}
+
+.signature {
+  color: var(--medium-color);
+  font-style: italic;
+  font-size: 0.8rem;
+  text-align: end;
+  flex-shrink: 0;
+}
+
+.tip {
+  color: inherit;
+}
+
+@media (max-width: 724px) {
+  .tip {
+    display: none;
+  }
+}
+
+.loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  animation: load 1s linear 0.1s infinite alternate;
+}
+
+@keyframes load {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 0.2;
+  }
+}

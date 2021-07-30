@@ -1,0 +1,35 @@
+<header>
+  <h2>Select QuickBooks Customer</h2>
+  <button class="close-button focusable" (click)="close()" title="Cancel">
+    <img src="assets/icons/close_icon.svg" alt="" />
+  </button>
+</header>
+<hr />
+<form
+  class="filter-form"
+  *ngIf="filterForm$ | async as filterForm"
+  [formGroup]="filterForm"
+>
+  <input type="search" formControlName="query" placeholder="Type..." />
+</form>
+<ul #clientsContainer class="clients-list">
+  <li class="client">
+    <button class="focusable" (click)="close(null)">
+      + Create Client
+    </button>
+  </li>
+  <li
+    [id]="obtainClientItemId(client)"
+    class="client"
+    *ngFor="let client of filteredClients$ | async; trackBy: trackById"
+  >
+    <button
+      class="focusable"
+      (click)="close(client)"
+      [class.preselected]="client.email === preselectedClient?.email"
+    >
+      <span>{{ client.displayName }}</span>
+      <span class="email">{{ client.email }}</span>
+    </button>
+  </li>
+</ul>

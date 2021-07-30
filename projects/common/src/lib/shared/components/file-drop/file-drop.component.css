@@ -1,0 +1,90 @@
+:host {
+  --space: 20px;
+  display: flex;
+  background: var(--light-color);
+  padding: var(--space);
+  padding-bottom: calc(var(--space) / 2);
+  flex-direction: column;
+}
+
+.file-drop {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.file-drop.active {
+  border: 2px dashed var(--medium-color);
+  border-radius: 10px;
+}
+
+.file-drop button {
+  font-weight: bold;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 10px;
+}
+
+.file-drop .upload-button {
+  color: var(--secondary-color);
+}
+
+.file-drop span {
+  color: var(--medium-color);
+  font-style: italic;
+}
+
+.file {
+  width: 100%;
+}
+
+.file img {
+  filter: invert(0.5);
+}
+
+.file span {
+  flex: 1;
+}
+
+.file .remove-button {
+  color: var(--tertiary-color);
+}
+
+.single .file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.single .file img {
+  height: 40px;
+  width: 40px;
+}
+
+.multiple .file {
+  display: flex;
+  align-items: center;
+  padding: calc(var(--space) / 2);
+  border: 1px solid var(--medium-color);
+  border-radius: 3px;
+  margin: calc(var(--space) / 4) 0;
+}
+
+.multiple .file img {
+  width: 25px;
+  height: 25px;
+  margin-right: calc(var(--space) / 2);
+}
+
+.multiple .file .remove-button {
+  margin-left: auto;
+}
+
+.tip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

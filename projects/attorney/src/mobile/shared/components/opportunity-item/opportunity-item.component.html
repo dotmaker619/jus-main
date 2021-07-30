@@ -1,0 +1,32 @@
+<ion-item
+  class="item"
+  button
+  [routerLink]="['/forum', 'topic', topic.id]"
+  [detail]="false"
+>
+  <div class="content">
+    <div class="row">
+      <div class="icon">
+        <ion-icon src="/assets/icons/opportunities.svg"></ion-icon>
+      </div>
+      <div class="header">
+        <div class="row space">
+          <div class="author">
+            {{ topic.firstPost.author.shortName }}
+          </div>
+          <div class="note" *ngIf="!detail">
+            {{ topic.created | jusLawNamedOffsetFromNow }}
+          </div>
+        </div>
+        <div class="title">"{{ topic.title }}"</div>
+      </div>
+    </div>
+    <p class="description">
+      {{ topic.firstPost.text }}
+    </p>
+    <div class="info" *ngIf="detail">
+      <span class="note">{{ topic.created | date: "shortDate" }}</span>
+      <span class="note">{{ topic.postCount }} Replies</span>
+    </div>
+  </div>
+</ion-item>

@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCancelClick()" fill="clear">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Duplicate File</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    *ngIf="form$ | async as form"
+    (ngSubmit)="onSubmit(form)"
+    [formGroup]="form"
+    id="duplicate-file-modal-form"
+  >
+    <label>
+      <span>Filename*</span>
+      <input formControlName="title" />
+      <jlc-form-control-validation-message
+        controlName="title"
+      ></jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Folder*</span>
+      <select formControlName="parent">
+        <option
+          [disabled]="folder.id === document.parent"
+          [ngValue]="folder.id"
+          *ngFor="let folder of folders$ | async; trackBy: trackById"
+        >
+          {{ folder.title }}
+        </option>
+      </select>
+      <jlc-form-control-validation-message
+        controlName="parent"
+      ></jlc-form-control-validation-message>
+    </label>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="button-panel">
+      <button class="primary" type="submit" form="duplicate-file-modal-form">
+        Save
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

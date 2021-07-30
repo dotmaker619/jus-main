@@ -1,0 +1,162 @@
+:host {
+  --space: 10px;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  /* To have a proper padding for author-info, so that shadow-outline would not stick to the content. */
+  margin: 0 -5px calc(var(--space) * 2) -5px;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: var(--primary-font-color);
+  flex: 1;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.author-avatar {
+  width: 48px;
+  height: 48px;
+  margin-right: var(--space);
+}
+
+.author-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 80%;
+}
+
+.author .name {
+  font-size: 1.25rem;
+}
+
+.author .specialties {
+  width: 100%;
+  color: var(--primary-light-font-color);
+}
+
+.post-options-button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.post-options-button img {
+  width: 100%;
+  height: 100%;
+  transform: rotate(90deg);
+}
+
+.post-block {
+  padding: calc(var(--space) * 2);
+  padding-bottom: var(--space);
+  box-shadow: var(--post-card-box-shadow);
+  border: var(--post-border);
+  margin-bottom: calc(var(--space) * 1.5);
+  border-radius: 4px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  height: 150px;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.image-block {
+  width: 25%;
+}
+
+.image-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info {
+  width: 70%;
+  position: relative;
+}
+
+.info::after {
+  content: "";
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  background: var(--post-card-blur-gradient);
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: calc(var(--space) * 0.5);
+}
+
+.date {
+  font-size: 0.86rem;
+  color: var(--primary-light-font-color);
+}
+
+.html-content {
+  width: 100%;
+}
+
+.more-btn {
+  color: var(--secondary-color);
+  cursor: pointer;
+  display: block;
+  margin: var(--space) 0 0 auto;
+  width: 75px;
+  text-align: right;
+}
+
+.options-list {
+  list-style: none;
+}
+
+.options-list button {
+  text-align: start;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 10rem;
+  font-size: 1rem;
+  color: var(--primary-font-color);
+  overflow: hidden;
+  white-space: nowrap;
+  margin-right: auto;
+  text-overflow: ellipsis;
+}
+
+.options-list li:hover {
+  background: var(--light-color);
+}

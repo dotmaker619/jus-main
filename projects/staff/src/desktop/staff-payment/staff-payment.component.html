@@ -1,0 +1,31 @@
+<div class="page-container">
+  <h1>
+    Payment Information
+  </h1>
+  <hr />
+  <main>
+    <section>
+      <h2>Payment Type</h2>
+      <jlc-staff-payment-plan-info [price]="price$ | async">
+      </jlc-staff-payment-plan-info>
+    </section>
+    <section>
+      <h2>Card Information</h2>
+      <jlc-payment-method-form
+        class="payment-form"
+        [showControls]="false"
+      ></jlc-payment-method-form>
+    </section>
+    <footer class="form-footer">
+      <button class="secondary" (click)="onLogoutClick()">Cancel</button>
+      <button class="primary" (click)="onSubmit()">Submit</button>
+    </footer>
+  </main>
+</div>
+
+<jlc-loading
+  mode="fullscreen"
+  *ngIf="isLoading$ | async"
+  message="Processing the payment..."
+>
+</jlc-loading>

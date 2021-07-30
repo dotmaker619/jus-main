@@ -1,0 +1,37 @@
+<div
+  class="page-container"
+  *ngIf="invoiceAndBillings$ | async as data; else loading"
+>
+  <jlc-breadcrumbs [links]="breadcrumbs$ | async"></jlc-breadcrumbs>
+
+  <jlcl-invoice-info-table [invoice]="data.invoice" [billings]="data.billings">
+  </jlcl-invoice-info-table>
+
+  <section class="billings">
+    <header>
+      <div class="icon-wrapper">
+        <img src="/assets/icons/clock_icon.svg" alt="Invoice icon" />
+      </div>
+
+      <h3 class="heading">Billable time</h3>
+    </header>
+    <jlc-billings-table
+      [matter]="data.invoice.matter"
+      [billings]="data.billings"
+      [isLoggedByColumnDisplayed]="true"
+    >
+    </jlc-billings-table>
+  </section>
+  <a
+    *ngIf="!data.invoice.isPaid"
+    class="primary payment-btn"
+    title="Make a payment for invoice"
+    routerLink="payment"
+  >
+    Make a Payment
+  </a>
+</div>
+
+<ng-template #loading>
+  <div class="loading"><jlc-loading></jlc-loading></div>
+</ng-template>

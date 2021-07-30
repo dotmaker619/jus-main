@@ -1,0 +1,50 @@
+:host {
+  --space: 10px;
+}
+
+ion-content {
+  --background: var(--primary-background-color);
+}
+
+.subtitle {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.subtitle span {
+  font-size: 0.9rem;
+  font-weight: normal;
+  font-style: italic;
+  color: var(--medium-color);
+  margin-right: 10px;
+}
+
+.subtitle select {
+  display: block;
+  background-color: #ffe1e1;
+  border: none;
+  height: 1.4rem;
+  border-radius: unset;
+  font-size: 0.9rem;
+}
+
+ion-toolbar {
+  --padding-bottom: var(--space);
+  --padding-top: var(--space);
+}
+
+.special-button {
+  width: 38px;
+  height: 38px;
+  margin: 0 calc(var(--space) / 2);
+}
+
+.special-button:active {
+  background: var(--special-button-gradient-active);
+}
+
+ion-content {
+  /** To override Ionic's default buggy keyboard offset on iOS devices*/
+  --keyboard-offset: 0 !important;
+}

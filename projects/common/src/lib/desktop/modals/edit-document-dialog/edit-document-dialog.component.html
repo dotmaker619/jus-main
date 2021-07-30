@@ -1,0 +1,19 @@
+<div class="container">
+  <header>
+    <h2>Edit document: {{ options?.document?.title }}</h2>
+    <button
+      class="close-button focusable"
+      (click)="close()"
+      title="Close modal"
+    >
+      <img src="assets/icons/close_icon.svg" />
+    </button>
+  </header>
+  <hr />
+  <jlc-pdf-editor
+    [jlpDoc]="options.document"
+    (save)="onFileSave($event)"
+  ></jlc-pdf-editor>
+</div>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

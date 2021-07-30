@@ -1,0 +1,54 @@
+<jlc-login-page-container class="page-container">
+  <div class="auth-container">
+    <div class="logo-container">
+      <jlc-logo class="logo"></jlc-logo>
+      <div class="page-title">Attorney Portal</div>
+    </div>
+    <div>
+      <form [formGroup]="form" (ngSubmit)="onFormSubmitted()">
+        <div>
+          <label>
+            <span class="text-bold">Email*</span>
+            <input type="email" formControlName="email">
+            <jlc-form-control-validation-message
+              controlName="email">
+            </jlc-form-control-validation-message>
+          </label>
+        </div>
+        <div>
+          <label>
+            <span class="text-bold">Password*</span>
+            <input
+              type="password"
+              formControlName="password"
+              autocomplete="current-password">
+            <jlc-form-control-validation-message
+              controlName="password">
+            </jlc-form-control-validation-message>
+          </label>
+        </div>
+        <div class="error-container" *ngIf="isFailed$ | async">
+          <p>Login failed.</p>
+          <p>Try using another credential, or wait until your account would be verified.</p>
+        </div>
+        <div>
+          <button class="primary">Login</button>
+        </div>
+        <div class="link-container">
+          <a routerLink="/auth/password-reset">Forgot Password?</a>
+        </div>
+      </form>
+    </div>
+  
+    <div class="policy-and-terms">
+      <a routerLink="/privacy-policy">Privacy Policy</a>
+      <a routerLink="/terms-of-use">Terms of Use</a>
+    </div>
+  </div>
+</jlc-login-page-container>
+
+
+<jlc-loading
+  *ngIf="isSubmitting$ | async"
+  mode="fullscreen">
+</jlc-loading>

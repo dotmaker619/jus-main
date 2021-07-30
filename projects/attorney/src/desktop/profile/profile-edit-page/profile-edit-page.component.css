@@ -1,0 +1,8 @@
+:host {
+  --space: 40px;
+}
+
+.page-container {
+  padding: var(--space);
+  width: auto;
+}

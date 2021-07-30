@@ -1,0 +1,44 @@
+<main>
+  <ng-container *ngIf="opportunities$ | async as opportunities; else loading">
+    <ng-container *ngIf="opportunities.length; else noOpportunities">
+      <jlat-opportunities-table
+        class="opportunities"
+        [opportunities]="opportunities"
+        (clickChat)="onStartChattingClicked($event)"
+      ></jlat-opportunities-table>
+    </ng-container>
+  </ng-container>
+</main>
+<ng-template #loading>
+  <jlc-loading class="pre-loader"></jlc-loading>
+</ng-template>
+<ng-template #noOpportunities>
+  No opportunities found.
+</ng-template>
+<aside>
+  <div class="aside-header">
+    <h2>My Opportunities</h2>
+    <span class="secondary-text">
+      Potential leads from forum postings
+      <a class="profile-link" routerLink="/profile/edit">
+        <img src="/assets/icons/edit_icon.svg" alt="" />
+      </a>
+    </span>
+  </div>
+  <div class="aside-body">
+    <div class="container" *ngIf="attorney$ | async as attorney; else loading">
+      <h3>My Location</h3>
+      <ng-container *ngIf="location$ | async as location">
+        <jlat-badge-list [badges]="location"></jlat-badge-list>
+      </ng-container>
+      <h3>My Expertise</h3>
+      <ng-container *ngIf="specialties$ | async as specialties">
+        <jlat-badge-list [badges]="specialties"></jlat-badge-list>
+      </ng-container>
+      <ng-container *ngIf="keywords$ | async as keywords">
+        <h3>Related Keywords</h3>
+        <jlat-badge-list [badges]="keywords"></jlat-badge-list>
+      </ng-container>
+    </div>
+  </div>
+</aside>

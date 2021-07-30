@@ -1,0 +1,22 @@
+<h1>
+  Active subscription is required
+</h1>
+<hr />
+
+<div class="content">
+  <p>You don't have an active subscription.</p>
+  <p>To continue open the web application in a browser.</p>
+  <ng-container *ngIf="isSubscriptionsAllowed">
+    <p>To continue you should get active subscription.</p>
+    <a class="primary action-link"
+      routerLink="/subscription"
+    >
+      Get Subscription!
+    </a>
+  </ng-container>
+  <a class="primary action-link"
+    routerLink="/auth/logout"
+  >
+    Logout
+  </a>
+</div>

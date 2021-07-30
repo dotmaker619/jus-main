@@ -1,0 +1,32 @@
+<header class="header">
+  <h2 class="title">Forum Categories</h2>
+  <p class="italic">Got a question? Ask a professional!</p>
+</header>
+
+<div
+  *ngIf="forumCategories$ | async | slice: 0:5 as categories; else loading"
+  class="categories"
+>
+  <ion-item
+    *ngFor="let category of categories"
+    class="category"
+    lines="none"
+    mode="ios"
+    [routerLink]="['/forum/category', category.id]"
+  >
+    <div class="icon-wrapper">
+      <img [src]="category.icon || iconFallbackUrl" alt="" />
+    </div>
+
+    <div class="title">{{ category.title }}</div>
+  </ion-item>
+</div>
+<button class="primary all-categories-btn" routerLink="/forum">
+  See all categories
+</button>
+
+<ng-template #loading>
+  <div class="loading">
+    <jlc-loading></jlc-loading>
+  </div>
+</ng-template>

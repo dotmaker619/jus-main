@@ -1,0 +1,61 @@
+:host {
+  display: block;
+  --space: 40px;
+}
+
+.page-container {
+  width: auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: calc(var(--space) / 2) var(--space);
+}
+
+.tab-label {
+  display: flex;
+  justify-content: space-between;
+  width: 12rem;
+}
+
+.badge {
+  background: currentColor;
+  border-radius: 11px;
+  font-weight: bold;
+  min-width: 2.5rem;
+  padding: 1px 5px;
+}
+
+.badge span {
+  color: var(--primary-contrast-color);
+}
+
+.tab-label.active .badge {
+  background: var(--primary-highlight-color);
+}
+
+.create-invite {
+  display: flex;
+  align-items: center;
+}
+
+button img {
+  margin-right: 0.95rem;
+}
+
+mat-tab-group {
+  width: 100%;
+}
+
+jlat-active-clients-table {
+  --thead-row-padding: 15px 40px;
+  --row-padding: 15px 40px;
+}
+
+.tab-content {
+  border: 1px solid var(--primary-border-color);
+  border-top: none;
+  padding-bottom: 20px;
+}

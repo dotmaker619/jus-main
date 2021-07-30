@@ -1,0 +1,67 @@
+:host {
+  --event-info-min-height: 140px;
+}
+
+.event-container {
+  display: flex;
+  background: var(--event-background-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  min-height: var(--event-info-min-height);
+}
+
+.date {
+  color: var(--primary-highlight-color);
+  background: var(--event-date-background-color);
+  display: flex;
+  flex-direction: column;
+  flex-basis: 12%;
+  flex-shrink: 0;
+  align-items: center;
+  padding: 25px 14px;
+}
+
+.month {
+  font-size: 0.8rem;
+}
+
+.day {
+  font-size: 1.5rem;
+}
+
+.event-main {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 25px 14px;
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  color: var(--event-title-color);
+  font-size: 1.15rem;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.buttons {
+  margin-left: auto;
+  display: flex;
+}
+
+.buttons a:first-child {
+  margin-right: 36px;
+}
+
+.location {
+  color: var(--primary-font-color);
+  font-size: 0.95rem;
+  line-height: 1.36;
+}
+
+.description {
+  color: var(--primary-font-color);
+  font-size: 0.95rem;
+  line-height: 1.36;
+  margin-top: 8px;
+}

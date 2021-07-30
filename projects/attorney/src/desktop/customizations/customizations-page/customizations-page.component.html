@@ -1,0 +1,53 @@
+<div class="page-container">
+  <h1>Customizations</h1>
+  <mat-tab-group disableRipple dynamicHeight>
+    <!-- Stages tab. -->
+    <mat-tab>
+      <!-- Tab label. -->
+      <ng-template mat-tab-label>
+        <div class="tab-label">
+          {{ stagesTab.title }}
+        </div>
+      </ng-template>
+      <!-- Tab content. -->
+      <jlat-customization-tab
+        [tab]="stagesTab"
+        (clickNew)="openCreateOrEditDialog(CustomizationType.Stage, $event)"
+        (clickEdit)="openCreateOrEditDialog(CustomizationType.Stage, $event)"
+        (clickDelete)="openDeleteStageDialog(CustomizationType.Stage, $event)"
+      >
+        <ng-template let-stage="item">
+          <div class="ellipsis">{{ stage.title }}</div>
+        </ng-template>
+      </jlat-customization-tab>
+    </mat-tab>
+
+    <!-- Closing checklist tab. -->
+    <mat-tab>
+      <!-- Tab label. -->
+      <ng-template mat-tab-label>
+        <div class="tab-label">
+          {{ closingChecklistTab.title }}
+        </div>
+      </ng-template>
+      <!-- Tab content. -->
+      <jlat-customization-tab
+        [tab]="closingChecklistTab"
+        (clickNew)="openCreateOrEditDialog(CustomizationType.Checklist, $event)"
+        (clickEdit)="
+          openCreateOrEditDialog(CustomizationType.Checklist, $event)
+        "
+        (clickDelete)="
+          openDeleteStageDialog(CustomizationType.Checklist, $event)
+        "
+      >
+        <ng-template let-checklistItem="item">
+          <div class="ellipsis">{{ checklistItem.description }}</div>
+        </ng-template>
+      </jlat-customization-tab>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<ng-container *ngIf="isLoading$ | async">
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-container>

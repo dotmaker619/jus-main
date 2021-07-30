@@ -1,0 +1,124 @@
+/* Chat icon */
+
+.avatars-container {
+  /* Offset between two avatars overlapping each other */
+  --offset-x: 10px;
+  --offset-y: 10px;
+  /* Since there is no `abs` function I had to come up with multiplier values
+    to properly calculate the size of parent container. */
+  --offset-x-multiplier: 1;
+  --offset-y-multiplier: -1;
+  --avatar-size: 40px;
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(var(--avatar-size) + var(--offset-y));
+  width: calc(var(--avatar-size) + var(--offset-x));
+}
+
+.avatars-container img {
+  object-fit: cover;
+  border-radius: 50px;
+  border: 1px solid var(--primary-border-color);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  background: var(--light-color);
+  overflow: hidden;
+  position: absolute;
+}
+
+.avatars-container img:nth-child(1) {
+  transform: translate(
+      calc(var(--offset-x-multiplier) * var(--offset-x) / 2),
+      calc(var(--offset-y-multiplier) * var(--offset-y) / 2)
+    )
+    scale(0.9);
+}
+
+.avatars-container img:only-child {
+  /* Don't translate avatars when there is only one chat participant */
+  transform: none;
+}
+
+.avatars-container img:nth-child(2) {
+  transform: translate(
+    calc(var(--offset-x-multiplier) * var(--offset-x) / -2),
+    calc(var(--offset-y-multiplier) * var(--offset-y) / -2)
+  );
+}
+
+/* Chat item layout */
+
+:host {
+  display: grid;
+  grid-template-columns: 10px auto 1fr auto; /* badge, avatar, info, date */
+  align-items: center;
+  column-gap: 10px;
+  padding: 10px 0;
+}
+
+.avatars-container,
+.unread-badge,
+.date {
+  grid-row: span 2;
+}
+
+.date {
+  align-self: center;
+}
+
+.title {
+  align-self: end;
+}
+
+.last-message {
+  align-self: start;
+}
+
+/* Badge */
+
+.unread-badge {
+  width: 7px;
+  height: 7px;
+  background: red;
+  border-radius: 50%;
+  visibility: hidden;
+}
+
+.unread-badge.active {
+  visibility: visible;
+}
+
+/* Chat info */
+
+.title {
+  font-weight: bold;
+}
+
+.last-message {
+  font-size: 0.9rem;
+}
+
+.placeholder,
+.date {
+  color: var(--medium-color);
+  font-style: italic;
+}
+
+/* Skeleton */
+
+.title .skeleton-text {
+  width: 10rem;
+}
+
+.last-message .skeleton-text {
+  width: 6rem;
+}
+
+.skeleton-text {
+  height: 1rem;
+  display: inline-block;
+  background-color: var(--light-color);
+}

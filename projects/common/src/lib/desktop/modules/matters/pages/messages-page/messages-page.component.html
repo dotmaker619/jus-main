@@ -1,0 +1,35 @@
+<jlc-breadcrumbs [links]="breadcrumbs$ | async"></jlc-breadcrumbs>
+
+<div class="header">
+  <div class="icon-wrapper">
+    <img alt="Message icon" src="/assets/icons/matter_message_icon.svg" />
+  </div>
+
+  <h1 class="ellipsis">{{ (matterTopic$ | async)?.title }}</h1>
+</div>
+
+<div class="messages" #messagesContainer>
+  <ng-container *ngIf="matterPosts$ | async as matterPosts; else loading">
+    <jlc-message
+      *ngFor="let post of matterPosts; trackBy: trackMessage"
+      [matterPost]="post"
+    ></jlc-message>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="loading">
+      <jlc-loading></jlc-loading>
+    </div>
+  </ng-template>
+</div>
+
+<form
+  *ngIf="(matterTopic$ | async) || { id: null } as matterTopic"
+  class="send-form"
+  [formGroup]="sendForm"
+  (ngSubmit)="onSend(matterTopic.id)"
+>
+  <input formControlName="message" type="text" placeholder="Post a Reply" />
+
+  <button type="submit"></button>
+</form>

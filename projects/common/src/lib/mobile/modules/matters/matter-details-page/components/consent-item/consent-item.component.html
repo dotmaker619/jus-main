@@ -1,0 +1,17 @@
+<ng-container *ngIf="consent; else skeleton">
+  <div class="icon-container">
+    <ion-icon src="assets/icons/voice_consent.svg"></ion-icon>
+  </div>
+  <span class="title ellipsis">
+    {{ consent.name }}
+  </span>
+</ng-container>
+
+<ng-template #skeleton>
+  <div class="skeleton icon-container">
+    <ion-icon></ion-icon>
+  </div>
+  <span class="title ellipsis skeleton">
+    <ion-skeleton-text animated></ion-skeleton-text>
+  </span>
+</ng-template>

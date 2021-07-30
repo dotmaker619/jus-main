@@ -1,0 +1,7 @@
+{
+  "name": "JusLaw",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

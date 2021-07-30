@@ -1,0 +1,18 @@
+:host {
+  --space: 10px;
+}
+
+.card,
+.form {
+  margin: var(--space);
+  display: block;
+}
+
+.button-panel {
+  display: flex;
+  margin: var(--space);
+}
+
+.button-panel .primary {
+  flex: 1;
+}

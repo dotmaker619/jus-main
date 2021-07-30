@@ -1,0 +1,82 @@
+:host {
+  display: block;
+}
+
+.message {
+  display: block;
+  position: relative;
+  color: var(--tertiary-contrast-color);
+  background-color: var(--tertiary-color);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding: 15px;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 50%;
+  word-break: break-word;
+}
+
+.time {
+  position: absolute;
+  right: 40px;
+  color: var(--primary-font-color);
+  font-size: 0.85rem;
+  width: max-content;
+}
+
+.my {
+  position: relative;
+  margin-left: auto;
+  border: 1px solid var(--me-message-border-color);
+  margin-right: 35px;
+}
+
+.my > .time {
+  right: 0;
+}
+
+.my::before {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  right: -20px;
+  border-top: 16px solid transparent;
+  border-left: 20px solid var(--tertiary-color);
+}
+
+.my::after {
+  content: "";
+  position: absolute;
+  bottom: 9px;
+  right: -18px;
+  border-top: 15px solid transparent;
+  border-left: 20px solid var(--tertiary-color);
+}
+
+.not-my {
+  position: relative;
+  border: 1px solid var(--interlocutor-message-border-color);
+  margin-left: 35px;
+}
+
+.not-my > .time {
+  left: 0;
+}
+
+.not-my::before {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  left: -20px;
+  border-top: 16px solid transparent;
+  border-right: 20px solid var(--tertiary-color);
+}
+
+.not-my::after {
+  content: "";
+  position: absolute;
+  bottom: 9px;
+  left: -17px;
+  border-top: 15px solid transparent;
+  border-right: 20px solid var(--tertiary-color);
+}

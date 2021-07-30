@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  padding: 27px;
+}
+
+hr {
+  width: 100%;
+  margin-top: 0.8rem;
+  margin-bottom: 1.15rem;
+}
+
+.dialog-body {
+  flex-grow: 1;
+  margin-bottom: 1.15rem;
+}
+
+.message {
+  color: var(--primary-font-color);
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+}

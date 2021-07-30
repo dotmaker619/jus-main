@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="onCancelClick()">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ headerTitle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form *ngIf="itemForm$ | async as form" [formGroup]="form" id="checklist-item-form" (ngSubmit)="onFormSubmit(form)">
+    <label>
+      <span>Description*</span>
+      <input type="text" placeholder="Type..." formControlName="description" />
+      <jlc-form-control-validation-message controlName="description">
+      </jlc-form-control-validation-message>
+    </label>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button class="primary" form="checklist-item-form" type="submit">
+      Save
+    </button>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

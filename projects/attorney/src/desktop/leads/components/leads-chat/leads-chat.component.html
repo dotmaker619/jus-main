@@ -1,0 +1,35 @@
+<ng-container *ngIf="chat$ | async as chat">
+  <header class="header">
+    <span class="recipient-name">
+      {{ chat.recipient.shortName }}
+    </span>
+
+    <div class="actions">
+      <form [formGroup]="changePriorityForm">
+        <select
+          formControlName="priority"
+          class="priority"
+        >
+          <option disabled hidden [ngValue]="null">- Select -</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </form>
+      <button
+        class="special-button"
+        type="button"
+        [queryParams]="{client: chat.recipient.id, lead: chat.lead.id}"
+        [routerLink]="['/matters', 'create']"
+      >
+        <img src="/assets/icons/conversion_icon.svg" alt="">
+      </button>
+    </div>
+  </header>
+
+  <div class="feed-container">
+    <jlc-chat
+      [chat]="chat"
+    ></jlc-chat>
+  </div>
+</ng-container>

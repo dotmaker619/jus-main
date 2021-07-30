@@ -1,0 +1,106 @@
+<nav>
+  <a routerLink="/" class="logo-link">
+    <img class="logo-img" src="/assets/juslaw-horizontal.svg" alt="" />
+  </a>
+  <div class="links" *ngIf="navigationLinks">
+    <div class="centred">
+      <ng-container *ngFor="let navigation of navigationLinks">
+        <a *ngIf="navigation.isExternal" [href]="navigation.link">
+          {{ navigation.label }}
+        </a>
+        <a
+          *ngIf="!navigation.isExternal"
+          [routerLink]="[navigation.link]"
+          routerLinkActive="active"
+        >
+          {{ navigation.label }}
+        </a>
+      </ng-container>
+    </div>
+  </div>
+  <!-- Logged in. -->
+  <div
+    *ngIf="currentUser$ | async as currentUser; else authLinkTemplate"
+    class="buttons"
+  >
+    <div class="notifications-bar" *ngIf="isClientUser$ | async">
+      <!-- Followed topics. -->
+      <a
+        class="topics"
+        routerLink="/forum/followed-topics"
+        routerLinkActive="active"
+      >
+        <span class="badge" *ngIf="false">
+          <span class="badge-content ellipsis">
+            <!-- badge-content -->
+          </span>
+        </span>
+      </a>
+      <!-- Chats. -->
+      <a class="chats" routerLink="/chats" routerLinkActive="active">
+        <span
+          class="badge"
+          *ngIf="unreadChatsCount$ | async as unreadChatsCount"
+        >
+          <span class="badge-content ellipsis">
+            {{ unreadChatsCount }}
+          </span>
+        </span>
+      </a>
+      <!-- Notifications. -->
+      <a
+        class="notifications"
+        routerLink="/notifications"
+        routerLinkActive="active"
+      >
+        <span
+          class="badge"
+          *ngIf="unreadNotifications$ | async as notificationsCount"
+        >
+          <span class="badge-content ellipsis">
+            {{ notificationsCount }}
+          </span>
+        </span>
+      </a>
+    </div>
+    <!-- Burger menu button. -->
+    <a
+      class="menu-button"
+      role="button"
+      [matMenuTriggerFor]="headerMenu"
+      [class.active]="isOpened$ | async"
+      (click)="onMenuClicked()"
+    >
+      <!-- Burger menu icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path
+          d="M432 176H80c-8.8 0-16-7.2-16-16s7.2-16 16-16h352c8.8 0 16 7.2 16 16s-7.2 16-16 16zM432 272H80c-8.8 0-16-7.2-16-16s7.2-16 16-16h352c8.8 0 16 7.2 16 16s-7.2 16-16 16zM432 368H80c-8.8 0-16-7.2-16-16s7.2-16 16-16h352c8.8 0 16 7.2 16 16s-7.2 16-16 16z"
+        ></path>
+      </svg>
+    </a>
+    <!-- Nav menu. -->
+    <mat-menu
+      #headerMenu="matMenu"
+      (closed)="onMenuClosed()"
+      class="header-menu"
+    >
+      <jlc-header-menu
+        [menuLinks]="menuLinks"
+        [user]="currentUser$ | async"
+      ></jlc-header-menu>
+    </mat-menu>
+  </div>
+  <!-- Not logged. -->
+  <ng-template #authLinkTemplate>
+    <div class="buttons">
+      <a
+        class="primary"
+        *ngFor="let navigation of navigationButtons"
+        [routerLink]="[navigation.link]"
+        routerLinkActive="active"
+      >
+        {{ navigation.label }}
+      </a>
+    </div>
+  </ng-template>
+</nav>

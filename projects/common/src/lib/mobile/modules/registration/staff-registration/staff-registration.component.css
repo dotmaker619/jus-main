@@ -1,0 +1,27 @@
+:host {
+  --space: 10px;
+}
+
+.registration-form {
+  padding: var(--space);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registration-form > label {
+  width: 100%;
+}
+
+jlc-editable-profile-image {
+  margin-bottom: var(--space);
+}
+
+.button-panel {
+  display: flex;
+  margin: var(--space);
+}
+
+.button-panel button {
+  flex: 1;
+}

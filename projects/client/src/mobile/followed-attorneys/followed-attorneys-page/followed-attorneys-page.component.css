@@ -1,0 +1,18 @@
+ion-list {
+  margin: 0;
+  padding: 0;
+}
+
+.no-items {
+  font-style: italic;
+  color: var(--medium-color);
+  text-align: center;
+}
+
+ion-avatar ion-skeleton-text {
+  width: 100%;
+}
+
+ion-label ion-skeleton-text {
+  width: 80%;
+}

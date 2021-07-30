@@ -1,0 +1,46 @@
+:host {
+  --space: 16px;
+}
+
+.padding {
+  padding: var(--space);
+}
+
+form .padding > * {
+  display: block;
+}
+
+form .padding > *:not(:first-child) {
+  margin-top: var(--space);
+}
+
+textarea {
+  height: 6rem;
+  resize: none;
+}
+
+ion-footer ion-toolbar {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+  --padding-bottom: calc(var(--space) * 0.5);
+  --padding-top: calc(var(--space) * 0.5);
+}
+
+ion-footer button {
+  width: 100%;
+}
+
+.pagination {
+  background: var(--primary-background-color);
+  border: 1px solid var(--primary-border-color);
+  border-radius: 3px;
+  margin: 10px auto;
+  color: var(--medium-color);
+  padding: 5px 20px;
+  display: block;
+  transition-duration: 0.15s;
+}
+
+.pagination:disabled {
+  background: rgba(0, 0, 0, 0.2);
+}

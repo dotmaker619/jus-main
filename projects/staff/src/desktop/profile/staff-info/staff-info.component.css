@@ -1,0 +1,25 @@
+.form-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.staff-info {
+  flex: 1;
+}
+
+.staff-info > label {
+  display: block;
+  width: 80%;
+}
+
+.button-panel {
+  display: flex;
+}
+
+.button-panel > *:not(:first-child) {
+  margin-left: 15px;
+}
+
+textarea {
+  resize: none;
+}

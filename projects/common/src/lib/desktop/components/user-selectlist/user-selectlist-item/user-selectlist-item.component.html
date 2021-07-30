@@ -1,0 +1,31 @@
+<div class="avatar-container">
+  <jlc-profile-image [src]="user.avatar" [alt]="user.fullName + ' avatar'"></jlc-profile-image>
+</div>
+<div class="info">
+  <div class="name ellipsis" [title]="user.fullName">
+    {{ user.fullName }}
+  </div>
+  <div class="specialization ellipsis" [title]="user.description">
+    {{ user.description }}
+  </div>
+</div>
+<button
+  class="attorney-toggle-button focusable"
+  (click)="onToggleClicked()"
+  type="button"
+  [disabled]="disabled"
+  [title]="isSelected ? 'Unselect attorney' : 'Select attorney'"
+>
+  <ng-container
+    [ngTemplateOutlet]="selectedButtonIcon"
+    *ngIf="isSelected; else unselectedButtonIcon"
+  ></ng-container>
+</button>
+
+<ng-template #selectedButtonIcon>
+  <img src="/assets/icons/checked_blue.svg" />
+</ng-template>
+
+<ng-template #unselectedButtonIcon>
+  <img src="/assets/icons/rounded_plus.svg" />
+</ng-template>

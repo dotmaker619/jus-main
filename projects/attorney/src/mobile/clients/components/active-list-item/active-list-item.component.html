@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="avatar">
+    <img
+      class="client-avatar"
+      *ngIf="matter.client.avatar; else fallbackAvatar"
+      [src]="matter.client.avatar"
+    />
+  </div>
+  <div class="header">
+    <div class="row space">
+      <p class="name">
+        {{ matter.client.fullName }}
+      </p>
+      <p class="italic location">
+        {{ matter.city?.name
+        }}<span class="location" *ngIf="matter.city">,</span>
+        {{ matter.state.name }}
+      </p>
+    </div>
+    <div class="row space">
+      <p class="italic client-id">ID #{{ matter.client.id }}</p>
+      <p class="italic last-activity">
+        Last Activity {{ matter.modified | date: "shortDate" }}
+      </p>
+    </div>
+  </div>
+</div>
+<div class="active-matter row">
+  <ion-icon src="/assets/icons/document_icon_brown.svg"></ion-icon>
+  <p>[{{ matter.code }}] {{ matter.title }}</p>
+</div>
+
+<ng-template #fallbackAvatar>
+  <img src="/assets/icons/person_icon.svg" />
+</ng-template>

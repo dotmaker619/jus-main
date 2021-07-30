@@ -1,0 +1,29 @@
+<a
+  *ngIf="absoluteLink; else buttonTemplate"
+  [routerLink]="absoluteLink"
+  routerDirection="root"
+  queryParamsHandling="merge"
+  routerLinkActive="active"
+  class="tab-button"
+>
+  <ng-container [ngTemplateOutlet]="buttonContentTemplate"></ng-container>
+</a>
+
+<ng-template #buttonTemplate>
+  <button type="button" class="tab-button" [class.active]="isActive">
+    <ng-container [ngTemplateOutlet]="buttonContentTemplate"></ng-container>
+  </button>
+</ng-template>
+
+<ng-template #buttonContentTemplate>
+  <ng-content></ng-content>
+  <ng-container *ngIf="showBadge">
+    <div class="badge">
+      <span *ngIf="count != null; else skeletonTextTemplate">{{ count }}</span>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #skeletonTextTemplate>
+  <ion-skeleton-text class="skeleton" animated></ion-skeleton-text>
+</ng-template>

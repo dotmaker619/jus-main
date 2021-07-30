@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>DocuSign Consent</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="esignProfile$ | async as esignProfile; else loading">
+    <div>
+      <div *ngIf="esignProfile.hasConsent; else noConsentBlock">
+        <div>
+          <p>{{ consentProvided }}</p>
+        </div>
+        <div class="button-container">
+          <a routerLink="/matters" class="primary">Return</a>
+        </div>
+      </div>
+      <ng-template #noConsentBlock>
+        <div>
+          <p>{{ welcomeMessage }}</p>
+          <p>{{ description }}</p>
+          <p>{{ actionDescription }}</p>
+        </div>
+        <div class="button-container">
+          <button class="primary" (click)="onConsentClicked()">
+            Provide consent
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</ion-content>
+
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

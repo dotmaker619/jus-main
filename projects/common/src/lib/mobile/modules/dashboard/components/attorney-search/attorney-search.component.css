@@ -1,0 +1,110 @@
+:host {
+  --space: 16px;
+}
+
+.jumbotron {
+  width: 100%;
+  color: var(--header-color);
+  text-align: center;
+  font-size: 3rem;
+  height: 430px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  position: relative;
+  padding: var(--space);
+}
+
+.video-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  filter: brightness(0.7);
+}
+
+.video {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  z-index: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.input-container > .input-icon {
+  position: absolute;
+}
+
+.input-icon {
+  height: 50px;
+  padding: 7px;
+  user-select: none;
+}
+
+.input-icon + .input {
+  padding-left: 50px;
+}
+
+.input-container > .input {
+  width: 350px;
+  height: 50px;
+  border-radius: 0;
+  font-size: 1rem;
+  background: transparent;
+  border: none;
+  flex: 1;
+}
+
+.input::placeholder {
+  font-size: 1rem;
+  font-style: normal;
+  color: var(--primary-font-color);
+}
+
+.form-container > .input-container {
+  box-shadow: 0 0 0 1px inset var(--primary-border-color);
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  user-select: none;
+}
+
+.input-container {
+  background: var(--primary-background-color);
+}
+
+.input.ng-invalid.ng-touched {
+  box-shadow: inset 0 0 0 2px var(--error-color);
+}
+
+.search-button {
+  height: 50px;
+  margin-top: calc(var(--space) * 1.5);
+  display: block;
+  width: 100%;
+}

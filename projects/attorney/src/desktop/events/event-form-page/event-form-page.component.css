@@ -1,0 +1,68 @@
+.event-form-container {
+  --event-form-checkbox-size: 16px;
+
+  padding: 14px 40px;
+}
+
+h1 {
+  margin-top: 28px;
+  text-transform: capitalize;
+}
+
+hr {
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+label {
+  display: inline-block;
+  color: var(--primary-label-input-color);
+  font-weight: bold;
+  width: calc(2 / 3 * 100%);
+  margin: 8px 0;
+}
+
+input:not([type="checkbox"]),
+textarea {
+  margin-top: 9px;
+  width: 100%;
+}
+
+textarea {
+  height: 5rem;
+}
+
+.start-end-container {
+  display: flex;
+  margin-top: 9px;
+}
+
+.start-date-time-container,
+.end-date-time-container {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.separator {
+  margin: 10px 16px 0;
+}
+
+button {
+  border-radius: 10px;
+  height: auto;
+  width: 12rem;
+  padding: 14px 14px 13px;
+}
+
+.secondary {
+  margin-right: 16px;
+}
+
+.font-normal {
+  font-weight: normal;
+}
+
+.flex-v-center {
+  display: flex;
+  align-items: center;
+}

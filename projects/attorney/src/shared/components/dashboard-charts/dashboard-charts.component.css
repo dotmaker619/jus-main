@@ -1,0 +1,61 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  /* Background for the header with buttons. */
+  --header-background: none;
+
+  /* Font color on header. */
+  --header-font-color: black;
+
+  /* Behavior of text-transform on header. */
+  --header-text-transform: capitalize;
+
+  /* Flex justify behavior of a header elements. (center, space-between, etc.) */
+  --header-justify-mode: center;
+
+  /* Header button filter for icons. (none for black buttons, invert(1) for white) */
+  --header-button-filter: none;
+
+  /* Button size in px. */
+  --header-button-size: 15px;
+
+  /* Header padding in px. */
+  --header-padding: 10px;
+}
+
+.quarter-nav {
+  display: flex;
+  background: var(--header-background);
+  text-transform: var(--header-text-transform);
+  justify-content: var(--header-justify-mode);
+  align-items: center;
+}
+
+.charts-title {
+  font-weight: normal;
+  color: var(--header-font-color);
+}
+
+.forward-button {
+  box-sizing: content-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--header-button-size);
+  height: var(--header-button-size);
+  padding: var(--header-padding);
+  background: none;
+  border: none;
+  outline: transparent;
+}
+
+.forward-button img {
+  width: 100%;
+  height: 100%;
+  filter: var(--header-button-filter);
+}
+
+.prev {
+  transform: rotate(180deg);
+}

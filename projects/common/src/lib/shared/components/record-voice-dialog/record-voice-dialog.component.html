@@ -1,0 +1,94 @@
+<!-- Dialog layout -->
+<header>
+  <h2 class="ellipsis">
+    {{ options?.title }}
+  </h2>
+</header>
+<div class="hint">
+  <ng-container *ngTemplateOutlet="message"></ng-container>
+</div>
+<div class="button-panel">
+  <ng-container *ngTemplateOutlet="controls"></ng-container>
+</div>
+<footer>
+  <button (click)="close()" class="secondary">
+    Cancel
+  </button>
+</footer>
+
+<!-- Dialog message depending on current state of recorder. -->
+<ng-template #message>
+  <ng-container *ngIf="recorderState$ | async as state" [ngSwitch]="state">
+    <ng-container *ngSwitchCase="states.ReadyForRecording">
+      {{ dialogMessages.ReadyForRecording }}
+    </ng-container>
+    <ng-container *ngSwitchCase="states.ReadyForNativeRecording">
+      {{ dialogMessages.ReadyForNativeRecording }}
+    </ng-container>
+    <ng-container *ngSwitchCase="states.PermissionsForRecordRequired">
+      {{ dialogMessages.PermissionsForRecordRequired }}
+    </ng-container>
+    <ng-container *ngSwitchCase="states.Loading">
+      <jlc-loading></jlc-loading>
+    </ng-container>
+    <ng-container *ngSwitchCase="states.Recording">
+      <span class="time">
+        {{ seconds$ | async | juslawFormatSeconds }}
+      </span>
+    </ng-container>
+    <ng-container *ngSwitchCase="states.Recorded">
+      {{ dialogMessages.Recorded }}
+      <span>({{ seconds$ | async | juslawFormatSeconds }})</span>
+    </ng-container>
+    <ng-container *ngSwitchCase="states.Error">
+      {{ dialogMessages.Error }}
+    </ng-container>
+  </ng-container>
+</ng-template>
+
+<!-- Dialog controls depending on current state of recorder. -->
+<ng-template #controls>
+  <ng-container *ngIf="recorderState$ | async as state" [ngSwitch]="state">
+    <!-- Start recording button. -->
+    <button
+      *ngSwitchCase="states.ReadyForRecording"
+      class="primary-action focusable"
+      title="Start recording audio"
+      (click)="startRecording()"
+    >
+      <img class="white" src="assets/icons/microphone.svg" alt="" />
+    </button>
+    <button
+      title="Stop recording audio"
+      *ngSwitchCase="states.Recording"
+      class="primary-action focusable pulse-animation"
+      (click)="stopRecording()"
+    >
+      <img class="white" src="assets/icons/stop.svg" alt="" />
+    </button>
+    <!-- Controls to save, delete, download the record. -->
+    <ng-container *ngSwitchCase="states.Recorded">
+      <button
+        class="secondary-action focusable"
+        title="Delete record"
+        (click)="clearRecord()"
+      >
+        <img src="assets/icons/delete_icon.svg" alt="" />
+      </button>
+      <button
+        class="primary-action focusable"
+        title="Save the record"
+        (click)="onCloseClick()"
+      >
+        <img class="white" src="assets/icons/save.svg" alt="" />
+      </button>
+      <button
+        class="secondary-action focusable"
+        title="Download the record"
+        (click)="downloadRecord()"
+      >
+        <img class="grey" src="assets/icons/upload_icon.svg" alt="" />
+      </button>
+    </ng-container>
+  </ng-container>
+</ng-template>

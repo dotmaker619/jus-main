@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" routerLink="../network/create">
+        + New
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Networks</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="filter-container">
+    <input
+      type="search"
+      class="search-input"
+      placeholder="Search..."
+      (input)="onSearchQueryChange($event.target.value)"
+    />
+  </div>
+  <ion-list *ngIf="chats$ | async as chats; else skeletonList" lines="full">
+    <ion-item
+      *ngFor="let chat of chats; trackBy: trackById"
+      [routerLink]="[chat.network.id]"
+      details="false"
+      button
+    >
+      <jlc-chat-list-item [chat]="chat"></jlc-chat-list-item>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ng-template #placeholder>
+  <div class="placeholder">
+    <img src="/assets/icons/network.svg" />
+    <span>No active networks</span>
+  </div>
+</ng-template>
+
+<ng-template #skeletonList>
+  <ion-list lines="full">
+    <ion-item details="false" *ngFor="let i of [1, 2, 3]">
+      <jlc-chat-list-item></jlc-chat-list-item>
+    </ion-item>
+  </ion-list>
+</ng-template>

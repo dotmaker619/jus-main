@@ -1,0 +1,17 @@
+.row {
+  display: flex;
+  margin-bottom: 22px;
+}
+
+.row > :not(:last-child) {
+  margin-right: 29px;
+}
+
+label {
+  width: 407px;
+}
+
+.actions button {
+  display: block;
+  margin: 10px 0;
+}

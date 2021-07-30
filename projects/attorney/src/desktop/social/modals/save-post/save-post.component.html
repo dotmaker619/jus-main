@@ -1,0 +1,40 @@
+<h2>{{ (isEdit$ | async) ? "Edit Post" : "Start Your New Post" }}</h2>
+<hr />
+<form
+  *ngIf="socialPostForm$ | async as form"
+  [formGroup]="form"
+  (ngSubmit)="onFormSubmit(form)"
+>
+  <label>
+    <span>Title*</span>
+    <input formControlName="title" type="text" />
+    <jlc-form-control-validation-message controlName="title">
+    </jlc-form-control-validation-message>
+  </label>
+  <label>
+    <span>Text preview*</span>
+    <textarea formControlName="preview"></textarea>
+    <jlc-form-control-validation-message controlName="preview">
+    </jlc-form-control-validation-message>
+  </label>
+  <div>
+    <jlc-image-uploader formControlName="image"></jlc-image-uploader>
+    <jlc-form-control-validation-message controlName="image">
+    </jlc-form-control-validation-message>
+  </div>
+  <div>
+    <jlc-html-editor formControlName="body"></jlc-html-editor>
+    <jlc-form-control-validation-message controlName="body">
+    </jlc-form-control-validation-message>
+  </div>
+  <div class="action-buttons">
+    <button class="secondary" type="button" (click)="onCloseClicked()">
+      Cancel
+    </button>
+    <button type="submit" class="primary">
+      Submit post
+    </button>
+  </div>
+</form>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

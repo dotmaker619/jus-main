@@ -1,0 +1,53 @@
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.9rem;
+  padding-bottom: 1.1rem;
+}
+
+.primary {
+  border-radius: 0.65rem;
+  font-size: 0.8rem;
+  padding: 0.7rem 1.7rem;
+}
+
+.buttons {
+  margin-left: auto;
+  display: flex;
+  align-items: stretch;
+  align-self: stretch;
+}
+
+.buttons button {
+  width: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.2rem;
+  background: none;
+  border: none;
+  outline: none;
+  transition: background-color 0.2s linear;
+}
+
+.buttons button:active {
+  background-color: var(--light-tint-color);
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--list-item-border-color);
+  min-height: 5rem;
+  padding: 0.5rem 1rem 0.5rem 1.7rem;
+  color: var(--primary-font-color);
+}
+
+li:not(:last-of-type) {
+  border-bottom: none;
+}

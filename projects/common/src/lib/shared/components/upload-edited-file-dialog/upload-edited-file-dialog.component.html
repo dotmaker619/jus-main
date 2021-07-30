@@ -1,0 +1,44 @@
+<div class="dialog">
+  <h3>Copy File</h3>
+  <hr />
+  <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+    <ng-container *ngIf="folders; else loading">
+      <ng-container *ngIf="!(isLoading$ | async); else loading">
+        <label>
+          <span>Name*</span>
+          <input formControlName="name" />
+          <jlc-form-control-validation-message controlName="name">
+          </jlc-form-control-validation-message>
+        </label>
+        <label>
+          <span>Folder*</span>
+          <select formControlName="folder">
+            <option [ngValue]="option.id" *ngFor="let option of folders">
+              {{ option.title }}
+            </option>
+          </select>
+        </label>
+        <ng-container *ngIf="!(isLoading$ | async); else loading">
+          <div class="validation-error">
+            <span *ngIf="validationError$ | async as error">
+              {{ error }}
+            </span>
+          </div>
+          <div class="button-panel">
+            <button class="secondary" type="button" (click)="onCancelClick()">
+              Cancel
+            </button>
+            <button class="primary" type="submit">
+              <img src="/assets/icons/folder_icon.svg" aria-hidden="true" />
+              <span>Upload to Docs</span>
+            </button>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </form>
+
+  <ng-template #loading>
+    <jlc-loading></jlc-loading>
+  </ng-template>
+</div>

@@ -1,0 +1,22 @@
+:host {
+  --page-space: 16px;
+}
+
+ion-content {
+  --padding-start: var(--page-space);
+  --padding-end: var(--page-space);
+  --padding-top: var(--page-space);
+  --padding-bottom: var(--page-space);
+}
+
+.card {
+  margin-bottom: var(--page-space);
+}
+
+.payment-card {
+  padding: var(--page-space);
+}
+
+button.primary {
+  width: 100%;
+}

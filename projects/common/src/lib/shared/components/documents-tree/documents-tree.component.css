@@ -1,0 +1,286 @@
+:host {
+  --space: 40px;
+
+  /* Color variables. */
+  --folder-background-color: none;
+  --document-background-color: var(--light-color);
+
+  /* Variables for expand-icon-container. */
+  --expand-icon-size: 10px;
+  --document-icon-size: 30px;
+  --expand-icon-container-inner-space: 15px;
+  --expand-icon-container-width: calc(
+    var(--expand-icon-size) + var(--document-icon-size) +
+      var(--expand-icon-container-inner-space)
+  );
+  --options-button-width: 50px;
+  --date-text-align: start;
+
+  /* End of variables for expand-icon-container. */
+
+  --row-height: calc(
+    var(--document-icon-size) + var(--expand-icon-container-inner-space) * 2
+  );
+  --border: 1px solid var(--primary-border-color);
+
+  position: relative;
+}
+
+h2 {
+  margin: var(--space) 0;
+}
+
+.documents-header {
+  padding: 0 var(--space);
+  border-bottom: var(--border);
+}
+
+.documents-header .title {
+  font-weight: normal;
+}
+
+.node-content {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 100%;
+  height: var(--row-height);
+  position: relative;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.additional {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  justify-content: flex-end;
+}
+
+.documents-tree-node::before,
+.documents-nested-tree-node::before {
+  content: "";
+  height: var(--row-height);
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  box-shadow: 0 -1px 0 0 var(--table-row-separator-color) inset;
+}
+
+.documents-tree-node:hover::before,
+.documents-nested-tree-node:hover::before {
+  background-color: var(--table-row-highlight-color);
+  transition: 0.15s ease;
+}
+
+.documents-tree-node:not(.folder)::before {
+  background: var(--document-background-color);
+}
+
+.documents-nested-tree-node button.expand-button {
+  cursor: pointer;
+}
+
+.expand-button {
+  border: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  max-width: calc(100% - var(--options-button-width));
+  color: var(--primary-font-color);
+  font-size: 1rem;
+
+  /* To overlap `before` elements. */
+  z-index: 1;
+}
+
+.expand-icon-container {
+  width: var(--expand-icon-container-width);
+  height: 100%;
+  margin-right: var(--expand-icon-container-inner-space);
+  background: none;
+  border: none;
+  padding: 0;
+  flex: 0;
+  display: flex;
+  align-items: center;
+}
+
+.expand-icon {
+  opacity: 0.5;
+}
+
+.expand-icon-container .expand-icon {
+  width: var(--expand-icon-size);
+  height: var(--expand-icon-size);
+  margin-right: var(--expand-icon-container-inner-space);
+}
+
+.expand-icon {
+  transform: rotate(-90deg);
+}
+
+.expand-icon.rotated {
+  transform: none;
+}
+
+.documents-tree {
+  display: block;
+  overflow: visible;
+  padding: 0 var(--space);
+}
+
+.documents-nested-tree-node,
+.documents-tree-node {
+  display: block;
+  margin-left: var(--space);
+}
+
+/* Remove margins on first level */
+.documents-tree > .documents-nested-tree-node,
+.documents-tree > .documents-tree-node {
+  margin: 0;
+}
+
+.documents-tree-invisible {
+  display: none;
+}
+
+.icon-container {
+  height: var(--document-icon-size);
+  width: var(--document-icon-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background: var(--primary-shade-color);
+}
+
+.icon-container img {
+  height: 50%;
+  width: 50%;
+  filter: invert(1);
+}
+
+.title {
+  font-weight: bold;
+  max-width: 20rem;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-right: auto;
+  text-overflow: ellipsis;
+}
+
+.title.underlined {
+  text-decoration: underline;
+}
+
+.owner,
+.date {
+  margin-right: 5rem;
+  width: 10rem;
+}
+
+.date {
+  text-align: var(--date-text-align);
+  padding-right: 3px;
+}
+
+.documents-tree .owner,
+.documents-tree .date {
+  color: var(--medium-color);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .expand-icon-container .expand-icon {
+    position: absolute;
+    right: -20px;
+    height: 8px;
+  }
+
+  .documents-header .owner,
+  .documents-header .date {
+    display: none;
+  }
+
+  .info {
+    flex-direction: column;
+  }
+
+  .additional {
+    justify-content: space-between;
+  }
+
+  .documents-tree-node:not(.folder) .additional {
+    margin-top: var(5px);
+  }
+
+  .documents-tree-node:not(.folder) .document-options-button img {
+    transform: translateY(-5px);
+  }
+
+  .owner,
+  .date {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .date {
+    position: absolute;
+    right: 0;
+  }
+
+  .title {
+    max-width: 100%;
+  }
+}
+
+.documents-tree > .documents-nested-tree-node > button {
+  margin-left: var(--space);
+}
+
+.documents-tree-node-children > .documents-nested-tree-node {
+  padding-left: 0;
+  margin-left: var(--space);
+}
+
+.document-options-button {
+  background: none;
+  border: none;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  width: var(--options-button-width);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.5;
+}
+
+.document-options-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.document-options-button:disabled img {
+  display: none;
+}
+
+jlc-loading {
+  padding: 100px 0;
+}
+
+.message {
+  padding: calc(var(--space) / 2) var(--space);
+}

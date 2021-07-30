@@ -1,0 +1,23 @@
+:host {
+  --space: 20px;
+}
+
+.dialog {
+  padding: var(--space);
+  width: 500px;
+  min-width: 20rem;
+}
+
+.button-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-panel > button {
+  margin: 0 var(--space);
+}
+
+jlc-form-control-validation-message {
+  height: var(--space);
+}

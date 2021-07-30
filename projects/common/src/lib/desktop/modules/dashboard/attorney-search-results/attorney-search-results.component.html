@@ -1,0 +1,77 @@
+<div class="page-container">
+  <jlc-attorney-search
+    [place]="currentPlace$ | async"
+    [name]="(searchData$ | async)?.name"
+    [initialSpeciality]="currentSpeciality$ | async"
+    (search)="onSearch($event)"
+  >
+  </jlc-attorney-search>
+
+  <div *ngIf="attorneys$ | async as attorneys; else loading">
+    <span class="search-count">{{ attorneys.length }} Attorneys found</span>
+    <span *ngIf="currentState$ | async as state"> in {{ state }}</span>
+    <span *ngIf="currentSpeciality$ | async as currentSpeciality">
+      with "{{ currentSpeciality.title }}" expertise</span
+    >
+    <div class="search-results">
+      <div class="search-results-attorneys" #attorneyContainer>
+        <div
+          [class.selected-attorney]="
+            attorney.id === (selectedAttorney$ | async)?.id
+          "
+          class="attorney-info"
+          *ngFor="let attorney of attorneys; trackBy: trackByAttorneyId"
+          (click)="onAttorneyClick(attorney)"
+          [id]="'attorney-data-' + attorney.id"
+        >
+          <div class="attorney-avatar-container">
+            <img
+              class="attorney-avatar"
+              [src]="attorney.avatar || '/assets/profile-image.png'"
+              alt=""
+            />
+          </div>
+          <div class="attorney-info-data">
+            <div *ngIf="attorney.featured" class="label">
+              <span>Featured</span>
+            </div>
+            <div class="attorney-name">
+              <a [routerLink]="['/attorneys/profile', attorney.id]">{{
+                attorney.fullName
+              }}</a>
+            </div>
+            <div class="specialty-info">
+              {{ extractSpecialtyInfo(attorney) }}
+            </div>
+            <ng-template #extraInfo>
+              <div>{{ attorney.extraInfo }}</div>
+            </ng-template>
+            <div *ngIf="attorney.distance" class="attorney-distance">
+              {{ attorney.distance | number: "1.0-1" }} mi
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="search-results-map">
+        <agm-map
+          [latitude]="(mapLocation$ | async)?.latitude"
+          [longitude]="(mapLocation$ | async)?.longitude"
+          [styles]="mapStyles"
+        >
+          <agm-marker
+            *ngFor="let attorney of attorneys; trackBy: trackByAttorneyId"
+            iconUrl="/assets/icons/map-pin.svg"
+            [latitude]="attorney.firmLocation.latitude"
+            [longitude]="attorney.firmLocation.longitude"
+            (markerClick)="onAttorneyClick(attorney)"
+          >
+          </agm-marker>
+        </agm-map>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <jlc-loading></jlc-loading>
+</ng-template>

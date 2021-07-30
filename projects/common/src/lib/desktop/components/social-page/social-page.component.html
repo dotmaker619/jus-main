@@ -1,0 +1,14 @@
+<div class="container" *ngIf="pagination$ | async as pagination; else loading">
+  <jlc-social-posts-list [posts]="pagination.items" (more)="onShowMore($event)">
+  </jlc-social-posts-list>
+  <button
+    class="primary show-more"
+    (click)="onMorePosts()"
+    *ngIf="pagination.items.length < pagination.itemsCount"
+  >
+    More posts
+  </button>
+</div>
+<ng-template #loading>
+  <jlc-loading mode="fullsize"></jlc-loading>
+</ng-template>

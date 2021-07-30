@@ -1,0 +1,113 @@
+:host {
+  display: flex;
+  height: 100%;
+  max-height: 100%;
+
+  /* For calculate aside header height. */
+  --page-title-font-size: 1.5rem;
+  --page-title-line-height: 1.335;
+  --page-padding: 20px;
+  --tab-border-size: 1px;
+  --tab-height: 2.5rem;
+}
+
+.secondary-text {
+  color: var(--primary-placeholder-color);
+  font-size: 0.86rem;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.opportunities {
+  display: block;
+  flex: 1;
+  overflow: auto;
+  padding-right: 5px;
+}
+
+ul {
+  list-style: none;
+}
+
+main {
+  display: flex;
+  flex: 0 0 68.75%;
+  height: 100%;
+  max-width: 68.75%;
+  padding: 20px 0;
+}
+
+main ul {
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+aside {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  width: 31.25%;
+  background-color: var(--primary-background-color);
+}
+
+aside ul li {
+  display: inline-block;
+  background: var(--primary-light-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 19px;
+  color: var(--primary-font-color);
+  font-size: 0.86rem;
+  font-weight: bold;
+  padding: 2px 20px 4px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+h3 {
+  margin-bottom: 8px;
+}
+
+.aside-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  height: calc(
+    var(--page-title-font-size) * var(--page-title-line-height) +
+      (2 * var(--page-padding)) + 2 * var(--tab-border-size) + var(--tab-height)
+  );
+  padding: 16px 20px;
+}
+
+.aside-header span {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.aside-body {
+  flex: 1;
+  min-height: 1px;
+  padding: 25px 0 25px 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.pre-loader {
+  flex: 1;
+}

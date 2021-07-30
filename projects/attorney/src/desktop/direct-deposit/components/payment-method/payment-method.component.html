@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="payment-info">
+    <strong class="main"
+      >{{ paymentAccount.brand }} &#9679; ****{{ paymentAccount.last4 }}</strong
+    >
+    <p class="additional">
+      {{ paymentAccount.additionalInfo }}
+      <span class="italic not-verified">
+        {{ paymentAccount.isVerified ? "" : "(not verified)" }}
+      </span>
+    </p>
+  </div>
+  <div class="action-buttons">
+    <a title="Edit payment method" target="_blank" [href]="editLink">
+      <img class="btn-icon" src="assets/icons/edit_icon.svg" alt=""/>
+    </a>
+  </div>
+</div>

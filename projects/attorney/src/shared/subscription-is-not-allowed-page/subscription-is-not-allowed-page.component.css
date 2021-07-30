@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  padding: 25px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.action-link {
+  margin-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}

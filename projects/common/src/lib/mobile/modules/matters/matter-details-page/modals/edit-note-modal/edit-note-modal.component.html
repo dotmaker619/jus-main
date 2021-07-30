@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="onCancelClick()">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ modalTitle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    id="create-note-modal-form"
+    *ngIf="form$ | async as form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form)"
+  >
+    <label>
+      <span>Title*</span>
+      <input
+        placeholder="Type..."
+        [jlcApiValidation]="validationError$"
+        formControlName="title"
+      />
+      <jlc-form-control-validation-message
+        controlName="title"
+      ></jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Note*</span>
+      <textarea
+        placeholder="Type..."
+        rows="10"
+        [jlcApiValidation]="validationError$"
+        formControlName="text"
+      ></textarea>
+      <jlc-form-control-validation-message
+        controlName="text"
+      ></jlc-form-control-validation-message>
+    </label>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="button-panel">
+      <button class="primary" type="submit" form="create-note-modal-form">
+        Save
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

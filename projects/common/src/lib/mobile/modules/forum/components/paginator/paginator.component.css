@@ -1,0 +1,36 @@
+:host {
+  --space: 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(var(--space) / 2) var(--space);
+}
+
+button {
+  border: 1px solid var(--light-color);
+  background: none;
+  color: var(--secondary-color);
+  outline: none;
+}
+
+.pagination-button {
+  border-right: 0.5px solid var(--light-color);
+  border-left: 0.5px solid var(--light-color);
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:disabled {
+  color: var(--medium-color);
+}
+
+.current-page {
+  color: var(--secondary-color);
+}
+
+.separator {
+  margin: 0 calc(var(--space) / 1.5);
+}

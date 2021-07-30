@@ -1,0 +1,14 @@
+<div class="page-container">
+  <h1>
+    Account Information
+  </h1>
+  <hr />
+
+  <ng-container *ngIf="currentUser$ | async as user; else loading">
+    <jlc-account-info [user]="user"> </jlc-account-info>
+  </ng-container>
+
+  <ng-template #loading>
+    <jlc-loading mode="fullscreen"></jlc-loading>
+  </ng-template>
+</div>

@@ -1,0 +1,37 @@
+<header class="header">
+  <h2 class="title">
+    {{title}}
+  </h2>
+  <span class="badge">
+    {{matters.length}}
+  </span>
+</header>
+
+<ul
+  *ngIf="matters.length > 0"
+  class="list"
+>
+  <li
+    *ngFor="let matter of matters; trackBy: trackByMatterId"
+    class="item"
+  >
+    <a
+      class="link"
+      [routerLink]="['/matters', matter.id]"
+    >
+      <img class="icon" src="/assets/icons/file-circle-green.svg" />
+      <div class="content">
+        <div class="item-title">
+          [{{matter.code}}] {{matter.title}}
+        </div>
+        <span class="description">
+          {{matter.description}}
+        </span>
+      </div>
+    </a>
+  </li>
+</ul>
+
+<div *ngIf="matters.length === 0">
+  No Active Matters
+</div>

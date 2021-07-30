@@ -1,0 +1,94 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: 1280px;
+  width: 90%;
+  margin: auto;
+  height: 100%;
+  padding-bottom: 40px;
+}
+
+.page-header {
+  margin: 40px 0;
+}
+
+.chats-wrapper {
+  display: flex;
+  border: 1px solid var(--light-shade-color);
+  flex: 1;
+  min-height: 1px;
+}
+
+.current-chat-container {
+  flex: 1;
+  min-width: 1px;
+}
+
+.contacts {
+  width: 30%;
+  border-right: 1px solid var(--light-shade-color);
+  list-style-type: none;
+  overflow: auto;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  min-height: 66px;
+  border-bottom: 1px solid var(--light-shade-color);
+  padding: 13px 19px 16px 8px;
+  color: var(--primary-font-color);
+}
+
+.contact:hover {
+  text-decoration: none;
+}
+
+.contact.selected {
+  background: var(--primary-light-color);
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: 8px;
+  object-fit: cover;
+}
+
+.contact-info {
+  margin-left: 8px;
+  flex: 1;
+  min-width: 1px;
+}
+
+.contact-name {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.last-message-preview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.last-message-date {
+  color: var(--primary-placeholder-color);
+  font-style: italic;
+  font-size: 0.86rem;
+}
+
+.new-messages-indicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 100%;
+  background: var(--header-badge-background-color);
+}
+
+.new-messages-indicator.no-new-messages {
+  visibility: hidden;
+}

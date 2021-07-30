@@ -1,0 +1,56 @@
+<jlc-login-page-container class="page-container">
+  <div class="auth-container">
+    <div class="column">
+      <jlc-logo class="logo"></jlc-logo>
+    </div>
+    <div>
+      <form [formGroup]="form" (ngSubmit)="onFormSubmitted()">
+        <div>
+          <label>
+            <div class="text-bold">Email*</div>
+            <input
+              type="text"
+              autocomplete="email"
+              autocapitalize="off"
+              inputmode="email"
+              formControlName="email"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            <div class="text-bold">Password*</div>
+            <input
+              type="password"
+              formControlName="password"
+              autocomplete="current-password"
+            />
+          </label>
+        </div>
+        <div class="error-container" *ngIf="isFailed$ | async">
+          <p>Wrong password. Try again or click Forgot password to reset it.</p>
+        </div>
+        <div>
+          <button class="primary">Login</button>
+        </div>
+        <div class="link-container">
+          <a routerLink="/auth/password-reset">Forgot Password?</a>
+        </div>
+      </form>
+      <hr />
+      <div class="text-center">
+        Don't have an account?
+      </div>
+      <div>
+        <a routerLink="/auth/register" class="secondary">Register</a>
+      </div>
+    </div>
+
+    <div class="policy-and-terms">
+      <a routerLink="/privacy-policy">Privacy Policy</a>
+      <a routerLink="/terms-of-use">Terms of Use</a>
+    </div>
+  </div>
+</jlc-login-page-container>
+
+<jlc-loading *ngIf="isSubmitting$ | async" mode="fullscreen"> </jlc-loading>

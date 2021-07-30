@@ -1,0 +1,47 @@
+<section class="invoice content" *ngIf="invoice">
+  <header>
+    <h2 class="title">
+      {{ getInvoiceTitle(invoice) }}
+    </h2>
+    <jlc-badge class="paid-badge" *ngIf="invoice.isPaid">
+      Paid
+    </jlc-badge>
+  </header>
+
+  <div class="invoice-data">
+    <div>
+      <b>Attorney</b>
+      <span class="attorney-name">
+        {{ invoice.matter.attorney.fullName }}
+      </span>
+    </div>
+    <div>
+      <b>Start Date</b>
+      <span>{{ invoice.periodStart | date: "shortDate" }}</span>
+    </div>
+    <div>
+      <b>Fee Structure</b>
+      <span>
+        {{ RateType.toReadable(invoice.matter.rateType) }}
+      </span>
+    </div>
+    <div>
+      <b>Rate</b>
+      <span>
+        {{ invoice.matter.rate | currency: "USD":"symbol":"1.0-2" }}
+      </span>
+    </div>
+    <ng-container *ngIf="billings">
+      <div>
+        <b>Total Time Spent</b>
+        <span>{{ billings.totalTime }}</span>
+      </div>
+      <div>
+        <b>Total Fees Earned</b>
+        <span>
+          {{ billings.totalFees || 0 | currency: "USD":"symbol":"1.2-2" }}
+        </span>
+      </div>
+    </ng-container>
+  </div>
+</section>

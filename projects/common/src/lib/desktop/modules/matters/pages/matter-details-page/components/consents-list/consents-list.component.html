@@ -1,0 +1,50 @@
+<ul *ngIf="consents; else loading">
+  <ng-container *ngIf="consents.length > 0; else noItemsMessage">
+    <li *ngFor="let consent of consents; trackBy: trackById">
+      <div class="icon-container">
+        <img src="assets/icons/voice_consent.svg" />
+      </div>
+      <span class="title ellipsis">
+        {{ consent.name }}
+      </span>
+      <button
+        class="focusable options-button"
+        title="Open consent options"
+        (click)="onConsentClick(consent)"
+        [matMenuTriggerFor]="nodeMenu"
+      >
+        <img src="/assets/icons/more_icon.svg" alt="" />
+      </button>
+    </li>
+  </ng-container>
+</ul>
+
+<!-- Node options menu. -->
+<mat-menu #nodeMenu="matMenu">
+  <ul class="mat-menu-options-list" *ngIf="selectedConsent$ | async as consent">
+    <li>
+      <button (click)="onDownloadClick(consent)">
+        Download
+      </button>
+    </li>
+    <ng-container *ngIf="this.editable">
+      <li>
+        <button (click)="onDeleteClick(consent)">
+          Delete
+        </button>
+      </li>
+    </ng-container>
+  </ul>
+</mat-menu>
+
+<ng-template #loading>
+  <jlc-loading></jlc-loading>
+</ng-template>
+
+<ng-template #noItemsMessage>
+  <div class="message">
+    No consents
+  </div>
+</ng-template>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

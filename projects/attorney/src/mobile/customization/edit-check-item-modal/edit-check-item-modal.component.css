@@ -1,0 +1,15 @@
+:host {
+  --space: 10px;
+}
+
+ion-content,
+ion-footer ion-toolbar {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+  --padding-top: var(--space);
+  --padding-bottom: var(--space);
+}
+
+button[type="submit"] {
+  width: 100%;
+}

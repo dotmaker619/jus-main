@@ -1,0 +1,20 @@
+<div class="page-container">
+  <div class="title">
+    Attorneys I Follow
+  </div>
+  <div>
+    <div *ngIf="(attorneys$ | async)?.length === 0">
+      <p>No Followed Attorneys</p>
+    </div>
+    <div *ngFor="let attorney of attorneys$ | async as attorneys">
+      <jlc-followed-attorney-detail
+        [attorney]="attorney"
+        (unfollowEmitter)="unfollowAttorneyHandler(attorney.id)"
+      >
+      </jlc-followed-attorney-detail>
+    </div>
+  </div>
+</div>
+<div [hidden]="!(loading$ | async)">
+  <jlc-loading [mode]="'fullsize'"> </jlc-loading>
+</div>

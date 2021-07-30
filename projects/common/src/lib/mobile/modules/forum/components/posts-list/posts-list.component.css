@@ -1,0 +1,7 @@
+:host {
+  --space: 20px;
+}
+
+.post {
+  margin-bottom: var(--space);
+}

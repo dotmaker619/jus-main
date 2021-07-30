@@ -1,0 +1,46 @@
+:host {
+  --border-color: var(--light-shade-color);
+  --title-color: var(--primary-font-color);
+  --space: 10px;
+
+  display: block;
+}
+
+header {
+  padding: calc(var(--space) * 2) var(--space);
+}
+
+footer,
+article {
+  padding: var(--space);
+}
+
+h3 {
+  color: var(--title-color);
+}
+
+.skeleton-text {
+  width: 50%;
+}
+
+.description {
+  font-style: italic;
+  color: var(--medium-color);
+}
+
+article table {
+  width: 100%;
+}
+
+article table td {
+  padding: calc(var(--space) / 2) 0;
+}
+
+.cell-header {
+  font-weight: bold;
+}
+
+.cell-header,
+.cell-content {
+  color: var(--primary-font-color);
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 63.1 (101010) - https://sketch.com -->
+    <title>217976E1-89AA-4476-AF96-D904E5C70BA6</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="98.902027%" id="linearGradient-1">
+            <stop stop-color="#569FC3" offset="0%"></stop>
+            <stop stop-color="#2D678A" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Element-Sheet" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-90.000000, -1175.000000)" id="Buttons/btn-add-client">
+            <g transform="translate(90.000000, 1175.000000)">
+                <g id="BTN/Add">
+                    <rect id="Rectangle" fill="url(#linearGradient-1)" x="0" y="0" width="50" height="50" rx="25"></rect>
+                    <g id="Group-6" transform="translate(7.000000, 10.000000)" fill="#FFFFFF">
+                        <path d="M23.0204379,19.3438388 C26.5180766,19.3438388 29.2267509,22.0522983 29.2267509,25.4358093 L29.2267509,26 L7,26 L7,25.4358093 C7,22.0506648 9.70845944,19.3438388 13.2063131,19.3438388 L23.0204379,19.3438388 Z M18.1677527,4 C21.4404029,4 24.2597231,6.8209537 24.2597231,10.2063131 C24.2597231,13.5916724 21.4387694,16.2982835 18.1677527,16.2982835 C14.7826083,16.2982835 11.9614396,13.5898241 11.9614396,10.2063131 C11.9614396,6.82116863 14.7823933,4 18.1677527,4 Z" id="Combined-Shape"></path>
+                        <text id="+" font-family="ProximaNova-Bold, Proxima Nova" font-size="13" font-weight="bold">
+                            <tspan x="1.724" y="12">+ </tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

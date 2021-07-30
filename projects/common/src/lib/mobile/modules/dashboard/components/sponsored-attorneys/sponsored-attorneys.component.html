@@ -1,0 +1,48 @@
+<ng-container *ngIf="attorneys$ | async as attorneys">
+  <ng-container *ngIf="attorneys.length > 0">
+    <header class="header">
+      <h2 class="title">Sponsored Attorneys</h2>
+
+      <div class="controls" *ngIf="attorneys.length > 1">
+        <button type="button" class="to-left" (click)="swipeToLeft()"></button>
+        <button
+          type="button"
+          class="to-right"
+          (click)="swipeToRight()"
+        ></button>
+      </div>
+    </header>
+
+    <div class="attorneys">
+      <ion-slides #slider [options]="slideOpts">
+        <ion-slide *ngFor="let attorney of attorneys; trackBy: trackById">
+          <div class="attorney-el-wrapper">
+            <a
+              [routerLink]="['/attorneys/profile/', attorney.id]"
+              class="attorney"
+              [style.backgroundImage]="
+                attorney.avatar && 'url(' + attorney.avatar + ')'
+              "
+            >
+              <div class="info">
+                <span class="name">{{ attorney.fullName }}</span>
+                <div class="location">
+                  {{ attorney?.firmLocationCity }},
+                  {{ attorney?.firmLocationState }}
+                </div>
+              </div>
+            </a>
+            <a
+              *ngIf="attorney.sponsorLink"
+              [attr.href]="attorney.sponsorLink"
+              target="_system"
+              class="sponsor-link"
+            >
+              Site
+            </a>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </ng-container>
+</ng-container>

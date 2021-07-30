@@ -1,0 +1,38 @@
+:host {
+  --space: 10px;
+}
+
+ion-content {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+  --padding-top: var(--space);
+  --padding-bottom: var(--space);
+}
+
+form {
+  margin-bottom: var(--space);
+}
+
+form > * {
+  width: 100%;
+  background-color: var(--primary-background-color);
+}
+
+ion-list {
+  background: none;
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: var(--space);
+}
+
+.message {
+  text-align: center;
+}
+
+ion-icon {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,152 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/matters"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <span *ngIf="matter$ | async as matter; else skeletonTextTemplate">
+        [{{ matter.code }}]
+      </span>
+    </ion-title>
+    <ion-buttons slot="end" *ngIf="matter$ | async as matter">
+      <ion-button
+        *ngIf="isAble(permissions.EditJobs) | async"
+        (click)="onTimeBillClick()"
+      >
+        <ion-icon size="small" slot="icon-only" name="time"></ion-icon>
+      </ion-button>
+      <jlc-matter-action-button
+        (revokeMatter)="revokeMatter()"
+        (closeMatter)="closeMatter()"
+        (addNote)="addNote()"
+        (uploadFile)="uploadFile()"
+        (addFolder)="addFolder()"
+        (reopenMatter)="reopenMatter()"
+        (recordConsent)="recordConsent()"
+        (referMatter)="referMatter()"
+        (addSupports)="addSupports()"
+        [matter]="matter$ | async"
+        [permissions]="curPermissions$ | async"
+      >
+      </jlc-matter-action-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="content">
+  <jlc-matter-detail-card [matter]="matter$ | async" class="matter-card">
+    <ng-container *ngIf="isAble(permissions.EditStage) | async">
+      <form
+        class="control-form"
+        *ngIf="matterForm$ | async as form"
+        [formGroup]="form"
+      >
+        <select formControlName="stage">
+          <option [ngValue]="null" disabled>- Select stage -</option>
+          <option
+            *ngFor="let stage of stageOptions$ | async; trackBy: trackById"
+            [ngValue]="stage.id"
+          >
+            {{ stage.title }}
+          </option>
+        </select>
+      </form>
+    </ng-container>
+  </jlc-matter-detail-card>
+  <ng-container *ngIf="shouldDisplayContactButtons$ | async">
+    <div class="contact-button-panel" *ngIf="matter$ | async as matter">
+      <button
+        *ngIf="isAble(permissions.SendPersonalMessage) | async"
+        (click)="openNewMessageModal(matter)"
+      >
+        <ion-icon src="/assets/icons/matter_message_icon.svg"></ion-icon>
+        Message
+      </button>
+      <button
+        (click)="onCallClicked(matter)"
+        *ngIf="isAble(permissions.InitiateCall) | async"
+      >
+        <ion-icon src="/assets/icons/phone_icon.svg"></ion-icon>
+        Call
+      </button>
+    </div>
+  </ng-container>
+  <jlc-card class="card" *ngIf="matter$ | async as matter">
+    <jlc-tab-bar (tabChange)="onTabChange($event)">
+      <jlc-tab-button
+        [tab]="tabs.Documents"
+        [showBadge]="true"
+        [count]="documentsCount$ | async"
+      >
+        {{ tabs.Documents }}
+      </jlc-tab-button>
+      <jlc-tab-button
+        [tab]="tabs.Notes"
+        [showBadge]="true"
+        [count]="(notes$ | async)?.itemsCount"
+      >
+        {{ tabs.Notes }}
+      </jlc-tab-button>
+      <jlc-tab-button
+        [tab]="tabs.Consents"
+        [showBadge]="true"
+        [count]="(consents$ | async)?.itemsCount"
+      >
+        {{ tabs.Consents }}
+      </jlc-tab-button>
+    </jlc-tab-bar>
+    <div>
+      <jlc-documents-tree
+        class="documents-tree"
+        [hidden]="selectedTab !== tabs.Documents"
+        [documents]="documents$ | async"
+        (documentAction)="onNodeAction($event)"
+      ></jlc-documents-tree>
+      <jlc-notes-list
+        [hidden]="selectedTab !== tabs.Notes"
+        (notesLimitChange)="onNotesLimitChange($event)"
+        [notes]="notes$ | async"
+        [editable]="isAble(permissions.EditNotes) | async"
+      ></jlc-notes-list>
+      <jlc-consents-list
+        [hidden]="selectedTab !== tabs.Consents"
+        [consents]="(consents$ | async)?.items"
+        [editable]="isAble(permissions.EditConsents) | async"
+      >
+      </jlc-consents-list>
+    </div>
+  </jlc-card>
+
+  <jlc-header-with-icon class="header" src="/assets/icons/clock_icon.svg">
+    BILLABLE TIME
+  </jlc-header-with-icon>
+  <jlc-billable-time-card
+    class="card"
+    [billings]="timeBillings$ | async"
+    [isLoggedByColumnDisplayed]="true"
+    [editable]="isAble(permissions.EditJobs) | async"
+    (periodChange)="onBillingsPeriodChange($event)"
+    (billingClick)="onBillingClick($event)"
+  >
+  </jlc-billable-time-card>
+
+  <jlc-header-with-icon
+    class="header"
+    src="/assets/icons/matter_message_icon.svg"
+  >
+    MESSAGES
+  </jlc-header-with-icon>
+  <jlc-matter-messages-card
+    class="card"
+    [messages]="matterTopics$ | async"
+  ></jlc-matter-messages-card>
+</ion-content>
+
+<ng-template #skeletonTextTemplate>
+  <span>
+    <ion-skeleton-text animated class="skeleton"></ion-skeleton-text>
+  </span>
+</ng-template>
+
+<ng-container *ngIf="isLoading$ | async">
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-container>

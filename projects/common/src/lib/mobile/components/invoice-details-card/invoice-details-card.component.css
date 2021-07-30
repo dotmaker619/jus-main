@@ -1,0 +1,68 @@
+:host {
+  --space: 10px;
+
+  display: block;
+  color: var(--primary-font-color);
+}
+
+/* Card header */
+
+.header {
+  padding: calc(var(--space) * 2) var(--space);
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+.paid-badge {
+  background-color: var(--success-shade-color);
+  color: var(--success-contrast-color);
+}
+
+/* Card body details  */
+
+.invoice-details {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: var(--space);
+  padding: var(--space);
+}
+
+.user-info {
+  grid-column: span 3;
+}
+
+.start-date {
+  grid-column: span 2;
+}
+
+.title {
+  font-weight: bold;
+}
+
+/* Card footer */
+
+.footer {
+  color: var(--medium-color);
+  padding: var(--space);
+  font-style: italic;
+}
+
+/* Skeleton text */
+
+.header ion-skeleton-text {
+  width: 30%;
+}
+
+.title ion-skeleton-text {
+  width: 5rem;
+}
+
+.footer ion-skeleton-text {
+  width: 70%;
+}
+
+ion-skeleton-text {
+  width: 50%;
+  display: block;
+}

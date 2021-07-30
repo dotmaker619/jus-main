@@ -1,0 +1,12 @@
+@import "../auth.css";
+
+.policy-and-terms {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.page-container {
+  padding-bottom: 25px;
+}

@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="onCancelClicked()">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    *ngIf="form$ | async as form; else loading"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form)"
+    class="form"
+    id="edit-invoice-modal-form"
+  >
+    <label>
+      <span>Title*</span>
+      <input
+        formControlName="title"
+        [jlcApiValidation]="validationError$"
+        placeholder="Type..."
+      />
+      <jlc-form-control-validation-message
+        controlName="title"
+      ></jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Matter*</span>
+      <select formControlName="matter" [jlcApiValidation]="validationError$">
+        <option [ngValue]="null">- Select matter -</option>
+        <option
+          *ngFor="let matter of matterOptions$ | async"
+          [ngValue]="matter.id"
+        >
+          {{ matter.title }}
+        </option>
+      </select>
+      <jlc-form-control-validation-message
+        controlName="matter"
+      ></jlc-form-control-validation-message>
+    </label>
+    <div class="row" formGroupName="period">
+      <label>
+        <span>Period Start Date*</span>
+        <jlc-date-time-picker
+          formControlName="start"
+          mode="date"
+          [jlcApiValidation]="validationError$"
+          [datePickerOptions]="datePickerOptions"
+        ></jlc-date-time-picker>
+        <jlc-form-control-validation-message controlName="start">
+        </jlc-form-control-validation-message>
+      </label>
+      <label>
+        <span>Period End Date*</span>
+        <jlc-date-time-picker
+          formControlName="end"
+          mode="date"
+          [jlcApiValidation]="validationError$"
+          [datePickerOptions]="datePickerOptions"
+        ></jlc-date-time-picker>
+        <jlc-form-control-validation-message controlName="end">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+    <jlc-form-control-validation-message
+      class="period-error"
+      controlName="period"
+    >
+    </jlc-form-control-validation-message>
+    <label>
+      <span>Message</span>
+      <textarea
+        placeholder="Type..."
+        rows="10"
+        formControlName="note"
+        [jlcApiValidation]="validationError$"
+      ></textarea>
+      <jlc-form-control-validation-message controlName="note">
+      </jlc-form-control-validation-message>
+    </label>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="button-panel">
+      <button class="primary" type="submit" form="edit-invoice-modal-form">
+        Save
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<ng-container
+  *ngIf="isBusy$ | async"
+  [ngTemplateOutlet]="loading"
+></ng-container>
+
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

@@ -1,0 +1,42 @@
+<h1>Edit Subscription</h1>
+
+<hr />
+
+<form *ngIf="form$ | async as form; else loading" [formGroup]="form" (ngSubmit)="onFormSubmitted(form)">
+  <h2>Select a Plan</h2>
+
+  <label class="payment-method" *ngFor="let paymentPlan of availablePaymentPlans$ | async; trackBy: trackPlanById">
+    <span class="control">
+      <input type="radio" formControlName="paymentPlan" [value]="paymentPlan.id" />
+    </span>
+    <span class="plan-info">
+      <span class="plan-title">{{ paymentPlan.name | titlecase }}</span>
+      <span class="plan-details">
+        <span class="plan-price">
+          {{ paymentPlan.amountPerDay | currency: paymentPlan.currency }} / day
+        </span>
+        <span class="plan-description">
+          {{ paymentPlan.description }}
+        </span>
+      </span>
+    </span>
+  </label>
+  <jlc-form-control-validation-message
+    controlName="paymentPlan">
+  </jlc-form-control-validation-message>
+
+  <div class="controls">
+    <a class="secondary" routerLink="../">Cancel</a>
+    <button
+      type="submit"
+      class="primary"
+      [disabled]="isPlanTheSame$ | async"
+    >
+      Save
+    </button>
+  </div>
+</form>
+
+<ng-template #loading [ngIf]="isSubmitting$ | async">
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

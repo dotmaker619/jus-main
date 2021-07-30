@@ -1,0 +1,28 @@
+<div class="attorneys">
+  <jlc-carousel
+    [collection]="featuredAttorneys$ | async"
+    [groupSize]="4"
+    [itemTemplate]="listItem"
+    [trackFn]="trackAttorney"
+    header="Featured Attorneys"
+  ></jlc-carousel>
+</div>
+
+<ng-template #listItem let-attorney>
+  <a
+    class="attorney"
+    [routerLink]="['/attorneys/profile', attorney.id]"
+    [style.backgroundImage]="obtainBackground(attorney)"
+  >
+    <div class="label"><span>Featured</span></div>
+    <div class="info">
+      <span class="name">
+        {{ attorney.fullName }}
+      </span>
+      <div class="location">
+        {{ attorney?.firmLocationCity }},
+        {{ attorney?.firmLocationState }}
+      </div>
+    </div>
+  </a>
+</ng-template>

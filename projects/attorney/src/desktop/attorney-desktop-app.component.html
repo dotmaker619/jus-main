@@ -1,0 +1,8 @@
+<div class="app-container">
+  <jlat-header [navigationLinks]="navigationLinks"></jlat-header>
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

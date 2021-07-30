@@ -1,0 +1,72 @@
+.form {
+  border-top: 1px solid var(--light-shade-color);
+  display: flex;
+}
+
+.form:focus-within {
+  box-shadow: var(--focus-shadow);
+}
+
+.input:focus {
+  box-shadow: none;
+}
+
+.message-label {
+  flex: 1;
+}
+
+.message-label input.input {
+  border: 0;
+  height: 60px;
+  outline: transparent;
+  background: transparent;
+}
+
+.message-label input.input::placeholder {
+  font-size: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Temporary styles. */
+.send {
+  margin-right: 10px;
+  color: var(--primary-color);
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  outline: transparent;
+  cursor: pointer;
+}
+
+.send.attach {
+  color: var(--medium-color);
+}
+
+.send:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.icon {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.loading {
+  animation: spin 1s infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateZ(0turn);
+  }
+
+  100% {
+    transform: rotateZ(1turn);
+  }
+}

@@ -1,0 +1,63 @@
+:host {
+  --space: 10px;
+
+  --message-color: var(--medium-color);
+  --header-font-color: var(--primary-font-color);
+  --font-size: 1rem;
+
+  display: block;
+  width: 100%;
+  font-size: var(--font-size);
+  /* To avoid truncation letters with italic style. */
+  padding-right: 2px;
+}
+
+.avatar {
+  width: 2.57rem;
+  height: 2.57rem;
+  background: var(--primary-active-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.row.space {
+  justify-content: space-between;
+}
+
+.header {
+  flex: 1;
+  color: var(--header-font-color);
+  margin-left: var(--space);
+}
+
+.client-email,
+.sent {
+  color: var(--primary-placeholder-color);
+  font-size: 0.86rem;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.client-email {
+  max-width: 200px;
+}
+
+.resend-btn {
+  margin: 0;
+  font-size: 0.86rem;
+  height: inherit;
+  background: transparent;
+  color: var(--secondary-color);
+  border: none;
+  font-weight: bold;
+  padding: 0;
+}

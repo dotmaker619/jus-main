@@ -1,0 +1,19 @@
+<button
+  [disabled]="currentPage === 0"
+  (click)="onClickPrev()"
+  title="Show previous page"
+>
+  Prev
+</button>
+<p class="page">
+  <span class="current-page">{{ currentPage + 1 }}</span>
+  <span class="separator">of</span>
+  <span>{{ pagesCount }}</span>
+</p>
+<button
+  [disabled]="isLastPage(currentPage)"
+  (click)="onClickNext()"
+  title="Show next page"
+>
+  Next
+</button>

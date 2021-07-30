@@ -1,0 +1,30 @@
+<div class="category-item" *ngIf="category; else skeleton">
+  <div class="logo">
+    <img [src]="category.icon || iconFallbackUrl" />
+  </div>
+  <div class="info">
+    <span class="title">
+      {{ category.title }}
+    </span>
+    <p class="description">
+      {{ category.description }}
+    </p>
+  </div>
+</div>
+
+<ng-template #skeleton>
+  <div class="category-item skeleton">
+    <div class="logo">
+      <ion-skeleton-text></ion-skeleton-text>
+    </div>
+    <div class="info">
+      <div class="title">
+        <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+      </div>
+      <div class="description">
+        <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+</ng-template>

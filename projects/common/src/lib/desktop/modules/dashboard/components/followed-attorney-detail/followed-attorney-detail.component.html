@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="profile-data" [routerLink]="['/attorneys/profile', attorney.id]">
+    <img class="profile-image" [src]="attorney.avatar || avatarFallbackUrl" />
+    <div>
+      <p class="profile-name">
+        {{ attorney.fullName }}
+      </p>
+    </div>
+  </div>
+  <div>
+    <button class="unfollow" (click)="onUnfollowClick()">
+      Unfollow
+    </button>
+  </div>
+</div>

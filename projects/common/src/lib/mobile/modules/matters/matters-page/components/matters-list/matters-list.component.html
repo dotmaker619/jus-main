@@ -1,0 +1,16 @@
+<ion-content>
+  <ion-list *ngIf="matters$ | async as matters; else loading">
+    <ion-item class="message" *ngIf="matters.length === 0">
+      <ion-label>No matters</ion-label>
+    </ion-item>
+    <jlc-matter-item
+      *ngFor="let matter of matters; trackBy: trackMatterItem"
+      [routerLink]="['/matters', matter.id]"
+      [matter]="matter"
+    ></jlc-matter-item>
+  </ion-list>
+</ion-content>
+
+<ng-template #loading>
+  <jlc-skeleton-list></jlc-skeleton-list>
+</ng-template>

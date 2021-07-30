@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCloseClick()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <agm-map
+    *ngIf="mapLocation$ | async as coords"
+    [latitude]="coords.latitude"
+    [longitude]="coords.longitude"
+  >
+    <agm-marker
+      *ngFor="let coords of coordsArray$ | async"
+      [latitude]="coords.latitude"
+      [longitude]="coords.longitude"
+    ></agm-marker>
+  </agm-map>
+</ion-content>

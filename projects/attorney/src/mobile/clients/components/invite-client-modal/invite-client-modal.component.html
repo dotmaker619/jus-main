@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="onCancelClick()">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Invite New Client
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    id="invite-client-form"
+    *ngIf="form$ | async as form"
+    [formGroup]="form"
+    (ngSubmit)="onFormSubmitted(form)"
+  >
+    <div class="row">
+      <label class="radio-label">
+        <input
+          type="radio"
+          [value]="clientTypeOptions.Individual"
+          formControlName="clientType"
+          [jlcApiValidation]="validationError$"
+        />
+        <span>Individual</span>
+      </label>
+      <label class="radio-label">
+        <input
+          type="radio"
+          [value]="clientTypeOptions.Organization"
+          formControlName="clientType"
+        />
+        <span>Organization</span>
+      </label>
+    </div>
+    <!-- Organization name. Hidden for Individual client.-->
+    <label *ngIf="form.controls.organizationName" [@enterFormFieldAnimation]>
+      <span>Organization Name*</span>
+      <input
+        type="text"
+        formControlName="organizationName"
+        [jlcApiValidation]="validationError$"
+      />
+      <jlc-form-control-validation-message controlName="organizationName">
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>First name*</span>
+      <input
+        type="text"
+        formControlName="firstName"
+        autocomplete="name"
+        [jlcApiValidation]="validationError$ | async"
+        placeholder="Type..."
+      />
+      <jlc-form-control-validation-message controlName="firstName">
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Last name*</span>
+      <input
+        type="text"
+        formControlName="lastName"
+        autocomplete="additional-name"
+        [jlcApiValidation]="validationError$ | async"
+        placeholder="Type..."
+      />
+      <jlc-form-control-validation-message controlName="lastName">
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Email*</span>
+      <input
+        type="email"
+        formControlName="email"
+        autocomplete="email"
+        [jlcApiValidation]="validationError$ | async"
+        placeholder="Type..."
+      />
+      <jlc-form-control-validation-message controlName="email">
+      </jlc-form-control-validation-message>
+    </label>
+    <label>
+      <span>Message*</span>
+      <textarea
+        [jlcApiValidation]="validationError$ | async"
+        formControlName="message"
+        rows="10"
+      ></textarea>
+      <jlc-form-control-validation-message controlName="message">
+      </jlc-form-control-validation-message>
+    </label>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button class="primary submit-btn" form="invite-client-form">Submit</button>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

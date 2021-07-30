@@ -1,0 +1,21 @@
+<div class="container" *ngIf="post$ | async as post; else loading">
+  <jlc-post-details [post]="mapSocialPostToPostData(post)"> </jlc-post-details>
+  <div class="author-info">
+    <a [routerLink]="['/attorneys', 'profile', post.author]">
+      <div *ngIf="post.authorData.avatar" class="author-avatar">
+        <img [src]="post.authorData.avatar" />
+      </div>
+      <div class="author">
+        <h2 class="name">{{ post.authorData.fullName }}</h2>
+        <p class="specialties italic ellipsis">
+          {{ post.authorData.specialitiesStr }} |
+          {{ post.authorData.firmState }}, {{ post.authorData.firmCity }}
+        </p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

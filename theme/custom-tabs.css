@@ -1,0 +1,115 @@
+/** overriding of mat-tabs. */
+.mat-tab-body-wrapper {
+  height: 100%;
+}
+
+.mat-tab-header-pagination {
+  /* Reset z-index for pagination buttons. */
+  z-index: 0 !important;
+}
+
+.mat-tab-labels {
+  --tab-color: var(--light-color);
+  --tab-triangle-width: 20px;
+  --tab-height: 2.5rem;
+  --tab-width: 10rem;
+  --tab-border-color: var(--light-shade-color);
+  --tab-border-size: 1px;
+
+  height: calc(var(--tab-height) + calc(var(--tab-border-size) * 2));
+  align-items: center;
+  padding-left: calc(var(--tab-border-size) * 2);
+}
+
+.mat-tab-label-content {
+  width: 100% !important;
+}
+
+.mat-tab-label {
+  overflow: visible !important;
+  font-weight: bold !important;
+  user-select: none !important;
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  border-top-left-radius: 2px !important;
+  border-top-right-radius: 1px !important;
+  min-width: calc(var(--tab-width) - var(--tab-triangle-width)) !important;
+  width: auto;
+  height: var(--tab-height) !important;
+  border: none !important;
+  padding: 0.5rem 1rem 0.5rem 1rem !important;
+  background: var(--tab-color) !important;
+  box-shadow: 0 0 0 var(--tab-border-size) var(--tab-border-color),
+    0 -1px 3px 0 var(--tab-border-color) !important;
+  justify-content: space-between !important;
+  position: relative !important;
+  margin-right: calc(
+    var(--tab-triangle-width) + var(--tab-border-size)
+  ) !important;
+}
+
+.mat-tab-label::after {
+  position: absolute !important;
+  content: " " !important;
+  width: var(--tab-triangle-width) !important;
+  left: 100% !important;
+  bottom: 0 !important;
+  border-top: var(--tab-height) solid transparent !important;
+  border-left: var(--tab-triangle-width) solid var(--tab-color) !important;
+  filter: drop-shadow(
+    var(--tab-border-size) var(--tab-border-size) 0 var(--tab-border-color)
+  ) !important;
+}
+
+.mat-tab-label-active {
+  background: white !important;
+  color: var(--primary-shade-color) !important;
+  box-shadow: 1px 4px 0 1px white,
+    0 0 0 var(--tab-border-size) var(--tab-border-color),
+    0 -1px 3px 0 var(--tab-border-color) !important;
+}
+
+.mat-tab-label-active::after {
+  border-left-color: white !important;
+  filter: drop-shadow(
+    var(--tab-border-size) 0 0 var(--tab-border-color)
+  ) !important;
+}
+
+.mat-tab-label-focused::after,
+.mat-tab-label-active.mat-tab-label-focused::after {
+  filter: drop-shadow(
+    calc(var(--tab-border-size) * 2) calc(var(--tab-border-size) * 2) 0
+      var(--primary-color)
+  );
+}
+
+.mat-tab-labels::after {
+  content: " ";
+  flex-grow: 1;
+  box-shadow: 1px 1px 0 1px var(--tab-border-color);
+  height: var(--tab-height);
+  opacity: 0.6;
+}
+
+mat-ink-bar {
+  visibility: hidden !important;
+}
+
+mat-tab-header {
+  border: none !important;
+  position: relative;
+  padding-left: 40px;
+}
+
+.mat-tab-header:before {
+  content: "";
+  position: absolute;
+  width: 42px;
+  bottom: 0;
+  left: 0px;
+  border-bottom: 1px solid #e6e7e8;
+}
+
+/** End of mat-tab styles */

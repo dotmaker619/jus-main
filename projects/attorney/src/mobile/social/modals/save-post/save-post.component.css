@@ -1,0 +1,30 @@
+:host {
+  --space: 16px;
+}
+
+ion-content {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+  --padding-top: var(--space);
+  --padding-bottom: var(--space);
+}
+
+form > *:not(:last-child) {
+  display: block;
+  margin-bottom: var(--space);
+}
+
+textarea {
+  resize: none;
+}
+
+ion-footer button {
+  width: 100%;
+}
+
+ion-footer ion-toolbar {
+  --padding-bottom: calc(var(--space) * 0.5);
+  --padding-top: calc(var(--space) * 0.5);
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+}

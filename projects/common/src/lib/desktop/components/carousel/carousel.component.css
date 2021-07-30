@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  margin: 32px 0 0 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header > h2 {
+  color: var(--page-title-color);
+  font-size: 2.428rem;
+  font-weight: normal;
+  letter-spacing: -0.033rem;
+  line-height: 1.323;
+}
+
+.loading {
+  padding: 100px 0;
+}
+
+.to-left,
+.to-right {
+  border: none;
+  background: none;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.to-left::before,
+.to-right::before {
+  content: "";
+  display: block;
+  background: url(/assets/icons/arrow-right_icon.svg) 50% 50% no-repeat;
+  background-size: 19px 19px;
+  filter: brightness(0);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.to-left {
+  transform: rotateZ(180deg);
+  margin-right: 15px;
+}
+
+.items-list {
+  display: grid;
+  grid-template-columns: repeat(var(--group-size, 1), 1fr);
+  column-gap: 15px;
+  margin-top: 30px;
+}

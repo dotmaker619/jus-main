@@ -1,0 +1,34 @@
+<div class="section-header">
+  <h2>{{ tab.title }}</h2>
+
+  <a class="primary" (click)="onNewClicked()">{{ tab.buttonTitle }}</a>
+</div>
+
+<ng-container *ngIf="tab.list$ | async as items; else loading">
+  <ul *ngIf="items.length; else noItems">
+    <li *ngFor="let item of items; trackBy: trackById">
+      <ng-template [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="{item: item}"></ng-template>
+      <div class="buttons" title="Edit">
+        <button class="button-edit" (click)="onEditClicked(item)">
+          <img src="/assets/icons/edit_icon.svg" alt="Edit icon"/>
+        </button>
+        <button class="button-delete" type="button" title="Delete"
+          (click)="onDeleteClicked(item)"
+        >
+          <img src="/assets/delete_icon.svg" alt="Delete icon"/>
+        </button>
+      </div>
+    </li>
+  </ul>
+  <ng-template #noItems>
+    <span *ngIf="items.length === 0; else error">No {{ tab.id }}s.</span>
+  </ng-template>
+  <ng-template #error>
+    <span *ngIf="items.message">{{ items.message }}</span>
+    <span *ngIf="!items.message">Getting list failed.</span>
+  </ng-template>
+</ng-container>
+<!-- Preloader. -->
+<ng-template #loading>
+  <jlc-loading></jlc-loading>
+</ng-template>

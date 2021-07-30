@@ -1,0 +1,12 @@
+ion-list {
+  padding: 0;
+}
+
+.message {
+  --padding-start: 0;
+  --padding-end: 0;
+  text-align: center;
+  font-style: italic;
+  color: var(--medium-color);
+  font-size: 0.9rem;
+}

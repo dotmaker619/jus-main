@@ -1,0 +1,82 @@
+<ng-container *ngIf="topics$ | async as topics; else loading">
+  <table
+    mat-table
+    #table
+    *ngIf="topics.length; else noResults"
+    [dataSource]="topics"
+  >
+    <!-- Title column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef class="wide">Topic Title</th>
+      <td mat-cell *matCellDef="let row" class="wide">
+        <div class="title-cell">
+          <a
+            class="text-bold title"
+            [routerLink]="['/forum/topic', row.id, row.postCount]"
+          >
+            {{ row.title }}
+          </a>
+          <span class="medium-color italic author">
+            By:
+            <jlc-author-link
+              [author]="row.firstPost?.author"
+              [authorUserType]="row.firstPost?.userType"
+            ></jlc-author-link>
+          </span>
+          <jlc-pagination-shortcut
+            [link]="['/forum/topic', row.id]"
+            [itemsCount]="row.postCount"
+            [itemsPerPage]="postsPerPage"
+          ></jlc-pagination-shortcut>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Replies column -->
+    <ng-container matColumnDef="replies">
+      <th mat-header-cell *matHeaderCellDef class="numeric-cell small">
+        Replies
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let row"
+        class="numeric-cell medium-color italic ellipsis small"
+      >
+        {{ row.postCount }}
+      </td>
+    </ng-container>
+
+    <!-- Last action column -->
+    <ng-container matColumnDef="lastAction">
+      <th mat-header-cell *matHeaderCellDef>Last Action</th>
+      <td mat-cell *matCellDef="let row" class="medium-color medium">
+        <div>{{ row.lastPost?.modified | jusLawDate }}</div>
+        <div
+          *ngIf="row.firstPost && row.firstPost.author"
+          class="last-action-author ellipsis"
+        >
+          By:
+          <jlc-author-link
+            [author]="row.lastPost?.author"
+            [authorUserType]="row.lastPost?.userType"
+          ></jlc-author-link>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="['title', 'replies', 'lastAction']"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: ['title', 'replies', 'lastAction']"
+    ></tr>
+  </table>
+</ng-container>
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>
+<ng-template #noResults>
+  <h1>No Topics found.</h1>
+</ng-template>

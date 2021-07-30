@@ -1,0 +1,145 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+}
+
+.tab-sub-title {
+  text-align: center;
+  color: var(--medium-color);
+  font-style: italic;
+  width: 100%;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--light-shade-color);
+}
+
+.chat {
+  display: flex;
+  flex: 1;
+  min-height: 1px; /* Hack to limit max height. */
+}
+
+.contacts {
+  width: 30%;
+  border-right: 1px solid var(--light-shade-color);
+  overflow: auto;
+}
+
+.contact {
+  padding-left: 4px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 65px;
+  border: none;
+  border-bottom: 1px solid var(--light-shade-color);
+  color: var(--primary-font-color);
+  font-size: 0.75rem;
+}
+
+.contact-link {
+  padding-right: 19px;
+  height: 100%;
+  flex: 1;
+  min-width: 1px; /* To prevent get width more that allowed */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  box-shadow: none;
+}
+
+.contact-link:hover {
+  text-decoration: none;
+}
+
+.selected {
+  background: var(--primary-light-color);
+}
+
+.contact.has-new {
+  background-color: var(--contact-with-unread-message);
+}
+
+.contact:hover {
+  text-decoration: none;
+}
+
+.contact:focus-within {
+  box-shadow: var(--focus-shadow);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  flex: 1;
+  min-width: 1px; /* To prevent get width more that allowed */
+  margin-left: 12px;
+}
+
+.name {
+  color: var(--primary-font-color);
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.location {
+  color: var(--primary-font-color);
+  font-size: 0.875rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.priority {
+  color: var(--primary-font-color);
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 0 3px;
+  margin: 0 5px;
+}
+
+.high-priority {
+  background-color: var(--high-lead-priority);
+}
+
+.medium-priority {
+  background-color: var(--medium-lead-priority);
+}
+
+.new-messages-indicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 100%;
+  background: var(--header-badge-background-color);
+}
+
+.new-messages-indicator.no-new-messages {
+  visibility: hidden;
+}
+
+.create-matter-button {
+  background: var(--primary-color);
+  margin-left: 5px;
+}
+
+@media screen and (max-width: 1025px) and (orientation: portrait) {
+  .contacts {
+    width: 35%;
+  }
+
+  .chat-info .priority,
+  .chat-info .priority + span {
+    display: block;
+    text-align: center;
+  }
+}

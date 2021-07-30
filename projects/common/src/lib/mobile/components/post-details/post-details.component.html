@@ -1,0 +1,10 @@
+<header>
+  <h2 class="title">{{ post.title }}</h2>
+  <p class="italic">
+    by {{ post.author.name }} | {{ post.created | date: "mediumDate" }}
+  </p>
+</header>
+<div class="content">
+  <img [src]="post.image" alt="Post preview image" class="preview-image" />
+  <jlc-display-html [content]="post.content"></jlc-display-html>
+</div>

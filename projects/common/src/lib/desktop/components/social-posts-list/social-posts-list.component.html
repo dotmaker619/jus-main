@@ -1,0 +1,55 @@
+<div class="post-block" *ngFor="let post of posts; trackBy: trackPost">
+  <header>
+    <a
+      [routerLink]="['/attorneys', 'profile', post.authorData.id]"
+      class="author-info"
+    >
+      <div *ngIf="post.authorData.avatar as avatar" class="author-avatar">
+        <img [src]="avatar" />
+      </div>
+      <div class="author">
+        <h2 class="name">{{ post.authorData.fullName }}</h2>
+        <p class="specialties italic ellipsis">
+          {{ post.authorData.specialitiesStr }}
+        </p>
+      </div>
+    </a>
+    <button
+      *ngIf="isCurrentUserAuthor(post.author) | async"
+      class="post-options-button focusable"
+      title="Open social post options"
+      [matMenuTriggerFor]="nodeMenu"
+    >
+      <img src="/assets/icons/more_icon.svg" />
+    </button>
+
+    <!-- Node options menu. -->
+    <mat-menu #nodeMenu="matMenu">
+      <ul class="options-list">
+        <li *ngFor="let action of actionList">
+          <button (click)="onActionClick(action, post)">
+            {{ action.value }}
+          </button>
+        </li>
+      </ul>
+    </mat-menu>
+  </header>
+  <div class="content">
+    <div *ngIf="post.image" class="image-block">
+      <img [src]="post.image" />
+    </div>
+    <div class="info">
+      <p class="title">{{ post.title }}</p>
+      <p class="date italic">{{ post.created | date: "mediumDate" }}</p>
+      <div class="html-content">
+        <jlc-display-html
+          [content]="post.body"
+          [areImagesHidden]="true"
+        ></jlc-display-html>
+      </div>
+    </div>
+  </div>
+  <a class="more-btn" [routerLink]="post.id" title="Open post details"
+    >See more</a
+  >
+</div>

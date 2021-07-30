@@ -1,0 +1,150 @@
+:host {
+  display: block;
+  margin: 50px 0 0 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.header > h2 {
+  color: var(--page-title-color);
+  font-size: 2.428rem;
+  font-weight: normal;
+  letter-spacing: -0.033rem;
+  line-height: 1.323;
+}
+
+.small-text {
+  margin: 0 16px 6px 16px;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--primary-font-color);
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.controls > button.primary {
+  border-radius: 10px;
+  height: 45px;
+  padding: 0 28px;
+  width: auto;
+}
+
+.categories {
+  --columns: 3;
+
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -30px;
+  padding-top: 8px;
+}
+
+@media (max-width: 912px) {
+  .categories {
+    --columns: 2;
+  }
+}
+
+.question {
+  margin-bottom: 32px;
+}
+
+.category {
+  position: relative;
+  display: flex;
+  min-height: 90px;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 0 4px 0 rgba(123, 123, 123, 0.5);
+  width: calc(100% / var(--columns) - 16px);
+  margin-left: 16px;
+  margin-top: 16px;
+  overflow: hidden;
+  align-items: center;
+}
+
+.category::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 4px;
+  pointer-events: none;
+  border: 1px solid var(--primary-color);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.category,
+.category::before {
+  transition: all 0.15s ease;
+}
+
+.category:hover,
+.category:focus {
+  text-decoration: none;
+  background-color: var(--tertiary-contrast-color);
+  outline: none;
+}
+
+.category:hover::before,
+.category:focus::before {
+  visibility: visible;
+  opacity: 1;
+}
+
+.icon-wrapper {
+  width: 89px;
+  background-image: var(--primary-gradient);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.icon-wrapper > img {
+  height: 40px;
+}
+
+.category > .title {
+  flex-grow: 1;
+  position: relative;
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 40px 0 24px;
+  color: var(--primary-font-color);
+  font-weight: bold;
+  font-size: 1.285rem;
+  line-height: 1.333;
+  max-height: 3.4rem;
+}
+
+.category > .title::before {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 18px;
+  width: 20px;
+  height: 20px;
+  background: url(/assets/icons/arrow-right_icon.svg);
+}
+
+.loading {
+  padding: 100px 0;
+}

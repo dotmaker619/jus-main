@@ -1,0 +1,14 @@
+:host {
+  --space: 10px;
+}
+
+ion-content {
+  --padding-start: var(--space);
+  --padding-end: var(--space);
+  --padding-top: calc(var(--space) * 1.5);
+  --padding-bottom: calc(var(--space) * 1.5);
+}
+
+ion-button[type="submit"] {
+  color: var(--secondary-color);
+}

@@ -1,0 +1,34 @@
+<form class="dialog" [formGroup]="noteFormGroup" (submit)="onSaveClick()">
+  <h3 class="ellipsis">
+    {{ dialogTitle }}
+  </h3>
+  <hr />
+  <label>
+    <span>Title*</span>
+    <input formControlName="title" />
+    <jlc-form-control-validation-message controlName="title">
+    </jlc-form-control-validation-message>
+  </label>
+
+  <label>
+    <span>Note*</span>
+    <textarea formControlName="text"></textarea>
+    <jlc-form-control-validation-message controlName="text">
+    </jlc-form-control-validation-message>
+  </label>
+  <ng-container *ngIf="!(isLoading$ | async); else loading">
+    <div class="button-panel">
+      <button class="confirm secondary" type="button" (click)="onCloseClick()">
+        Cancel
+      </button>
+      <button class="confirm primary" type="submit">
+        Save
+      </button>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate> </ng-template>
+</form>
+
+<ng-template #loading>
+  <jlc-loading> </jlc-loading>
+</ng-template>

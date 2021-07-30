@@ -1,0 +1,28 @@
+<div class="profile-image">
+  <img
+    [src]="profileImageUrl || '/assets/profile-image.png'"
+    alt="Profile image"
+  />
+  <div class="image-handle-panel">
+    <ng-container *ngIf="profileImageName">
+      <span class="ellipsis">{{ profileImageName }}</span>
+      <button
+        class="image-remove"
+        (click)="onProfileRemoveClick()"
+        type="button"
+      >
+        Remove
+      </button>
+    </ng-container>
+
+    <button class="image-upload" (click)="onProfileEditClick()" type="button">
+      Edit
+      <input
+        #fileInput
+        type="file"
+        accept="image/png, image/jpeg"
+        (change)="onProfileImageChange($event.target.files)"
+      />
+    </button>
+  </div>
+</div>

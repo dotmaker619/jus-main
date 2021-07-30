@@ -1,0 +1,31 @@
+:host {
+  display: block;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.topic {
+  width: 100%;
+}
+
+.topic * {
+  font-size: 0.9rem;
+  color: var(--medium-color);
+}
+
+.topic .title {
+  color: var(--medium-contrast-color);
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: calc(var(--space) / 4);
+}
+
+.replies {
+  font-style: italic;
+  font-size: 1rem;
+  padding-right: 2px;
+}

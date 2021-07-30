@@ -1,0 +1,96 @@
+:host {
+  --space: 20px;
+}
+
+.dialog {
+  padding: var(--space);
+}
+
+h2 {
+  font-size: 1rem;
+  align-self: stretch;
+}
+
+hr {
+  width: 100%;
+}
+
+button.confirm {
+  margin: auto var(--space) var(--space) var(--space);
+}
+
+button.close {
+  margin: var(--space) var(--space) 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.button-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.button-panel button {
+  --button-panel-space: calc(var(--space) / 2);
+  margin: var(--button-panel-space) auto;
+  border-radius: 10px;
+  min-width: 150px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+}
+
+input:disabled {
+  background: var(--light-color);
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+}
+
+textarea {
+  resize: none;
+  height: 6rem;
+  padding: 10px;
+}
+
+label,
+div.label {
+  font-weight: bold;
+  color: var(--primary-font-color);
+  width: 100%;
+}
+
+div.label.half,
+.half {
+  width: 48%;
+}
+
+.date span {
+  width: 100%;
+  display: block;
+}
+
+.date-input input {
+  padding-right: 2rem;
+}
+
+.date-input {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.date-input mat-datepicker-toggle {
+  position: absolute;
+  right: 0;
+}

@@ -1,0 +1,51 @@
+:host {
+  display: block;
+  padding: 32px 40px;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  padding: 24px;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 2px;
+}
+
+.plan-info {
+  flex-grow: 1;
+  margin-left: 16px;
+  display: flex;
+  flex-direction: column;
+  font-weight: normal;
+}
+
+.plan-title {
+  font-weight: bold;
+}
+
+.plan-details {
+  display: flex;
+  margin-top: 2px;
+}
+
+.plan-price {
+  font-size: 0.929rem;
+  margin-top: 2px;
+}
+
+.plan-description {
+  font-style: italic;
+  color: var(--primary-light-font-color);
+  margin-left: 18px;
+  flex: 1;
+}
+
+.controls {
+  margin-top: 22px;
+  display: flex;
+}
+
+.controls > *:not(:last-child) {
+  margin-right: 16px;
+}

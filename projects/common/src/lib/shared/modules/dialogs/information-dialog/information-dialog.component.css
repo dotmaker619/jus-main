@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  padding: 27px;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.message {
+  white-space: pre-wrap;
+}
+
+button.confirm {
+  cursor: pointer;
+  margin: 28px 28px 0 28px;
+}

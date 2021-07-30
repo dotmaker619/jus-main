@@ -1,0 +1,38 @@
+:host {
+  --space: 10px;
+  display: block;
+}
+
+ion-list {
+  padding: 0;
+  margin: 0;
+}
+
+.item-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  padding: var(--space) 0;
+}
+
+.info {
+  font-style: italic;
+  color: var(--medium-color);
+  padding: 0 var(--space);
+}
+
+.title {
+  flex: 1;
+}
+
+.message {
+  text-align: center;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--medium-color);
+}
+
+span {
+  color: var(--primary-font-color);
+}

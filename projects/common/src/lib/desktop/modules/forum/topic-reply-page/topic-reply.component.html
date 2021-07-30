@@ -1,0 +1,23 @@
+<div class="forum-page-container">
+  <jlc-breadcrumbs [links]="breadcrumbs$ | async"></jlc-breadcrumbs>
+  <h1 *ngIf="currentPostId; else newReply">Edit Reply</h1>
+  <form [formGroup]="replyForm" (ngSubmit)="onSubmit()">
+    <label class="reply-message">
+      <span>{{ (currentTopic$ | async)?.title }}</span>
+      <textarea
+        placeholder="Type your response here..."
+        formControlName="message"
+      >
+      </textarea>
+    </label>
+    <div class="button-panel">
+      <button type="button" (click)="onCancel()" class="secondary">
+        Cancel
+      </button>
+      <button type="submit" class="primary">Submit</button>
+    </div>
+  </form>
+</div>
+<ng-template #newReply>
+  <h1>Post a Reply</h1>
+</ng-template>

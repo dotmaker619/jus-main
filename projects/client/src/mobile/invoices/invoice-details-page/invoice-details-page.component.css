@@ -1,0 +1,33 @@
+:host {
+  --page-space: 16px;
+}
+
+ion-content {
+  --padding-start: var(--page-space);
+  --padding-end: var(--page-space);
+  --padding-top: var(--page-space);
+  --padding-bottom: var(--page-space);
+}
+
+.card {
+  margin-bottom: var(--page-space);
+}
+
+.button-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.button-panel > * {
+  flex: 1;
+  min-width: auto;
+  padding: 0;
+}
+
+.button-panel > *:not(:first-child) {
+  margin-left: calc(var(--page-space) / 2);
+}
+
+.skeleton {
+  width: 5rem;
+}

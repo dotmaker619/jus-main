@@ -1,0 +1,59 @@
+<div class="dialog">
+  <h3>Upload a File</h3>
+  <hr />
+  <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+    <ng-container *ngIf="folders; else loading">
+      <ng-container *ngIf="!(isLoading$ | async); else loading">
+        <label>
+          <span>Folder*</span>
+          <select formControlName="folder">
+            <option
+              [ngValue]="option.id"
+              *ngFor="let option of folders; trackBy: trackById"
+            >
+              {{ option.title }}
+            </option>
+          </select>
+        </label>
+        <jlc-file-drop
+          class="file-drop"
+          [onlyBrowseButton]="isApplication"
+          (documentsChange)="onAttachedFileChange($event)"
+          [fileValidators]="fileValidators"
+          (errors)="onErrors($event)"
+        ></jlc-file-drop>
+        <ng-container *ngIf="!(isLoading$ | async); else loading">
+          <div class="validation-error">
+            <span *ngIf="validationError$ | async as error">
+              {{ error }}
+            </span>
+          </div>
+          <div class="button-panel">
+            <button class="secondary" type="button" (click)="onCancelClick()">
+              Cancel
+            </button>
+            <button class="primary" type="submit" [disabled]="!file">
+              <img src="/assets/icons/folder_icon.svg" aria-hidden="true" />
+              <span>Upload to Docs</span>
+            </button>
+            <ng-template [ngxPermissionsOnly]="Role.Attorney">
+              <button
+                [disabled]="!file"
+                (click)="onDocusignButtonClick()"
+                type="button"
+                *ngIf="isDocusignAvailable"
+                class="primary"
+              >
+                Send With Docusign
+              </button>
+            </ng-template>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </form>
+
+  <ng-template #loading>
+    <jlc-loading></jlc-loading>
+  </ng-template>
+</div>

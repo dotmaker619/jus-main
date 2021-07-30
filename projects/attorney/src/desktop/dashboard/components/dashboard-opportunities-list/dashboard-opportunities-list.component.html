@@ -1,0 +1,49 @@
+<header class="header">
+  <h2 class="title">
+    {{title}}
+  </h2>
+  <span class="badge">
+    {{opportunities.length}}
+  </span>
+</header>
+
+<ul
+  *ngIf="opportunities.length > 0"
+  class="list"
+>
+  <li
+    *ngFor="let topic of opportunities; trackBy: trackByTopicId"
+    class="item"
+  >
+    <a
+      class="link"
+      [routerLink]="['/forum', 'topic', topic.id]"
+    >
+      <span class="time">
+        {{ topic.lastPost.modified | jusLawNamedOffsetFromNow }}
+      </span>
+      <img class="icon" src="/assets/icons/opportunities-circle.svg" alt="">
+      <div class="content">
+        <div class="item-title">
+          <span class="post-author">
+            {{topic.lastPost.author.shortName}}
+          </span>
+
+          &nbsp;posted in&nbsp;
+
+          <span class="topic-title">
+            "{{ topic.title }}"
+          </span>
+        </div>
+
+        <span class="last-post">
+          {{ topic.lastPost.text }}
+        </span>
+      </div>
+    </a>
+  </li>
+</ul>
+
+<div *ngIf="opportunities.length === 0">
+  No Opportunities
+</div>

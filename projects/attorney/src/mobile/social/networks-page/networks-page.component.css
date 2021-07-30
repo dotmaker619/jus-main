@@ -1,0 +1,43 @@
+/* Content placeholder */
+
+.placeholder {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder span {
+  font-style: italic;
+  color: var(--medium-color);
+  margin-top: 10px;
+}
+
+/* Networks list */
+
+ion-list {
+  border-top: var(--primary-border-color);
+}
+
+/* List item */
+
+ion-item {
+  --padding-start: 5px;
+}
+
+jlc-chat-list-item {
+  width: 100%;
+}
+
+/* Filter input */
+
+.filter-container {
+  padding: 10px;
+}
+
+.search-input {
+  width: 100%;
+  background-color: var(--primary-background-color);
+}

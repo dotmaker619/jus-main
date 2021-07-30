@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  align-items: center;
+  --icon-size: 30px;
+  --font-size: 1rem;
+}
+
+:host > * + * {
+  margin-left: 10px;
+}
+
+.icon-container {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  border-radius: var(--icon-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--success-color);
+}
+
+.icon-container ion-icon {
+  color: white;
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+span {
+  font-size: var(--font-size);
+}

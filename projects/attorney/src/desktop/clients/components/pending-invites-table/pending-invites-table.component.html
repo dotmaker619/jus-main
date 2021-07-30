@@ -1,0 +1,46 @@
+<ng-container *ngIf="invites; else loading">
+  <!-- Table head. -->
+  <div class="thead row">
+    <div class="cell-client">Client Name</div>
+    <div class="cell-sent">Sent</div>
+    <div class="cell-controls"></div>
+  </div>
+  <ng-container *ngIf="invites.length; else noInvites">
+    <button
+      *ngFor="let invite of invites; trackBy: trackByUUID"
+      type="button "
+      class="row"
+      [class.active]="selectedInvite === invite.uuid"
+      (click)="onInviteClicked(invite)"
+    >
+      <!-- Column client name. -->
+      <div class="cell-client">
+        <div class="client-icon">
+          <img src="/assets/icons/person_icon.svg" alt="Person icon" />
+        </div>
+        {{ invite.recipientName }} ({{ invite.email }})
+      </div>
+      <div class="cell-sent">
+        {{ invite.sent | date: "shortDate" }}
+      </div>
+      <div class="cell-controls">
+        <button
+          class="resend"
+          *ngIf="selectedInvite === invite.uuid"
+          (click)="onResendClicked($event, invite)"
+        >
+          Resend
+        </button>
+      </div>
+    </button>
+  </ng-container>
+
+  <ng-template #noInvites>
+    <div class="no-items">
+      No invites.
+    </div>
+  </ng-template>
+</ng-container>
+<ng-template #loading>
+  <jlc-loading></jlc-loading>
+</ng-template>

@@ -1,0 +1,38 @@
+<div
+  class="message-container"
+  [ngClass]="message.isMyMessage ? 'my' : 'not-my'"
+>
+  <a
+    *ngIf="message.author"
+    class="avatar focusable"
+    [routerLink]="['/attorneys', 'profile', message.author.id]"
+    [title]="message.author.fullName + '\'s profile'"
+  >
+    <img [src]="message.author?.avatar" />
+  </a>
+  <div class="message" *ngIf="message.text">
+    {{ message.text }}
+    <ng-container *ngTemplateOutlet="timestamp"></ng-container>
+  </div>
+  <div
+    class="attachments-container"
+    *ngIf="message.files && message.files.length > 0"
+  >
+    <ul class="attachments-list">
+      <li *ngFor="let attachment of message.files; trackBy: trackAttachment">
+        <jlc-chat-attachment [attachment]="attachment"></jlc-chat-attachment>
+      </li>
+    </ul>
+    <ng-container *ngTemplateOutlet="timestamp"></ng-container>
+  </div>
+</div>
+
+<ng-template #timestamp>
+  <time
+    *ngIf="message.created as time"
+    [title]="time.toLocaleString()"
+    class="time"
+  >
+    {{ time | date: "shortTime" }}
+  </time>
+</ng-template>

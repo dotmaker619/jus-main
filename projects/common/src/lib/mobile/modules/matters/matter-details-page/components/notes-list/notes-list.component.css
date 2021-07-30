@@ -1,0 +1,31 @@
+:host {
+  --space: 10px;
+}
+
+.message {
+  --padding-start: 0;
+  --padding-end: 0;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--medium-color);
+  text-align: center;
+}
+
+ion-list {
+  padding: 0;
+  margin: 0;
+}
+
+.button-panel {
+  width: 100%;
+  display: flex;
+}
+
+.button-panel ion-button {
+  flex: 1;
+  height: 30px;
+}
+
+.button-panel ion-button ion-icon {
+  color: var(--light-shade-color);
+}

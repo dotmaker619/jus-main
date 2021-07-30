@@ -1,0 +1,59 @@
+<header>
+  <h2>New Network</h2>
+  <button class="close-button focusable" title="Close dialog" (click)="close()">
+    <img src="/assets/icons/close_icon.svg" />
+  </button>
+</header>
+<hr />
+<form
+  *ngIf="form$ | async as form"
+  [formGroup]="form"
+  class="network-form"
+  (ngSubmit)="onSubmit(form)"
+>
+  <div class="form-content">
+    <div class="fields">
+      <input
+        type="text"
+        formControlName="title"
+        placeholder="Network Group Name"
+      />
+      <jlc-form-control-validation-message
+        controlName="title"
+      ></jlc-form-control-validation-message>
+      <select formControlName="category">
+        <option [ngValue]="null">All Categories</option>
+        <option
+          [ngValue]="category"
+          *ngFor="let category of categories$ | async; trackBy: trackById"
+        >
+          {{ category.title }}
+        </option>
+      </select>
+      <!-- To preserve equal margins -->
+      <jlc-form-control-validation-message></jlc-form-control-validation-message>
+      <jlat-select-attorneys
+        [specialty]="selectedCategory$ | async"
+        formControlName="attorneys"
+      ></jlat-select-attorneys>
+      <jlc-form-control-validation-message
+        controlName="attorneys"
+      ></jlc-form-control-validation-message>
+    </div>
+  </div>
+  <button class="primary" type="submit">
+    Create Group
+  </button>
+</form>
+
+<ng-template #noItemsMessage>
+  <div class="no-items-message">
+    We haven't found anyone
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <jlc-loading class="loading"></jlc-loading>
+</ng-template>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

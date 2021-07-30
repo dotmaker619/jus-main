@@ -1,0 +1,145 @@
+:host {
+  /* 
+    Try to obtain variable value from parent's scope, 
+      hide author info by default.
+    Possible values: `visible`, `hidden`.
+  */
+  --message-sign-visibility-local: var(--message-sign-visibility, hidden);
+  /* 
+    Controls the visibility of message authors.
+    Possible values: 'block', 'none'.
+  */
+  --avatar-display-local: var(--author-display, none);
+
+  display: block;
+}
+
+.message-container {
+  display: flex;
+  padding: 0 10px 20px 10px;
+}
+
+.message {
+  display: block;
+  position: relative;
+  color: var(--primary-font-color);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding: 15px;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 50%;
+  word-break: break-word;
+}
+
+.time {
+  position: absolute;
+  color: var(--primary-font-color);
+  font-size: 0.85rem;
+  width: max-content;
+  bottom: -20px;
+}
+
+.my .time {
+  right: 5px;
+}
+
+.not-my .time {
+  left: 5px;
+}
+
+.avatar {
+  border-radius: 50%;
+  border: 1px solid var(--primary-border-color);
+  align-self: flex-end;
+  visibility: var(--message-sign-visibility-local);
+  display: var(--avatar-display-local);
+  width: 36px;
+  height: 36px;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.my .avatar {
+  display: none;
+}
+
+.my .message {
+  margin-left: auto;
+  background-color: var(--my-message-color);
+  border: 1px solid var(--me-message-border-color);
+  margin-right: 25px;
+}
+
+.my .message::before {
+  content: "";
+  visibility: var(--message-sign-visibility-local);
+  position: absolute;
+  bottom: 8px;
+  right: -20px;
+  border-top: 16px solid transparent;
+  border-left: 20px solid var(--me-message-border-color);
+}
+
+.my .message::after {
+  content: "";
+  visibility: var(--message-sign-visibility-local);
+  position: absolute;
+  bottom: 9px;
+  right: -18px;
+  border-top: 15px solid transparent;
+  border-left: 20px solid var(--my-message-color);
+}
+
+.not-my .message {
+  position: relative;
+  border: 1px solid var(--interlocutor-message-border-color);
+  margin-left: 25px;
+}
+
+.not-my .message::before {
+  content: "";
+  visibility: var(--message-sign-visibility-local);
+  position: absolute;
+  bottom: 8px;
+  left: -20px;
+  border-top: 16px solid transparent;
+  border-right: 20px solid var(--interlocutor-message-border-color);
+}
+
+.not-my .message::after {
+  content: "";
+  visibility: var(--message-sign-visibility-local);
+  position: absolute;
+  bottom: 9px;
+  left: -17px;
+  border-top: 15px solid transparent;
+  border-right: 20px solid var(--interlocutor-message-color);
+}
+
+/* List of attachments */
+
+.attachments-container {
+  margin-left: 25px;
+  width: 70%;
+  position: relative;
+}
+
+.my .attachments-container {
+  margin-left: auto;
+  margin-right: 25px;
+}
+
+.attachments-list {
+  list-style: none;
+}
+
+.attachments-list li + li {
+  margin-top: 10px;
+}

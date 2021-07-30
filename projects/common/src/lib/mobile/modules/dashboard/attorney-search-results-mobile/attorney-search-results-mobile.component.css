@@ -1,0 +1,79 @@
+.content {
+  height: 100%;
+  overflow: auto;
+}
+
+.fullscreen-map.content {
+  overflow: hidden;
+}
+
+/* Map */
+
+.search-results-map {
+  height: 30%;
+  transition: ease-in-out 300ms;
+  position: relative;
+}
+
+.fullscreen-map .search-results-map {
+  height: 100%;
+}
+
+.search-results-map ion-skeleton-text {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+agm-map {
+  height: 100%;
+}
+
+.expand-map-button {
+  border-radius: 3px;
+  min-width: auto;
+  min-height: auto;
+  height: fit-content;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.subtitle {
+  text-align: center;
+}
+
+/* Attorneys list */
+.attorney-container {
+  height: 70%;
+}
+.attorney-container > * {
+  margin: 10px;
+}
+
+.no-items-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+jlc-attorney-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.attorney-card-backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}

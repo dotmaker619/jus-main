@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Account Information</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div [ngSwitch]="clientType$ | async" class="form">
+    <ng-container *ngSwitchCase="clientTypes.Individual">
+      <jlc-create-individual-account [data]="client$ | async" [disabled]="true">
+      </jlc-create-individual-account>
+    </ng-container>
+    <ng-container *ngSwitchCase="clientTypes.Organization">
+      <jlc-create-organization-account
+        [data]="client$ | async"
+        [disabled]="true"
+      >
+      </jlc-create-organization-account>
+    </ng-container>
+  </div>
+  <div class="button-panel">
+    <button class="secondary" (click)="onChangePasswordClick()">
+      Change Password
+    </button>
+  </div>
+</ion-content>

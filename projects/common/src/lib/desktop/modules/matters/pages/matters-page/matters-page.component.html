@@ -1,0 +1,311 @@
+<div class="matters-page-container">
+  <div class="matters-content">
+    <div class="page-header">
+      <h1>My matters</h1>
+
+      <!-- Link to matter creation page. Available only for an Attorney -->
+      <ng-template [ngxPermissionsOnly]="roles.Attorney">
+        <a class="primary" routerLink="create">+ New Matter</a>
+      </ng-template>
+    </div>
+    <mat-tab-group
+      disableRipple
+      dynamicHeight
+      (selectedTabChange)="sideMenu.close()"
+      class="full-screen-wide"
+    >
+      <mat-tab *ngFor="let tab of tabs$ | async">
+        <!-- Tab label -->
+        <ng-template mat-tab-label>
+          <div class="tab-label">
+            <span class="label">
+              {{ tab.title }}
+            </span>
+            <div class="badge" *ngIf="tab.matters$ | async as matters">
+              <span>
+                {{ matters.length }}
+              </span>
+            </div>
+          </div>
+        </ng-template>
+        <div class="tab-body-container">
+          <!-- Order select -->
+          <select
+            class="order-select"
+            (change)="onOrderChange($event.target.value)"
+          >
+            <option
+              *ngFor="let order of orderOptions; trackBy: trackSelectOptions"
+              [value]="order.value"
+            >
+              {{ order.label }}
+            </option>
+          </select>
+
+          <!-- Matters list -->
+          <ul
+            class="matters-list"
+            *ngIf="tab.matters$ | async as matters; else loading"
+          >
+            <ng-container *ngIf="matters.length; else noMatters">
+              <li *ngFor="let matter of matters; trackBy: trackById">
+                <button
+                  class="matter-button"
+                  [class.selected]="matter.id === selectedMatter?.id"
+                  [title]="matter.title | titlecase"
+                  (click)="onMatterClick(matter)"
+                >
+                  <div class="matter-item-content">
+                    <!-- Icon -->
+                    <div class="matter-icon-container">
+                      <img
+                        src="/assets/icons/document_icon.svg"
+                        alt="Matter icon"
+                      />
+                    </div>
+                    <!-- Description -->
+                    <div class="matter-description-container ellipsis">
+                      <span class="matter-title ellipsis">
+                        [{{ matter.code | uppercase }}]
+                        {{ matter.title | titlecase }}
+                      </span>
+                      <p
+                        class="matter-description medium-color italic ellipsis"
+                      >
+                        {{ matter.description }}
+                      </p>
+                    </div>
+                    <!-- Status -->
+                    <span
+                      [ngClass]="[matter.status ? matter.status : '', 'status']"
+                    >
+                      {{ matter.status | titlecase }}
+                    </span>
+                    <!-- Client information -->
+                    <ng-template [ngxPermissionsOnly]="roles.Attorney">
+                      <ng-container
+                        *ngTemplateOutlet="
+                          clientInfo;
+                          context: { client: matter.client }
+                        "
+                      ></ng-container>
+                    </ng-template>
+                    <ng-template [ngxPermissionsOnly]="roles.Client">
+                      <ng-container
+                        *ngTemplateOutlet="
+                          attorneyInfo;
+                          context: { attorney: matter.attorney }
+                        "
+                      ></ng-container>
+                    </ng-template>
+                  </div>
+                </button>
+              </li>
+            </ng-container>
+            <ng-template #noMatters>
+              <div class="no-matters-title">No {{ tab.field }} matters.</div>
+            </ng-template>
+          </ul>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <!-- Side menu -->
+  <jlc-side-menu #sideMenu>
+    <div class="menu-content" *ngIf="selectedMatter">
+      <!-- Menu heading -->
+      <div class="menu-heading">
+        <!-- Menu title -->
+        <h2 class="matter-title ellipsis">
+          <div class="ellipsis">[{{ selectedMatter.code | uppercase }}]</div>
+          <div class="ellipsis">{{ selectedMatter.title | titlecase }}</div>
+        </h2>
+        <!-- Close menu button -->
+        <button class="menu-close-button" (click)="sideMenu.close()">
+          <img src="/assets/icons/close_icon.svg" alt="Close menu" />
+        </button>
+      </div>
+      <!-- Menu content -->
+      <ul class="menu-list">
+        <!-- Client information -->
+        <li class="menu-client-info">
+          <ng-template [ngxPermissionsOnly]="roles.Attorney">
+            <ng-container
+              *ngTemplateOutlet="
+                clientInfo;
+                context: {
+                  client: selectedMatter.client,
+                  fullName: true
+                }
+              "
+            ></ng-container>
+          </ng-template>
+          <ng-template [ngxPermissionsOnly]="roles.Client">
+            <ng-container
+              *ngTemplateOutlet="
+                attorneyInfo;
+                context: {
+                  attorney: selectedMatter.attorney,
+                  fullName: true
+                }
+              "
+            ></ng-container>
+          </ng-template>
+
+          <!-- Date of creation/closing  -->
+          <div
+            class="menu-matter-date"
+            *ngIf="selectedMatter.completed || selectedMatter.created"
+          >
+            <!-- Display date of matter closing -->
+            <ng-container *ngIf="selectedMatter.completed; else dateOfCreation">
+              <span class="text-bold">Completed</span>
+              <span class="italic medium-color">
+                {{ selectedMatter.completed | date: "shortDate" }}
+              </span>
+            </ng-container>
+            <!-- Else - display date of creation -->
+            <ng-template #dateOfCreation>
+              <span class="text-bold">Created</span>
+              <span class="created-date italic medium-color">
+                {{ selectedMatter.created | date: "shortDate" }}
+              </span>
+            </ng-template>
+          </div>
+        </li>
+        <!-- Billable time. Displayed only when status is 'active' -->
+        <li
+          class="menu-bill-info"
+          *ngIf="selectedMatter.status === MatterStatus.Active"
+        >
+          <span class="menu-bill-label">
+            <img src="/assets/icons/clock_icon.svg" />
+            Billable Time
+          </span>
+          <span class="medium-color italic">
+            {{ selectedMatter.timeBilled | jusLawFormatMinutes }}
+          </span>
+        </li>
+        <!-- Description -->
+        <li class="column">
+          <p>
+            {{ selectedMatter.description }}
+          </p>
+          <!-- Display button depending on matter status. -->
+          <ng-container [ngSwitch]="selectedMatter.status">
+            <!-- View matter routing -->
+            <ng-container *ngSwitchCase="'active'">
+              <!-- View matter routing -->
+              <a class="primary menu-button" [routerLink]="[selectedMatter.id]">
+                <span> View Matter </span>
+                <img src="/assets/icons/forward_icon.svg" alt="" />
+              </a>
+              <!-- Cancel matter button. Visible only for Attorney. -->
+              <ng-template [ngxPermissionsOnly]="roles.Attorney">
+                <button
+                  class="tertiary menu-button"
+                  (click)="onCancelMatterClick(selectedMatter)"
+                >
+                  Cancel/Revoke
+                </button>
+              </ng-template>
+            </ng-container>
+            <a
+              class="primary menu-button"
+              [routerLink]="[selectedMatter.id]"
+              *ngSwitchCase="MatterStatus.Completed"
+            >
+              <span> View Matter </span>
+              <img src="/assets/icons/forward_icon.svg" alt="" />
+            </a>
+            <!-- Cancel matter, Edit matter only for an Attorney. -->
+            <ng-template [ngxPermissionsOnly]="roles.Attorney">
+              <ng-container *ngSwitchCase="MatterStatus.Pending">
+                <ng-container *ngTemplateOutlet="pendingButtons"></ng-container>
+              </ng-container>
+              <ng-container *ngSwitchCase="MatterStatus.Draft">
+                <ng-container *ngTemplateOutlet="pendingButtons"></ng-container>
+              </ng-container>
+
+              <!-- Reopen matter button -->
+              <button
+                class="primary menu-button"
+                *ngSwitchCase="MatterStatus.Revoked"
+                (click)="onReopenMatterClick(selectedMatter)"
+              >
+                <span> Re-open Matter </span>
+                <img src="/assets/icons/forward_icon.svg" alt="" />
+              </button>
+            </ng-template>
+          </ng-container>
+        </li>
+        <ng-container
+          *ngIf="matterActivities$ | async as activities; else loading"
+        >
+          <!-- Activities list -->
+          <li *ngIf="activities?.length" class="menu-activity">
+            <!-- Title -->
+            <div class="menu-activity-title">Latest Activity</div>
+            <!-- List itself -->
+            <ul class="menu-activity-list">
+              <li *ngFor="let activity of activities; trackBy: trackById">
+                <div class="menu-activity-title">
+                  {{ activity.title }}
+                </div>
+                <!--
+                  Display date of modification if it is presented
+                  else display date of creation
+                 -->
+                <span class="date" *ngIf="activity.modified; else creationDate">
+                  {{ activity.modified | jusLawDate }}
+                </span>
+                <ng-template #creationDate>
+                  <span class="date">
+                    {{ activity?.created | jusLawDate }}
+                  </span>
+                </ng-template>
+              </li>
+            </ul>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </jlc-side-menu>
+  <ng-template #loading>
+    <jlc-loading class="loading"></jlc-loading>
+  </ng-template>
+</div>
+<!-- User information -->
+<ng-template #attorneyInfo let-attorney="attorney" let-fullName="fullName">
+  <a class="client-info" [routerLink]="['/attorneys/profile', attorney.id]">
+    <jlc-client-info
+      [client]="attorney"
+      [fullName]="fullName"
+    ></jlc-client-info>
+  </a>
+</ng-template>
+<ng-template #clientInfo let-client="client" let-fullName="fullName">
+  <jlc-client-info
+    class="client-info"
+    [client]="client"
+    [fullName]="fullName"
+  ></jlc-client-info>
+</ng-template>
+
+<!-- Side menu buttons for pending status. -->
+<ng-template #pendingButtons>
+  <!-- Edit matter link. -->
+  <a class="primary menu-button" [routerLink]="['edit', selectedMatter.id]">
+    <span> Edit Matter </span>
+    <img src="/assets/icons/forward_icon.svg" alt="" />
+  </a>
+  <!-- Cancel matter button. -->
+  <button
+    class="tertiary menu-button"
+    (click)="onCancelMatterClick(selectedMatter)"
+  >
+    Cancel/Revoke
+  </button>
+</ng-template>
+
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

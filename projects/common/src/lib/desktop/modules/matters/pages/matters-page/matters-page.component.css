@@ -1,0 +1,305 @@
+:host {
+  --space: 40px;
+}
+
+.no-matters-title {
+  margin: 0 var(--space);
+  border-top: 1px solid var(--light-shade-color);
+  padding-top: 10px;
+}
+
+.matters-page-container {
+  display: flex;
+  overflow-x: hidden;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.tab-body-container {
+  border: 1px solid var(--primary-border-color);
+  border-top: none;
+}
+
+.matters-content {
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 100%;
+}
+
+.page-header {
+  width: 100%;
+  display: flex;
+  padding: calc(var(--space) / 2) var(--space);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu {
+  flex-shrink: 0;
+  flex-grow: 1;
+  display: none;
+}
+
+.tab-label {
+  width: 9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tab-label .label {
+  color: currentColor;
+}
+
+.tab-label .badge {
+  flex-shrink: 0;
+  background: currentColor;
+  border-radius: 2rem;
+  width: 2rem;
+}
+
+.menu-button span {
+  margin-left: auto;
+  color: currentColor;
+}
+
+.tab-label .badge span {
+  color: white;
+}
+
+.order-select {
+  margin: 1rem 0 1rem var(--space);
+  border-radius: 0;
+  width: 130px;
+}
+
+.primary,
+.secondary,
+.tertiary {
+  border-radius: 0.8rem;
+}
+
+.matters-list {
+  padding: 0 0 20px;
+  margin: 0;
+}
+
+.matters-list li + li {
+  border-top: 1px solid var(--table-row-separator-color);
+}
+
+.matter-button {
+  border: none;
+  background: none;
+  width: 100%;
+  padding: 1rem var(--space);
+  cursor: pointer;
+}
+
+.matter-item-content {
+  display: grid;
+  grid-template-columns: auto 50% 1fr 1fr;
+  column-gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.matter-button:active,
+.matter-button.selected {
+  background: var(--primary-tint-color);
+}
+
+.matter-icon-container {
+  background-color: var(--status-active-color);
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.matter-icon-container img {
+  width: 1rem;
+  height: 1rem;
+  filter: invert(1);
+}
+
+.matter-description-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.matter-title {
+  font-weight: bold;
+  color: var(--primary-font-color);
+}
+
+.matter-title,
+.matter-description {
+  width: 100%;
+  text-align: start;
+}
+
+/* Styles for status badges. */
+
+.status {
+  font-weight: bold;
+  padding: 0.2rem 1rem;
+  border-radius: 0.1rem;
+  color: white;
+  justify-self: center;
+  align-self: center;
+}
+
+.status.active {
+  background-color: var(--status-active-color);
+}
+
+.status.pending {
+  background-color: var(--status-pending-color);
+}
+
+.status.completed {
+  background-color: var(--status-completed-color);
+}
+
+.status.revoked {
+  background-color: var(--status-revoked-color);
+}
+
+.status.draft {
+  background-color: var(--status-draft-color);
+}
+
+/* Styles for side menu */
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.menu-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.menu-close-button {
+  background: none;
+  padding: 0;
+  border: none;
+}
+
+.menu-close-button img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.menu-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.menu-client-info,
+.menu-bill-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-client-info .client-info {
+  width: 50%;
+}
+
+.menu-list > li {
+  border-bottom: 1px solid var(--light-color);
+}
+
+.menu-matter-date > * {
+  display: block;
+}
+
+.menu-list > li > * {
+  margin: 1rem 0.5rem;
+}
+
+.menu-list > li.column {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.menu-button {
+  width: auto;
+  display: flex;
+  box-sizing: content-box;
+  height: auto;
+  padding: 0.7rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-button img {
+  margin-left: auto;
+  width: 1.5rem;
+  height: 1.5rem;
+  filter: invert(1);
+}
+
+.menu-activity-list li {
+  margin-bottom: 0.5rem;
+}
+
+.menu-list li:last-child {
+  border: none;
+}
+
+.menu-bill-label {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.menu-bill-label img {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 1rem;
+}
+
+.menu-matter-date {
+  text-align: right;
+}
+
+.created-date {
+  font-size: 0.85rem;
+}
+
+.menu-activity-title {
+  color: var(--primary-font-color);
+  font-weight: bold;
+}
+
+.menu-activity > .menu-activity-title {
+  font-size: 1rem;
+}
+
+.menu-activity-list {
+  list-style-type: square;
+  color: var(--primary-color);
+  padding: 0 1rem;
+}
+
+.loading {
+  padding: 100px 0;
+}
+
+.date {
+  font-weight: normal;
+  color: var(--medium-color);
+  font-style: italic;
+}

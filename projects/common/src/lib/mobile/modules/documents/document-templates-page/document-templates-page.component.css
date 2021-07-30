@@ -1,0 +1,29 @@
+:host {
+  --space: 10px;
+}
+
+.docs-tree {
+  display: block;
+  border-bottom: 1px solid var(--light-shade-color);
+  background: var(--primary-background-color);
+  --space: 10px;
+  --folder-background-color: var(--primary-background-color);
+  --document-background-color: var(--primary-background-color);
+  --document-icon-size: 25px;
+  --expand-icon-container-inner-space: 17.5px;
+  --date-text-align: end;
+}
+
+.docs-tree,
+.button-panel {
+  background: var(--primary-background-color);
+}
+
+.button-panel {
+  display: flex;
+  padding: var(--space);
+}
+
+.button-panel button {
+  flex: 1;
+}

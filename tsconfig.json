@@ -1,0 +1,70 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "stripe-v3",
+      "googlemaps",
+      "dom-mediacapture-record"
+    ],
+    "lib": [
+      "es2019",
+      "dom"
+    ],
+    "paths": {
+      "@jl/common": [
+        "projects/common/src/lib"
+      ],
+      "@jl/common/*": [
+        "projects/common/src/lib/*"
+      ],
+      "@jl/client": [
+        "projects/client/src"
+      ],
+      "@jl/client/*": [
+        "projects/client/src/*"
+      ],
+      "@jl/attorney": [
+        "projects/attorney/src"
+      ],
+      "@jl/attorney/*": [
+        "projects/attorney/src/*"
+      ],
+      "@jl/env": [
+        "projects/common/src/environments"
+      ],
+      "@jl/env/*": [
+        "projects/common/src/environments/*"
+      ],
+      "@jl/marketing": [
+        "projects/marketing/src"
+      ],
+      "@jl/marketing/*": [
+        "projects/marketing/src/*"
+      ],
+      "@jl/staff": [
+        "projects/staff/src"
+      ],
+      "@jl/staff*": [
+        "projects/staff/src/*"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableIvy": false,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}

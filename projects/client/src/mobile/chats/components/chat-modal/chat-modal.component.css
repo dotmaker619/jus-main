@@ -1,0 +1,18 @@
+ion-title .attorney-name {
+  color: unset;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+ion-content {
+  /** To override Ionic's default buggy keyboard offset on iOS devices*/
+  --keyboard-offset: 0 !important;
+  --background: var(--primary-background-color);
+}
+
+.special-button {
+  width: 35px;
+  height: 35px;
+}

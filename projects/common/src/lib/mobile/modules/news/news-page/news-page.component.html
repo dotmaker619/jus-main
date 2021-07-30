@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Jus-Law News</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ng-container *ngIf="pagination$ | async as pagination; else loading">
+    <ion-list lines="full">
+      <ion-item
+        *ngFor="let news of pagination.items; trackBy: trackNews"
+        [routerLink]="['/news', news.id]"
+        detail="false"
+      >
+        <jlc-post-list-item
+          [post]="mapNewsToPostData(news)"
+        ></jlc-post-list-item>
+      </ion-item>
+      <ion-item *ngIf="pagination.items.length === 0">
+        <ion-label class="item-message">
+          No news found
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll
+      *ngIf="pagination.items.length < pagination.itemsCount"
+      threshold="200px"
+      (ionInfinite)="loadMoreNews($event)"
+    >
+      <jlc-loading></jlc-loading>
+      <ion-infinite-scroll-content loadingText="Loading more news...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ng-container>
+</ion-content>
+<ng-template #loading>
+  <jlc-loading mode="fullscreen"></jlc-loading>
+</ng-template>

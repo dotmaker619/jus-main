@@ -1,0 +1,36 @@
+
+:host {
+  display: block;
+}
+
+.post {
+  padding: 14px 22px;
+  border: 1px solid var(--matter-messages-border-color);
+  border-radius: 4px;
+}
+
+.post:not(:first-child) {
+  margin-top: 15px;
+}
+
+.post-content {
+  font-size: 1rem;
+  line-height: 2.14;
+  margin-top: 4px;
+  white-space: pre-line;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.author {
+  font-weight: bold;
+}
+
+.date {
+  color: var(--primary-placeholder-color);
+  font-style: italic;
+  font-size: 0.857rem;
+}

@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="onCloseClick()">
+        Close
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Export statistics</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="onFormSubmit(form)">
+    <div class="row" formGroupName="period">
+      <label>
+        <span>Period Start Date*</span>
+        <jlc-date-time-picker
+          formControlName="start"
+          mode="date"
+          [datePickerOptions]="datePickerOptions"
+        ></jlc-date-time-picker>
+        <jlc-form-control-validation-message controlName="start">
+        </jlc-form-control-validation-message>
+      </label>
+      <label>
+        <span>Period End Date*</span>
+        <jlc-date-time-picker
+          formControlName="end"
+          mode="date"
+          [datePickerOptions]="datePickerOptions"
+        ></jlc-date-time-picker>
+        <jlc-form-control-validation-message controlName="end">
+        </jlc-form-control-validation-message>
+      </label>
+    </div>
+    <jlc-form-control-validation-message
+      class="period-error"
+      controlName="period"
+    ></jlc-form-control-validation-message>
+    <label>
+      <span>File format</span>
+      <select formControlName="format">
+        <option *ngFor="let format of formats" [ngValue]="format.key">
+          {{ format.value }}
+        </option>
+      </select>
+      <jlc-form-control-validation-message
+        controlName="format"
+      ></jlc-form-control-validation-message>
+    </label>
+    <button type="submit" class="primary">
+      Export
+    </button>
+  </form>
+</ion-content>
+<jlc-loading *ngIf="isLoading$ | async" mode="fullscreen"></jlc-loading>

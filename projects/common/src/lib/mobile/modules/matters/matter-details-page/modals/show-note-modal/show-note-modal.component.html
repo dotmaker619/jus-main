@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCancelClicked()" fill="clear">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span *ngIf="note">
+        {{ note.title }}
+      </span>
+      <span *ngIf="!note">
+        <ng-container [ngTemplateOutlet]="skeletonTextTemplate"></ng-container>
+      </span>
+    </ion-title>
+    <ion-buttons slot="end" *ngIf="editable">
+      <ion-button (click)="onMoreButtonClick()">
+        <ion-icon
+          size="small"
+          slot="icon-only"
+          src="/assets/icons/more_icon.svg"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item lines="full" detail="false">
+    <ion-avatar slot="start">
+      <img [src]="note.createdBy.avatar || fallbackAvatarUrl" />
+    </ion-avatar>
+    <ion-label>
+      <div class="note-author-content">
+        <div class="name">
+          <ng-container *ngIf="note">
+            <div>
+              <span>{{ note.createdBy.firstName }}</span>
+            </div>
+            <div>
+              <span>{{ note.createdBy.lastName }}</span>
+            </div>
+          </ng-container>
+          <span *ngIf="!note">
+            <ng-container
+              [ngTemplateOutlet]="skeletonTextTemplate"
+            ></ng-container>
+          </span>
+        </div>
+        <div class="date">
+          <span>Last updated</span>
+          <span *ngIf="note">{{ note.modified | jusLawDate }}</span>
+          <span *ngIf="!note">
+            <ng-container
+              [ngTemplateOutlet]="skeletonTextTemplate"
+            ></ng-container>
+          </span>
+        </div>
+      </div>
+    </ion-label>
+  </ion-item>
+  <ion-item lines="full" detail="false">
+    <div class="note-content">
+      <pre *ngIf="note">{{ note.text }}</pre>
+      <p *ngIf="!note">
+        <ng-container [ngTemplateOutlet]="skeletonTextTemplate"></ng-container>
+      </p>
+    </div>
+  </ion-item>
+</ion-content>
+<ng-template #skeletonTextTemplate>
+  <ion-skeleton-text animated class="skeleton-text"></ion-skeleton-text>
+</ng-template>

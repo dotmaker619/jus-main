@@ -1,0 +1,68 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <div class="marketing-header-logo" slot="start"></div>
+      <ion-buttons slot="end">
+        <ion-button shape="round" fill="clear" (click)="onToggleMenu()">
+          <ion-icon
+            slot="icon-only"
+            name="menu"
+            *ngIf="!(isHeaderExpanded$ | async)"
+          ></ion-icon>
+          <ion-icon
+            slot="icon-only"
+            name="close"
+            *ngIf="isHeaderExpanded$ | async"
+          ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar
+      class="marketing-header-list-container"
+      [@enterMenuList]
+      *ngIf="isHeaderExpanded$ | async"
+    >
+      <ion-list [@enterMenuList] lines="full" detail="false">
+        <ng-container *ngFor="let link of navigationLinks$ | async">
+          <ion-item
+            *ngIf="!link.isExternal; else externalLinkTemplate"
+            [routerLink]="link.link"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="active"
+            (click)="closeMenu()"
+          >
+            <ion-label>{{ link.label }}</ion-label>
+          </ion-item>
+          <ng-template #externalLinkTemplate>
+            <ion-item [href]="link.link">
+              <ion-label>{{ link.label }}</ion-label>
+            </ion-item>
+          </ng-template>
+        </ng-container>
+      </ion-list>
+      <div
+        *ngIf="navigationButtons$ | async as buttons"
+        class="buttons"
+        [@enterMenuList]
+      >
+        <a
+          *ngFor="let button of buttons"
+          [routerLink]="button.link"
+          (click)="closeMenu()"
+          class="primary"
+        >
+          {{ button.label }}
+        </a>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-router-outlet></ion-router-outlet>
+    <div
+      class="marketing-layout-backdrop"
+      *ngIf="isHeaderExpanded$ | async"
+      [@fadeInOut]
+      (click)="closeMenu()"
+    ></div>
+  </ion-content>
+</ion-app>

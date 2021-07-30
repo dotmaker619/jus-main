@@ -1,0 +1,30 @@
+:host {
+  --space: 10px;
+}
+
+form {
+  display: grid;
+  row-gap: var(--space);
+  padding: var(--space);
+  background: var(--primary-background-color);
+}
+
+form select {
+  width: 100%;
+}
+
+.docs-tree {
+  display: block;
+  border-bottom: 1px solid var(--light-shade-color);
+  background: var(--primary-background-color);
+  --space: 10px;
+  --folder-background-color: var(--primary-background-color);
+  --document-background-color: var(--primary-background-color);
+  --document-icon-size: 25px;
+  --expand-icon-container-inner-space: 17.5px;
+  --date-text-align: end;
+}
+
+ion-fab-button {
+  --color: var(--secondary-contrast-color);
+}

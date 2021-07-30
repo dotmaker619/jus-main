@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="onCancelClick()">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ title$ | async }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form
+    [formGroup]="form"
+    *ngIf="form$ | async as form"
+    (ngSubmit)="onSubmit(form)"
+    id="edit-post-modal-form"
+  >
+    <label>
+      <span>Message*</span>
+      <textarea rows="20" formControlName="message"></textarea>
+
+      <jlc-form-control-validation-message controlName="message">
+      </jlc-form-control-validation-message>
+    </label>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="button-panel">
+      <button class="primary" type="submit" form="edit-post-modal-form">
+        Save
+      </button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<jlc-loading mode="fullscreen" *ngIf="isLoading$ | async"></jlc-loading>

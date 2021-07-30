@@ -1,0 +1,92 @@
+:host {
+  --space: 40px;
+}
+
+.create-matter-container {
+  margin: var(--space);
+}
+
+.page-heading {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+}
+
+.page-heading h1 {
+  margin-right: auto;
+}
+
+.primary,
+.secondary {
+  height: auto;
+  width: auto;
+  margin-left: 1rem;
+  padding: 0.8rem 0.8rem;
+  box-sizing: content-box;
+  border-radius: 0.7rem;
+  font-size: 1rem;
+}
+
+fieldset {
+  padding: 0;
+  border: none;
+  width: 100%;
+}
+
+.row {
+  margin: 10px 0;
+  display: flex;
+}
+
+legend {
+  font-weight: bold;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0;
+}
+
+label {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+input,
+select,
+textarea {
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+textarea {
+  height: 5rem;
+  resize: vertical;
+  padding: 1rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.short-width {
+  width: 15%;
+}
+
+.third-width {
+  width: calc(100% / 3);
+}
+
+.dollar-input {
+  background: url("/assets/icons/currency_icon.svg") no-repeat;
+  background-size: 1rem;
+  background-position: left center;
+}
+
+.file-drop {
+  width: 100%;
+  border-radius: 5px;
+}

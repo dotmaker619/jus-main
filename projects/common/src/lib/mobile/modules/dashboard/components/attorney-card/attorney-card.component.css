@@ -1,0 +1,106 @@
+:host {
+  --space: 16px;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px var(--primary-border-color) inset;
+  position: relative;
+}
+
+:host:active {
+  box-shadow: var(--focus-shadow);
+  background-color: var(--primary-light-color);
+}
+
+.content {
+  display: flex;
+  padding: var(--space);
+}
+
+.avatar {
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--light-color);
+}
+
+.info {
+  flex: 1;
+  margin-top: var(--space);
+  margin-left: var(--space);
+}
+
+.name {
+  font-weight: bold;
+}
+
+.distance {
+  margin-left: var(--space);
+  color: var(--medium-color);
+  font-style: italic;
+}
+
+.name,
+.specialty,
+.place {
+  display: flex;
+}
+
+.label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  padding: 0 15px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.label::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-width: 15px 8px;
+  border-style: solid;
+  border-color: var(--primary-highlight-color);
+  border-right-color: transparent;
+}
+
+.label > span {
+  position: relative;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--tertiary-contrast-color);
+}
+
+/* Skeleton */
+
+.skeleton .name {
+  width: 50%;
+}
+
+.skeleton .specialty {
+  width: 70%;
+}
+
+.skeleton .place-name {
+  width: 40%;
+}
+
+.skeleton .distance {
+  width: 10%;
+}
+
+.avatar ion-skeleton-text {
+  margin: 0;
+}

@@ -1,0 +1,82 @@
+<div class="dialog">
+  <h3 class="ellipsis">[{{ matter.code }}] {{ matter.title }}</h3>
+  <hr />
+  <div class="matter-container">
+    <jlc-matter-info [matter]="matter"></jlc-matter-info>
+  </div>
+  <ng-container
+    *ngIf="closeMatterForm$ | async as closeMatterForm; else loading"
+  >
+    <form [formGroup]="closeMatterForm" (ngSubmit)="onSubmit(closeMatterForm)">
+      <!-- Input for date of matter closing. -->
+      <div class="date-label" (click)="$event.stopPropagation()">
+        <span>Close Date*</span>
+        <div class="date-input">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [matDatepickerFilter]="filterDatesForMatter"
+            formControlName="closeDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            startView="multi-year"
+            touchUi
+            #picker
+          ></mat-datepicker>
+        </div>
+        <jlc-form-control-validation-message controlName="closeDate">
+        </jlc-form-control-validation-message>
+      </div>
+      <!-- Checklist -->
+      <ng-container *ngIf="checklist$ | async as checklist; else loading">
+        <fieldset *ngIf="checklist.length; else emptyChecklist">
+          <div class="legend">
+            <span class="text-bold">Closing checklist</span>
+            <span class="medium-color italic ">
+              Carefully check that you've completed the following
+            </span>
+          </div>
+          <div class="check-group" formArrayName="checklist">
+            <label
+              class="checkbox"
+              *ngFor="let checklistItem of checklist; let i = index"
+              [formGroupName]="i"
+            >
+              <input type="checkbox" formControlName="isChecked" />
+              {{ checklistItem.description | titlecase }}
+            </label>
+          </div>
+          <jlc-form-control-validation-message controlName="checklist">
+          </jlc-form-control-validation-message>
+        </fieldset>
+      </ng-container>
+      <ng-template #emptyChecklist>
+        <h3>Checklist is empty.</h3>
+      </ng-template>
+
+      <!-- "Close dialog", "Complete matter" buttons -->
+      <ng-container *ngIf="!(isLoading$ | async); else loading">
+        <div class="button-panel">
+          <button class="secondary" type="button" (click)="onCloseClicked()">
+            Cancel
+          </button>
+          <button
+            class="primary"
+            type="submit"
+            [disabled]="closeMatterForm.invalid"
+          >
+            Close Matter
+          </button>
+        </div>
+      </ng-container>
+    </form>
+  </ng-container>
+</div>
+
+<ng-template #loading>
+  <jlc-loading class="loading"></jlc-loading>
+</ng-template>

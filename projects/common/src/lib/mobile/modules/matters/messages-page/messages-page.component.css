@@ -1,0 +1,43 @@
+:host {
+  --space: 12px;
+}
+
+ion-content {
+  --padding-start: calc(var(--space) / 2);
+  --padding-end: calc(var(--space) / 2);
+  --padding-top: var(--space);
+  --padding-bottom: var(--space);
+}
+
+ion-footer ion-toolbar {
+  --background: var(--primary-background-color);
+}
+
+jlc-message:not(:first-child) {
+  margin-top: var(--space);
+}
+
+.submit-input {
+  position: relative;
+  margin: var(--space);
+}
+
+.submit-input input {
+  width: 100%;
+  padding-right: 50px;
+}
+
+.submit-input ion-button {
+  position: absolute;
+  margin: 0;
+  top: 0;
+  right: 0;
+}
+
+.submit-input ion-button ion-icon {
+  color: var(--primary-shade-color);
+}
+
+.skeleton {
+  width: 5rem;
+}
